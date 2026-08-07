@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#E9EAEB;color:#24282B;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}
+:root{--c-bg:#182430;--c-bd:#2A3B49;--c-a1:#DFB05C;--c-txt:#C9D3DB;--c-dim:#8FA3B3;--annD:block;--frameCols:1fr 300px 320px;--frameRows:300px 230px;--tickSpan:span 2}
+@media (max-width:1180px){:root{--frameCols:1fr 260px 300px}}
+@media (max-width:920px){:root{--frameCols:1fr;--frameRows:auto;--tickSpan:auto}}
+button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 32px 64px;box-sizing:border-box">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;width:100%;max-width:1360px;position:sticky;top:0;z-index:30;background:#E9EAEB;padding:14px 0 10px">
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — DESKTOP HOST · MERIDIAN</div>
+<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+<span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#7A8288">“MERIDIAN” IS AN INVENTED BROKER</span>
+<button type="button" onClick="{{ resetDemo }}" style-hover="background:rgba(140,106,37,.08)" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — ALL SURFACES</button>
+</div>
+</div>
+
+<div style="width:100%;max-width:1360px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin:14px 0 26px">
+<div style="display:flex;flex-direction:column;gap:8px">
+<div style="font:800 34px/1 'Plus Jakarta Sans';letter-spacing:-.02em;color:#24282B">TENET</div>
+<div style="font:600 15px/1.4 'Plus Jakarta Sans';color:#24282B">Self-authored guardrails for impulsive trading.</div>
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">FRICTION, NEVER A BLOCK · THE GUARD FOLLOWS THE PERSON, NOT THE PRODUCT</div>
+</div>
+<div style="font:400 13px/1.65 'Plus Jakarta Sans';color:#5C6367;max-width:520px">Dart removes reflection through stimulation. Meridian removes reflection through efficiency. Tenet restores one deliberate moment in both. Here: the same cooldown that guards 0DTE options on a phone, holding a revenge-sized short sale in a professional equities workstation.</div>
+</div>
+
+<div style="width:100%;max-width:1360px;display:flex;flex-direction:column;gap:8px;margin:0 0 12px">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288">01 · WITH TENET — 9:53, THREE LOSING ROUND TRIPS, FLAT, A 1,000-SHARE SHORT TYPED · INTERACTIVE</div>
+<div style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center">
+<div style="max-width:760px;font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">» Transmit with the button or ⇧⏎ — the loss cooldown steps in at send with three ways forward: start the 9-minute cooldown, override with a reason, or cancel. After the wait you confirm at a refreshed bid, or edit, or cancel. Nothing sends by itself. Demo time runs ~36× faster.</div>
+<sc-if value="{{ isCooling }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:10px;align-items:center;border:1px dashed #9AA0A4;border-radius:999px;padding:4px 6px 4px 16px">
+<span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#7A8288">DEMO CONTROL</span>
+<button type="button" onClick="{{ skip }}" style-hover="background:rgba(90,99,103,.08)" style="min-height:40px;border:1px solid #9AA0A4;border-radius:999px;padding:8px 14px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#5C6367">SKIP THE COOLDOWN ⟶</button>
+</div>
+</sc-if>
+</div>
+</div>
+
+<div data-screen-label="Meridian — with Tenet" style="width:1360px;max-width:100%;background:#FBFBFA;border:1px solid #DEE0E1;border-radius:14px;box-shadow:0 30px 60px -38px rgba(30,36,40,.45);color:#212528;display:flex;flex-direction:column;overflow:hidden;position:relative">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E9EBEB;background:#F2F3F3">
+<div style="display:flex;gap:18px;align-items:center"><span style="font:700 13px 'Plus Jakarta Sans'">Meridian Trader</span><span style="font:500 11px 'Plus Jakarta Sans';color:#6E767C">Workspace: Equities — SPY</span></div>
+<div style="display:flex;gap:16px;align-items:center;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#6E767C">ACCT 7734-2 · 4:1</span><span style="color:#6E767C">{{ clock }} ET</span><span style="color:#C13A3F">DAY P&amp;L −$360.00</span>
+<div style="position:relative">
+<button type="button" onClick="{{ toggleRules }}" ref="{{ rulesBtnRef }}" aria-expanded="{{ rulesOpen }}" aria-haspopup="true" style="color:#8C6A25;font:600 11px 'IBM Plex Mono',monospace;min-height:36px;display:flex;align-items:center;gap:5px;padding:0 4px" style-hover="color:#6E521C">◆ TENET · 4 RULES · 3 APPLY HERE <span aria-hidden="true" style="font-size:8px">▾</span></button>
+<sc-if value="{{ rulesOpenOn }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-label="Your rules on this host" onKeyDown="{{ rulesKey }}" style="position:absolute;right:0;top:calc(100% + 6px);width:350px;background:#FFFFFF;border:1px solid #DEE0E1;border-radius:12px;box-shadow:0 18px 40px -18px rgba(30,36,40,.4);padding:14px;display:flex;flex-direction:column;gap:10px;z-index:40;text-align:left;font-weight:400">
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25">LOSS COOLDOWN · UNIVERSAL — STEPPED IN TODAY</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#4E5B65">After 3 losing trades before noon — options or shares — the next order waits nine minutes.</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25">SIZE CAP · PER INSTRUMENT</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#4E5B65">0DTE: 5 contracts · equities: 1,500 shares. This order: 1,000 of 1,500 — within the cap, not triggered.</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25">PACING · UNIVERSAL</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#4E5B65">Two minutes between rapid entries.</span></div>
+<div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#7A8288">WIND-DOWN · NOT APPLICABLE HERE</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#7A8288">0DTE size steps down into the close — options only.</span></div>
+<div style="border-top:1px solid #E9EBEB;padding-top:9px;font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:#6E767C">written by you · edited any evening in the <a href="duo.html">Companion →</a></div>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:var(--frameCols);grid-template-rows:var(--frameRows);gap:1px;background:#E9EBEB">
+<div style="background:#FBFBFA;position:relative;padding:14px;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="display:flex;gap:12px;align-items:baseline"><span style="font:700 15px 'Plus Jakarta Sans'">SPY</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#C13A3F">{{ quote }} −1.24%</span></div><div style="display:flex;gap:8px;font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C"><span style="color:#212528">5m</span><span>15m</span><span>1h</span><span>D</span></div></div>
+<div style="display:flex;gap:14px;font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C;margin-top:5px"><span>O 603.42</span><span>H 603.88</span><span>L 601.94</span><span>VWAP 602.71</span><span>VOL 41.2M</span></div>
+<svg width="100%" height="180" viewBox="0 0 800 240" preserveAspectRatio="none" style="margin-top:8px" role="img" aria-label="SPY five-minute chart, selling off from about 603.40 toward 601.90 through the morning"><line x1="0" y1="60" x2="800" y2="60" style="stroke:#EFF0F0" stroke-width="1"></line><line x1="0" y1="120" x2="800" y2="120" style="stroke:#EFF0F0" stroke-width="1"></line><line x1="0" y1="180" x2="800" y2="180" style="stroke:#EFF0F0" stroke-width="1"></line><polyline points="0,52 40,60 80,50 120,74 160,64 200,88 240,78 280,104 320,92 360,120 400,110 440,138 480,126 520,152 560,142 600,168 640,158 680,186 720,178 760,196 800,190" fill="none" style="stroke:#C13A3F" stroke-width="2"></polyline>
+<sc-if value="{{ guardMarkOn }}" hint-placeholder-val="{{ false }}"><line x1="655" y1="0" x2="655" y2="240" style="stroke:#A87F2C" stroke-width="1" stroke-dasharray="4 4"></line></sc-if></svg>
+<sc-if value="{{ guardMarkOn }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;right:24px;top:44px;font:500 10.5px 'IBM Plex Mono',monospace;color:#8C6A25">◆ 9:53 — your rule stepped in</div></sc-if>
+<div style="position:absolute;left:14px;right:14px;bottom:10px;display:flex;justify-content:space-between;font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C"><span>9:30</span><span>10:00</span><span>10:30</span><span>11:00</span></div>
+</div>
+<div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">LEVEL 2 · SPY</div>
+<div style="flex:1;display:flex;flex-direction:column;font:500 11px 'IBM Plex Mono',monospace;color:#6E767C">
+<div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>602.20</span><span style="color:#C13A3F">2,210</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>{{ l2Ask }}</span><span style="color:#C13A3F">890</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px;border-top:1px solid #E9EBEB;border-bottom:1px solid #E9EBEB;color:#212528"><span style="color:#2F8F5B">{{ l2BidSize }}</span><span>{{ l2Bid }}</span><span style="color:#C13A3F">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">2,050</span><span>602.10</span><span></span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">880</span><span>602.08</span><span></span></div>
+</div>
+<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C;padding-top:8px">ladder live — the guard never touches it</div>
+</div>
+<div style="background:#F6F7F7;padding:14px 16px;display:flex;flex-direction:column;gap:8px;grid-row:var(--tickSpan);overflow-y:auto;box-sizing:border-box">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 12px 'Plus Jakarta Sans'">Order — SPY</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C">MKT · DAY · SMART</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#6E767C">Side</span><span style="display:flex;gap:7px;align-items:center"><span style="font:600 13px 'Plus Jakarta Sans';color:{{ sideColor }}">{{ sideLabel }}</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#6E767C;border:1px solid #E4E6E7;border-radius:4px;padding:2px 5px">SHORTABLE · ETB</span></span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#6E767C">Qty</span><span style="font:600 15px 'IBM Plex Mono',monospace">{{ qtyDisp }}</span></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#2F8F5B;white-space:nowrap">BID {{ bid }} × {{ bidSize }}</span><span style="color:#C13A3F;white-space:nowrap">ASK {{ ask }} × 890</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#6E767C">Est. execution</span><span style="font:600 12.5px 'IBM Plex Mono',monospace">≈ {{ execPx }} <span style="font-weight:400;color:#6E767C">({{ execAt }})</span></span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#6E767C">Est. notional</span><span style="font-weight:600">{{ notional }}</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 4px;font-size:12.5px"><span style="color:#6E767C">Buying power</span><span style="font-weight:600;color:#6E767C">{{ buyingPower }}</span></div>
+<div style="flex:1"></div>
+
+<sc-if value="{{ isStepped }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -14px rgba(20,30,40,.5)">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ LOSS COOLDOWN STEPPED IN — NOTHING SENT</div>
+<div style="font:400 12px/1.6 'Plus Jakarta Sans';color:var(--c-txt)">Your rule: after 3 losing trades before noon, the next order waits nine minutes. Losing exits 9:41 / 9:46 / 9:52 (−$360.00) · this order flips you short at 2× your largest size today.</div>
+<div style="font:400 11px/1.5 'IBM Plex Mono',monospace;color:var(--c-dim)">size cap not triggered — 1,000 of 1,500 shares · only this rule holds the order</div>
+<button type="button" onClick="{{ startCooldown }}" style-hover="background:rgba(223,176,92,.1)" style="border:1px solid var(--c-a1);color:var(--c-a1);border-radius:8px;min-height:44px;text-align:center;font:600 12.5px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Start 9-minute cooldown</button>
+<button type="button" onClick="{{ openReason }}" style-hover="background:rgba(255,255,255,.05)" style="border:1px solid var(--c-bd);color:var(--c-txt);border-radius:8px;min-height:44px;text-align:center;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Override with a reason</button>
+<button type="button" onClick="{{ cancelOrder }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel order — nothing sends</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCooling }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:9px">
+<div role="timer" aria-label="Cooldown remaining" style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ COOLDOWN — {{ cd }} LEFT</div>
+<div aria-hidden="true" style="height:4px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:{{ coolPct }};background:var(--c-a1);transition:width .2s linear"></div></div>
+<div style="font:400 12px/1.6 'Plus Jakarta Sans';color:var(--c-txt)">Your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.</div>
+<button type="button" onClick="{{ cancelCooldown }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel cooldown and order</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isReason }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="false" aria-label="Override with a reason" onKeyDown="{{ reasonKey }}" ref="{{ reasonRef }}" style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ BEFORE YOU CONTINUE</div>
+<div style="font:400 11.5px/1.55 'Plus Jakarta Sans';color:var(--c-txt)">You’re continuing past your cooldown. Pick the reason that fits — it’s recorded next to the trade as context.</div>
+<div role="radiogroup" aria-label="Override reason" ref="{{ rgRef }}" onKeyDown="{{ rgKey }}" style="display:flex;flex-direction:column;gap:7px">
+<sc-for list="{{ reasons }}" as="r" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{ r.checked }}" tabIndex="{{ r.ti }}" onClick="{{ r.onClick }}" style="border:{{ r.border }};background:{{ r.bg }};border-radius:9px;padding:9px 10px;display:flex;gap:8px;align-items:center;min-height:44px;box-sizing:border-box;width:100%"><span aria-hidden="true" style="width:13px;height:13px;border-radius:50%;border:{{ r.dot }};flex:none;box-sizing:border-box"></span><span style="font:500 11.5px 'Plus Jakarta Sans';color:{{ r.color }}">{{ r.label }}</span></button>
+</sc-for>
+</div>
+<button type="button" onClick="{{ reasonContinue }}" aria-disabled="{{ continueDisabled }}" style-hover="background:rgba(223,176,92,.1)" style="min-height:44px;border-radius:8px;border:1px solid var(--c-a1);display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:var(--c-a1);opacity:{{ continueOpacity }}">Continue to order review</button>
+<button type="button" onClick="{{ reasonCancel }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel — keep the pause</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ COOLDOWN COMPLETE — REVIEW BEFORE SENDING</div>
+<div style="font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:var(--c-txt)">Market refreshed 10:02 · bid 602.12 → 601.85</div>
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:var(--c-a1)">⚠ BID MOVED −$0.27 WHILE YOU WAITED</div>
+<div style="font:400 11px/1.55 'IBM Plex Mono',monospace;color:var(--c-dim)">est. notional now $601,850 · market execution may differ</div>
+<div style="display:flex;gap:7px">
+<button type="button" onClick="{{ editOrder }}" style-hover="background:rgba(255,255,255,.05)" style="flex:1;border:1px solid var(--c-bd);color:var(--c-txt);border-radius:8px;min-height:44px;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Edit order</button>
+<button type="button" onClick="{{ cancelOrder }}" style-hover="background:rgba(255,255,255,.05)" style="flex:1;border:1px solid var(--c-bd);color:var(--c-dim);border-radius:8px;min-height:44px;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Cancel order</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isOverridden }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #C9CDD0;border-radius:10px;padding:9px 11px;font:400 11px/1.6 'IBM Plex Mono',monospace;color:#6E767C">◇ override recorded 9:54 · loss cooldown · reason: “{{ reasonShort }}” — context on your record, not a penalty · market execution may differ</div>
+</sc-if>
+
+<sc-if value="{{ isEdited }}" hint-placeholder-val="{{ false }}">
+<div style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:9px">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ EDIT ORDER — QUOTE REFRESHED 10:02</div>
+<div role="radiogroup" aria-label="Order side" ref="{{ sideRgRef }}" onKeyDown="{{ sideRgKey }}" style="display:flex;gap:7px">
+<sc-for list="{{ sideOpts }}" as="o" hint-placeholder-count="2">
+<button type="button" role="radio" aria-checked="{{ o.checked }}" tabIndex="{{ o.ti }}" onClick="{{ o.onClick }}" style="flex:1;border:{{ o.border }};background:{{ o.bg }};color:{{ o.color }};border-radius:8px;min-height:44px;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">{{ o.label }}</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:7px;align-items:center">
+<button type="button" aria-label="100 fewer shares" onClick="{{ qMinus }}" style="width:44px;height:44px;border:1px solid var(--c-bd);border-radius:8px;color:var(--c-txt);font:600 16px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center;flex:none">−</button>
+<input value="{{ qtyStr }}" onChange="{{ qtyChange }}" inputMode="numeric" aria-label="Share quantity" style="flex:1;min-width:0;height:44px;background:transparent;border:1px solid var(--c-bd);border-radius:8px;color:#F2F5F7;font:700 14px 'IBM Plex Mono',monospace;text-align:center;outline:none;box-sizing:border-box">
+<button type="button" aria-label="100 more shares" onClick="{{ qPlus }}" style="width:44px;height:44px;border:1px solid var(--c-bd);border-radius:8px;color:var(--c-txt);font:600 16px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center;flex:none">+</button>
+</div>
+<div style="font:400 11px/1.5 'IBM Plex Mono',monospace;color:var(--c-dim)">{{ editCapNote }}</div>
+<div style="font:400 11px/1.55 'IBM Plex Mono',monospace;color:var(--c-txt)">est. {{ execPx }} ({{ execAt }}) · notional {{ notional }} · transmit sends — cooldown served</div>
+<button type="button" onClick="{{ cancelOrder }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel order — nothing sends</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isCancelled }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #C9CDD0;border-radius:10px;padding:11px 12px;display:flex;flex-direction:column;gap:6px;text-align:center">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5C6367">◇ ORDER CANCELLED · NOTHING SENT · COOLDOWN RECORDED</div>
+<div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#8A9196">{{ cancelNote }} · trading unaffected · on your record</div>
+</div>
+<button type="button" onClick="{{ newOrder }}" style-hover="background:rgba(90,99,103,.06)" style="min-height:44px;border:1px solid #9AA0A4;border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#5C6367">New order</button>
+</sc-if>
+
+<sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid #BFDCC9;background:#F0F7F2;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;text-align:center">
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#2B8E59">{{ sentHead }}</div>
+<div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#6E767C">{{ sentNote }}</div>
+<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C">on the shared record — open the <a href="duo.html">Companion</a> to see it</div>
+</div>
+<button type="button" onClick="{{ newOrder }}" style-hover="background:rgba(90,99,103,.06)" style="min-height:44px;border:1px solid #9AA0A4;border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5C6367">NEW ORDER</button>
+</sc-if>
+
+<sc-if value="{{ sellOn }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ sell }}" style-hover="filter:brightness(1.08)" style="background:{{ sellBg }};color:#FDF5F4;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-align:center;padding:13px;border-radius:4px;min-height:46px;width:100%;box-sizing:border-box">{{ sellLabel }}</button>
+</sc-if>
+<sc-if value="{{ sellMutedOn }}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="border:1px solid #E4E6E7;color:#B0B6BA;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-align:center;padding:13px;border-radius:4px;user-select:none">SELL SHORT 1,000 SPY MKT · ⇧⏎</div>
+</sc-if>
+<div style="border-top:1px solid #E9EBEB;padding-top:8px;font:400 10.5px 'IBM Plex Mono',monospace;color:{{ footC }};text-align:center">{{ footLine }}</div>
+</div>
+<div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">ROUND TRIPS — TODAY</div>
+<div style="flex:1;font:500 11px 'IBM Plex Mono',monospace;color:#6E767C">
+<div style="display:flex;justify-content:space-between;padding:5px 4px"><span>9:31→9:41 · long 200 shs</span><span style="color:#C13A3F">−56.25</span></div>
+<div style="display:flex;justify-content:space-between;padding:5px 4px"><span>9:43→9:46 · long 300 shs</span><span style="color:#C13A3F">−93.75</span></div>
+<div style="display:flex;justify-content:space-between;padding:5px 4px"><span>9:48→9:52 · long 500 shs</span><span style="color:#C13A3F">−210.00</span></div>
+<sc-for list="{{ execRows }}" as="x" hint-placeholder-count="0"><div style="display:flex;justify-content:space-between;padding:5px 4px;color:#8C6A25;border-top:1px dashed #E4E6E7"><span>{{ x.label }}</span><span>✓</span></div></sc-for>
+<sc-if value="{{ fillRowOn }}" hint-placeholder-val="{{ false }}"><div style="display:flex;justify-content:space-between;padding:5px 4px;color:#8C6A25;border-top:1px dashed #E4E6E7"><span>{{ fillRowLabel }}</span><span>{{ fillRowMark }}</span></div></sc-if>
+</div>
+<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C">3 losing round trips · size 200 → 500 · next typed 1,000 short</div>
+</div>
+<div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">POSITIONS</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9196">{{ positionsLine }}</div>
+<div style="display:flex;justify-content:space-between;font:500 11px 'IBM Plex Mono',monospace;color:#6E767C;border-top:1px solid #E9EBEB;padding-top:8px"><span>Day P&amp;L</span><span style="color:#C13A3F">−$360.00</span></div>
+</div>
+</div>
+<div aria-live="polite" role="status" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">{{ liveMsg }}</div>
+</div>
+<div style="display:var(--annD);max-width:640px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;margin:14px 0 0">▸ Two contained changes: a quiet status indicator in the header and an active intervention at transmit. The chart, market depth, order context, and positions remain untouched.</div>
+
+<div style="width:100%;max-width:1360px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288;margin:44px 0 10px">02 · WITHOUT TENET — THE SAME MOMENT, FOR COMPARISON</div>
+<div style="width:1360px;max-width:100%;background:#FBFBFA;border:1px solid #DEE0E1;border-radius:14px;box-shadow:0 30px 60px -38px rgba(30,36,40,.45);color:#212528;display:flex;flex-direction:column;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E9EBEB;background:#F2F3F3">
+<div style="display:flex;gap:18px;align-items:center"><span style="font:700 13px 'Plus Jakarta Sans'">Meridian Trader</span><span style="font:500 11px 'Plus Jakarta Sans';color:#6E767C">Workspace: Equities — SPY</span></div>
+<div style="display:flex;gap:16px;align-items:center;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#6E767C">ACCT 7734-2 · 4:1</span><span style="color:#6E767C">09:53:12 ET</span><span style="color:#C13A3F">DAY P&amp;L −$360.00</span></div>
+</div>
+<div style="display:grid;grid-template-columns:var(--frameCols);grid-template-rows:var(--frameRows);gap:1px;background:#E9EBEB">
+<div style="background:#FBFBFA;position:relative;padding:14px;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="display:flex;gap:12px;align-items:baseline"><span style="font:700 15px 'Plus Jakarta Sans'">SPY</span><span style="font:500 12px 'IBM Plex Mono',monospace;color:#C13A3F">602.15 −1.24%</span></div><div style="display:flex;gap:8px;font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C"><span style="color:#212528">5m</span><span>15m</span><span>1h</span><span>D</span></div></div>
+<div style="display:flex;gap:14px;font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C;margin-top:5px"><span>O 603.42</span><span>H 603.88</span><span>L 601.94</span><span>VWAP 602.71</span><span>VOL 41.2M</span></div>
+<svg width="100%" height="180" viewBox="0 0 800 240" preserveAspectRatio="none" style="margin-top:8px" role="img" aria-label="SPY five-minute chart, selling off from about 603.40 toward 601.90 through the morning"><line x1="0" y1="60" x2="800" y2="60" style="stroke:#EFF0F0" stroke-width="1"></line><line x1="0" y1="120" x2="800" y2="120" style="stroke:#EFF0F0" stroke-width="1"></line><line x1="0" y1="180" x2="800" y2="180" style="stroke:#EFF0F0" stroke-width="1"></line><polyline points="0,52 40,60 80,50 120,74 160,64 200,88 240,78 280,104 320,92 360,120 400,110 440,138 480,126 520,152 560,142 600,168 640,158 680,186 720,178 760,196 800,190" fill="none" style="stroke:#C13A3F" stroke-width="2"></polyline></svg>
+<div style="position:absolute;left:14px;right:14px;bottom:10px;display:flex;justify-content:space-between;font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C"><span>9:30</span><span>10:00</span><span>10:30</span><span>11:00</span></div>
+</div>
+<div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">LEVEL 2 · SPY</div>
+<div style="flex:1;display:flex;flex-direction:column;font:500 11px 'IBM Plex Mono',monospace;color:#6E767C">
+<div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>602.20</span><span style="color:#C13A3F">2,210</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>602.15</span><span style="color:#C13A3F">890</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px;border-top:1px solid #E9EBEB;border-bottom:1px solid #E9EBEB;color:#212528"><span style="color:#2F8F5B">1,480</span><span>602.12</span><span style="color:#C13A3F">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">2,050</span><span>602.10</span><span></span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">880</span><span>602.08</span><span></span></div>
+</div>
+<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C;padding-top:8px">&nbsp;</div>
+</div>
+<div style="background:#F6F7F7;padding:14px 16px;display:flex;flex-direction:column;gap:8px;grid-row:var(--tickSpan);box-sizing:border-box">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 12px 'Plus Jakarta Sans'">Order — SPY</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C">MKT · DAY · SMART</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#6E767C">Side</span><span style="display:flex;gap:7px;align-items:center"><span style="font:600 13px 'Plus Jakarta Sans';color:#C13A3F">Sell Short</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#6E767C;border:1px solid #E4E6E7;border-radius:4px;padding:2px 5px">SHORTABLE · ETB</span></span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#6E767C">Qty</span><span style="font:600 15px 'IBM Plex Mono',monospace">1,000</span></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#2F8F5B;white-space:nowrap">BID 602.12 × 1,480</span><span style="color:#C13A3F;white-space:nowrap">ASK 602.15 × 890</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#6E767C">Est. execution</span><span style="font:600 12.5px 'IBM Plex Mono',monospace">≈ 602.12 <span style="font-weight:400;color:#6E767C">(at bid)</span></span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#6E767C">Est. notional</span><span style="font-weight:600">$602,120</span></div>
+<div style="display:flex;justify-content:space-between;padding:7px 4px;font-size:12.5px"><span style="color:#6E767C">Buying power</span><span style="font-weight:600;color:#6E767C">$612,430</span></div>
+<div style="flex:1"></div>
+<div style="background:#C13A3F;color:#FDF5F4;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-align:center;padding:13px;border-radius:4px" aria-hidden="true">SELL SHORT 1,000 SPY MKT · ⇧⏎</div>
+<div style="border-top:1px solid #E9EBEB;padding-top:8px;font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C;text-align:center">transmit armed — nothing watching</div>
+</div>
+<div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">ROUND TRIPS — TODAY</div>
+<div style="flex:1;font:500 11px 'IBM Plex Mono',monospace;color:#6E767C">
+<div style="display:flex;justify-content:space-between;padding:5px 4px"><span>9:31→9:41 · long 200 shs</span><span style="color:#C13A3F">−56.25</span></div>
+<div style="display:flex;justify-content:space-between;padding:5px 4px"><span>9:43→9:46 · long 300 shs</span><span style="color:#C13A3F">−93.75</span></div>
+<div style="display:flex;justify-content:space-between;padding:5px 4px"><span>9:48→9:52 · long 500 shs</span><span style="color:#C13A3F">−210.00</span></div>
+</div>
+<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C">3 losing round trips · size 200 → 500 · next typed 1,000 short</div>
+</div>
+<div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">POSITIONS</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9196">FLAT — no open positions</div>
+<div style="display:flex;justify-content:space-between;font:500 11px 'IBM Plex Mono',monospace;color:#6E767C;border-top:1px solid #E9EBEB;padding-top:8px"><span>Day P&amp;L</span><span style="color:#C13A3F">−$360.00</span></div>
+</div>
+</div>
+</div>
+<div style="display:var(--annD);max-width:640px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;margin:14px 0 0">▸ Meridian does not gamify trading. Its risk is speed: after three losses, a revenge-sized short remains one keystroke away.</div>
+
+<div style="display:flex;gap:44px;margin-top:44px;flex-wrap:wrap;width:100%;max-width:1360px;justify-content:flex-start">
+<div style="max-width:320px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C">▸ THE ONLY COLORED OBJECT — the broker is deliberately near-neutral, so the card carries all the register change. When the guard speaks, the room changes; nothing else moves.</div>
+<div style="max-width:320px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C">▸ CONTAINMENT — two contained changes: a quiet status indicator and an active intervention at transmit. Diff the frames and chart, depth, order context, and positions are identical.</div>
+<div style="max-width:320px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C">▸ The market keeps printing while the countdown runs — waiting happens in front of a moving chart. The guard holds the door, never the room.</div>
+</div>
+
+<div style="width:100%;max-width:1360px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288;margin:44px 0 10px">03 · VISUAL DIRECTION — FINAL &amp; EXPLORED</div>
+<div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:flex-start;width:100%;max-width:1360px">
+<div style="width:340px;background:#F6F7F7;border:1px solid #DEE0E1;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">FINAL — INK BLUE</div>
+<div style="background:#182430;border:1px solid #2A3B49;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 14px 30px -14px rgba(20,30,40,.5)">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#DFB05C">◆ LOSS COOLDOWN STEPPED IN</div>
+<div style="font:400 11px/1.65 'IBM Plex Mono',monospace;color:#C9D3DB">Your rule: 9-min pause after 3 losing trades.<br>Stepped in 9:53 · nothing sent.</div>
+<div style="border:1px solid #DFB05C;color:#DFB05C;border-radius:8px;padding:11px;text-align:center;font:600 13px 'Plus Jakarta Sans'">Start 9-minute cooldown</div>
+<div style="text-align:center;color:#8FA3B3;font:500 11px 'IBM Plex Mono',monospace;text-decoration:underline">Override with a reason</div>
+</div>
+<div style="display:var(--annD);font:10.5px/1.55 'IBM Plex Mono',monospace;color:#6E767C">chosen: procedural and credible inside a workstation — contrast without resembling a market alert. gold stays Tenet's voice.</div>
+</div>
+<div style="width:340px;background:#F6F7F7;border:1px solid #DEE0E1;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box;opacity:.82">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288">EXPLORED ALTERNATIVE — UMBER</div>
+<div style="background:#2B211A;border:1px solid #41332A;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 14px 30px -14px rgba(40,30,20,.5)">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#D9A94E">◆ LOSS COOLDOWN STEPPED IN</div>
+<div style="font:400 11px/1.65 'IBM Plex Mono',monospace;color:#D9CDBD">Your rule: 9-min pause after 3 losing trades.<br>Stepped in 9:53 · nothing sent.</div>
+<div style="border:1px solid #D9A94E;color:#D9A94E;border-radius:8px;padding:11px;text-align:center;font:600 13px 'Plus Jakarta Sans'">Start 9-minute cooldown</div>
+<div style="text-align:center;color:#A08C77;font:500 11px 'IBM Plex Mono',monospace;text-decoration:underline">Override with a reason</div>
+</div>
+<div style="display:var(--annD);font:10.5px/1.55 'IBM Plex Mono',monospace;color:#6E767C">set aside: warmer and more human, but reads closer to an alert state inside a dense workstation.</div>
+</div>
+</div>
+
+<div style="margin-top:32px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;text-align:left;width:100%;max-width:1360px;border-top:1px solid #DEE0E1;padding-top:14px">◆ TENET — behavioral risk layer · concept &amp; design 2026 · brokers, quotes, and fills are simulated — the rules, interventions, and shared record are functional<br><a href="duo.html">mobile host + companion prototypes →</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:2300},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ink blue&quot;,&quot;umber&quot;],&quot;default&quot;:&quot;ink blue&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Card&quot;},&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;},&quot;cooldownSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:36,&quot;min&quot;:6,&quot;max&quot;:120,&quot;step&quot;:6,&quot;unit&quot;:&quot;s served / s held&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+const SKEY = 'tenetSharedV3';
+const BASELINE = {v:3,resetSeq:0,cap:5,capPending:null,spacing:'armed',pattern:'detected',fridayRule:null,events:[
+ {id:'e1',day:'THU',time:'10:44',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'3× 602C',result:'sent @ $1.19',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e2',day:'THU',time:'10:42',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.16',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e3',day:'THU',time:'10:40',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.14',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e4',day:'WED',time:'15:52',rule:'WIND-DOWN',what:'wind-down · trimmed to the 3:52 allowance',size:'3→1× 604C',result:'sent 1',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e5',day:'WED',time:'11:02',rule:'—',what:'feed lost 17 min · trading unaffected',size:'—',result:'gap preserved',out:'⚠ outage',kind:'gap',tone:'warn',sync:'synced'},
+ {id:'e6',day:'TUE',time:'10:18',rule:'SIZE CAP',what:'size cap · order changed before sending',size:'12→5× 602P',result:'sent 5',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e7',day:'MON',time:'10:03',rule:'SIZE CAP',what:'size cap · continued past the cap',size:'8× 602P',result:'−$310 by close',out:'− $310',kind:'over',tone:'bad',sync:'failed',reason:'This setup was planned before the losses'},
+ {id:'e8',day:'MON',time:'10:02',rule:'LOSS COOLDOWN',what:'loss cooldown · 9-min cooldown · reviewed & sent',size:'5× 602P',result:'sent @ $1.36',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'}
+]};
+const REASONS = ['This setup was planned before the losses', 'This rule needs review', 'Continue despite my rule'];
+const SHORT = ['planned before the losses', 'rule flagged for review', 'continued despite my rule'];
+class Component extends DCLogic {
+  state = { mode: 'armed', sec: 540, refreshed: false, rulesOpen: false, reason: null, side: 'short', qty: 1000, editTrim: false, cancelNote: '', sentFill: '', sentHead: '', sentNote: '', liveMsg: '', pos: null, execs: [] };
+  applyFill(side, qty, px) {
+    const p = this.state.pos;
+    if (!p || p.side === side) { const tq = (p ? p.qty : 0) + qty; return { side, qty: tq, px: Math.round((((p ? p.qty * p.px : 0) + qty * px) / tq) * 100) / 100 }; }
+    if (qty < p.qty) return { side: p.side, qty: p.qty - qty, px: p.px };
+    if (qty > p.qty) return { side, qty: qty - p.qty, px };
+    return null;
+  }
+  sh() { try { const o = JSON.parse(localStorage.getItem(SKEY)); if (o && o.v === 3) return o; } catch (e) {} return JSON.parse(JSON.stringify(BASELINE)); }
+  addEvent(ev) { const s = this.sh(); const n = { ...s, events: [{ id: 'd' + Date.now() + Math.random().toString(36).slice(2, 5), sync: 'synced', tone: 'ok', host: 'meridian', ...ev }, ...s.events] }; try { localStorage.setItem(SKEY, JSON.stringify(n)); } catch (e) {} }
+  componentDidMount() {
+    this.applyVars();
+    this.iv = setInterval(() => { const s = this.state;
+      if (s.mode === 'cooling') { const r = s.sec - (this.props.cooldownSpeed ?? 36) / 10;
+        if (r <= 0) this.setState({ sec: 0, mode: 'review', refreshed: true, liveMsg: 'Cooldown complete. Review the refreshed bid — nothing was sent. Confirm, edit, or cancel.' });
+        else this.setState({ sec: r }); } }, 100);
+    this._st = (e) => { if (e && e.key && e.key !== SKEY) return; const n = this.sh();
+      if (this._seq != null && n.resetSeq !== this._seq) this.localReset(); this._seq = n.resetSeq; };
+    this._seq = this.sh().resetSeq;
+    window.addEventListener('storage', this._st);
+    this._kb = (e) => { if (e.shiftKey && e.key === 'Enter') { const t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return; e.preventDefault(); this.doSell(); } };
+    window.addEventListener('keydown', this._kb);
+  }
+  componentDidUpdate() { this.applyVars(); }
+  componentWillUnmount() { clearInterval(this.iv); window.removeEventListener('storage', this._st); window.removeEventListener('keydown', this._kb); }
+  applyVars() {
+    const umber = (this.props.cardStyle ?? 'ink blue') === 'umber';
+    const m = umber
+      ? { '--c-bg': '#2B211A', '--c-bd': '#41332A', '--c-a1': '#D9A94E', '--c-txt': '#D9CDBD', '--c-dim': '#A08C77' }
+      : { '--c-bg': '#182430', '--c-bd': '#2A3B49', '--c-a1': '#DFB05C', '--c-txt': '#C9D3DB', '--c-dim': '#8FA3B3' };
+    const r = document.documentElement.style;
+    for (const k in m) r.setProperty(k, m[k]);
+    r.setProperty('--annD', (this.props.annotations ?? true) ? 'block' : 'none');
+  }
+  localReset() { this.setState({ mode: 'armed', sec: 540, refreshed: false, rulesOpen: false, reason: null, side: 'short', qty: 1000, editTrim: false, cancelNote: '', sentFill: '', sentHead: '', sentNote: '', liveMsg: 'Demo reset to baseline.', pos: null, execs: [] }); }
+  fmt(s) { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }
+  fmtN(n) { return (n || 0).toLocaleString('en-US'); }
+  roveRg(e, el, cur, n, set) { let d = 0; if (e.key === 'ArrowDown' || e.key === 'ArrowRight') d = 1; else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') d = -1; else return; e.preventDefault(); const i = ((cur < 0 ? 0 : cur) + d + n) % n; set(i); setTimeout(() => { if (el) { const r = el.querySelectorAll('[role=radio]')[i]; if (r) r.focus(); } }, 30); }
+  doSell() {
+    const s = this.state, m = s.mode;
+    if (m === 'armed') { this.setState({ mode: 'stepped', liveMsg: 'Your loss cooldown stepped in at send. Nothing was sent. Three paths: start the nine minute cooldown, override with a reason, or cancel. The size cap did not trigger.' }); return; }
+    if (m === 'review' || m === 'edited') {
+      const short = s.side === 'short', qty = s.qty;
+      if (m === 'edited' && (!qty || qty < 1)) { this.setState({ liveMsg: 'Enter a quantity first.' }); return; }
+      const px = short ? '601.85' : '601.88';
+      const parts = [];
+      if (m === 'edited') { if (qty !== 1000) parts.push('quantity 1,000 → ' + this.fmtN(qty)); if (!short) parts.push('side sell short → buy'); }
+      const how = parts.length ? 'edited (' + parts.join(' · ') + ')' : 'reviewed, then confirmed';
+      this.addEvent({ day: 'MON', time: '10:02', rule: 'LOSS COOLDOWN', what: 'loss cooldown · waited 9:00 · ' + how + ' at refreshed ' + (short ? 'bid' : 'ask') + ' · Meridian · SPY shares', size: (short ? 'short ' : 'buy ') + this.fmtN(qty) + ' SPY', result: (short ? 'bid 602.12 → ' : '') + 'simulated fill @ ' + px, out: '✓ sent', kind: 'held' });
+      this.setState({ mode: 'sent', pos: this.applyFill(s.side, qty, parseFloat(px)), execs: s.execs.concat(['10:02 ' + (short ? 'SS ' : 'BOT ') + this.fmtN(qty) + ' @ ' + px + ' (sim)']), sentFill: px, sentHead: '✓ ' + (short ? 'SOLD SHORT ' : 'BOUGHT ') + this.fmtN(qty) + ' SPY — SIMULATED FILL @ ' + px, sentNote: 'waited 9:00 · ' + how + ' · 10:02 · simulated fill — a live fill may differ', liveMsg: (short ? 'Sold short ' : 'Bought ') + qty + ' SPY, simulated fill at ' + px + ', after the cooldown. Recorded in the Companion.' });
+    }
+    else if (m === 'overridden') { this.addEvent({ day: 'MON', time: '9:54', rule: 'LOSS COOLDOWN', what: 'override · continued to order review · “' + SHORT[s.reason ?? 2] + '” · Meridian · SPY shares', size: 'short 1,000 SPY', result: 'simulated fill @ 602.12 · outcome pending', out: '◇ sent · override', kind: 'over', pending: true, tone: 'warn', reason: REASONS[s.reason ?? 2] });
+      this.setState({ mode: 'sent', pos: this.applyFill('short', 1000, 602.12), execs: s.execs.concat(['9:54 SS 1,000 @ 602.12 (sim)']), sentFill: '602.12', sentHead: '✓ SOLD SHORT 1,000 SPY — SIMULATED FILL @ 602.12', sentNote: 'override + reason recorded · 9:54 — context, not a confession · simulated fill — a live fill may differ', liveMsg: 'Sold short 1,000 SPY, simulated fill at 602.12, on an override. Reason recorded in the Companion.' }); }
+  }
+  renderVals() {
+    const s = this.state, m = s.mode, rf = s.refreshed;
+    const reasons = REASONS.map((label, i) => { const on = s.reason === i;
+      return { label, checked: String(on), ti: on ? 0 : (s.reason == null && i === 0 ? 0 : -1), onClick: () => this.setState({ reason: i }),
+        border: on ? '1px solid var(--c-a1)' : '1px solid var(--c-bd)', bg: on ? 'rgba(223,176,92,.08)' : 'transparent',
+        color: on ? 'var(--c-a1)' : 'var(--c-txt)', dot: on ? '4px solid var(--c-a1)' : '1px solid var(--c-dim)' }; });
+    const FOOT = {
+      armed: ['#8C6A25', '◆ 4 rules on — 3 apply to equities · silent until one steps in'],
+      stepped: ['#8C6A25', '◆ order held — everything else live · nothing sends by itself'],
+      cooling: ['#8C6A25', '◆ order held — everything else live · nothing sends by itself'],
+      reason: ['#8C6A25', '◆ order held — everything else live · nothing sends by itself'],
+      review: ['#8C6A25', '◆ fresh confirmation required — the old order never fires by itself'],
+      edited: ['#8C6A25', '◆ cooldown served — transmit sends at the refreshed bid'],
+      overridden: ['#8C6A25', '◆ override recorded — fresh confirmation still required'],
+      cancelled: ['#99A0A5', '◇ 4 rules on · trading unaffected'],
+      sent: ['#99A0A5', '◇ 4 rules on · event on your record'] };
+    const FILLROW = {
+      stepped: ['9:53 SS 1,000 — held', '◆'], cooling: ['9:53 SS 1,000 — held', '◆'], reason: ['9:53 SS 1,000 — held', '◆'],
+      review: ['9:53 SS 1,000 — held', '◆'], edited: ['9:53 SS 1,000 — held', '◆'], overridden: ['9:53 SS 1,000 — held', '◆'],
+      cancelled: ['9:53 SS 1,000 — cancelled', '◇'] };
+    return {
+      isStepped: m === 'stepped', isCooling: m === 'cooling', isReason: m === 'reason', isReview: m === 'review',
+      isEdited: m === 'edited', isOverridden: m === 'overridden', isCancelled: m === 'cancelled', isSent: m === 'sent',
+      sellOn: m === 'armed' || m === 'review' || m === 'edited' || m === 'overridden',
+      sellMutedOn: m === 'stepped' || m === 'cooling' || m === 'reason',
+      sellBg: m === 'review' || m === 'overridden' ? '#8A6D2F' : '#C13A3F',
+      sellLabel: m === 'review' ? 'CONFIRM — SELL SHORT 1,000 SPY @ EST. 601.85' : m === 'overridden' ? 'CONFIRM — SELL SHORT 1,000 SPY @ EST. 602.12' : m === 'edited' ? ((s.side === 'short' ? 'SELL SHORT ' : 'BUY ') + this.fmtN(s.qty) + ' SPY @ EST. ' + (s.side === 'short' ? '601.85' : '601.88') + ' · ⇧⏎') : 'SELL SHORT 1,000 SPY MKT · ⇧⏎',
+      sell: () => this.doSell(),
+      startCooldown: () => this.setState({ mode: 'cooling', sec: 540, liveMsg: 'Nine minute cooldown started. Your order is held; you review it after.' }),
+      openReason: () => { this.setState({ mode: 'reason', reason: null }); setTimeout(() => { if (this._reasonEl) { const b = this._reasonEl.querySelector('[role=radio]'); if (b) b.focus(); } }, 60); },
+      reasonRef: (el) => { this._reasonEl = el; },
+      reasonKey: (e) => { if (e.key === 'Escape') { e.stopPropagation(); this.setState({ mode: 'stepped', reason: null, liveMsg: 'Kept the pause.' }); } },
+      reasons, reasonShort: s.reason == null ? '—' : SHORT[s.reason],
+      continueDisabled: String(s.reason == null), continueOpacity: s.reason == null ? '.45' : '1',
+      reasonContinue: () => { if (s.reason == null) { this.setState({ liveMsg: 'Pick a reason first — it is recorded with the trade.' }); return; }
+        this.setState({ mode: 'overridden', liveMsg: 'Override recorded. You are back at order review — confirm to send at the current bid.' }); },
+      reasonCancel: () => this.setState({ mode: 'stepped', reason: null, liveMsg: 'Kept the pause.' }),
+      editOrder: () => this.setState({ mode: 'edited', side: 'short', qty: 1000, editTrim: false, liveMsg: 'Editing. Side and quantity are editable; the quote stays refreshed. Transmit sends — the cooldown is served.' }),
+      qtyStr: s.qty === 0 ? '' : String(s.qty),
+      qtyChange: (e) => { const d = String(e.target.value).replace(/[^0-9]/g, '').slice(0, 4); let v = d === '' ? 0 : parseInt(d, 10); let trim = false; if (v > 1500) { v = 1500; trim = true; } this.setState({ qty: v, editTrim: trim }); },
+      qMinus: () => this.setState({ qty: Math.max(100, (s.qty || 0) - 100), editTrim: false }),
+      qPlus: () => this.setState({ qty: Math.min(1500, (s.qty || 0) + 100), editTrim: (s.qty || 0) + 100 > 1500 }),
+      editCapNote: s.editTrim ? '◆ trimmed to your 1,500-share equity cap' : 'equity cap: 1,500 shares · typing above it trims',
+      sideOpts: [['short', 'Sell Short'], ['buy', 'Buy']].map(([k, label]) => { const on = s.side === k;
+        return { label, checked: String(on), ti: on ? 0 : -1, onClick: () => this.setState({ side: k }),
+          border: on ? '1px solid var(--c-a1)' : '1px solid var(--c-bd)', bg: on ? 'rgba(223,176,92,.08)' : 'transparent', color: on ? 'var(--c-a1)' : 'var(--c-txt)' }; }),
+      sideRgRef: (el) => { this._sideRg = el; },
+      sideRgKey: (e) => this.roveRg(e, this._sideRg, ['short', 'buy'].indexOf(s.side), 2, (i) => this.setState({ side: ['short', 'buy'][i] })),
+      rgRef: (el) => { this._rg = el; },
+      rgKey: (e) => this.roveRg(e, this._rg, s.reason == null ? -1 : s.reason, 3, (i) => this.setState({ reason: i })),
+      sideLabel: s.side === 'short' ? 'Sell Short' : 'Buy', sideColor: s.side === 'short' ? '#C13A3F' : '#2F8F5B',
+      qtyDisp: this.fmtN(s.qty), sentHead: s.sentHead,
+      execPx: s.side === 'short' ? (rf ? '601.85' : '602.12') : (rf ? '601.88' : '602.15'),
+      execAt: s.side === 'short' ? 'at bid' : 'at ask',
+      cancelOrder: () => { this.addEvent({ day: 'MON', time: '9:55', rule: 'LOSS COOLDOWN', what: 'loss cooldown stepped in · you cancelled the order · Meridian · SPY shares', size: 'short 1,000 SPY', result: 'nothing sent · cooldown recorded', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+        this.setState({ mode: 'cancelled', cancelNote: 'cancelled ' + (s.refreshed ? '10:02' : '9:55'), liveMsg: 'Order cancelled. Nothing was sent; the cooldown is recorded.' }); },
+      cancelCooldown: () => { this.addEvent({ day: 'MON', time: '9:56', rule: 'LOSS COOLDOWN', what: 'cooldown cancelled with the order · Meridian · SPY shares', size: 'short 1,000 SPY', result: 'nothing sent · cooldown recorded', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+        this.setState({ mode: 'cancelled', sec: 540, cancelNote: 'cooldown cancelled 9:56', liveMsg: 'Cooldown cancelled. Nothing was sent.' }); },
+      newOrder: () => this.setState({ mode: 'armed', sec: 540, rulesOpen: false, reason: null, side: 'short', qty: 1000, editTrim: false, cancelNote: '', sentFill: '', sentHead: '', sentNote: '', liveMsg: 'New order ticket. Your position, fills, and record are preserved.' }),
+      skip: () => { if (this.state.mode === 'cooling') this.setState({ sec: 0, mode: 'review', refreshed: true, liveMsg: 'Skipped to the end of the cooldown. Review the refreshed bid.' }); },
+      resetDemo: () => { const cur = this.sh(); const base = JSON.parse(JSON.stringify(BASELINE)); base.resetSeq = (cur.resetSeq || 0) + 1;
+        try { localStorage.setItem(SKEY, JSON.stringify(base)); } catch (e) {} this._seq = base.resetSeq; this.localReset(); },
+      rulesOpen: String(!!s.rulesOpen), rulesOpenOn: !!s.rulesOpen,
+      toggleRules: () => this.setState({ rulesOpen: !s.rulesOpen }),
+      rulesKey: (e) => { if (e.key === 'Escape') { e.stopPropagation(); this.setState({ rulesOpen: false }); if (this._rulesBtn) try { this._rulesBtn.focus(); } catch (x) {} } },
+      rulesBtnRef: (el) => { this._rulesBtn = el; },
+      cd: this.fmt(s.sec), coolPct: Math.round(((540 - s.sec) / 540) * 100) + '%',
+      clock: rf ? '10:02:41' : '09:53:12',
+      quote: rf ? '601.88' : '602.15',
+      bid: rf ? '601.85' : '602.12', bidSize: rf ? '1,320' : '1,480', ask: rf ? '601.88' : '602.15',
+      l2Bid: rf ? '601.85' : '602.12', l2BidSize: rf ? '1,320' : '1,480', l2Ask: rf ? '601.88' : '602.15',
+      notional: '$' + this.fmtN(Math.round((s.qty || 0) * (s.side === 'short' ? (rf ? 601.85 : 602.12) : (rf ? 601.88 : 602.15)))),
+      guardMarkOn: m !== 'armed',
+      fillRowOn: m !== 'armed' && m !== 'sent', fillRowLabel: (FILLROW[m] || ['', ''])[0], fillRowMark: (FILLROW[m] || ['', ''])[1],
+      execRows: s.execs.map((label) => ({ label })),
+      positionsLine: s.pos ? (s.pos.side === 'short' ? 'SHORT ' : 'LONG ') + this.fmtN(s.pos.qty) + ' SPY @ ' + s.pos.px.toFixed(2) + ' · SIMULATED FILL' : 'FLAT — no open positions',
+      buyingPower: '$' + this.fmtN(612430 - (s.pos ? Math.round(0.25 * s.pos.qty * s.pos.px) : 0)),
+      footC: (FOOT[m] || FOOT.armed)[0], footLine: (FOOT[m] || FOOT.armed)[1],
+      cancelNote: s.cancelNote, sentNote: s.sentNote, liveMsg: s.liveMsg,
+    };
+  }
+}
+</script>
+</body>
+</html>

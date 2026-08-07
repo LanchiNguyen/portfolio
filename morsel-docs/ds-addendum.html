@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" type="image/png" href="../favicon.png" />
+<meta name="description" content="Morsel process document: design-system addendum tracking tokens and components across v2, v3, and v3.1." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morsel — design system addendum (v2/v3/v3.1)</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; --accent-ink:#FFF6EC; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", sans-serif; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 920px; margin: 0 auto; padding: 56px 32px 96px; }
+  h1 { font-family: "Lora", serif; font-weight: 600; font-size: 42px; line-height: 1.05; }
+  .sub { color: var(--ink2); font-size: 15px; line-height: 1.55; max-width: 640px; }
+  .comp { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; margin-top: 18px; display: grid; grid-template-columns: 300px 1fr; gap: 22px; }
+  .comp h2 { font-family: "Lora", serif; font-weight: 600; font-size: 20px; margin-bottom: 12px; grid-column: 1 / -1; }
+  .comp h2 .v { font-size: 11px; font-weight: 800; font-family: "Hanken Grotesk"; letter-spacing: .06em; color: #3D5A2E; background: #DCE8D4; border-radius: 99px; padding: 3px 9px; margin-left: 8px; vertical-align: 3px; }
+  .demo { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .demo .cap { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
+  .notes { font-size: 13px; line-height: 1.55; color: var(--ink2); }
+  .notes b { color: var(--ink); }
+  .notes .a11y { display: block; margin-top: 10px; padding: 9px 12px; background: var(--sunken); border-radius: 10px; font-size: 12.5px; }
+  .notes .a11y::before { content: "Accessibility — "; font-weight: 800; color: var(--ink); }
+  .notes .copy { display: block; margin-top: 8px; font-size: 12.5px; }
+  .notes .copy::before { content: "Content — "; font-weight: 800; color: var(--ink); }
+  /* live component styles (mirrors app/styles.css) */
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); padding: 9px 16px; font-size: 14px; font-weight: 600; min-height: 40px; }
+  .chip.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .chip.al-on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
+  .warnchip { display: inline-flex; align-items: center; gap: 5px; background: var(--accent); color: var(--accent-ink); border-radius: 999px; padding: 5px 10px; font-size: 11.5px; font-weight: 800; }
+  .banner { display: flex; gap: 10px; align-items: flex-start; background: rgba(194,73,43,.10); border: 1.5px solid var(--accent); border-radius: 16px; padding: 12px 14px; }
+  .banner .x { color: var(--accent); flex: none; font-weight: 900; font-size: 13px; width: 20px; height: 20px; border-radius: 99px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; }
+  .banner .t { font-size: 13.5px; font-weight: 800; color: var(--accent); }
+  .banner .s { font-size: 12px; color: var(--ink2); line-height: 1.45; }
+  .stat { display: flex; align-items: center; gap: 10px; background: var(--sunken); border-radius: 14px; padding: 11px 13px; width: 100%; }
+  .stat .t { font-size: 13.5px; font-weight: 800; }
+  .stat .s { font-size: 11.5px; color: var(--ink2); }
+  .stat .s .link { color: var(--accent); font-weight: 800; }
+  .stat.new { background: transparent; border: 1.5px dashed var(--ink3); }
+  .statuspill { display: inline-flex; border-radius: 99px; background: var(--ink); color: var(--paper); padding: 6px 12px; font-size: 12px; font-weight: 700; }
+  .glasspill { display: inline-flex; border-radius: 99px; background: rgba(120,36,22,.75); color: #FFF9F0; padding: 6px 12px; font-size: 12px; font-weight: 700; }
+  .skel { border-radius: 12px; background: linear-gradient(100deg, var(--sunken) 40%, rgba(255,255,255,.5) 50%, var(--sunken) 60%); background-size: 200% 100%; animation: sh 1.4s linear infinite; }
+  @keyframes sh { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+  @media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+  .obanner { display: flex; gap: 10px; align-items: center; background: var(--sunken); border: 1px solid var(--line); border-radius: 14px; padding: 10px 13px; width: 100%; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 99px; min-height: 44px; padding: 0 20px; font-weight: 700; font-size: 14px; }
+  .btn.p { background: var(--accent); color: var(--accent-ink); }
+  .btn.q { background: var(--sunken); }
+  .btn.dis { opacity: .35; }
+  .focusdemo { outline: 2.5px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  @media (max-width: 720px) { .comp { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <a href="../morsel.html">← back to case study</a> · <a href="../morsel.html">core design system (parent project) →</a>
+  <h1 style="margin-top:16px;">Design system addendum</h1>
+  <p class="sub" style="margin-top:12px;">Patterns added in v2 (critique round), v3 (logic &amp; edge-state round), and v3.1 (audit round). The core system — palette, type, spacing, buttons, sheets — is unchanged and documented separately. Tokens shown here are the Toast direction.</p>
+
+  <div class="comp">
+    <h2>Lifestyle selection chip <span class="v">v2</span></h2>
+    <div class="demo">
+      <span class="cap">Default / selected</span>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;"><span class="chip">Vegetarian</span><span class="chip on">✓ Vegan</span></div>
+    </div>
+    <div class="notes">
+      Single-select; tapping the active chip deselects (lifestyle is optional). Selection = ink fill, check glyph. Filters the feed — copy must always say so.
+      <span class="copy">Label with the noun ("Vegan"), never "No meat" — lifestyle is identity, not exclusion.</span>
+      <span class="a11y">Chip is a real <code>button</code> with <code>aria-pressed</code>. Selection is signaled by fill + check glyph, not color alone. Min target 44pt.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Allergy selection chip <span class="v">v2</span></h2>
+    <div class="demo">
+      <span class="cap">Default / selected</span>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;"><span class="chip">Nuts</span><span class="chip al-on">✓ Nuts</span></div>
+    </div>
+    <div class="notes">
+      Multi-select. Uses <b>accent (terracotta), never ink</b> — allergies are a different tier from taste/lifestyle and must look like it. Always followed by the kitchen-confirmation reminder.
+      <span class="copy">Promise precisely: "excluded from your feed and search; saved dishes stay visible with warnings." Never "removed everywhere."</span>
+      <span class="a11y">Check glyph + weight change accompany the color shift. Announce as "Nuts allergy, on".</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Allergen warn chip <span class="v">v3</span></h2>
+    <div class="demo">
+      <span class="cap">On photo tiles (saved / collections / restaurant)</span>
+      <div style="position:relative; width:150px; aspect-ratio:.9; border-radius:12px; overflow:hidden;"><img src="../images/morsel-photos/1455619452474-d2be8b1e70cd.webp" alt="" style="width:100%;height:100%;object-fit:cover;" /><span class="warnchip" style="position:absolute; top:8px; left:8px;">! Nuts</span></div>
+    </div>
+    <div class="notes">
+      Marks a saved/retained dish that conflicts with the user's allergy settings. Top-left so it never collides with sort/trending tags (bottom-left). Conflicting dishes are <b>kept, never auto-deleted</b> — accompanied by a list-level caption explaining that.
+      <span class="copy">Name the allergen ("! Nuts"), not a generic warning.</span>
+      <span class="a11y">"!" glyph carries the signal without color. Image alt includes "contains nuts".</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Allergen conflict banner <span class="v">v2 · copy v3</span></h2>
+    <div class="demo" style="align-items:stretch;">
+      <span class="cap">Dish detail, direct open</span>
+      <div class="banner"><div class="x">!</div><div><div class="t">Contains nuts</div><div class="s">Excluded from your feed and search — you're seeing it because you opened it directly. Double-check with the kitchen before ordering.</div></div></div>
+    </div>
+    <div class="notes">
+      Shown when a dish reached via save, collection, or shared link conflicts with an allergy. Sits above the trust card — safety outranks persuasion.
+      <span class="copy">Three beats, always: what it contains → why you're seeing it anyway → confirm with the kitchen.</span>
+      <span class="a11y"><code>role="alert"</code>. Border + glyph + text; never color-only. Treat allergen data as prototype/best-effort — say so in Profile.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Trust &amp; methodology disclosure <span class="v">v2 · v3</span></h2>
+    <div class="demo" style="align-items:stretch;">
+      <span class="cap">Default</span>
+      <div class="stat"><div><div class="t">94% would order again</div><div class="s">131 verified diners · <span class="link">how we know</span></div></div></div>
+      <span class="cap">Cold start (insufficient data)</span>
+      <div class="stat new"><div><div class="t">New — no score yet</div><div class="s">too few repeat orders to be honest about a number</div></div></div>
+    </div>
+    <div class="notes">
+      The anti-star-rating. "How we know" expands inline: repeat orders through Morsel handoffs within 90 days, never self-reported — plus a prototype-data note. Below a minimum sample the number is withheld entirely (cold start), never extrapolated. <b>Status: proposed model, not operational fact</b> — no order pipeline exists in the prototype; the repeat-order signal depends on unbuilt carrier integration, attribution, and consent plumbing, all open feasibility questions.
+      <span class="copy">Sample size always visible. Methodology in one sentence. Abstention copy admits the limit plainly.</span>
+      <span class="a11y">Ring graphic is decorative (<code>aria-hidden</code>); the stat reads as text. Disclosure is a real button, expanded state announced.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Availability status <span class="v">v2 · v3</span></h2>
+    <div class="demo">
+      <span class="cap">Closed (restaurant hero) / sold out (dish) / disabled action</span>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;"><span class="glasspill">Closed now · opens 8 AM</span><span class="statuspill">Sold out today · usually back tomorrow</span></div>
+      <div style="display:flex; gap:8px; width:100%;"><span class="btn q" style="flex:1;">Directions</span><span class="btn p dis" style="flex:1;">Opens 8 AM</span></div>
+    </div>
+    <div class="notes">
+      Status must disable the actions it invalidates: closed kitchens and sold-out dishes show a disabled primary that <b>names the reason</b> ("Opens 8 AM", "Sold out") instead of a dead "Order".
+      <span class="copy">Always pair the negative with the recovery: when it reopens / usually back tomorrow.</span>
+      <span class="a11y">Disabled buttons keep ≥4.5:1 text contrast on their label text; reason is in the label itself, not a tooltip.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>No-carrier &amp; handoff failure <span class="v">v2 · v3</span></h2>
+    <div class="demo" style="align-items:stretch;">
+      <span class="cap">No delivery apps</span>
+      <div class="obanner"><div style="font-size:12.5px;"><b>Not on delivery apps.</b> <span style="color:var(--ink2);">A sit-down room — pick it up below, or go in person.</span></div></div>
+      <span class="cap">Handoff failure</span>
+      <div class="banner"><div class="x">!</div><div><div class="t">Couldn't open DoorDash</div><div class="s">It may not be installed. Try again, pick another app, or grab it yourself — pickup never fails.</div></div></div>
+    </div>
+    <div class="notes">
+      The order sheet never dead-ends: no carriers → pickup stays; a failed app-open shows an inline error with retry and keeps every alternative visible.
+      <span class="copy">Blame the situation, not the user. Always end on the option that can't fail (pickup).</span>
+      <span class="a11y">Failure banner is <code>role="alert"</code>; retry is a text button ≥44pt tall in the row.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Search-result label <span class="v">v2</span></h2>
+    <div class="demo">
+      <span class="cap">Glass overlay, results only</span>
+      <div style="position:relative; width:170px; aspect-ratio:1.05; border-radius:12px; overflow:hidden;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" style="width:100%;height:100%;object-fit:cover;" /><span style="position:absolute; left:8px; bottom:8px; background:rgba(28,18,10,.5); backdrop-filter:blur(6px); color:#FFF9F0; border-radius:99px; padding:5px 10px; font-size:11.5px; font-weight:700;">Shoyu Ramen No. 4 · $17</span></div>
+    </div>
+    <div class="notes">
+      Search results carry name + price on the photo; the browse feed stays photo-only. Rationale: searchers are comparing candidates, browsers are grazing. Same glass component as feed chrome.
+      <span class="copy">Name · price. Nothing else — distance and % stay in detail.</span>
+      <span class="a11y">Label is real text over a dark glass fill (≥4.5:1 on any photo).</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Loading skeleton <span class="v">v3</span></h2>
+    <div class="demo" style="align-items:stretch;">
+      <span class="cap">Feed shimmer</span>
+      <div style="display:flex; gap:8px;"><div class="skel" style="flex:1; aspect-ratio:.8;"></div><div class="skel" style="flex:1; aspect-ratio:1.05;"></div></div>
+    </div>
+    <div class="notes">
+      Mirrors the real layout (hero block + staggered grid) so content doesn't jump on arrival. Shimmer only — no spinners, no logo pulses.
+      <span class="a11y">Container has <code>aria-label="Loading dishes near you"</code>; shimmer stops under <code>prefers-reduced-motion</code>.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Offline / location-off banner <span class="v">v3</span></h2>
+    <div class="demo" style="align-items:stretch;">
+      <div class="obanner"><div style="flex:none; width:8px; height:8px; border-radius:99px; background:var(--ink3);"></div><div style="font-size:12.5px;"><b>You're offline.</b> <span style="color:var(--ink2);">Showing your last loaded feed — prices and hours may be stale.</span></div></div>
+      <div class="obanner"><div style="font-size:12.5px; flex:1;"><b>Location is off.</b> <span style="color:var(--ink2);">Showing Shaw, our demo neighborhood.</span></div><span style="color:var(--accent); font-weight:800; font-size:12.5px;">Enable</span><span style="color:var(--accent); font-weight:800; font-size:12.5px;">Set manually</span></div>
+    </div>
+    <div class="notes">
+      Quiet sunken banners under the hero — informational, not blocking. Location-off offers both recoveries (system permission or manual entry). Offline warns about staleness rather than hiding content.
+      <span class="a11y"><code>role="status"</code>, not alert — these don't interrupt. Actions are discrete buttons.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Zero-result preference recovery <span class="v">v3</span></h2>
+    <div class="demo" style="align-items:stretch;">
+      <div style="background:var(--sunken); border-radius:16px; padding:14px;">
+        <div style="font-size:13.5px; font-weight:800; margin-bottom:6px;">No dish clears every rule right now</div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap; margin-bottom:10px;">
+          <span style="border-radius:99px; padding:5px 10px; font-size:11px; font-weight:700; background:var(--surface); border:1px solid var(--line); color:var(--ink2);">Vegan</span>
+          <span style="border-radius:99px; padding:5px 10px; font-size:11px; font-weight:700; background:var(--accent); color:var(--accent-ink);">! No nuts</span>
+          <span style="border-radius:99px; padding:5px 10px; font-size:11px; font-weight:700; background:var(--surface); border:1px solid var(--line); color:var(--ink2);">within 0.5 mi</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:6px;"><span class="btn p" style="min-height:38px; font-size:13px;">Clear browsing filters</span><span class="btn q" style="min-height:38px; font-size:13px;">Edit dietary settings</span></div>
+      </div>
+    </div>
+    <div class="notes">
+      Names every active constraint, tier by tier, with a separate action per tier. <b>"Clear filters" must never clear an allergy</b> — dietary edits route to the safety screen deliberately.
+      <span class="copy">State the cause, list the limits, offer one action per tier. Footnote that allergies are never cleared by shortcuts.</span>
+      <span class="a11y">Constraint chips are a list with a label; allergy chips carry the "!" glyph.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Dynamic Type behavior <span class="v">v3</span></h2>
+    <div class="demo">
+      <span class="cap">100% / 135%</span>
+      <div style="font-family:'Lora',serif; font-weight:600; font-size:22px;">Near you</div>
+      <div style="font-family:'Lora',serif; font-weight:600; font-size:30px;">Near you</div>
+    </div>
+    <div class="notes">
+      All type classes scale through a single <code>--ts</code> multiplier (100–140% exposed in the prototype's Tweaks). Photo tiles keep their aspect ratio; text containers grow and wrap — chips wrap to new lines, buttons grow vertically, nothing truncates below 140%.
+      <span class="a11y">Maps to iOS Dynamic Type up to XXL. Glass labels and warn chips scale with <code>--ts</code> too; hit targets never shrink below 44pt.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Non-color indicators — summary <span class="v">v3</span></h2>
+    <div class="demo">
+      <div style="display:flex; gap:8px; flex-wrap:wrap;"><span class="chip on">✓ selected</span><span class="warnchip">! warning</span><span class="chip" style="border-style:dashed;">— insufficient data</span></div>
+    </div>
+    <div class="notes">
+      Every state carries a glyph or border treatment alongside its color: selection = check, warning = "!", cold start = dashed. Active feed tab = underline + weight. This is the floor for any new component.
+      <span class="a11y">Verified against deuteranopia simulation; terracotta-on-cream also passes 4.5:1 for text ≥13px.</span>
+    </div>
+  <div class="comp">
+    <h2>Order-sheet allergy acknowledgement <span class="v">v3.1</span></h2>
+    <div class="demo">
+      <span class="cap">Warning + gate + locked option</span>
+      <div class="banner" style="flex-direction:column; align-items:stretch; gap:8px; width:100%;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div class="x">!</div>
+          <div><div class="t">Contains shellfish — an allergy you flagged</div>
+          <div class="s">Ordering stays locked until you confirm below.</div></div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span style="width:22px; height:22px; border-radius:7px; border:2px solid var(--accent); flex:none;"></span>
+          <span style="font-size:12.5px; font-weight:700;">I understand this dish contains shellfish — unlock ordering</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center; opacity:.4; width:100%;">
+        <span style="width:34px; height:34px; border-radius:10px; background:#EB1700; color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center;">D</span>
+        <span style="font-size:13px; font-weight:700;">DoorDash</span>
+        <span style="font-size:11.5px; color:var(--ink2);">Locked — confirm the allergy notice above</span>
+      </div>
+    </div>
+    <div class="notes">
+      When a dish that conflicts with a flagged allergy reaches the order sheet (saved dishes and direct links can), the dish-level warning is <b>repeated at the point of commitment</b>. Every delivery and pickup option is disabled until the diner explicitly acknowledges. The warning stays visible until the handoff completes or the sheet is cancelled; the acknowledgement never persists between sheets and is never pre-checked.
+      <span class="copy">Name the allergen and its source ("an allergy you flagged"). The unlock line restates the substance — no generic "I agree".</span>
+      <span class="a11y">Warning container is <code>role="alert"</code>. The gate is <code>role="checkbox"</code> + <code>aria-checked</code>. Locked rows are true <code>disabled</code> buttons with the lock reason in their visible sub-line. No filter, reset, or "clear" action anywhere in the product can remove allergy rules.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Diet-aware empty search <span class="v">v3.1</span></h2>
+    <div class="demo">
+      <span class="cap">Rules-empty (not inventory-empty)</span>
+      <div style="background:var(--sunken); border-radius:14px; padding:14px; width:100%;">
+        <div style="font-size:13.5px; font-weight:800; margin-bottom:6px;">No “burger” matches your current dietary settings</div>
+        <div style="font-size:11.5px; color:var(--ink2); margin-bottom:8px;">2 dishes exist on Morsel but are excluded by:</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+          <span style="font-size:11px; font-weight:700; border-radius:99px; padding:5px 10px; background:var(--surface); border:1px solid var(--line); color:var(--ink2);">Vegan · lifestyle</span>
+          <span style="font-size:11px; font-weight:700; border-radius:99px; padding:5px 10px; background:var(--accent); color:var(--accent-ink);">! no dairy · allergy</span>
+        </div>
+        <span class="btn q" style="min-height:36px; font-size:12.5px; width:100%;">Edit lifestyle preferences</span>
+      </div>
+    </div>
+    <div class="notes">
+      Two different truths need two different answers: <b>"we don't have it"</b> (“Nothing for X yet” — reserved for genuinely absent inventory) versus <b>"we have it, your rules exclude it"</b>. The rules-empty state names the query, counts the hidden matches, and lists exactly which rules excluded them — lifestyle chips neutral, allergy chips in warning treatment.
+      <span class="copy">Only lifestyle gets an edit shortcut. Allergy rules are named but never offered as a one-tap removal — "Allergy protections are separate and always stay on."</span>
+      <span class="a11y">The "!" glyph plus the · allergy suffix distinguish tiers without relying on color. Edit shortcut deep-links to the Diet &amp; safety step, not a generic settings page.</span>
+    </div>
+  </div>
+
+  <div class="comp">
+    <h2>Prototype-data label <span class="v">v3.1</span></h2>
+    <div class="demo">
+      <span class="cap">Contextual + global</span>
+      <div class="stat"><div><div class="t">96% would order again</div><div class="s">133 verified diners (illustrative) · <span class="link">how we know</span></div></div></div>
+      <div style="font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink3);">From people who ate it · illustrative</div>
+      <div style="font-size:11.5px; color:var(--ink2);">Prototype: all diner counts, scores, save numbers, names, and quotes are illustrative seed data — not real customer evidence.</div>
+    </div>
+    <div class="notes">
+      Every place the prototype shows evidence-shaped content — diner counts, trust percentages, reviewer names and quotes, save momentum — carries an <b>(illustrative)</b> or <b>· sample data</b> label in context, and a persistent global note sits under the device on every load. The "how we know" disclosure repeats the methodology caveat in full.
+      <span class="copy">Label the data, not the feature: "133 verified diners (illustrative)" keeps the mechanism honest while marking the numbers as seed data. Never invent new metrics to fill space.</span>
+      <span class="a11y">Labels are plain text in the same node as the number they qualify — screen readers hear the caveat with the claim, not after it.</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Morsel figure capture harness</title>
+<link rel="stylesheet" href="/morsel-proto/v3/app/styles.css" />
+<style>html,body{margin:0;padding:0;background:#EDE6D8}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+/* sentinel transport: u() returns "PHOTO:<id>" so the serialized DOM carries the
+   canonical photo id, which the artifact rehydrates from its shared photo map. */
+window.__MORSEL_PHOTOS = new Proxy({}, { get: (_, k) => (typeof k === 'string' ? 'PHOTO:' + k : undefined),
+                                         has: () => true });
+/* each figure captures from a clean slate, never from a sibling figure's saved state */
+try { localStorage.removeItem('morsel3_state'); } catch (e) {}
+</script>
+<script src="/morsel-proto/vendor/react.development.js"></script>
+<script src="/morsel-proto/vendor/react-dom.development.js"></script>
+<script src="/morsel-bundle.js"></script>
+</body>
+</html>

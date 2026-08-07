@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
+<sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
+<div style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — COMPANION APP v2 · RULES / PATTERNS / RECORD</div>
+<div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">HOST-AGNOSTIC — THE SAME RULES ARM DART OR A DESKTOP</div>
+</div>
+</sc-if>
+
+<div role="group" aria-label="Prototype demo controls" style="width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;margin-top:20px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.2em;color:#5E6B75">PROTOTYPE — AFTER-CLOSE COMPANION</div>
+<div style="max-width:720px;font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">Rules, patterns, and the Record live here. Tighten the size cap and the Host enforces it immediately; loosen it and it waits for the next open. Everything the Host does lands in the Record.</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed #9AA0A4;border-radius:16px;padding:8px 10px 8px 16px;align-self:flex-start">
+<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#5E6B75">DEMO CONTROLS</span>
+<button type="button" onClick="{{ toggleFirstRun }}" aria-pressed="{{ firstRunStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">{{ firstRunLabel }}</button>
+<sc-if value="{{ resetVisible }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — BOTH SURFACES</button>
+</sc-if>
+</div>
+</div>
+
+<div style="width:100%;max-width:1100px;display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;margin-top:18px">
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+<div data-screen-label="Companion phone" style="width:322px;background:#101013;border:1px solid #2a2620;border-radius:34px;padding:14px 13px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;color:#e8e4da;min-height:680px;box-shadow:0 26px 50px -30px rgba(10,14,18,.55);position:relative;overflow:hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:0 6px"><span style="font:600 10px 'IBM Plex Mono',monospace">16:12</span><span aria-hidden="true" style="font:600 9.5px 'IBM Plex Mono',monospace;color:#5b6167;letter-spacing:.14em">▮▮▮ ▰</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#e6c36a">◆ TENET</span>
+<button type="button" onClick="{{ toggleBroker }}" aria-pressed="{{ brokerOffStr }}" aria-label="{{ brokerAria }}" style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;min-height:44px;padding:0 6px;display:flex;align-items:center;gap:5px">{{ brokerChip }}</button>
+</div>
+<sc-if value="{{ brokerOffOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.34);background:rgba(230,195,106,.06);border-radius:12px;padding:11px 12px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#e6c36a">◆ DART LINK DOWN — SINCE 16:09</div>
+<div style="font:400 10.5px/1.65 'IBM Plex Mono',monospace;color:#c9b384">Your rules keep running inside Dart. New events sync when the link returns. Trading is unaffected.</div>
+<button type="button" onClick="{{ toggleBroker }}" style="align-self:flex-start;min-height:44px;border:1px solid #e6c36a;border-radius:999px;padding:0 16px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#e6c36a;display:flex;align-items:center">RECONNECT</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Companion — Home" style="display:flex;flex-direction:column;gap:10px;flex:1">
+<sc-if value="{{ firstRunOff }}" hint-placeholder-val="{{ true }}">
+<div style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;letter-spacing:.1em">WEEK OF JUL 27–31 · MARKET CLOSED</div>
+<div style="border:1px solid rgba(212,169,76,.35);background:rgba(212,169,76,.07);border-radius:13px;padding:13px;display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#c7a24e">WHAT YOUR RULES DID · JUL 27–31</div><span style="font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#8f897d;border:1px solid #3a3733;border-radius:4px;padding:2px 5px;white-space:nowrap">ILLUSTRATIVE PROTOTYPE DATA</span></div>
+<div style="display:flex;gap:18px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 15px 'Plus Jakarta Sans';color:#e8e4da">{{ steppedCount }}×</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#928b7e">STEPPED IN</span></div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 15px 'Plus Jakarta Sans';color:#7fa27f">{{ waitedCount }}×</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#928b7e">WAITED OR TRIMMED</span></div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 15px 'Plus Jakarta Sans';color:#a49d90">{{ overrodeCount }}×</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#928b7e">CONTINUED PAST</span></div>
+</div>
+<sc-if value="{{ cancelledOn }}" hint-placeholder-val="{{ false }}"><div style="font:400 9.5px/1.5 'IBM Plex Mono',monospace;color:#928b7e">+ {{ cancelledCount }} cancelled — nothing sent</div></sc-if>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">counts, not outcomes — every event is in the Record with its timestamp</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px">
+<sc-for list="{{ weekRows }}" as="w" hint-placeholder-count="5">
+<button type="button" onClick="{{ w.onClick }}" style="display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #1e1c18;padding:11px 2px;font:400 10.5px 'IBM Plex Mono',monospace;color:#a49d90;min-height:44px;box-sizing:border-box;align-items:center;width:100%"><span>{{ w.label }}</span><span style="display:flex;gap:7px;align-items:baseline"><span style="color:{{ w.color }}">{{ w.out }}</span><span aria-hidden="true" style="color:#8a9098">›</span></span></button>
+</sc-for>
+</div>
+<div style="border:1px dashed #3a3733;border-radius:10px;padding:9px 11px;font:400 10px/1.6 'IBM Plex Mono',monospace;color:#928b7e">◇ wed 11:02–11:19 · feed lost · trading unaffected · logged</div>
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:12px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8f897d">ESTIMATES · JUL 27–31</div><span style="font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#8f897d;border:1px solid #3a3733;border-radius:4px;padding:2px 5px;white-space:nowrap">ILLUSTRATIVE PROTOTYPE DATA</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+<span style="font:500 11px 'Plus Jakarta Sans';color:#c9c4b8">Estimated loss avoided</span>
+<span style="display:flex;align-items:baseline;gap:6px"><span style="font:700 14px 'IBM Plex Mono',monospace;color:#7fa27f">$1,240</span><span style="font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#8a9098;border:1px solid #3a3733;border-radius:4px;padding:2px 4px">EST</span></span>
+</div>
+<div style="font:400 10px/1.5 'IBM Plex Mono',monospace;color:#928b7e">{{ heldDesc }}</div>
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+<span style="font:500 11px 'Plus Jakarta Sans';color:#c9c4b8">Realized on overrides</span>
+<span style="display:flex;align-items:baseline;gap:6px"><span style="font:700 14px 'IBM Plex Mono',monospace;color:#c07a6a">−$310</span><span style="font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#8a9098;border:1px solid #3a3733;border-radius:4px;padding:2px 4px">ACTUAL</span></span>
+</div>
+<div style="font:400 10px/1.5 'IBM Plex Mono',monospace;color:#928b7e">{{ overridesDesc }}</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e;border-top:1px solid #1e1c18;padding-top:8px">Estimated using each order’s mark-to-close price. Excludes fees, slippage, and alternate trades. Not money earned.</div>
+</div>
+<div style="flex:1"></div>
+</sc-if>
+<sc-if value="{{ firstRunOn }}" hint-placeholder-val="{{ false }}">
+<div style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;letter-spacing:.1em">FIRST EVENING · NOTHING RECORDED YET</div>
+<div style="border:1px solid rgba(212,169,76,.35);background:rgba(212,169,76,.07);border-radius:13px;padding:13px;display:flex;flex-direction:column;gap:9px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#c7a24e">WELCOME — TENET IS A GUARD YOU WRITE</div>
+<div style="font:400 11px/1.65 'Plus Jakarta Sans';color:#c9c4b8">It never trades for you and never locks you out. Rules you write tonight arm at the next open.</div>
+</div>
+<div style="border:1px solid #2a2620;border-radius:13px;padding:12px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#e6c36a">1 · CONNECT YOUR BROKER</div>
+<sc-if value="{{ frDisconnected }}" hint-placeholder-val="{{ true }}">
+<div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">Reads order tickets at send and fills after the close — nothing else. Your rules and Record live in your Tenet account. Disconnect any time: rules stop arming, the Record stays yours, deleting Tenet deletes both.</div>
+<button type="button" onClick="{{ frConnect }}" style="align-self:flex-start;min-height:44px;border:1px solid #e6c36a;border-radius:999px;padding:0 18px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#e6c36a;display:flex;align-items:center">CONNECT DART</button>
+</sc-if>
+<sc-if value="{{ frConnected }}" hint-placeholder-val="{{ false }}">
+<div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#7fa27f">✓ Dart connected · read-only · you can disconnect any time</div>
+</sc-if>
+</div>
+<div style="border:1px solid #2a2620;border-radius:13px;padding:12px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#e6c36a">2 · WRITE YOUR FIRST RULE AFTER THE CLOSE</div>
+<div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">In your own words — a wait, a trim, a queue, or a reminder. It arms at tomorrow’s open, never mid-session.</div>
+</div>
+<div style="border:1px solid #2a2620;border-radius:13px;padding:12px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#e6c36a">3 · YOUR RECORD BUILDS ITSELF</div>
+<div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">Every intervention lands here with its timestamp and rule — preserved, with room for your notes.</div>
+</div>
+<div style="flex:1"></div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isRules }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Companion — Rules" style="display:flex;flex-direction:column;gap:8px;flex:1">
+<sc-if value="{{ firstRunOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8f897d">NO RULES YET</div>
+<div style="font:400 11px/1.65 'Plus Jakarta Sans';color:#c9c4b8">Rules are sentences you write about your own trading. Tenet enforces them at send — it never writes one for you. Start from a detected pattern, or from scratch after the close.</div>
+<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#928b7e">trading unaffected · nothing arms until you save a rule</div>
+</div>
+</sc-if>
+<sc-if value="{{ firstRunOff }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;letter-spacing:.1em">{{ rulesCountLine }}</span><span style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098">written by you</span></div>
+<sc-for list="{{ rules }}" as="r" hint-placeholder-count="4">
+<div style="border:1px solid {{ r.border }};background:{{ r.bg }};border-radius:13px;padding:11px 12px;display:flex;flex-direction:column;gap:7px">
+<button type="button" onClick="{{ r.onClick }}" aria-expanded="{{ r.expanded }}" style="display:flex;justify-content:space-between;align-items:center;min-height:44px;width:100%;gap:8px"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#e6c36a">{{ r.name }}</span><span style="font:400 10px 'IBM Plex Mono',monospace;color:{{ r.tallyColor }}">{{ r.tally }}</span></button>
+<div style="font:500 11.5px/1.55 'Plus Jakarta Sans';color:#c9c4b8">“{{ r.quote }}”</div>
+<sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;justify-content:space-between;gap:8px;font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e;flex-wrap:wrap"><span>{{ r.friction }}</span><span>written {{ r.adopted }}</span></div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">{{ r.provenance }}</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#a49d90">enforces: {{ r.params }}</div>
+<sc-if value="{{ r.isCap }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:8px;border-top:1px solid #1e1c18;padding-top:9px">
+<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#c7a24e;flex:1">0DTE CAP</span>
+<button type="button" onClick="{{ capMinus }}" aria-label="Lower the 0DTE cap by one — stricter, applies now" style="width:44px;height:44px;border:1px solid #3a3733;border-radius:9px;display:flex;align-items:center;justify-content:center;font:600 16px 'Plus Jakarta Sans';color:#c9c4b8">−</button>
+<span style="font:700 15px 'IBM Plex Mono',monospace;color:#e6c36a;min-width:22px;text-align:center">{{ capStr }}</span>
+<button type="button" onClick="{{ capPlus }}" aria-label="Raise the 0DTE cap by one — looser, starts at the next open" style="width:44px;height:44px;border:1px solid #3a3733;border-radius:9px;display:flex;align-items:center;justify-content:center;font:600 16px 'Plus Jakarta Sans';color:#c9c4b8">+</button>
+</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">stricter: applies now, in the Host too · looser: tomorrow’s open</div>
+<sc-if value="{{ capTightened }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3a3733;border-radius:9px;padding:8px 10px;font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#a49d90">◇ cap {{ capStr }} · effective now — the Host ticket already enforces it · logged</div></sc-if>
+<sc-if value="{{ capPendingOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.34);background:rgba(230,195,106,.06);border-radius:9px;padding:8px 10px;display:flex;flex-direction:column;gap:5px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#e6c36a">◆ CAP {{ capStr }} → {{ capPendingStr }} STARTS TOMORROW 9:30</div>
+<div style="font:400 9.5px/1.55 'IBM Plex Mono',monospace;color:#c9b384">looser never starts mid-day — today the Host keeps {{ capStr }} · logged</div>
+<button type="button" onClick="{{ capUndo }}" style="align-self:flex-start;font:500 10px 'IBM Plex Mono',monospace;color:#a49d90;text-decoration:underline;min-height:44px;display:flex;align-items:center">keep it at {{ capStr }}</button>
+</div>
+</sc-if>
+</sc-if>
+<sc-if value="{{ r.isSpacing }}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{ spacingArmed }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid rgba(230,195,106,.34);background:rgba(230,195,106,.06);border-radius:9px;padding:8px 10px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#e6c36a">◆ SUGGESTION — PAUSE THIS RULE?</div>
+<div style="font:400 9.5px/1.55 'IBM Plex Mono',monospace;color:#c9b384">60 days, no overrides, no sign of the habit · comes back if it returns</div>
+<div style="display:flex;gap:6px">
+<button type="button" onClick="{{ spacingRetire }}" style="flex:1;border:1px solid #e6c36a;border-radius:999px;min-height:44px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#e6c36a;display:flex;align-items:center;justify-content:center">PAUSE AT CLOSE</button>
+<button type="button" onClick="{{ spacingKeep }}" style="flex:1;border:1px solid #3a3733;border-radius:999px;min-height:44px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a49d90;display:flex;align-items:center;justify-content:center">KEEP</button>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ spacingRetired }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3a3733;border-radius:9px;padding:8px 10px;font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#a49d90">◇ pauses at close · still watched · logged · trading unaffected</div></sc-if>
+<sc-if value="{{ spacingKept }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3a3733;border-radius:9px;padding:8px 10px;font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#a49d90">◇ kept · asks again in 30 days</div></sc-if>
+</sc-if>
+</sc-if>
+</div>
+</sc-for>
+<sc-if value="{{ fridayOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #8f7a3e;border-radius:13px;padding:11px 12px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#c7a24e">FRIDAY GUARD</span><span style="font:400 10px 'IBM Plex Mono',monospace;color:#c7a24e">starts mon aug 3 · 9:30</span></div>
+<div style="font:500 11.5px/1.55 'Plus Jakarta Sans';color:#c9c4b8">“{{ fridaySentence }}”</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">{{ fridayFrictionLine }} · written by you tonight</div>
+</div>
+</sc-if>
+<div style="flex:1"></div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isPatterns }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Companion — Patterns" style="display:flex;flex-direction:column;gap:8px;flex:1">
+<sc-if value="{{ firstRunOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8f897d">NO PATTERNS DETECTED YET</div>
+<div style="font:400 11px/1.65 'Plus Jakarta Sans';color:#c9c4b8">Tenet needs about two weeks of your own fills before anything stands out. It reads only your record — never your screen, never other accounts.</div>
+<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#928b7e">trading unaffected · check back after a few sessions</div>
+</div>
+</sc-if>
+<sc-if value="{{ firstRunOff }}" hint-placeholder-val="{{ true }}">
+<div style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;letter-spacing:.1em">HABITS IN YOUR RECORD · LAST 45 DAYS</div>
+<div style="border:1px solid #2a2620;border-radius:13px;padding:11px 12px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#e6c36a">REVENGE SIZING AFTER LOSSES</span><span style="font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#14130E;background:#c7a24e;border-radius:4px;padding:3px 6px">2 RULES COVER THIS</span></div>
+<div style="display:flex;gap:18px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 14px 'Plus Jakarta Sans';color:#e8e4da">14×</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#928b7e">OBSERVED</span></div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 14px 'Plus Jakarta Sans';color:#c07a6a">−$212</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#928b7e">AVG COST</span></div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 14px 'Plus Jakarta Sans';color:#e8e4da">×2.4</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#928b7e">SIZE BY LOSS 3</span></div>
+</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">covered by loss cooldown + size cap</div>
+</div>
+
+<sc-if value="{{ patternOpen }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid rgba(230,195,106,.34);background:rgba(230,195,106,.06);border-radius:13px;padding:11px 12px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#e6c36a">◆ NEW — ADDING TO LOSERS ON FRIDAYS</div>
+<div style="display:flex;gap:16px;flex-wrap:wrap">
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 14px 'Plus Jakarta Sans';color:#e6c36a">6 of 6</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a6957a">OBSERVED EVENTS</span></div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 14px 'Plus Jakarta Sans';color:#c07a6a">−$184</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a6957a">AVG COST</span></div>
+<div style="display:flex;flex-direction:column;gap:1px"><span style="font:700 14px 'Plus Jakarta Sans';color:#e6c36a">FRI 2:00+</span><span style="font:400 9.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a6957a">JUN 12 → JUL 24</span></div>
+</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#a6957a">Small sample — treat it as a lead, not a law. Tenet keeps counting either way.</div>
+
+<sc-if value="{{ patDetected }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button type="button" onClick="{{ patInspect }}" style="flex:1;min-width:100px;border:1px solid #3a3733;border-radius:999px;min-height:44px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#c9c4b8;display:flex;align-items:center;justify-content:center">SEE THE 6 EVENTS</button>
+<button type="button" onClick="{{ patDraft }}" style="flex:1;min-width:100px;border:1px solid #e6c36a;border-radius:999px;min-height:44px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#e6c36a;display:flex;align-items:center;justify-content:center">DRAFT A RULE</button>
+<button type="button" onClick="{{ patDismiss }}" style="border:1px solid #3a3733;border-radius:999px;min-height:44px;padding:0 14px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a49d90;display:flex;align-items:center;justify-content:center">DISMISS</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ patInspecting }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid rgba(230,195,106,.2);padding-top:8px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#c7a24e">THE EVENTS BEHIND THIS — YOUR FILLS</div>
+<sc-for list="{{ evidence }}" as="ev" hint-placeholder-count="6">
+<div style="display:flex;justify-content:space-between;gap:8px;font:400 10px/1.5 'IBM Plex Mono',monospace;border-bottom:1px solid #1e1c18;padding:6px 0"><span style="color:#a49d90">{{ ev.left }}</span><span style="color:#c07a6a;flex:none">{{ ev.right }}</span></div>
+</sc-for>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">why flagged: adds to losing positions cluster after 2:00 on Fridays · 6 of 6 observed events · avg −$184 · small sample</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">these fills come from your imported broker history (jun 12 – jul 24) — earlier than the week in Record, so they aren’t openable in this demo</div>
+<div style="display:flex;gap:6px">
+<button type="button" onClick="{{ patDraft }}" style="flex:1;border:1px solid #e6c36a;border-radius:999px;min-height:44px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#e6c36a;display:flex;align-items:center;justify-content:center">DRAFT A RULE</button>
+<button type="button" onClick="{{ patBack }}" style="border:1px solid #3a3733;border-radius:999px;min-height:44px;padding:0 14px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a49d90;display:flex;align-items:center;justify-content:center">BACK</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ patDrafting }}" hint-placeholder-val="{{ false }}">
+<div style="border-top:1px solid rgba(230,195,106,.2);padding-top:8px;display:flex;flex-direction:column;gap:8px">
+<label for="ruleSentence" style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#c7a24e">RULE — IN YOUR WORDS, EDITABLE</label>
+<textarea id="ruleSentence" value="{{ sentence }}" onChange="{{ sentenceChange }}" rows="3" style="background:#0B0B0E;border:1px solid #3a3733;border-radius:10px;color:#e8e4da;font:500 12px/1.5 'Plus Jakarta Sans';padding:10px;resize:vertical;outline:none;box-sizing:border-box;width:100%"></textarea>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">trigger (from the pattern): adding to a position that’s down · fridays after 2:00</div>
+<div role="radiogroup" aria-label="What happens when it triggers" style="display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#c7a24e">WHEN IT TRIGGERS</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<sc-for list="{{ frictions }}" as="f" hint-placeholder-count="4">
+<button type="button" role="radio" aria-checked="{{ f.checked }}" onClick="{{ f.onClick }}" style="border:{{ f.border }};background:{{ f.bg }};border-radius:999px;min-height:44px;padding:0 12px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:{{ f.color }};display:flex;align-items:center">{{ f.label }}</button>
+</sc-for>
+</div>
+</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">effective: monday aug 3 · 9:30 open — rules never start mid-session · reversible any evening</div>
+<div style="background:#07080A;border:1px solid #23272D;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:5px">
+<div style="font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#98A1AB">HOST PREVIEW — FRI AUG 7 · 2:04 PM</div>
+<div style="font:400 10px/1.5 'IBM Plex Mono',monospace;color:#A8B0B8">adding 2× SPY 598P · position −$120</div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;color:#E6C36A">◆ FRIDAY GUARD STEPPED IN</div>
+<div style="font:400 10px/1.5 'IBM Plex Mono',monospace;color:#CBB78A">{{ frictionPreview }}</div>
+</div>
+<sc-if value="{{ formErrOn }}" hint-placeholder-val="{{ false }}"><div role="alert" style="font:500 10.5px/1.6 'IBM Plex Mono',monospace;color:#e08a76">⚠ {{ formErr }}</div></sc-if>
+<div style="display:flex;gap:6px">
+<button type="button" onClick="{{ patSave }}" style="flex:1;border:1px solid #e6c36a;border-radius:999px;min-height:46px;font:700 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#e6c36a;display:flex;align-items:center;justify-content:center">SAVE RULE</button>
+<button type="button" onClick="{{ patBack }}" style="border:1px solid #3a3733;border-radius:999px;min-height:46px;padding:0 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#a49d90;display:flex;align-items:center;justify-content:center">CANCEL</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{ patDrafted }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:9px;padding:8px 10px;display:flex;flex-direction:column;gap:5px">
+<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#a49d90">✓ rule saved 16:12 · starts mon aug 3 9:30 · now in Rules and on the Record</div>
+<div style="display:flex;gap:10px">
+<button type="button" onClick="{{ patUndo }}" style="font:500 10.5px 'IBM Plex Mono',monospace;color:#a49d90;text-decoration:underline;min-height:44px;display:flex;align-items:center">undo</button>
+<button type="button" onClick="{{ goRules }}" style="font:500 10.5px 'IBM Plex Mono',monospace;color:#e6c36a;text-decoration:underline;min-height:44px;display:flex;align-items:center">view in rules</button>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ patDismissed }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:11px 12px;display:flex;flex-direction:column;gap:5px;opacity:.85">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8f897d">ADDING TO LOSERS ON FRIDAYS — DISMISSED</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">◇ dismissed 16:12 · still counted · resurfaces if it repeats · trading unaffected</div>
+<button type="button" onClick="{{ patUndo }}" style="align-self:flex-start;font:500 10.5px 'IBM Plex Mono',monospace;color:#a49d90;text-decoration:underline;min-height:44px;display:flex;align-items:center">undo dismiss</button>
+</div>
+</sc-if>
+<sc-if value="{{ noNewPatterns }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:11px 12px;font:400 10px/1.65 'IBM Plex Mono',monospace;color:#928b7e">NO NEW PATTERNS — Tenet re-scans your record after each close. Nothing else stands out yet.</div>
+</sc-if>
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:11px 12px;display:flex;flex-direction:column;gap:5px;opacity:.7">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8f897d">BUYING JUST BEFORE FED NEWS</div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#928b7e">dismissed jun 3 · quiet since</div>
+</div>
+<div style="flex:1"></div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isLedger }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Companion — Record" style="display:flex;flex-direction:column;gap:9px;flex:1">
+<sc-if value="{{ firstRunOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8f897d">NOTHING RECORDED YET</div>
+<div style="font:400 11px/1.65 'Plus Jakarta Sans';color:#c9c4b8">Your first intervention will land here with its timestamp, rule, and result — preserved, with room for your notes.</div>
+</div>
+</sc-if>
+<sc-if value="{{ firstRunOff }}" hint-placeholder-val="{{ true }}">
+<div style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;letter-spacing:.1em">RECORD · WEEK OF JUL 27–31</div>
+<div role="group" aria-label="Record filters" style="display:flex;gap:5px;flex-wrap:wrap">
+<sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+<button type="button" onClick="{{ f.onClick }}" aria-pressed="{{ f.pressed }}" style="min-height:44px;padding:0 12px;border-radius:999px;border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;display:flex;align-items:center">{{ f.label }}</button>
+</sc-for>
+</div>
+<div role="group" aria-label="Host filter" style="display:flex;gap:5px;flex-wrap:wrap">
+<sc-for list="{{ hostFilters }}" as="f" hint-placeholder-count="3">
+<button type="button" onClick="{{ f.onClick }}" aria-pressed="{{ f.pressed }}" style="min-height:44px;padding:0 12px;border-radius:999px;border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }};font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;display:flex;align-items:center">{{ f.label }}</button>
+</sc-for>
+</div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#8a9098;padding-top:2px">LAST 30 DAYS · OVERRODE {{ overCount }}× · 1 PAID OFF · <span style="color:#c07a6a">NET −$98</span> · SETTLED{{ pendingSuffix }} · EXCL. FEES</div>
+<sc-if value="{{ emptyFilterOn }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3a3733;border-radius:13px;padding:14px;font:400 10.5px/1.65 'IBM Plex Mono',monospace;color:#928b7e">{{ emptyFilterMsg }}</div>
+</sc-if>
+<div style="display:flex;flex-direction:column;gap:2px">
+<sc-for list="{{ ledgerGroups }}" as="g" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column">
+<div style="font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8a9098;padding:8px 2px 3px">{{ g.day }}</div>
+<sc-for list="{{ g.rows }}" as="l" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;border-bottom:1px solid #1e1c18">
+<button type="button" onClick="{{ l.onClick }}" aria-expanded="{{ l.expanded }}" style="display:flex;justify-content:space-between;gap:10px;padding:10px 2px;font:400 10px/1.5 'IBM Plex Mono',monospace;min-height:44px;box-sizing:border-box;align-items:center;width:100%"><span style="color:#a49d90;text-align:left"><span style="color:#8a9098">{{ l.time }}</span> · {{ l.what }}</span><span style="color:{{ l.color }};text-align:right;flex:none">{{ l.out }}</span></button>
+<sc-if value="{{ l.open }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid #2a2620;border-radius:10px;padding:10px;margin:0 0 10px;display:flex;flex-direction:column;gap:7px;background:#0B0B0E">
+<div style="font:400 10px/1.7 'IBM Plex Mono',monospace;color:#a49d90">host: {{ l.host }}<br>rule: {{ l.rule }} · size: {{ l.size }} · result: {{ l.result }}</div>
+<sc-if value="{{ l.hasReason }}" hint-placeholder-val="{{ false }}"><div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#c9b384">reason: “{{ l.reason }}”</div></sc-if>
+<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:{{ l.syncColor }}">{{ l.syncLabel }}</span>
+<sc-if value="{{ l.canRetry }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ l.retry }}" style="border:1px solid #e6c36a;border-radius:999px;min-height:44px;padding:0 14px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#e6c36a;display:flex;align-items:center">RETRY SYNC</button>
+</sc-if>
+</div>
+<sc-if value="{{ l.hasNote }}" hint-placeholder-val="{{ false }}"><div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#a49d90;border-left:2px solid #3a3733;padding-left:8px">your note: {{ l.note }}</div></sc-if>
+<sc-if value="{{ l.noting }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:6px;align-items:center">
+<input value="{{ noteDraft }}" onChange="{{ noteChange }}" placeholder="e.g. news spike — setup was planned" aria-label="Note for this event" style="flex:1;min-width:0;height:44px;background:transparent;border:1px solid #3a3733;border-radius:9px;color:#e8e4da;font:400 11px 'Plus Jakarta Sans';padding:0 10px;outline:none;box-sizing:border-box">
+<button type="button" onClick="{{ l.saveNote }}" style="border:1px solid #e6c36a;border-radius:999px;min-height:44px;padding:0 12px;font:600 10px 'IBM Plex Mono',monospace;color:#e6c36a;display:flex;align-items:center">SAVE</button>
+</div>
+</sc-if>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<button type="button" onClick="{{ l.noteToggle }}" style="font:500 10px 'IBM Plex Mono',monospace;color:#a49d90;text-decoration:underline;min-height:44px;display:flex;align-items:center">{{ l.noteLabel }}</button>
+<sc-if value="{{ l.notReported }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ l.report }}" style="font:500 10px 'IBM Plex Mono',monospace;color:#a49d90;text-decoration:underline;min-height:44px;display:flex;align-items:center">report an error</button>
+</sc-if>
+<sc-if value="{{ l.reported }}" hint-placeholder-val="{{ false }}"><span style="font:400 10px 'IBM Plex Mono',monospace;color:#928b7e;min-height:44px;display:flex;align-items:center">✓ reported — we’ll check the data · trading unaffected</span></sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div style="flex:1"></div>
+<div style="font:400 9.5px/1.6 'IBM Plex Mono',monospace;color:#8a9098">Intervention events are preserved. Add a note or report an error — the original entry stays.</div>
+</sc-if>
+</div>
+</sc-if>
+
+<nav aria-label="Companion sections" style="display:flex;justify-content:space-around;border-top:1px solid #1e1c18;padding-top:6px">
+<button type="button" onClick="{{ goHome }}" aria-current="{{ homeCur }}" style="color:{{ homeColor }};min-height:44px;padding:0 8px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em">HOME</button>
+<button type="button" onClick="{{ goRules }}" aria-current="{{ rulesCur }}" style="color:{{ rulesColor }};min-height:44px;padding:0 8px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em">RULES</button>
+<button type="button" onClick="{{ goPatterns }}" aria-current="{{ patternsCur }}" style="color:{{ patternsColor }};min-height:44px;padding:0 8px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em">PATTERNS</button>
+<button type="button" onClick="{{ goLedger }}" aria-current="{{ ledgerCur }}" style="color:{{ ledgerColor }};min-height:44px;padding:0 8px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.12em">RECORD</button>
+</nav>
+<div aria-live="polite" role="status" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">{{ liveMsg }}</div>
+</div>
+</div>
+
+<sc-if value="{{ showHints }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:340px;padding-top:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#8C6A25">TRY THIS</div>
+<sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
+<div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#8C6A25;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
+</sc-for>
+<div style="border-top:1px solid #C5CDD3;padding-top:11px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5E6B75;line-height:1.7">» AFTER-CLOSE VIEW — AUTHORING AND EVIDENCE. INTERVENTION LIVES IN THE HOST TICKET. ONE SHARED RULE SET AND RECORD ACROSS BOTH PROTOTYPES.</div>
+</div>
+</sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1160,&quot;height&quot;:1020},&quot;initialTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;home&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;rules&quot;,&quot;patterns&quot;,&quot;ledger&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showHints&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showChrome&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+const SKEY = 'tenetSharedV3';
+const BASELINE = {v:3,resetSeq:0,cap:5,capPending:null,spacing:'armed',pattern:'detected',fridayRule:null,events:[
+ {id:'e1',day:'THU',time:'10:44',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'3× 602C',result:'sent @ $1.19',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e2',day:'THU',time:'10:42',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.16',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e3',day:'THU',time:'10:40',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.14',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e4',day:'WED',time:'15:52',rule:'WIND-DOWN',what:'wind-down · trimmed to the 3:52 allowance',size:'3→1× 604C',result:'sent 1',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e5',day:'WED',time:'11:02',rule:'—',what:'feed lost 17 min · trading unaffected',size:'—',result:'gap preserved',out:'⚠ outage',kind:'gap',tone:'warn',sync:'synced'},
+ {id:'e6',day:'TUE',time:'10:18',rule:'SIZE CAP',what:'size cap · order changed before sending',size:'12→5× 602P',result:'sent 5',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e7',day:'MON',time:'10:03',rule:'SIZE CAP',what:'size cap · continued past the cap',size:'8× 602P',result:'−$310 by close',out:'− $310',kind:'over',tone:'bad',sync:'failed',reason:'This setup was planned before the losses'},
+ {id:'e8',day:'MON',time:'10:02',rule:'LOSS COOLDOWN',what:'loss cooldown · 9-min cooldown · reviewed & sent',size:'5× 602P',result:'sent @ $1.36',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'}
+]};
+const FRICTIONS = [
+ ['wait','WAIT 10 MIN','waits ten minutes, then you review a refreshed quote'],
+ ['trim','TRIM THE ADD','trims the add to 0 before sending — you confirm, cancel, or override'],
+ ['queue','QUEUE 2 MIN','queues the order two minutes, then you re-confirm'],
+ ['remind','REMINDER ONLY','shows a reminder with the pattern’s numbers — the order proceeds']];
+class Component extends DCLogic {
+  state = { sh: null, tab: 'home', openRule: 'cap', capTightened: false, filter: 'all', hostFilter: 'all', openEvent: null, noting: false, noteDraft: '',
+    patView: 'summary', sentence: 'No adding to a losing position after 2:00 on Fridays.', friction: 'trim', formErr: null,
+    firstRun: false, frBroker: 'off', broker: 'on', liveMsg: '' };
+
+  sh() { try { const o = JSON.parse(localStorage.getItem(SKEY)); if (o && o.v === 3) return o; } catch (e) {} return JSON.parse(JSON.stringify(BASELINE)); }
+  put(patch) { const n = { ...this.sh(), ...patch }; try { localStorage.setItem(SKEY, JSON.stringify(n)); } catch (e) {} this.setState({ sh: n }); return n; }
+  updEvent(id, patch) { const s = this.sh(); this.put({ events: s.events.map(e => e.id === id ? { ...e, ...patch } : e) }); }
+  addEvent(ev, replaceId) { const s = this.sh(); const list = replaceId ? s.events.filter(e => e.id !== replaceId) : s.events;
+    this.put({ events: [{ id: replaceId || ('c' + Date.now() + Math.random().toString(36).slice(2, 5)), sync: this.state.broker === 'on' ? 'synced' : 'pending', tone: 'ok', ...ev }, ...list] }); }
+
+  componentDidMount() {
+    const t = this.props.initialTab;
+    this.setState({ sh: this.sh(), tab: t || 'home' });
+    this._st = (e) => { if (e && e.key && e.key !== SKEY) return; const n = this.sh(); const old = this.state.sh || BASELINE;
+      if (n.resetSeq !== old.resetSeq) this.localReset(n); else this.setState({ sh: n }); };
+    window.addEventListener('storage', this._st);
+  }
+  componentWillUnmount() { window.removeEventListener('storage', this._st); clearTimeout(this._retryT); }
+  localReset(sh) { this.setState({ sh: sh || this.sh(), tab: 'home', openRule: 'cap', capTightened: false, filter: 'all', openEvent: null, noting: false, noteDraft: '',
+    patView: 'summary', sentence: 'No adding to a losing position after 2:00 on Fridays.', friction: 'trim', formErr: null, firstRun: false, frBroker: 'off', broker: 'on', liveMsg: 'Demo reset to baseline.' }); }
+  resetDemo() { const base = JSON.parse(JSON.stringify(BASELINE)); base.resetSeq = (this.sh().resetSeq || 0) + 1; try { localStorage.setItem(SKEY, JSON.stringify(base)); } catch (e) {} this.localReset(base); }
+  go(tab) { this.setState({ tab, openEvent: null, noting: false }); }
+  bare() { try { return /[?&]bare/.test(location.search); } catch (e) { return false; } }
+
+  saveRule() {
+    const s = this.state, txt = (s.sentence || '').trim();
+    if (txt.length < 8) { this.setState({ formErr: 'Write the rule as a sentence — it’s what you’ll see at send.', liveMsg: 'Validation: the rule needs a sentence.' }); return; }
+    if (!s.friction) { this.setState({ formErr: 'Pick what happens when it triggers.', liveMsg: 'Validation: pick a friction.' }); return; }
+    if (s.friction === 'remind' && /\bnever\b|\bno \b/i.test(txt) === false && false) return;
+    if (s.friction === 'remind' && /\bnever\b/i.test(txt)) { this.setState({ formErr: '“Never” with a reminder-only friction contradicts itself — pick a wait, trim, or queue, or soften the sentence.', liveMsg: 'Validation: contradictory rule.' }); return; }
+    const f = FRICTIONS.find(x => x[0] === s.friction);
+    this.put({ pattern: 'drafted', fridayRule: { sentence: txt, friction: s.friction, frictionLabel: f[1].toLowerCase(), effective: 'mon aug 3 · 9:30' } });
+    this.addEvent({ day: 'THU', time: '16:12', rule: 'FRIDAY GUARD', what: 'rule saved · “' + (txt.length > 42 ? txt.slice(0, 42) + '…' : txt) + '”', size: '—', result: 'starts mon aug 3 9:30', out: '◇ saved', kind: 'edit', tone: 'dim' }, 'friday');
+    this.setState({ formErr: null, patView: 'summary', liveMsg: 'Rule saved. It starts Monday at the open and now appears under Rules.' });
+  }
+
+  renderVals() {
+    const s = this.state, sh = s.sh || this.sh();
+    const gold = '#e6c36a', green = '#7fa27f', red = '#c07a6a', gray = '#a49d90', amber = '#c7a24e', dim = '#8a9098';
+    const cap = sh.cap;
+
+    const RULES = [
+      { key: 'cooldown', name: 'LOSS COOLDOWN', quote: 'After three losing trades before noon — options or shares — my next entry waits nine minutes.', params: '3 losing trades before noon → next order waits 9:00 · all instruments, both hosts', friction: 'starts a cooldown you can cancel', adopted: 'jun 9', provenance: 'why: you size up after losses', tally: 'stepped in 3× · waited 3×', tallyColor: green },
+      { key: 'cap', name: 'SIZE CAP', quote: 'On a red day I don’t size past ' + cap + ' contracts of 0DTE — or 1,500 shares.', params: '0DTE: ' + cap + ' contracts · equities: 1,500 shares · checked at send, per instrument', friction: 'changes the order before sending — you confirm', adopted: 'jun 9', provenance: 'why: you size up after losses', tally: 'stepped in 4× · overrode 1×', tallyColor: amber, isCap: true },
+      { key: 'wind', name: 'WIND-DOWN', quote: 'From 3:00 my 0DTE size steps down. Flat by 3:55.', params: '0DTE only · allowance 3:00→5 · 3:30→2 · 3:50→1 · 3:55→flat · not applicable to shares', friction: 'steps your size allowance down to zero', adopted: 'jun 23', provenance: 'why: late-day give-back', tally: 'stepped in 6× · waited 6×', tallyColor: green },
+      { key: 'spacing', name: 'PACING', quote: 'After three 0DTE entries inside ten minutes, everything after waits two minutes.', params: '3 entries inside 10 min → next orders queue 2:00 · all instruments', friction: 'queues orders — you re-confirm after the wait', adopted: 'jul 2', provenance: 'why: rapid entries pay the spread', tally: 'stepped in 11× · waited 11×', tallyColor: green, isSpacing: true },
+    ];
+    const rules = RULES.map(r => ({ isCap: false, isSpacing: false, ...r, open: s.openRule === r.key, expanded: String(s.openRule === r.key),
+      onClick: () => this.setState({ openRule: s.openRule === r.key ? null : r.key }),
+      border: s.openRule === r.key ? 'rgba(230,195,106,.3)' : '#2a2620',
+      bg: s.openRule === r.key ? 'rgba(230,195,106,.04)' : 'transparent' }));
+
+    const weekRows = [
+      ['MON · loss cooldown', 'waited 9:00', green], ['MON · size cap', 'overrode −$310', red],
+      ['TUE · size cap', 'changed 12→5', green], ['WED · wind-down', 'sized down', green], ['THU · pacing', 'waited ×3', green],
+    ].map(([label, out, color]) => ({ label, out, color, onClick: () => this.go('ledger') }));
+
+    const DAYN = { MON: 0, TUE: 1, WED: 2, THU: 3, FRI: 4 };
+    const evTs = (e) => { const d = DAYN[e.day] ?? 0; const p = String(e.time || '0:00').split(':'); return d * 1440 + (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0); };
+    const rows0 = sh.events.map((e, i) => ({ e, i })).sort((a, b) => (evTs(b.e) - evTs(a.e)) || (a.i - b.i)).map(x => x.e);
+    const FILTERS = [['all', 'ALL'], ['held', 'WAITED'], ['over', 'OVERRODE'], ['edit', 'CHANGES'], ['gap', 'OUTAGES'], ['noted', 'NOTES']];
+    const match = (l) => (s.filter === 'all' ? true : s.filter === 'noted' ? !!l.note : l.kind === s.filter) && (s.hostFilter === 'all' || (l.host || 'dart') === s.hostFilter);
+    const rows = rows0.filter(match);
+    const HOSTF = [['all', 'ALL HOSTS'], ['dart', 'DART'], ['meridian', 'MERIDIAN']];
+    const hostFilters = HOSTF.map(([k, label]) => ({ label, pressed: String(k === s.hostFilter), onClick: () => this.setState({ hostFilter: k, openEvent: null }),
+      border: k === s.hostFilter ? '#e6c36a' : '#3a3733', bg: k === s.hostFilter ? 'rgba(230,195,106,.08)' : 'transparent', color: k === s.hostFilter ? '#e6c36a' : '#a49d90' }));
+    const toneColor = { ok: green, warn: amber, bad: red, dim: gray };
+    const mkRow = (l) => { const open = s.openEvent === l.id;
+      return { time: l.time, what: l.what, out: l.out, color: toneColor[l.tone] || gray, open, expanded: String(open),
+        onClick: () => this.setState({ openEvent: open ? null : l.id, noting: false, noteDraft: (rows0.find(e => e.id === l.id) || {}).note || '' }),
+        rule: l.rule || '—', size: l.size || '—', result: l.result || '—',
+        host: (l.host || 'dart') === 'meridian' ? 'Meridian · desktop · shares' : 'Dart · mobile · 0DTE',
+        hasReason: !!l.reason, reason: l.reason || '',
+        syncLabel: l.sync === 'failed' ? '⚠ SYNC FAILED — KEPT ON DEVICE' : l.sync === 'pending' ? '↻ SYNC PENDING' : '✓ SYNCED',
+        syncColor: l.sync === 'failed' ? '#e08a76' : l.sync === 'pending' ? amber : green,
+        canRetry: l.sync === 'failed' || l.sync === 'pending',
+        retry: () => { this.updEvent(l.id, { sync: 'pending' }); this.setState({ liveMsg: 'Retrying sync…' });
+          clearTimeout(this._retryT); this._retryT = setTimeout(() => { this.updEvent(l.id, { sync: 'synced' }); this.setState({ liveMsg: 'Synced. The event is now on both surfaces.' }); }, 1200); },
+        hasNote: !!l.note, note: l.note || '', noting: open && s.noting,
+        noteToggle: () => this.setState({ noting: !s.noting, noteDraft: l.note || '' }),
+        noteLabel: s.noting && open ? 'close note' : (l.note ? 'edit note' : 'add a note'),
+        saveNote: () => { this.updEvent(l.id, { note: s.noteDraft.trim() }); this.setState({ noting: false, liveMsg: 'Note saved with the event. The original entry is unchanged.' }); },
+        notReported: !l.reported, reported: !!l.reported,
+        report: () => { this.updEvent(l.id, { reported: true }); this.setState({ liveMsg: 'Reported. We’ll check the data; trading is unaffected.' }); } }; };
+    const ledgerGroups = ['THU', 'WED', 'TUE', 'MON'].map(day => ({ day, rows: rows.filter(l => l.day === day).map(mkRow) })).filter(g => g.rows.length);
+    const filters = FILTERS.map(([k, label]) => ({ label, pressed: String(k === s.filter), onClick: () => this.setState({ filter: k, openEvent: null }),
+      border: k === s.filter ? '#e6c36a' : '#3a3733', bg: k === s.filter ? 'rgba(230,195,106,.08)' : 'transparent', color: k === s.filter ? gold : gray }));
+    const EMPTY_MSGS = { noted: 'No events with notes yet. Open any event and add a note — it shows up here. Trading unaffected.', held: 'No waited events match. Change the filter or the week.', over: 'No overrides this week. Change the filter or the week.', edit: 'No changes this week.', gap: 'No outages this week.' };
+
+    const fr = FRICTIONS.find(x => x[0] === s.friction) || FRICTIONS[1];
+    const frictions = FRICTIONS.map(([k, label]) => { const on = s.friction === k;
+      return { label, checked: String(on), onClick: () => this.setState({ friction: k, formErr: null }),
+        border: on ? '1px solid #e6c36a' : '1px solid #3a3733', bg: on ? 'rgba(230,195,106,.08)' : 'transparent', color: on ? gold : gray }; });
+    const evidence = [
+      ['JUN 12 · added 2× 597P, down −$95', 'closed −$180'], ['JUN 19 · added 3× 601P, down −$140', 'closed −$255'],
+      ['JUN 26 · added 2× 599C, down −$85', 'closed −$92'], ['JUL 3 · added 4× 602P, down −$210', 'closed −$310'],
+      ['JUL 17 · added 2× 604C, down −$60', 'closed −$88'], ['JUL 24 · added 3× 600P, down −$115', 'closed −$179'],
+    ].map(([left, right]) => ({ left, right }));
+
+    const HINTS = {
+      home: [['1', 'The metrics split honestly: estimated loss avoided (mark-to-close, with its method note) vs realized results on overrides.'], ['2', 'Tap a week row to open its Record entry.'], ['3', 'Tap the Dart chip up top to see the disconnected state; use VIEW FIRST-RUN STATE above for the empty app.']],
+      rules: [['1', 'Open SIZE CAP and tap −. Stricter applies now — the Host ticket enforces the new cap immediately.'], ['2', 'Tap +. Looser waits for tomorrow’s open; both surfaces show the pending change, and you can undo it.'], ['3', 'PACING went quiet, so Tenet suggests pausing it — rules that only pile up become a cage.']],
+      patterns: [['1', 'Open SEE THE 6 EVENTS — dates, adds, and costs behind the claim, called a small sample on purpose.'], ['2', 'DRAFT A RULE: edit the sentence in your own words, pick the friction, watch the Host preview update.'], ['3', 'SAVE — it lands in Rules, on the Record, and the Host footer counts it for Monday. Undo works.'], ['4', 'Try saving an empty sentence to see validation.']],
+      ledger: [['1', 'Open any row — full detail, sync status, add a note, report an error.'], ['2', 'MON 10:03 shows a failed sync: RETRY it and watch it recover.'], ['3', 'Filter NOTES before adding one to see the empty-filter state.'], ['4', 'Events from the Host land here live, with the same timestamp and reason.']] };
+
+    const patStatus = sh.pattern;
+    return {
+      isHome: s.tab === 'home', isRules: s.tab === 'rules', isPatterns: s.tab === 'patterns', isLedger: s.tab === 'ledger',
+      goHome: () => this.go('home'), goRules: () => this.go('rules'), goPatterns: () => this.go('patterns'), goLedger: () => this.go('ledger'),
+      homeColor: s.tab === 'home' ? gold : dim, rulesColor: s.tab === 'rules' ? gold : dim,
+      patternsColor: s.tab === 'patterns' ? gold : dim, ledgerColor: s.tab === 'ledger' ? gold : dim,
+      homeCur: s.tab === 'home' ? 'page' : 'false', rulesCur: s.tab === 'rules' ? 'page' : 'false',
+      patternsCur: s.tab === 'patterns' ? 'page' : 'false', ledgerCur: s.tab === 'ledger' ? 'page' : 'false',
+      weekRows, rules, ledgerGroups, filters, hostFilters,
+      steppedCount: (() => { const w = rows0.filter(e => e.kind === 'held').length, o = rows0.filter(e => e.kind === 'over').length, c = rows0.filter(e => e.kind === 'edit' && /cancell/i.test(e.what || '')).length; return String(w + o + c); })(),
+      waitedCount: String(rows0.filter(e => e.kind === 'held').length),
+      overrodeCount: String(rows0.filter(e => e.kind === 'over').length),
+      cancelledCount: String(rows0.filter(e => e.kind === 'edit' && /cancell/i.test(e.what || '')).length),
+      cancelledOn: rows0.some(e => e.kind === 'edit' && /cancell/i.test(e.what || '')),
+      overCount: String(2 + rows0.filter(e => e.kind === 'over').length),
+      pendingSuffix: (() => { const p = rows0.filter(e => e.kind === 'over' && e.pending).length; return p ? ' · ' + p + ' PENDING' : ''; })(),
+      overridesDesc: (() => { const p = rows0.filter(e => e.kind === 'over' && e.pending).length; return '1 continue-past-rule, closed red' + (p ? ' · ' + p + ' new pending mark-to-close' : ''); })(),
+      heldDesc: (() => { const h = rows0.filter(e => e.kind === 'held').length; return h > 6 ? '6 settled orders · ' + (h - 6) + ' new pending mark-to-close' : '6 orders where you waited or accepted a trim'; })(),
+      rulesCountLine: sh.fridayRule ? '4 RULES ON · 1 STARTS MONDAY' : '4 RULES ON',
+      emptyFilterOn: rows.length === 0 && (s.filter !== 'all' || s.hostFilter !== 'all'), emptyFilterMsg: s.hostFilter !== 'all' && rows.length === 0 && (EMPTY_MSGS[s.filter] == null || s.filter === 'all') ? 'No ' + (s.hostFilter === 'meridian' ? 'Meridian' : 'Dart') + ' events match. Change the host or event filter.' : (EMPTY_MSGS[s.filter] || 'Nothing here yet.'),
+      capStr: String(cap), capPendingStr: sh.capPending == null ? '' : String(sh.capPending),
+      capPendingOn: sh.capPending != null, capTightened: s.capTightened,
+      capMinus: () => { const c = this.sh().cap; if (c <= 1) return;
+        this.put({ cap: c - 1, capPending: null });
+        this.addEvent({ day: 'THU', time: '16:12', rule: 'SIZE CAP', what: 'cap tightened ' + c + '→' + (c - 1) + ' · effective now', size: '—', result: 'Host enforces ' + (c - 1) + ' immediately', out: '◇ now', kind: 'edit', tone: 'ok' }, 'loosen');
+        this.setState({ capTightened: true, liveMsg: 'Cap tightened to ' + (c - 1) + '. The Host enforces it immediately.' }); },
+      capPlus: () => { const cur = this.sh(); const from = cur.cap, to = (cur.capPending ?? cur.cap) + 1;
+        this.put({ capPending: to });
+        this.addEvent({ day: 'THU', time: '16:12', rule: 'SIZE CAP', what: 'cap loosened ' + from + '→' + to + ' · queued for the open', size: '—', result: 'today stays ' + from, out: '◇ tomorrow 9:30', kind: 'edit', tone: 'warn' }, 'loosen');
+        this.setState({ capTightened: false, liveMsg: 'Loosening queued: cap ' + to + ' starts tomorrow at the open. Today stays ' + from + '.' }); },
+      capUndo: () => { const cur = this.sh(); const from = cur.cap, to = cur.capPending;
+        this.put({ capPending: null });
+        this.addEvent({ day: 'THU', time: '16:12', rule: 'SIZE CAP', what: 'loosening ' + from + '→' + to + ' withdrawn', size: '—', result: 'cap stays ' + from, out: '◇ kept', kind: 'edit', tone: 'dim' }, 'loosen');
+        this.setState({ liveMsg: 'Loosening withdrawn. The cap stays ' + from + '.' }); },
+      spacingArmed: sh.spacing === 'armed', spacingRetired: sh.spacing === 'retired', spacingKept: sh.spacing === 'kept',
+      spacingRetire: () => { this.put({ spacing: 'retired' }); this.addEvent({ day: 'THU', time: '16:12', rule: 'PACING', what: 'rule paused at your request', size: '—', result: 'pauses at close · still watched', out: '◇ paused', kind: 'edit', tone: 'warn' }); this.setState({ liveMsg: 'Pacing pauses at close. Still watched; it returns if the habit does.' }); },
+      spacingKeep: () => { this.put({ spacing: 'kept' }); this.setState({ liveMsg: 'Kept. Tenet asks again in 30 days.' }); },
+      patternOpen: patStatus !== 'dismissed', patDetected: patStatus === 'detected' && s.patView === 'summary',
+      patInspecting: patStatus === 'detected' && s.patView === 'evidence',
+      patDrafting: patStatus === 'detected' && s.patView === 'form',
+      patDrafted: patStatus === 'drafted', patDismissed: patStatus === 'dismissed',
+      noNewPatterns: patStatus !== 'detected',
+      patInspect: () => this.setState({ patView: 'evidence', liveMsg: 'Showing the six events behind the pattern.' }),
+      patDraft: () => this.setState({ patView: 'form', formErr: null }),
+      patBack: () => this.setState({ patView: 'summary', formErr: null }),
+      patSave: () => this.saveRule(),
+      patUndo: () => { this.put({ pattern: 'detected', fridayRule: null, events: this.sh().events.filter(e => e.id !== 'friday' && e.id !== 'fridismiss') }); this.setState({ patView: 'summary', liveMsg: 'Undone. The pattern is back to detected.' }); },
+      patDismiss: () => { this.put({ pattern: 'dismissed' }); this.addEvent({ day: 'THU', time: '16:12', rule: '—', what: 'pattern dismissed · losers on fridays', size: '—', result: 'still counted · resurfaces if it repeats', out: '◇ dismissed', kind: 'edit', tone: 'dim' }, 'fridismiss'); this.setState({ liveMsg: 'Dismissed. Still counted; it resurfaces if it repeats. Undo available.' }); },
+      sentence: s.sentence, sentenceChange: (e) => this.setState({ sentence: e.target.value, formErr: null }),
+      frictions, frictionPreview: fr[2],
+      formErr: s.formErr, formErrOn: !!s.formErr,
+      fridayOn: !!sh.fridayRule, fridaySentence: sh.fridayRule ? sh.fridayRule.sentence : '',
+      fridayFrictionLine: sh.fridayRule ? ('friction: ' + sh.fridayRule.frictionLabel) : '',
+      evidence,
+      toggleBroker: () => this.setState({ broker: s.broker === 'on' ? 'off' : 'on', liveMsg: s.broker === 'on' ? 'Dart link down. Rules keep running in the Host; events sync when it returns.' : 'Dart reconnected. Pending events synced.' }),
+      brokerChip: s.broker === 'on' ? 'Dart connected ●' : 'Dart disconnected ○',
+      brokerAria: s.broker === 'on' ? 'Dart connection: connected. Activate to simulate a disconnect.' : 'Dart connection: disconnected. Activate to reconnect.',
+      brokerOffOn: s.broker === 'off', brokerOffStr: String(s.broker === 'off'),
+      toggleFirstRun: () => this.setState({ firstRun: !s.firstRun, tab: 'home', liveMsg: s.firstRun ? 'Back to the working demo.' : 'Showing the first-run empty states across all tabs.' }),
+      firstRunLabel: s.firstRun ? 'EXIT FIRST-RUN STATE' : 'VIEW FIRST-RUN STATE', firstRunStr: String(s.firstRun),
+      firstRunOn: s.firstRun, firstRunOff: !s.firstRun,
+      frDisconnected: s.frBroker === 'off', frConnected: s.frBroker === 'on',
+      frConnect: () => this.setState({ frBroker: 'on', liveMsg: 'Dart connected, read-only. Rules you write tonight arm at the next open.' }),
+      noteDraft: s.noteDraft, noteChange: (e) => this.setState({ noteDraft: e.target.value }),
+      resetDemo: () => this.resetDemo(), resetVisible: !this.bare(),
+      liveMsg: s.liveMsg,
+      hints: HINTS[s.tab].map(([n, t]) => ({ n, t })),
+      showHints: this.bare() ? false : (this.props.showHints ?? true),
+      showChrome: this.bare() ? false : (this.props.showChrome ?? true),
+    };
+  }
+}
+</script>
+</body>
+</html>

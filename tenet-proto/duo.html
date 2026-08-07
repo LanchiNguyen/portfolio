@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:30px var(--pad) 60px;box-sizing:border-box">
+<div style="width:100%;max-width:1240px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — HOST + COMPANION · PORTFOLIO PROTOTYPE</div>
+<div style="display:flex;gap:10px;align-items:center;border:1px dashed #9AA0A4;border-radius:999px;padding:4px 6px 4px 16px">
+<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#5E6B75">DEMO CONTROL</span>
+<button type="button" onClick="{{ resetDemo }}" style="min-height:40px;border:1px solid #8C6A25;border-radius:999px;padding:8px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — ALL SURFACES</button>
+</div>
+</div>
+
+<div style="width:100%;max-width:1240px;margin-top:26px;display:flex;flex-direction:column;gap:12px">
+<div style="font:800 clamp(40px,6vw,64px)/1 'Plus Jakarta Sans';letter-spacing:-.03em;color:#202B33">TENET</div>
+<div style="font:600 clamp(17px,2.4vw,22px)/1.35 'Plus Jakarta Sans';color:#202B33;max-width:640px">Self-authored guardrails for impulsive trading.</div>
+<div style="font:500 14px/1.65 'Plus Jakarta Sans';color:#4E5B65;max-width:640px">Rules written after close become reversible friction at the moment an order is sent. <span style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25;white-space:nowrap">FRICTION, NEVER A BLOCK.</span></div>
+</div>
+
+<div style="width:100%;max-width:1240px;margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:14px">
+<div style="border:1px solid #C5CDD3;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;background:rgba(255,255,255,.35)">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">01 · INSIDE THE TRADE — HOST INTERVENES</div>
+<div style="font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">The broker ticket looks normal until send. Then your own rules step in — a wait, a trim, a queue — always with reduce, cancel, and override paths.</div>
+</div>
+<div style="border:1px solid #C5CDD3;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;background:rgba(255,255,255,.35)">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">02 · AFTER THE CLOSE — COMPANION</div>
+<div style="font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">Turns interventions into evidence, and evidence into future rules. One rule set, one record — shared live with the Host beside it and the <a href="desktop.html">Meridian desktop host →</a></div>
+</div>
+</div>
+
+<div style="width:100%;max-width:1240px;margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:14px">
+<div style="border:1px dashed #A9B4BC;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#5E6B75">WHAT’S REAL, WHAT’S SIMULATED</div>
+<div style="font:500 12px/1.65 'Plus Jakarta Sans';color:#4E5B65">Dart, Meridian, quotes, fills, and the trading history are fictional. The rules, the interventions, the cross-surface sync, and the Record are fully functional — everything you do here lands in it.</div>
+</div>
+<div style="border:1px dashed #A9B4BC;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#5E6B75">WHAT TENET READS &amp; STORES</div>
+<div style="font:500 12px/1.65 'Plus Jakarta Sans';color:#4E5B65">Conceptually, Tenet runs inside the broker at order submit — an SDK the host embeds. It reads order tickets at send and fills after the close; never your screen, never other accounts. Your rules and Record are stored in your Tenet account.</div>
+</div>
+<div style="border:1px dashed #A9B4BC;border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#5E6B75">SYNC &amp; LEAVING</div>
+<div style="font:500 12px/1.65 'Plus Jakarta Sans';color:#4E5B65">One rule set: stricter changes reach every host immediately; looser ones arm at the next open. Disconnect any time — rules stop arming, the Record stays yours, and deleting Tenet deletes both.</div>
+</div>
+</div>
+
+<div style="width:100%;max-width:1240px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:30px;align-items:start;margin-top:24px">
+
+<div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+<span style="align-self:flex-start;font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#F2F5F7;background:#8C6A25;border-radius:4px;padding:5px 9px">INSIDE DART — RULES STEP IN AT SEND</span>
+<div style="font:500 12px/1.65 'Plus Jakarta Sans';color:#4E5B65">» Pick a scenario, size an order, swipe (or Tab to the rail and press Enter). Accept the trim, start the cooldown, or override with a reason — nothing ever sends by itself.</div>
+<iframe src="./host.html?bare" title="Host prototype — Dart broker ticket with Tenet rules" style="width:100%;height:1000px;border:none;background:transparent"></iframe>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+<span style="align-self:flex-start;font:600 9.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#F2F5F7;background:#8C6A25;border-radius:4px;padding:5px 9px">AFTER CLOSE — RULES &amp; RECORD LIVE HERE</span>
+<div style="font:500 12px/1.65 'Plus Jakarta Sans';color:#4E5B65">» Tighten the size cap (− on SIZE CAP) and the Host beside it enforces the new number immediately; loosen it and it waits for the open. Draft the Friday rule; open a Record row for notes, errors, and sync retry.</div>
+<iframe src="./companion.html?bare" title="Companion prototype — rules, patterns, and record" style="width:100%;height:1000px;border:none;background:transparent"></iframe>
+</div>
+
+</div>
+
+<div style="width:100%;max-width:1240px;margin-top:22px;border-top:1px solid #C5CDD3;padding-top:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5E6B75;line-height:1.7">
+<span>» ONE RULE SET · ONE RECORD — HOST EVENTS LAND IN THE COMPANION LIVE; RULE CHANGES FLOW BACK</span>
+<span>“DART” IS AN INVENTED BROKER · DEMO TIME RUNS FAST (COOLDOWN ~60×, QUEUE ~5×)</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1300,&quot;height&quot;:1200}}">
+const SKEY = 'tenetSharedV3';
+const BASELINE = {v:3,resetSeq:0,cap:5,capPending:null,spacing:'armed',pattern:'detected',fridayRule:null,events:[
+ {id:'e1',day:'THU',time:'10:44',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'3× 602C',result:'sent @ $1.19',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e2',day:'THU',time:'10:42',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.16',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e3',day:'THU',time:'10:40',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.14',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e4',day:'WED',time:'15:52',rule:'WIND-DOWN',what:'wind-down · trimmed to the 3:52 allowance',size:'3→1× 604C',result:'sent 1',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e5',day:'WED',time:'11:02',rule:'—',what:'feed lost 17 min · trading unaffected',size:'—',result:'gap preserved',out:'⚠ outage',kind:'gap',tone:'warn',sync:'synced'},
+ {id:'e6',day:'TUE',time:'10:18',rule:'SIZE CAP',what:'size cap · order changed before sending',size:'12→5× 602P',result:'sent 5',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e7',day:'MON',time:'10:03',rule:'SIZE CAP',what:'size cap · continued past the cap',size:'8× 602P',result:'−$310 by close',out:'− $310',kind:'over',tone:'bad',sync:'failed',reason:'This setup was planned before the losses'},
+ {id:'e8',day:'MON',time:'10:02',rule:'LOSS COOLDOWN',what:'loss cooldown · 9-min cooldown · reviewed & sent',size:'5× 602P',result:'sent @ $1.36',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'}
+]};
+class Component extends DCLogic {
+  renderVals() {
+    return { resetDemo: () => {
+      let seq = 0; try { const o = JSON.parse(localStorage.getItem(SKEY)); if (o && o.resetSeq != null) seq = o.resetSeq; } catch (e) {}
+      const base = JSON.parse(JSON.stringify(BASELINE)); base.resetSeq = seq + 1;
+      try { localStorage.setItem(SKEY, JSON.stringify(base)); } catch (e) {}
+    } };
+  }
+}
+</script>
+</body>
+</html>

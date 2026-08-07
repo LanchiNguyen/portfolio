@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
+<sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
+<div style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — RETAIL HOST v2 · SPY OPTIONS (0DTE)</div>
+<div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">“DART” IS AN INVENTED BROKER</div>
+</div>
+</sc-if>
+
+<div role="group" aria-label="Prototype scenario controls" style="width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;margin-top:20px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.2em;color:#5E6B75">PROTOTYPE SCENARIO — NOT PART OF THE PRODUCT</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+<sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+<button type="button" onClick="{{ t.onClick }}" aria-pressed="{{ t.pressed }}" style="min-height:44px;padding:10px 16px;border-radius:999px;border:1px solid {{ t.border }};background:{{ t.bg }};color:{{ t.color }};font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em">{{ t.label }}</button>
+</sc-for>
+</div>
+<div style="max-width:720px;font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">{{ scenarioIntro }}</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed #9AA0A4;border-radius:16px;padding:8px 10px 8px 16px;align-self:flex-start">
+<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#5E6B75">DEMO CONTROLS</span>
+<sc-if value="{{ isWed }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ advanceClock }}" aria-disabled="{{ wedAdvDisabled }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 18px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25;opacity:{{ wedAdvOpacity }}">{{ wedAdvLabel }}</button>
+</sc-if>
+<button type="button" onClick="{{ toggleTenet }}" aria-pressed="{{ tenetDownStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">{{ tenetToggleLabel }}</button>
+<sc-if value="{{ resetVisible }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — BOTH SURFACES</button>
+</sc-if>
+</div>
+</div>
+
+<div style="width:100%;max-width:1100px;display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;margin-top:18px">
+
+<div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+<div data-screen-label="Host phone" style="width:322px;background:#07080A;border:1px solid #191C21;border-radius:34px;padding:14px 13px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;color:#E9EDF2;min-height:660px;box-shadow:0 26px 50px -30px rgba(10,14,18,.55);position:relative;overflow:hidden;filter:{{ phoneFilter }};transition:filter .6s">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:0 6px"><span style="font:600 10px 'IBM Plex Mono',monospace">{{ statusClock }}</span><span aria-hidden="true" style="font:600 9.5px 'IBM Plex Mono',monospace;color:#3E444C;letter-spacing:.14em">▮▮▮ ▰</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font:800 16px 'Plus Jakarta Sans';letter-spacing:-.02em;color:#C8F65D">dart</span><span style="font:700 9.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#0A0B0C;background:#C8F65D;border-radius:999px;padding:4px 8px">4-DAY STREAK</span></div>
+
+<sc-if value="{{ isMon }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Mon — revenge trade" style="display:flex;flex-direction:column;gap:9px;flex:1">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 24px 'Plus Jakarta Sans';letter-spacing:-.03em">SPY $602.15</div><div style="font:600 11.5px 'Plus Jakarta Sans';color:#FF7A5C">Today −$460</div></div>
+<svg width="100%" height="46" viewBox="0 0 300 100" preserveAspectRatio="none" role="img" aria-label="{{ chartAlt }}"><polygon points="0,78 25,70 50,74 75,60 100,66 125,52 150,58 175,44 200,50 225,38 250,44 275,30 300,34 300,100 0,100" fill="rgba(200,246,93,.08)"></polygon><polyline points="0,78 25,70 50,74 75,60 100,66 125,52 150,58 175,44 200,50 225,38 250,44 275,30 300,34" fill="none" style="stroke:#C8F65D" stroke-width="2"></polyline></svg>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#98A1AB">SPY 0DTE · PUTS</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#FF7A5C">IV 24% · −38% today</span></div>
+
+<sc-if value="{{ monLive }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:6px">
+<div style="flex:1;border:1px solid #23272D;border-radius:10px;padding:7px 0;display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;color:#98A1AB">601P</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#A8B0B8">$1.02</span></div>
+<div style="flex:1;border:1px solid #C8F65D;background:rgba(200,246,93,.08);border-radius:10px;padding:7px 0;display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font:700 10.5px 'IBM Plex Mono',monospace;color:#C8F65D">602P</span><span style="font:600 10px 'IBM Plex Mono',monospace;color:#C8F65D">$1.42</span></div>
+<div style="flex:1;border:1px solid #23272D;border-radius:10px;padding:7px 0;display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;color:#98A1AB">603P</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#A8B0B8">$1.98</span></div>
+</div>
+<sc-if value="{{ monNoteOn }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3A3F46;border-radius:10px;padding:9px 11px;font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">{{ monNote }}</div></sc-if>
+<div style="flex:1"></div>
+<div style="border:1px solid #1A1E24;background:#0B0D10;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#98A1AB">CONTRACTS</div>
+<div style="display:flex;gap:7px">
+<button type="button" onClick="{{ monMinus }}" aria-label="One fewer contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">−</button>
+<input value="{{ monQtyStr }}" onChange="{{ monQtyChange }}" inputMode="numeric" placeholder="0" aria-label="Contracts quantity" style="flex:1;min-width:0;height:46px;background:transparent;border:1px solid #2E3238;border-radius:12px;color:#E9EDF2;font:700 16px 'IBM Plex Mono',monospace;text-align:center;outline:none;box-sizing:border-box">
+<button type="button" onClick="{{ monPlus }}" aria-label="One more contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">+</button>
+<button type="button" onClick="{{ monMaxFill }}" aria-label="Fill maximum size, 86 contracts" style="width:54px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:600 11px 'Plus Jakarta Sans';color:#C6CDD4">MAX</span><span style="font:500 9.5px 'IBM Plex Mono',monospace;color:#98A1AB">86</span></button>
+</div>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">{{ monCost }}</div>
+</div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ monLiveRailLabel }}</span></button>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">swipe, or press Enter on the rail</div>
+</sc-if>
+
+<sc-if value="{{ monStepped }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ {{ monSteppedTitle }}</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A"><strong style="font-weight:700;color:#E6C36A">Cooldown</strong> — 3 losing entries this morning · 9:41 / 9:46 / 9:52</div>
+<sc-if value="{{ monShowSizeLine }}" hint-placeholder-val="{{ true }}"><div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A"><strong style="font-weight:700;color:#E6C36A">Size</strong> — {{ monSizeLine }}</div></sc-if>
+<sc-if value="{{ monReducedOn }}" hint-placeholder-val="{{ false }}"><div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">◇ {{ monReducedNote }}</div></sc-if>
+<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">Nothing was sent. Three ways forward:</div>
+</div>
+<div style="flex:1"></div>
+<sc-if value="{{ monShowReduce }}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{ monReduce }}" style="min-height:48px;border-radius:999px;border:1px solid #C8F65D;display:flex;align-items:center;justify-content:center;font:700 12.5px 'Plus Jakarta Sans';color:#C8F65D;padding:0 16px">{{ monReduceLabel }}</button>
+</sc-if>
+<button type="button" onPointerDown="{{ holdDown }}" onKeyDown="{{ holdKey }}" aria-label="Hold, or press Enter, to start the 9 minute cooldown" style="position:relative;min-height:52px;width:100%;border-radius:999px;border:1px solid #E6C36A;background:linear-gradient(90deg,rgba(230,195,106,.3) 0 {{ holdPct }},rgba(230,195,106,.06) {{ holdPct }} 100%);display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;box-sizing:border-box"><span style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A;pointer-events:none">{{ monHoldLabel }}</span></button>
+<button type="button" onClick="{{ openSheetMon }}" style="min-height:44px;border-radius:999px;border:1px solid #3A3F46;display:flex;align-items:center;justify-content:center;font:600 11.5px 'Plus Jakarta Sans';color:#C6CDD4;padding:0 16px">Override with a reason</button>
+<button type="button" onClick="{{ monCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order — nothing sends</button>
+</sc-if>
+
+<sc-if value="{{ monCooling }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ COOLDOWN RUNNING</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.</div>
+</div>
+<div style="flex:1"></div>
+<div role="timer" aria-label="Cooldown remaining" style="position:relative;height:52px;border-radius:999px;border:1px solid #E6C36A;background:linear-gradient(90deg,rgba(230,195,106,.28) 0 {{ monCoolPct }},rgba(230,195,106,.05) {{ monCoolPct }} 100%);display:flex;align-items:center;justify-content:center"><span style="font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#E6C36A">COOLDOWN · {{ monClock }} LEFT</span></div>
+<button type="button" onClick="{{ monCancelCooldown }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel cooldown and order</button>
+</sc-if>
+
+<sc-if value="{{ monReview }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(200,246,93,.35);background:rgba(200,246,93,.05);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#C8F65D">◆ COOLDOWN COMPLETE — REVIEW BEFORE SENDING</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#A8B0B8">602P quote refreshed 10:02 · <span style="color:#E9EDF2">$1.42 → $1.36</span></div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A">⚠ PRICE MOVED −4.2% WHILE YOU WAITED</div>
+<sc-if value="{{ monReviewTrimOn }}" hint-placeholder-val="{{ false }}"><div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#CBB78A">{{ monReviewTrimNote }}</div></sc-if>
+</div>
+<div style="flex:1"></div>
+<div style="text-align:center;font:500 11px 'IBM Plex Mono',monospace;color:#C6CDD4">{{ monReviewCost }}</div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ monReviewRail }}</span></button>
+<button type="button" onClick="{{ monCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order</button>
+</sc-if>
+
+<sc-if value="{{ monOverridden }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3A3F46;border-radius:10px;padding:9px 11px;font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">◇ override recorded 9:54 · {{ monOverrideRecord }} · reason: “{{ monReasonShort }}” — context on your record, not a penalty</div>
+<div style="flex:1"></div>
+<div style="border:1px solid #1A1E24;background:#0B0D10;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#98A1AB">CONTRACTS</div>
+<div style="display:flex;gap:7px">
+<button type="button" onClick="{{ monMinus }}" aria-label="One fewer contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">−</button>
+<input value="{{ monQtyStr }}" onChange="{{ monQtyChange }}" inputMode="numeric" placeholder="0" aria-label="Contracts quantity" style="flex:1;min-width:0;height:46px;background:transparent;border:1px solid #2E3238;border-radius:12px;color:#E9EDF2;font:700 16px 'IBM Plex Mono',monospace;text-align:center;outline:none;box-sizing:border-box">
+<button type="button" onClick="{{ monPlus }}" aria-label="One more contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">+</button>
+<button type="button" onClick="{{ monMaxFill }}" aria-label="Fill maximum size, 86 contracts" style="width:54px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:600 11px 'Plus Jakarta Sans';color:#C6CDD4">MAX</span><span style="font:500 9.5px 'IBM Plex Mono',monospace;color:#98A1AB">86</span></button>
+</div>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">{{ monCost }}</div>
+</div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ monLiveRailLabel }}</span></button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isTue }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Tue — oversized order" style="display:flex;flex-direction:column;gap:9px;flex:1">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 24px 'Plus Jakarta Sans';letter-spacing:-.03em">SPY $602.05</div><div style="font:600 11.5px 'Plus Jakarta Sans';color:#FF7A5C">Today −$155</div></div>
+<svg width="100%" height="46" viewBox="0 0 300 100" preserveAspectRatio="none" role="img" aria-label="{{ chartAlt }}"><polygon points="0,72 25,66 50,70 75,58 100,62 125,52 150,56 175,46 200,50 225,40 250,44 275,36 300,38 300,100 0,100" fill="rgba(200,246,93,.08)"></polygon><polyline points="0,72 25,66 50,70 75,58 100,62 125,52 150,56 175,46 200,50 225,40 250,44 275,36 300,38" fill="none" style="stroke:#C8F65D" stroke-width="2"></polyline></svg>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#98A1AB">SPY 0DTE · PUTS</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#FF7A5C">IV 21% · −26% today</span></div>
+
+<sc-if value="{{ tueLive }}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{ tueNoteOn }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3A3F46;border-radius:10px;padding:9px 11px;font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">{{ tueNote }}</div></sc-if>
+<div style="flex:1"></div>
+<div style="border:1px solid #1A1E24;background:#0B0D10;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#98A1AB">CONTRACTS</div>
+<div style="display:flex;gap:7px">
+<button type="button" onClick="{{ tueMinus }}" aria-label="One fewer contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">−</button>
+<input value="{{ tueQtyStr }}" onChange="{{ tueQtyChange }}" inputMode="numeric" placeholder="0" aria-label="Contracts quantity" style="flex:1;min-width:0;height:46px;background:transparent;border:1px solid #2E3238;border-radius:12px;color:#E9EDF2;font:700 16px 'IBM Plex Mono',monospace;text-align:center;outline:none;box-sizing:border-box">
+<button type="button" onClick="{{ tuePlus }}" aria-label="One more contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">+</button>
+<button type="button" onClick="{{ tueMaxFill }}" aria-label="Fill maximum size, 86 contracts" style="width:54px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:600 11px 'Plus Jakarta Sans';color:#C6CDD4">MAX</span><span style="font:500 9.5px 'IBM Plex Mono',monospace;color:#98A1AB">86</span></button>
+</div>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">{{ tueCost }}</div>
+</div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ tueRailLabel }}</span></button>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">swipe, or press Enter on the rail</div>
+</sc-if>
+
+<sc-if value="{{ tueChanged }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ SIZE RULE — ORDER CHANGED BEFORE SENDING</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">You asked for <span style="color:#E9EDF2">{{ tueOrigLine }}</span></div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Revised to your cap <span style="color:#E9EDF2">{{ tueRevLine }}</span>{{ tuePendingNote }}</div>
+<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">Nothing was sent. Confirm the revised size, cancel, or override.</div>
+</div>
+<div style="flex:1"></div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ tueRailLabel }}</span></button>
+<button type="button" onClick="{{ openSheetTue }}" style="min-height:44px;border-radius:999px;border:1px solid #3A3F46;display:flex;align-items:center;justify-content:center;font:600 11.5px 'Plus Jakarta Sans';color:#C6CDD4;padding:0 16px">Override the cap with a reason</button>
+<button type="button" onClick="{{ tueCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order — nothing sends</button>
+</sc-if>
+
+<sc-if value="{{ tueOverridden }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px dashed #3A3F46;border-radius:10px;padding:9px 11px;font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">◇ override recorded 10:18 · size cap · reason: “{{ monReasonShort }}” — context on your record, not a penalty</div>
+<div style="flex:1"></div>
+<div style="text-align:center;font:500 11px 'IBM Plex Mono',monospace;color:#C6CDD4">{{ tueCost }}</div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ tueRailLabel }}</span></button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isWed }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Wed — late-day wind-down" style="display:flex;flex-direction:column;gap:9px;flex:1">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 24px 'Plus Jakarta Sans';letter-spacing:-.03em">SPY $603.40</div><div style="font:600 11.5px 'Plus Jakarta Sans';color:#8FB98F">Today +$62</div></div>
+<svg width="100%" height="46" viewBox="0 0 300 100" preserveAspectRatio="none" role="img" aria-label="{{ chartAlt }}"><polygon points="0,64 25,58 50,62 75,50 100,54 125,44 150,48 175,38 200,42 225,32 250,36 275,26 300,28 300,100 0,100" fill="rgba(200,246,93,.08)"></polygon><polyline points="0,64 25,58 50,62 75,50 100,54 125,44 150,48 175,38 200,42 225,32 250,36 275,26 300,28" fill="none" style="stroke:#C8F65D" stroke-width="2"></polyline></svg>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#98A1AB">SPY 0DTE · CALLS</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#8FB98F">{{ wedToClose }}</span></div>
+<sc-if value="{{ wedArmed }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.3);background:rgba(230,195,106,.05);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ WIND-DOWN — YOUR 3:00 RULE STEPPED IN</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">0DTE premium decays fastest into the close. In your last 45 days, 61% of give-back came after 3:00. Size steps down to expiry; typing above the allowance just trims it.</div>
+<div role="img" aria-label="Allowance steps down from 5 contracts at 3:00 to flat at 3:55" style="display:flex;gap:4px;align-items:flex-end;height:26px">
+<div style="flex:1;height:26px;background:rgba(230,195,106,.5);border-radius:3px"></div>
+<div style="flex:1;height:19px;background:rgba(230,195,106,.38);border-radius:3px"></div>
+<div style="flex:1;height:13px;background:rgba(230,195,106,.26);border-radius:3px"></div>
+<div style="flex:1;height:8px;background:rgba(230,195,106,.16);border-radius:3px"></div>
+<div style="flex:1;height:3px;background:rgba(230,195,106,.1);border-radius:3px"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#A6957A"><span>3:00 · 5 contracts</span><span>3:55 · flat</span></div>
+</div>
+</sc-if>
+<div style="flex:1"></div>
+<sc-if value="{{ wedNoteOn }}" hint-placeholder-val="{{ false }}"><div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A;text-align:center">◆ TRIMMED TO YOUR {{ wedClockShort }} ALLOWANCE</div></sc-if>
+<sc-if value="{{ wedOpen }}" hint-placeholder-val="{{ true }}">
+<div style="border:1px solid #1A1E24;background:#0B0D10;border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#98A1AB">{{ wedSharesLabel }}</div>
+<div style="display:flex;gap:7px">
+<button type="button" onClick="{{ wedMinus }}" aria-label="One fewer contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">−</button>
+<input value="{{ wedQtyStr }}" onChange="{{ wedQtyChange }}" inputMode="numeric" placeholder="0" aria-label="Contracts quantity" style="flex:1;min-width:0;height:46px;background:transparent;border:1px solid #2E3238;border-radius:12px;color:#E9EDF2;font:700 16px 'IBM Plex Mono',monospace;text-align:center;outline:none;box-sizing:border-box">
+<button type="button" onClick="{{ wedPlus }}" aria-label="One more contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">+</button>
+<button type="button" onClick="{{ wedMaxFill }}" aria-label="Fill maximum allowed size" style="width:54px;height:46px;border:1px solid {{ wedMaxBorder }};border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font:600 11px 'Plus Jakarta Sans';color:{{ wedMaxColor }}">MAX</span><span style="font:500 9.5px 'IBM Plex Mono',monospace;color:{{ wedMaxSubColor }}">{{ wedMaxSub }}</span></button>
+</div>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">{{ wedCost }}</div>
+</div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ wedRailLabel }}</span></button>
+</sc-if>
+<sc-if value="{{ wedFlat }}" hint-placeholder-val="{{ false }}">
+<div style="min-height:52px;border-radius:999px;border:1px dashed #A6957A;display:flex;align-items:center;justify-content:center;font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#CBB78A;text-align:center;padding:0 14px">FLAT AT 3:55 — YOUR RULE</div>
+<div style="text-align:center;font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">The one hard stop, five minutes before expiry — written by you, edited any evening in the Companion.</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isThu }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Thu — rapid-fire entries" style="display:flex;flex-direction:column;gap:9px;flex:1">
+<div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font:700 24px 'Plus Jakarta Sans';letter-spacing:-.03em">SPY $601.88</div><div style="font:600 11.5px 'Plus Jakarta Sans';color:#FF7A5C">Today −$96</div></div>
+<svg width="100%" height="46" viewBox="0 0 300 100" preserveAspectRatio="none" role="img" aria-label="{{ chartAlt }}"><polygon points="0,36 25,46 50,34 75,50 100,40 125,54 150,44 175,58 200,48 225,62 250,52 275,66 300,60 300,100 0,100" fill="rgba(255,122,92,.1)"></polygon><polyline points="0,36 25,46 50,34 75,50 100,40 125,54 150,44 175,58 200,48 225,62 250,52 275,66 300,60" fill="none" style="stroke:#FF7A5C" stroke-width="2"></polyline></svg>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#98A1AB">SPY 0DTE · CALLS</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#FF7A5C">spread $0.04</span></div>
+
+<sc-if value="{{ thuReady }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;gap:5px;align-items:center;padding:2px 2px 0;flex-wrap:wrap">
+<span style="font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB;padding-right:3px">LAST 6 MIN</span>
+<span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#4A5158"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#4A5158"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#4A5158"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#4A5158"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#4A5158"></span>
+<span style="font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB;padding-left:3px">5 entries · 10:36 → 10:42</span>
+</div>
+<sc-if value="{{ thuNoteOn }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3A3F46;border-radius:10px;padding:9px 11px;font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">{{ thuNote }}</div></sc-if>
+<div style="flex:1"></div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#98A1AB">ORDER</div>
+<div style="border:1px solid #23272D;border-radius:14px;padding:11px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 13px 'Plus Jakarta Sans'">BUY 3× SPY 602C</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#A8B0B8">0DTE · market · $345 at risk</span></div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">Swipe to buy 3 contracts</span></button>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">swipe, or press Enter on the rail</div>
+</sc-if>
+
+<sc-if value="{{ thuQueued }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ PACING RULE STEPPED IN — 2 MIN BETWEEN ENTRIES</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Five 0DTE entries in six minutes. Your cluster days ended −$310 on average — the spread ate the rest.</div>
+<div style="display:flex;gap:5px;align-items:center;padding-top:1px">
+<span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span>
+<span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;border:1px solid #E6C36A;box-sizing:border-box"></span>
+<span style="font:400 10px 'IBM Plex Mono',monospace;color:#A6957A;padding-left:5px">10:36 → 10:42</span>
+</div>
+</div>
+<div style="flex:1"></div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#98A1AB">QUEUED — NOTHING SENDS BY ITSELF</div>
+<div style="border:1px solid #23272D;border-radius:14px;padding:11px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 13px 'Plus Jakarta Sans'">BUY {{ thuQtyStr }}× SPY 602C</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#A8B0B8">market · held for review</span></div>
+<sc-if value="{{ thuEditingOn }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;gap:7px;align-items:center">
+<button type="button" onClick="{{ thuMinus }}" aria-label="One fewer contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">−</button>
+<input value="{{ thuQtyStr }}" onChange="{{ thuQtyChange }}" inputMode="numeric" placeholder="0" aria-label="Contracts quantity" style="flex:1;min-width:0;height:46px;background:transparent;border:1px solid #2E3238;border-radius:12px;color:#E9EDF2;font:700 16px 'IBM Plex Mono',monospace;text-align:center;outline:none;box-sizing:border-box">
+<button type="button" onClick="{{ thuPlus }}" aria-label="One more contract" style="width:46px;height:46px;border:1px solid #23272D;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 18px 'Plus Jakarta Sans';color:#C6CDD4">+</button>
+</div>
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">{{ thuCost }}</div>
+</sc-if>
+<div role="timer" aria-label="Queue time remaining" style="position:relative;height:50px;border-radius:999px;border:1px solid #E6C36A;background:linear-gradient(90deg,rgba(230,195,106,.26) 0 {{ thuFillPct }},rgba(230,195,106,.05) {{ thuFillPct }} 100%);display:flex;align-items:center;justify-content:center"><span style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A">READY TO REVIEW IN {{ thuClock }}</span></div>
+<div style="display:flex;gap:6px">
+<button type="button" onClick="{{ thuEditToggle }}" style="flex:1;min-height:44px;border:1px solid #3A3F46;border-radius:999px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#C6CDD4;display:flex;align-items:center;justify-content:center">{{ thuEditLabel }}</button>
+<button type="button" onClick="{{ thuLeave }}" style="flex:1;min-height:44px;border:1px solid #3A3F46;border-radius:999px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#C6CDD4;display:flex;align-items:center;justify-content:center">LEAVE QUEUE</button>
+<button type="button" onClick="{{ thuCancel }}" style="flex:1;min-height:44px;border:1px solid #3A3F46;border-radius:999px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#C6CDD4;display:flex;align-items:center;justify-content:center">CANCEL</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ thuReview }}" hint-placeholder-val="{{ false }}">
+<div style="border:1px solid rgba(200,246,93,.35);background:rgba(200,246,93,.05);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#C8F65D">◆ READY TO REVIEW — NOTHING WAS SENT</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#A8B0B8">602C quote refreshed 10:44 · <span style="color:#E9EDF2">$1.15 → $1.19</span></div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A">⚠ PRICE MOVED +3.5% WHILE QUEUED</div>
+<div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#CBB78A">{{ thuReviewCost }}</div>
+</div>
+<div style="flex:1"></div>
+<button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
+<span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ thuReviewRail }}</span></button>
+<button type="button" onClick="{{ thuCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order</button>
+</sc-if>
+
+<sc-if value="{{ thuCancelled }}" hint-placeholder-val="{{ false }}">
+<div style="flex:1"></div>
+<div style="border:1px dashed #3A3F46;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;text-align:center">
+<div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#C6CDD4">◇ ORDER CANCELLED — NOTHING SENT</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#98A1AB">Queue cleared at 10:43. Trading is unaffected; the cancellation is on your record.</div>
+</div>
+<button type="button" onClick="{{ resetCurrent }}" style="min-height:48px;border-radius:999px;border:1px solid #C8F65D;display:flex;align-items:center;justify-content:center;font:700 12.5px 'Plus Jakarta Sans';color:#C8F65D">New order</button>
+</sc-if>
+</div>
+</sc-if>
+
+<div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#98A1AB">{{ tenetLine }}</div>
+<div aria-hidden="true" style="display:flex;justify-content:space-around;border-top:1px solid #16191D;padding-top:10px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#4A5158"><span style="color:#C8F65D">TRADE</span><span>SEARCH</span><span>LISTS</span><span>ACTIVITY</span><span>YOU</span></div>
+
+<sc-if value="{{ sheetOn }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ closeSheet }}" aria-label="Close override sheet" style="position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:5;border-radius:0"></button>
+<div role="dialog" aria-modal="true" aria-label="Override with a reason" onKeyDown="{{ sheetKey }}" ref="{{ sheetRef }}" style="position:absolute;left:0;right:0;bottom:0;background:#0E1013;border-top:1px solid #23272D;border-radius:24px 24px 0 0;padding:14px 14px 18px;display:flex;flex-direction:column;gap:9px;z-index:6">
+<div aria-hidden="true" style="width:38px;height:4px;border-radius:999px;background:#2E3238;align-self:center;margin-bottom:2px"></div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ BEFORE YOU CONTINUE</div>
+<div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">{{ sheetSub }} Pick the reason that fits — it’s recorded next to the trade as context.</div>
+<div role="radiogroup" aria-label="Override reason" ref="{{ sheetRgRef }}" onKeyDown="{{ sheetRgKey }}" style="display:flex;flex-direction:column;gap:9px">
+<sc-for list="{{ sheetReasons }}" as="r" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{ r.checked }}" tabIndex="{{ r.ti }}" onClick="{{ r.onClick }}" style="border:{{ r.border }};background:{{ r.bg }};border-radius:12px;padding:12px;display:flex;gap:9px;align-items:center;min-height:48px;box-sizing:border-box;width:100%"><span aria-hidden="true" style="width:15px;height:15px;border-radius:50%;border:{{ r.dot }};flex:none;box-sizing:border-box"></span><span style="font:500 12px 'Plus Jakarta Sans';color:{{ r.color }}">{{ r.label }}</span></button>
+</sc-for>
+</div>
+<button type="button" onClick="{{ sheetContinue }}" aria-disabled="{{ sheetContinueDisabled }}" style="min-height:48px;border-radius:999px;border:1px solid #E6C36A;display:flex;align-items:center;justify-content:center;font:700 13px 'Plus Jakarta Sans';color:#E6C36A;margin-top:2px;opacity:{{ continueOpacity }}">Continue to order review</button>
+<button type="button" onClick="{{ closeSheet }}" style="text-align:center;font:500 11px 'IBM Plex Mono',monospace;color:#98A1AB;padding:12px 0;min-height:44px">Cancel — keep the pause</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ sentOn }}" hint-placeholder-val="{{ false }}">
+<div role="dialog" aria-modal="true" aria-label="Order confirmation" style="position:absolute;inset:0;background:rgba(7,8,10,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;padding:24px;z-index:7;text-align:center">
+<div aria-hidden="true" style="width:54px;height:54px;border-radius:50%;background:rgba(200,246,93,.12);border:1px solid #C8F65D;display:flex;align-items:center;justify-content:center;font:700 20px 'Plus Jakarta Sans';color:#C8F65D">✓</div>
+<div style="font:800 18px 'Plus Jakarta Sans';color:#E9EDF2">{{ sentT }}</div>
+<div style="font:600 11.5px 'IBM Plex Mono',monospace;color:#A8B0B8">{{ sentP }}</div>
+<div style="border:1px dashed #2E3238;border-radius:9px;padding:9px 12px;font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A;max-width:250px">{{ sentG }}</div>
+<div style="font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">recorded in the Companion with this timestamp</div>
+<button type="button" onClick="{{ resetCurrent }}" ref="{{ sentRef }}" style="margin-top:8px;min-height:46px;padding:0 24px;border-radius:999px;border:1px solid #C8F65D;display:flex;align-items:center;font:700 12.5px 'Plus Jakarta Sans';color:#C8F65D">New order</button>
+</div>
+</sc-if>
+<div aria-live="polite" role="status" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">{{ liveMsg }}</div>
+</div>
+</div>
+
+<sc-if value="{{ showHints }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;gap:14px;max-width:340px;padding-top:8px">
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#8C6A25">TRY THIS</div>
+<sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
+<div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#8C6A25;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
+</sc-for>
+<div style="border-top:1px solid #C5CDD3;padding-top:11px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5E6B75;line-height:1.7">» KEYBOARD WORKS EVERYWHERE — TAB TO THE RAIL, PRESS ENTER. DEMO TIME RUNS FAST: COOLDOWN ~60×, QUEUE ~5×. EVERY EVENT LANDS IN THE COMPANION RECORD.</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1160,&quot;height&quot;:1020},&quot;initialScenario&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;mon&quot;,&quot;options&quot;:[&quot;mon&quot;,&quot;tue&quot;,&quot;wed&quot;,&quot;thu&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;holdSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:60,&quot;min&quot;:10,&quot;max&quot;:120,&quot;step&quot;:10,&quot;unit&quot;:&quot;s served / s held&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showHints&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;showChrome&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+const TRAVEL = 236, THRESH = 180, SKEY = 'tenetSharedV3';
+const BASELINE = {v:3,resetSeq:0,cap:5,capPending:null,spacing:'armed',pattern:'detected',fridayRule:null,events:[
+ {id:'e1',day:'THU',time:'10:44',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'3× 602C',result:'sent @ $1.19',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e2',day:'THU',time:'10:42',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.16',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e3',day:'THU',time:'10:40',rule:'PACING',what:'pacing · waited 2:00 · reviewed & sent',size:'2× 602C',result:'sent @ $1.14',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e4',day:'WED',time:'15:52',rule:'WIND-DOWN',what:'wind-down · trimmed to the 3:52 allowance',size:'3→1× 604C',result:'sent 1',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e5',day:'WED',time:'11:02',rule:'—',what:'feed lost 17 min · trading unaffected',size:'—',result:'gap preserved',out:'⚠ outage',kind:'gap',tone:'warn',sync:'synced'},
+ {id:'e6',day:'TUE',time:'10:18',rule:'SIZE CAP',what:'size cap · order changed before sending',size:'12→5× 602P',result:'sent 5',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'},
+ {id:'e7',day:'MON',time:'10:03',rule:'SIZE CAP',what:'size cap · continued past the cap',size:'8× 602P',result:'−$310 by close',out:'− $310',kind:'over',tone:'bad',sync:'failed',reason:'This setup was planned before the losses'},
+ {id:'e8',day:'MON',time:'10:02',rule:'LOSS COOLDOWN',what:'loss cooldown · 9-min cooldown · reviewed & sent',size:'5× 602P',result:'sent @ $1.36',out:'✓ sent',kind:'held',tone:'ok',sync:'synced'}
+]};
+class Component extends DCLogic {
+  state = { sh: null, scenario: 'mon', dragX: 0, dragging: false, liveMsg: '',
+    monQty: 12, monPhase: 'live', monRemaining: 540, monReduced: false, monNote: null,
+    sheetFor: null, reason: null, holding: false, holdProg: 0,
+    tueQty: 2, tuePhase: 'live', tueOrig: null, tueNote: null,
+    wedQty: 5, wedStep: 0, wedNote: false,
+    thuQty: 3, thuPhase: 'ready', thuQueue: 120, thuEditing: false, thuNote: null,
+    sent: null, tenetDown: false };
+
+  sh() { try { const o = JSON.parse(localStorage.getItem(SKEY)); if (o && o.v === 3) return o; } catch (e) {} return JSON.parse(JSON.stringify(BASELINE)); }
+  put(patch) { const n = { ...this.sh(), ...patch }; try { localStorage.setItem(SKEY, JSON.stringify(n)); } catch (e) {} this.setState({ sh: n }); return n; }
+  addEvent(ev) { const s = this.sh(); this.put({ events: [{ id: 'x' + Date.now() + Math.random().toString(36).slice(2, 5), sync: this.state.tenetDown ? 'pending' : 'synced', tone: 'ok', ...ev }, ...s.events] }); }
+  cap() { return (this.state.sh || this.sh()).cap; }
+
+  componentDidMount() {
+    const init = this.props.initialScenario;
+    this.setState({ sh: this.sh(), scenario: init || 'mon' });
+    this.iv = setInterval(() => this.tick(), 100);
+    this._st = (e) => { if (e && e.key && e.key !== SKEY) return; const n = this.sh(); const old = this.state.sh || BASELINE;
+      if (n.resetSeq !== old.resetSeq) this.localReset(n); else this.setState({ sh: n }); };
+    window.addEventListener('storage', this._st);
+  }
+  componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.noteT); clearTimeout(this.wedNoteT); window.removeEventListener('storage', this._st); this.unbind(); }
+  unbind() { if (this._mv) { window.removeEventListener('pointermove', this._mv); window.removeEventListener('pointerup', this._up); this._mv = this._up = null; } }
+
+  tick() {
+    const s = this.state;
+    if (s.holding && s.monPhase === 'stepped') {
+      const p = s.holdProg + 100 / 700;
+      if (p >= 1) this.startCooldown(); else this.setState({ holdProg: p });
+    }
+    if (s.monPhase === 'cooling') {
+      const r = s.monRemaining - (this.props.holdSpeed ?? 60) / 10;
+      if (r <= 0) this.setState({ monRemaining: 0, monPhase: 'review', dragX: 0, liveMsg: 'Cooldown complete. Review the refreshed quote — nothing was sent. Send or cancel.' });
+      else this.setState({ monRemaining: r });
+    }
+    if (s.scenario === 'thu' && s.thuPhase === 'queued') {
+      const q = s.thuQueue - 0.5;
+      if (q <= 0) this.setState({ thuQueue: 0, thuPhase: 'review', thuEditing: false, dragX: 0, liveMsg: 'Queue finished. Ready to review at a refreshed quote — nothing was sent.' });
+      else this.setState({ thuQueue: q });
+    }
+  }
+  startCooldown() { this.unbind(); this.setState({ holding: false, holdProg: 0, monPhase: 'cooling', liveMsg: 'Nine minute cooldown started. Your order is held; you will review it after.' }); }
+
+  localReset(sh) {
+    this.unbind(); clearTimeout(this.noteT); clearTimeout(this.wedNoteT);
+    this.setState({ sh: sh || this.sh(), scenario: 'mon', dragX: 0, dragging: false, liveMsg: 'Demo reset to baseline.',
+      monQty: 12, monPhase: 'live', monRemaining: 540, monReduced: false, monNote: null, sheetFor: null, reason: null, holding: false, holdProg: 0,
+      tueQty: 2, tuePhase: 'live', tueOrig: null, tueNote: null, wedQty: 5, wedStep: 0, wedNote: false,
+      thuQty: 3, thuPhase: 'ready', thuQueue: 120, thuEditing: false, thuNote: null, sent: null, tenetDown: false });
+  }
+  resetDemo() { const base = JSON.parse(JSON.stringify(BASELINE)); base.resetSeq = (this.sh().resetSeq || 0) + 1; try { localStorage.setItem(SKEY, JSON.stringify(base)); } catch (e) {} this.localReset(base); }
+  resetScenario(sc) {
+    this.unbind();
+    this.setState({ scenario: sc, dragX: 0, dragging: false, monQty: 12, monPhase: 'live', monRemaining: 540, monReduced: false, monNote: null,
+      sheetFor: null, reason: null, holding: false, holdProg: 0, tueQty: 2, tuePhase: 'live', tueOrig: null, tueNote: null,
+      wedQty: 5, wedStep: 0, wedNote: false, thuQty: 3, thuPhase: 'ready', thuQueue: 120, thuEditing: false, thuNote: null, sent: null });
+  }
+
+  parseQty(v) { const d = String(v).replace(/[^0-9]/g, '').slice(0, 3); return d === '' ? 0 : parseInt(d, 10); }
+  wedAllow() { return [138, 5, 2, 1, 0][this.state.wedStep]; }
+  setWedQty(v) {
+    const a = this.wedAllow(), step = this.state.wedStep;
+    if (step >= 1 && v > a) { clearTimeout(this.wedNoteT); this.setState({ wedQty: a, wedNote: true, liveMsg: 'Trimmed to the current allowance of ' + a + '.' }); this.wedNoteT = setTimeout(() => this.setState({ wedNote: false }), 2000); }
+    else this.setState({ wedQty: Math.min(v, 138) });
+  }
+  fmtN(n) { return n.toLocaleString('en-US'); }
+  fmtC(n, prem) { return n === 0 ? '—' : n + ' × $' + (prem / 100).toFixed(2) + ' = $' + this.fmtN(n * prem) + ' premium at risk'; }
+  fmt(sec) { sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec / 60) + ':' + String(Math.floor(sec % 60)).padStart(2, '0'); }
+  bare() { try { return /[?&]bare/.test(location.search); } catch (e) { return false; } }
+
+  railDown(e) {
+    e.preventDefault();
+    if (this.state.sent || this._mv) return;
+    const sx = e.clientX;
+    this.setState({ dragging: true });
+    this._mv = (ev) => this.setState({ dragX: Math.max(0, Math.min(TRAVEL, ev.clientX - sx)) });
+    this._up = () => { this.unbind();
+      if (this.state.dragX > THRESH) { this.setState({ dragX: TRAVEL, dragging: false }); setTimeout(() => this.complete(), 170); }
+      else this.setState({ dragX: 0, dragging: false }); };
+    window.addEventListener('pointermove', this._mv);
+    window.addEventListener('pointerup', this._up);
+  }
+  railKey(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!this.state.sent) this.complete(); } }
+  holdDown(e) {
+    e.preventDefault();
+    if (this._mv) return;
+    this.setState({ holding: true, holdProg: 0 });
+    this._mv = () => {};
+    this._up = () => { this.unbind(); if (this.state.monPhase === 'stepped') this.setState({ holding: false, holdProg: 0, liveMsg: 'Hold released early. Keep holding, or press Enter, to start the cooldown.' }); };
+    window.addEventListener('pointermove', this._mv);
+    window.addEventListener('pointerup', this._up);
+  }
+  holdKey(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (this.state.monPhase === 'stepped') this.startCooldown(); } }
+  sheetKey(e) {
+    if (e.key === 'Escape') { this.closeSheet(); return; }
+    if (e.key === 'Tab' && this._sheetEl) {
+      const f = this._sheetEl.querySelectorAll('button');
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  openSheet(which, e) { this._trig = e && e.currentTarget; this.setState({ sheetFor: which, reason: null }); setTimeout(() => { if (this._sheetEl) { const b = this._sheetEl.querySelector('[role=radio]'); if (b) b.focus(); } }, 60); }
+  closeSheet() { this.setState({ sheetFor: null }); if (this._trig) { try { this._trig.focus(); } catch (e) {} this._trig = null; } }
+  sheetGo() {
+    const s = this.state; if (s.reason == null) { this.setState({ liveMsg: 'Pick a reason first — it is recorded with the trade.' }); return; }
+    if (s.sheetFor === 'mon') this.setState({ sheetFor: null, monPhase: 'overridden', dragX: 0, liveMsg: 'Override recorded. You are back at order review — swipe or press Enter to send.' });
+    else this.setState({ sheetFor: null, tuePhase: 'overridden', tueQty: s.tueOrig ?? s.tueQty, dragX: 0, liveMsg: 'Override recorded. You are back at order review — swipe or press Enter to send.' });
+  }
+  showSent(sent) { this.setState({ sent, dragX: 0 }); setTimeout(() => { if (this._sentEl) this._sentEl.focus(); }, 80); }
+
+  complete() {
+    const s = this.state, cap = this.cap(), R = ['This setup was planned before the losses', 'This rule needs review', 'Continue despite my rule'];
+    if (s.scenario === 'mon') {
+      if (s.monPhase === 'live') { if (s.monQty === 0) { this.setState({ dragX: 0 }); return; }
+        this.setState({ monPhase: 'stepped', dragX: 0, monNote: null, liveMsg: (s.monQty > cap ? 'Two of your rules stepped in.' : 'Your cooldown stepped in.') + ' Nothing was sent. Choose: reduce, start the cooldown, or override.' }); }
+      else if (s.monPhase === 'review') { const q = Math.min(s.monQty, cap);
+        this.addEvent({ day: 'MON', time: '10:02', rule: 'LOSS COOLDOWN', what: 'loss cooldown · waited 9:00 · reviewed & sent' + (s.monQty > cap ? ' at your cap' : ''), size: (s.monQty > cap ? s.monQty + '→' : '') + q + '× 602P', result: 'sent @ $1.36', out: '✓ sent', kind: 'held' });
+        this.showSent({ t: 'Bought ' + q + '× SPY 602P', p: '@ $1.36 · $' + this.fmtN(q * 136) + ' premium · 10:03', g: '◇ waited 9:00 · reviewed the refreshed quote · you confirmed the send' }); }
+      else if (s.monPhase === 'overridden') { if (s.monQty === 0) { this.setState({ dragX: 0 }); return; }
+        this.addEvent({ day: 'MON', time: '9:54', rule: s.monQty > cap ? 'LOSS COOLDOWN + SIZE CAP' : 'LOSS COOLDOWN', what: 'override · continued to order review · “' + ['planned before the losses', 'rule flagged for review', 'continued despite my rule'][s.reason] + '”', size: s.monQty + '× 602P', result: 'sent @ $1.42 · outcome pending', out: '◇ sent · override', kind: 'over', pending: true, tone: 'warn', reason: R[s.reason] });
+        this.showSent({ t: 'Bought ' + s.monQty + '× SPY 602P', p: '@ $1.42 · $' + this.fmtN(s.monQty * 142) + ' premium · 9:54', g: '◇ override + reason recorded — it reads as context, not a confession' }); }
+    }
+    else if (s.scenario === 'tue') {
+      if (s.tuePhase === 'live') { if (s.tueQty === 0) { this.setState({ dragX: 0 }); return; }
+        if (s.tueQty > cap) this.setState({ tuePhase: 'changed', tueOrig: s.tueQty, dragX: 0, liveMsg: 'Size rule stepped in. Order changed before sending: revised to ' + cap + '. Confirm, cancel, or override.' });
+        else this.showSent({ t: 'Bought ' + s.tueQty + '× SPY 602P', p: '@ $1.42 · $' + this.fmtN(s.tueQty * 142) + ' premium · 10:18', g: '◇ within your cap — no rule fired, nothing recorded' }); }
+      else if (s.tuePhase === 'changed') {
+        this.addEvent({ day: 'TUE', time: '10:18', rule: 'SIZE CAP', what: 'size cap · order changed before sending · you confirmed', size: s.tueOrig + '→' + cap + '× 602P', result: 'sent ' + cap, out: '✓ sent', kind: 'held' });
+        this.showSent({ t: 'Bought ' + cap + '× SPY 602P', p: '@ $1.42 · $' + this.fmtN(cap * 142) + ' premium · 10:18', g: '◇ changed from ' + s.tueOrig + ' before sending · you confirmed the revised size' }); }
+      else { if (s.tueQty === 0) { this.setState({ dragX: 0 }); return; }
+        this.addEvent({ day: 'TUE', time: '10:19', rule: 'SIZE CAP', what: 'override · continued past the cap · “' + ['planned before the losses', 'rule flagged for review', 'continued despite my rule'][s.reason] + '”', size: s.tueQty + '× 602P', result: 'sent @ $1.42 · outcome pending', out: '◇ sent · override', kind: 'over', pending: true, tone: 'warn', reason: R[s.reason] });
+        this.showSent({ t: 'Bought ' + s.tueQty + '× SPY 602P', p: '@ $1.42 · $' + this.fmtN(s.tueQty * 142) + ' premium · 10:19', g: '◇ override + reason recorded — on your record as context' }); }
+    }
+    else if (s.scenario === 'wed') {
+      if (s.wedQty === 0) { this.setState({ dragX: 0 }); return; }
+      if (s.wedStep >= 1) this.addEvent({ day: 'WED', time: ['', '15:04', '15:34', '15:52', ''][s.wedStep] || '15:04', rule: 'WIND-DOWN', what: 'wind-down · sent within the allowance', size: s.wedQty + '× 604C', result: 'sent @ $0.88', out: '✓ sent', kind: 'held' });
+      this.showSent({ t: 'Bought ' + s.wedQty + '× SPY 604C', p: '@ $0.88 · $' + this.fmtN(s.wedQty * 88) + ' premium', g: s.wedStep === 0 ? '◇ before 3:00 — nothing guards this' : '◇ within your wind-down allowance · flat by 3:55' });
+    }
+    else if (s.scenario === 'thu') {
+      if (s.thuPhase === 'ready') this.setState({ thuPhase: 'queued', thuQueue: 120, thuNote: null, dragX: 0, liveMsg: 'Pacing rule stepped in. Order queued for two minutes — you can edit, leave the queue, or cancel. Nothing sends by itself.' });
+      else if (s.thuPhase === 'review') { if (s.thuQty === 0) { this.setState({ dragX: 0 }); return; }
+        this.addEvent({ day: 'THU', time: '10:44', rule: 'PACING', what: 'pacing · waited 2:00 · reviewed & sent at refreshed quote', size: s.thuQty + '× 602C', result: 'sent @ $1.19', out: '✓ sent', kind: 'held' });
+        this.showSent({ t: 'Bought ' + s.thuQty + '× SPY 602C', p: '@ $1.19 · $' + this.fmtN(s.thuQty * 119) + ' premium · 10:44', g: '◇ paced 2:00 · you re-confirmed at the refreshed quote' }); }
+    }
+  }
+
+  renderVals() {
+    const s = this.state, sc = s.scenario, sh = s.sh || this.sh(), cap = sh.cap;
+    const TABS = [['mon', 'REVENGE TRADE'], ['tue', 'OVERSIZED ORDER'], ['wed', 'LATE-DAY WIND-DOWN'], ['thu', 'RAPID-FIRE ENTRIES']];
+    const tabs = TABS.map(([k, label]) => ({ label, pressed: String(k === sc), onClick: () => this.resetScenario(k),
+      border: k === sc ? '1px solid #212528' : '1px solid #A9B4BC', bg: k === sc ? '#212528' : 'transparent', color: k === sc ? '#F2F5F7' : '#4E5B65' }));
+    const INTROS = {
+      mon: 'Three losing 0DTE entries this morning; the next order is revenge-sized. Size it and swipe — your rules step in at send with three ways forward: reduce, cooldown, or override.',
+      tue: 'A red day. Send ' + cap + ' or fewer and nothing happens. Ask for more and the order is changed before sending — confirm the revised size, cancel, or override with a reason.',
+      wed: 'A green afternoon. From 3:00 your allowance steps down, flat by 3:55. Use ADVANCE THE CLOCK below to move through it.',
+      thu: 'Five entries in six minutes. The next order queues for two minutes — edit it, leave the queue, or cancel; when time is up you re-confirm at a fresh quote.' };
+    const pendingNote = sh.capPending != null ? ' (goes to ' + sh.capPending + ' tomorrow 9:30)' : '';
+    const monOverCap = s.monQty > cap;
+    const REASONS = ['This setup was planned before the losses', 'This rule needs review', 'Continue despite my rule'];
+    const reasonShort = ['planned before the losses', 'rule flagged for review', 'continued despite my rule'];
+    const sheetReasons = REASONS.map((label, i) => { const on = s.reason === i;
+      return { label, checked: String(on), ti: on ? 0 : (s.reason == null && i === 0 ? 0 : -1), onClick: () => this.setState({ reason: i }),
+        border: on ? '1px solid #E6C36A' : '1px solid #2A2E34', bg: on ? 'rgba(230,195,106,.07)' : 'transparent',
+        color: on ? '#E6C36A' : '#C9D1D8', dot: on ? '5px solid #E6C36A' : '1px solid #98A1AB' }; });
+    const wedAllow = this.wedAllow();
+    const wedClocks = ['14:58', '15:04', '15:34', '15:52', '15:55'];
+    const wedToCloseArr = ['62 min to expiry', '56 min to expiry', '26 min to expiry', '8 min to expiry', '5 min to expiry'];
+    const wedShares = ['CONTRACTS', 'CONTRACTS — 3:04 ALLOWANCE: 5', 'CONTRACTS — 3:34 ALLOWANCE: 2', 'CONTRACTS — 3:52 ALLOWANCE: 1', 'CONTRACTS — FLAT'];
+    const wedFilters = ['none', 'saturate(.62) sepia(.2) brightness(.86)', 'saturate(.5) sepia(.28) brightness(.78)', 'saturate(.42) sepia(.32) brightness(.72)', 'saturate(.34) sepia(.36) brightness(.65)'];
+    const HINTS = {
+      mon: [['1', 'Type any contract count (12 is staged) and swipe — or Tab to the rail and press Enter.'], ['2', 'Your rules step in at send; nothing is sent. Three paths: reduce to your cap, hold (or press Enter) to start the 9-minute cooldown, or override with a reason.'], ['3', 'After the cooldown you review a refreshed quote and send or cancel — an old order never fires by itself.'], ['4', 'Cancel is always available. Every path lands in the Companion Record.']],
+      tue: [['1', 'Send ' + cap + ' or fewer — the guard is silent inside your own rules.'], ['2', 'Type 12 (or MAX) and swipe: the order is changed before sending, showing original vs revised risk.'], ['3', 'Confirm the revised size with a fresh swipe, cancel, or override with a reason.'], ['4', 'Tighten the cap in the Companion and this scenario enforces the new number immediately.']],
+      wed: [['1', 'Before 3:00 the ticket is unguarded — type anything.'], ['2', 'ADVANCE THE CLOCK (above): the room dims, the allowance steps down, typing above it trims.'], ['3', 'Swipe to buy within the allowance.'], ['4', 'At 3:55 the rail goes flat — five minutes before expiry, by your rule.']],
+      thu: [['1', 'Swipe to buy — the order queues instead of sending; the pacing card explains why.'], ['2', 'While queued: edit the size, leave the queue, or cancel. The timer never fires the order.'], ['3', 'When it ends you get READY TO REVIEW — a refreshed quote and a fresh swipe to send.'], ['4', 'A price warning shows if the quote moved while you waited.']] };
+    const monFill = Math.round(((540 - s.monRemaining) / 540) * 100);
+    const qtyStr = (n) => n === 0 ? '' : String(n);
+    const railAriaFor = () => {
+      if (sc === 'mon') return s.monPhase === 'review' ? 'Send ' + Math.min(s.monQty, cap) + ' contracts at the refreshed quote. Swipe right or press Enter.' : 'Send order: buy ' + s.monQty + ' contracts. Swipe right or press Enter. Your rules check it at send.';
+      if (sc === 'tue') return s.tuePhase === 'changed' ? 'Send the revised size of ' + cap + ' contracts. Swipe right or press Enter.' : 'Send order: buy ' + s.tueQty + ' contracts. Swipe right or press Enter.';
+      if (sc === 'wed') return 'Send order: buy ' + s.wedQty + ' contracts. Swipe right or press Enter.';
+      return s.thuPhase === 'review' ? 'Send ' + s.thuQty + ' contracts at the refreshed quote. Swipe right or press Enter.' : 'Send order: buy 3 contracts. Swipe right or press Enter.'; };
+    return {
+      tabs, scenarioIntro: INTROS[sc], isMon: sc === 'mon', isTue: sc === 'tue', isWed: sc === 'wed', isThu: sc === 'thu',
+      statusClock: sc === 'wed' ? wedClocks[s.wedStep] : { mon: '9:53', tue: '10:18', thu: '10:42' }[sc],
+      chartAlt: { mon: 'SPY intraday chart, drifting lower through the morning, last 602.15', tue: 'SPY intraday chart, grinding lower, last 602.05', wed: 'SPY intraday chart, rising through the afternoon, last 603.40', thu: 'SPY intraday chart, choppy and falling, last 601.88' }[sc],
+      phoneFilter: sc === 'wed' ? wedFilters[s.wedStep] : 'none',
+      dragX: s.dragX, knobTransition: s.dragging ? 'none' : 'transform .28s cubic-bezier(.2,.8,.3,1)',
+      railLabelOpacity: Math.max(0, 1 - s.dragX / 150),
+      railDown: (e) => this.railDown(e), railKey: (e) => this.railKey(e), railAria: railAriaFor(),
+      holdDown: (e) => this.holdDown(e), holdKey: (e) => this.holdKey(e),
+      holdPct: Math.round(s.holdProg * 100) + '%',
+      monHoldLabel: s.holding ? 'KEEP HOLDING…' : 'HOLD TO START 9-MINUTE COOLDOWN',
+      monLive: sc === 'mon' && s.monPhase === 'live', monStepped: sc === 'mon' && s.monPhase === 'stepped',
+      monCooling: sc === 'mon' && s.monPhase === 'cooling', monReview: sc === 'mon' && s.monPhase === 'review',
+      monOverridden: sc === 'mon' && s.monPhase === 'overridden',
+      monQtyStr: qtyStr(s.monQty), monCost: this.fmtC(s.monQty, 142),
+      monQtyChange: (e) => this.setState({ monQty: Math.min(this.parseQty(e.target.value), 86) }),
+      monMinus: () => this.setState({ monQty: Math.max(0, s.monQty - 1) }),
+      monPlus: () => this.setState({ monQty: Math.min(86, s.monQty + 1) }),
+      monMaxFill: () => this.setState({ monQty: 86 }),
+      monLiveRailLabel: s.monQty === 0 ? 'Enter a quantity' : 'Swipe to buy ' + s.monQty + (s.monQty === 1 ? ' contract' : ' contracts'),
+      monSteppedTitle: (monOverCap ? '2 OF YOUR RULES STEPPED IN' : 'YOUR COOLDOWN STEPPED IN') + ' — NOTHING SENT',
+      monShowSizeLine: monOverCap, monSizeLine: 'you asked for ' + s.monQty + ' · your cap today is ' + cap + pendingNote,
+      monReducedOn: s.monReduced && !monOverCap, monReducedNote: 'size settled — reduced to your cap of ' + cap + ' · the cooldown still applies',
+      monShowReduce: monOverCap, monReduceLabel: 'REDUCE TO ' + cap + ' CONTRACTS',
+      monReduce: () => this.setState({ monQty: cap, monReduced: true, liveMsg: 'Order reduced to your cap of ' + cap + '. The cooldown still applies.' }),
+      monCancel: () => { this.addEvent({ day: 'MON', time: '9:55', rule: 'LOSS COOLDOWN', what: 'stepped in · you cancelled the order', size: s.monQty + '× 602P', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+        this.setState({ monPhase: 'live', monReduced: false, dragX: 0, monNote: '◇ order cancelled 9:55 · nothing sent · trading unaffected · on your record', liveMsg: 'Order cancelled. Nothing was sent.' }); },
+      monCancelCooldown: () => { this.addEvent({ day: 'MON', time: '9:56', rule: 'LOSS COOLDOWN', what: 'cooldown cancelled with the order', size: s.monQty + '× 602P', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+        this.setState({ monPhase: 'live', monRemaining: 540, monReduced: false, dragX: 0, monNote: '◇ cooldown cancelled 9:56 · nothing sent · trading unaffected · on your record', liveMsg: 'Cooldown cancelled. Nothing was sent.' }); },
+      monNoteOn: !!s.monNote, monNote: s.monNote,
+      monClock: this.fmt(s.monRemaining), monCoolPct: monFill + '%',
+      monReviewTrimOn: s.monQty > cap, monReviewTrimNote: 'size reduced from ' + s.monQty + ' to your cap of ' + cap + pendingNote,
+      monReviewCost: this.fmtC(Math.min(s.monQty, cap), 136),
+      monReviewRail: 'Swipe to send ' + Math.min(s.monQty, cap) + ' at $1.36',
+      monOverrideRecord: monOverCap ? 'cooldown + size cap' : 'cooldown', monReasonShort: s.reason == null ? '—' : reasonShort[s.reason],
+      openSheetMon: (e) => this.openSheet('mon', e), openSheetTue: (e) => this.openSheet('tue', e),
+      closeSheet: () => this.closeSheet(), sheetOn: !!s.sheetFor,
+      sheetSub: s.sheetFor === 'tue' ? 'You’re continuing past your size cap.' : (monOverCap ? 'You’re continuing past your cooldown and size cap.' : 'You’re continuing past your cooldown.'),
+      sheetReasons, sheetKey: (e) => this.sheetKey(e), sheetRef: (el) => { this._sheetEl = el; },
+      sheetRgRef: (el) => { this._rgEl = el; },
+      sheetRgKey: (e) => { let d = 0; if (e.key === 'ArrowDown' || e.key === 'ArrowRight') d = 1; else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') d = -1; else return; e.preventDefault(); const cur = s.reason == null ? -1 : s.reason; const i = ((cur < 0 ? 0 : cur) + d + 3) % 3; this.setState({ reason: i }); setTimeout(() => { if (this._rgEl) { const r = this._rgEl.querySelectorAll('[role=radio]')[i]; if (r) r.focus(); } }, 30); },
+      sheetContinue: () => this.sheetGo(), sheetContinueDisabled: String(s.reason == null), continueOpacity: s.reason == null ? '.45' : '1',
+      tueLive: sc === 'tue' && s.tuePhase === 'live', tueChanged: sc === 'tue' && s.tuePhase === 'changed', tueOverridden: sc === 'tue' && s.tuePhase === 'overridden',
+      tueQtyStr: qtyStr(s.tueQty), tueCost: this.fmtC(s.tueQty, 142),
+      tueQtyChange: (e) => this.setState({ tueQty: Math.min(this.parseQty(e.target.value), 86) }),
+      tueMinus: () => this.setState({ tueQty: Math.max(0, s.tueQty - 1) }),
+      tuePlus: () => this.setState({ tueQty: Math.min(86, s.tueQty + 1) }),
+      tueMaxFill: () => this.setState({ tueQty: 86 }),
+      tueOrigLine: (s.tueOrig || 0) + ' — $' + this.fmtN((s.tueOrig || 0) * 142) + ' premium at risk',
+      tueRevLine: cap + ' — $' + this.fmtN(cap * 142) + ' at risk', tuePendingNote: pendingNote,
+      tueRailLabel: s.tuePhase === 'changed' ? 'Swipe to send ' + cap + ' contracts' : (s.tueQty === 0 ? 'Enter a quantity' : 'Swipe to buy ' + s.tueQty + (s.tueQty === 1 ? ' contract' : ' contracts')),
+      tueCancel: () => { this.addEvent({ day: 'TUE', time: '10:18', rule: 'SIZE CAP', what: 'stepped in · you cancelled the order', size: (s.tueOrig || s.tueQty) + '× 602P', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+        this.setState({ tuePhase: 'live', dragX: 0, tueNote: '◇ order cancelled 10:18 · nothing sent · trading unaffected · on your record', liveMsg: 'Order cancelled. Nothing was sent.' }); },
+      tueNoteOn: !!s.tueNote, tueNote: s.tueNote,
+      wedQtyStr: qtyStr(s.wedQty), wedCost: s.wedStep === 4 ? 'flat · nothing at risk' : this.fmtC(s.wedQty, 88),
+      wedQtyChange: (e) => this.setWedQty(this.parseQty(e.target.value)),
+      wedMinus: () => this.setState({ wedQty: Math.max(0, s.wedQty - 1) }),
+      wedPlus: () => this.setWedQty(s.wedQty + 1),
+      wedMaxFill: () => this.setWedQty(138),
+      wedMaxBorder: s.wedStep >= 1 ? '#3A3B33' : '#23272D', wedMaxColor: s.wedStep >= 1 ? '#98A1AB' : '#C6CDD4',
+      wedMaxSubColor: s.wedStep >= 1 ? '#A6957A' : '#98A1AB', wedMaxSub: s.wedStep >= 1 ? 'ALLOW ' + wedAllow : '138',
+      wedNoteOn: s.wedNote, wedClockShort: wedClocks[s.wedStep].replace('15:', '3:'),
+      wedToClose: wedToCloseArr[s.wedStep], wedSharesLabel: wedShares[s.wedStep],
+      wedArmed: sc === 'wed' && s.wedStep >= 1, wedOpen: sc === 'wed' && s.wedStep < 4, wedFlat: sc === 'wed' && s.wedStep === 4,
+      wedRailLabel: s.wedQty === 0 ? 'Enter a quantity' : 'Swipe to buy ' + s.wedQty + (s.wedQty === 1 ? ' contract' : ' contracts'),
+      advanceClock: () => { const st = this.state; if (st.wedStep < 4) { const ns = st.wedStep + 1, a = [138, 5, 2, 1, 0][ns]; this.setState({ wedStep: ns, wedQty: Math.min(st.wedQty, a), dragX: 0, liveMsg: 'Clock advanced to ' + wedClocks[ns] + '. Allowance is now ' + a + '.' }); } },
+      wedAdvLabel: s.wedStep === 0 ? 'ADVANCE PAST 3:00 ⟶' : s.wedStep === 4 ? 'FLAT · 3:55' : 'ADVANCE THE CLOCK ⟶',
+      wedAdvOpacity: s.wedStep === 4 ? '.45' : '1', wedAdvDisabled: String(s.wedStep === 4),
+      thuReady: sc === 'thu' && s.thuPhase === 'ready', thuQueued: sc === 'thu' && s.thuPhase === 'queued',
+      thuReview: sc === 'thu' && s.thuPhase === 'review', thuCancelled: sc === 'thu' && s.thuPhase === 'cancelled',
+      thuQtyStr: qtyStr(s.thuQty), thuCost: this.fmtC(s.thuQty, 115),
+      thuQtyChange: (e) => this.setState({ thuQty: Math.max(1, Math.min(this.parseQty(e.target.value), 86)) }),
+      thuMinus: () => this.setState({ thuQty: Math.max(1, s.thuQty - 1) }),
+      thuPlus: () => this.setState({ thuQty: Math.min(86, s.thuQty + 1) }),
+      thuEditToggle: () => this.setState({ thuEditing: !s.thuEditing, liveMsg: s.thuEditing ? 'Done editing. The queue keeps its place.' : 'Editing the queued order. The queue keeps its place.' }),
+      thuEditLabel: s.thuEditing ? 'DONE EDITING' : 'EDIT ORDER', thuEditingOn: s.thuEditing,
+      thuLeave: () => { this.addEvent({ day: 'THU', time: '10:43', rule: 'PACING', what: 'left the queue · order back in your hands', size: s.thuQty + '× 602C', result: 'nothing sent', out: '◇ left queue', kind: 'edit', tone: 'dim' });
+        this.setState({ thuPhase: 'ready', thuQueue: 120, thuEditing: false, dragX: 0, thuNote: '◇ left the queue 10:43 · nothing sent · swiping again re-queues · on your record', liveMsg: 'Left the queue. Nothing was sent.' }); },
+      thuCancel: () => { this.addEvent({ day: 'THU', time: '10:43', rule: 'PACING', what: 'queued order cancelled', size: s.thuQty + '× 602C', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+        this.setState({ thuPhase: 'cancelled', thuEditing: false, dragX: 0, liveMsg: 'Order cancelled. Queue cleared; nothing was sent.' }); },
+      thuFillPct: Math.round(((120 - s.thuQueue) / 120) * 100) + '%', thuClock: this.fmt(s.thuQueue),
+      thuNoteOn: !!s.thuNote, thuNote: s.thuNote,
+      thuReviewCost: this.fmtC(s.thuQty, 119), thuReviewRail: 'Swipe to send ' + s.thuQty + ' at $1.19',
+      sentOn: !!s.sent, sentT: s.sent ? s.sent.t : '', sentP: s.sent ? s.sent.p : '', sentG: s.sent ? s.sent.g : '',
+      sentRef: (el) => { this._sentEl = el; },
+      resetCurrent: () => this.resetScenario(this.state.scenario),
+      resetDemo: () => this.resetDemo(), resetVisible: !this.bare(),
+      toggleTenet: () => this.setState({ tenetDown: !s.tenetDown, liveMsg: s.tenetDown ? 'Tenet link restored. Pending events will sync.' : 'Simulating a Tenet outage. Rules still run on this device; new events sync later.' }),
+      tenetToggleLabel: s.tenetDown ? 'TENET OUTAGE: ON — TAP TO RESTORE' : 'SIMULATE TENET OUTAGE',
+      tenetDownStr: String(s.tenetDown),
+      tenetLine: s.tenetDown ? '◆ tenet unreachable — your rules still run on this device · events sync when it returns · trading unaffected'
+        : (sh.fridayRule ? '◆ tenet · 4 rules on · cap ' + cap + (sh.capPending != null ? ' (→' + sh.capPending + ' tmrw)' : '') + ' · friday guard starts mon' : '◆ tenet · 4 rules on · cap ' + cap + (sh.capPending != null ? ' (→' + sh.capPending + ' tomorrow 9:30)' : '')),
+      liveMsg: s.liveMsg,
+      hints: HINTS[sc].map(([n, t]) => ({ n, t })),
+      showHints: this.bare() ? false : (this.props.showHints ?? true),
+      showChrome: this.bare() ? false : (this.props.showChrome ?? true),
+    };
+  }
+}
+</script>
+</body>
+</html>

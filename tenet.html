@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tenet &middot; Case study &middot; Lana Nguyen</title>
+  <meta name="description" content="Case study: Tenet, an order-time behavioral intervention layer for active traders — self-authored guardrails that restore one deliberate moment before an impulsive trade, prototyped inside two fictional brokers." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Tenet — self-authored guardrails at the moment of send" />
+  <meta property="og:description" content="Rules written after the close become reversible friction at order-send — friction, never a block — inside two fictional brokers backed by one shared Record. Functional prototype, 2026." />
+  <meta property="og:image" content="images/tenet/card.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="figures-fonts.css" />
+  <link rel="stylesheet" href="figures.css" />
+</head>
+<body>
+  <a class="skip-link" href="#case">Skip to case study</a>
+
+  <div class="desk">
+    <div class="page" id="project">
+
+      <header class="bar">
+        <a class="wordmark" href="index.html" aria-label="Lana Nguyen, home">Lana Nguyen<span class="dot">.</span></a>
+        <nav class="bar-links" aria-label="Case study">
+          <a class="active" href="index.html#home-work">Work</a>
+          <a href="sketchbook.html">Sketchbook</a>
+          <a href="about.html">About</a>
+          <a href="index.html#home-contact">Contact</a>
+        </nav>
+        <a class="bar-loc" href="mailto:lanchib.nguyen@gmail.com">OPEN TO NEW ROLES &rarr;</a>
+      </header>
+      <div class="bar-hairline"></div>
+
+      <!-- hero -->
+      <section class="proj-hero" id="case">
+        <div class="bloom"></div>
+        <a class="backlink" href="index.html#home-work">&larr; WORK / &#8470; 01 &middot; PROTOTYPE &middot; BEHAVIORAL SYSTEM</a>
+        <div class="proj-hero-grid">
+          <div class="rv">
+            <h1>Tenet &mdash; one deliberate <em>moment</em></h1>
+            <p class="proj-lede">Guardrails a trader writes for herself: rules authored after the close become reversible friction at order-send, inside the fictional brokers <strong>Dart</strong> (mobile, 0DTE options) and <strong>Meridian</strong> (desktop, equities), backed by one shared <strong>Record</strong>.</p>
+          </div>
+          <div class="meta-rail rv" style="--d:120ms">
+            <div><span class="k">ROLE</span><span class="v">Product design, interaction design, UX writing</span></div>
+            <div><span class="k">SCOPE</span><span class="v">0&rarr;1 behavioral intervention system</span></div>
+            <div><span class="k">STATUS</span><span class="v">Functional interactive prototype &middot; not shipped</span></div>
+            <div><span class="k">TEAM &middot; YEAR</span><span class="v">Independent &middot; 2026</span></div>
+            <div><span class="k">BUILD</span><span class="v">HTML/CSS/JavaScript prototype &middot; AI&#8209;assisted with Claude Design and Fable</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TL;DR -->
+      <div class="tldr rv">
+        <div class="cell"><span class="k">The problem</span><span class="v">Retail apps can remove reflection through <strong>stimulation</strong>: streaks, confetti, one-tap re-entry. Workstations remove it through <strong>efficiency</strong>: hotkeys, dense ladders, sub-second tickets. After a losing sequence both arrive at an order sent before the trader has decided.</span></div>
+        <div class="cell"><span class="k">The boundary</span><span class="v">Friction, never a block. Tenet never sends an order automatically and never locks a trader out; waiting, reducing, editing, overriding, and canceling stay available. Overrides are recorded as <strong>context, not moral failure</strong>.</span></div>
+        <div class="cell"><span class="k">Status</span><span class="v"><span class="status-flag">Functional prototype &middot; not shipped</span> The rules, intervention state machines, cross-surface sync, and Record are fully functional. Brokers, quotes, fills, and history are simulated; no user study has been completed.</span></div>
+      </div>
+
+      <p class="method-note rv">HOW TO READ THIS PAGE &mdash; <span class="lbl real">FUNCTIONAL</span> works in the linked prototypes &middot; <span class="lbl sim">SIMULATED</span> illustrative prototype data &middot; <span class="lbl plan">PROPOSED</span> a plan, never a result. <strong>Dart and Meridian are fictional brokers;</strong> quotes, fills, and trading history are simulated and labeled as such in the interface. The broker SDK and import/analysis pipeline are future work &mdash; described, not represented as complete. Every image below is captured directly from the working prototype; the prototypes themselves are linked from each section.</p>
+
+      <!-- cover: source portfolio card art -->
+      <div class="cover rv">
+        <div class="lit"><div class="lit-in">
+          <img class="shot-img" src="images/tenet/card.webp" alt="Tenet portfolio card: the wordmark beside three prototype surfaces — the Companion's weekly estimates panel, the Dart phone with 'Your rule stepped in — nothing sent' and three ways forward, and the light Meridian Trader workstation with a loss-cooldown panel" width="1600" height="900" />
+        </div></div>
+      </div>
+
+      <!-- try the prototype -->
+      <section class="proj-sec" id="try" aria-label="Try the Tenet prototype">
+        <div class="rule"></div>
+        <div class="sechead"><span class="lead">TRY THE PROTOTYPE</span><span>REAL BUILD &middot; SIMULATED MARKET</span></div>
+        <div class="demo-stage rv">
+          <div class="demo-head">
+            <div class="demo-tabs" role="tablist" aria-label="Prototype surface">
+              <button class="demo-tab" role="tab" aria-selected="true" data-src="tenet-proto/host.html?bare" data-w="1600" data-h="1000" data-poster="images/tenet/stage-dart.webp" data-title="Dart mobile host prototype — trigger a rule at order-send">DART &middot; MOBILE</button>
+              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/desktop.html?bare" data-w="1600" data-h="1050" data-poster="images/tenet/stage-meridian.webp" data-title="Meridian desktop host prototype — hold a short through the cooldown">MERIDIAN &middot; DESKTOP</button>
+              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/companion.html?bare" data-w="1600" data-h="1200" data-poster="images/tenet/stage-companion.webp" data-title="Tenet Companion prototype — rules, patterns, and the Record">COMPANION</button>
+            </div>
+            <a class="demo-open" href="tenet-proto/host.html">OPEN FULL PROTOTYPE &#8599;</a>
+          </div>
+          <div class="demo-frame">
+            <div class="demo-poster"><img src="images/tenet/stage-dart.webp" alt="Poster: the Dart host prototype stage — scenario tabs, the dark Dart phone with a staged 12-contract order, and the try-this instructions" width="1600" height="1000" /></div>
+            <button class="demo-load">&#9654;&ensp;TRY THE LIVE PROTOTYPE</button>
+          </div>
+          <div class="demo-foot">
+            <span class="demo-note-txt">SANDBOXED EMBED &middot; SEND AN ORDER AND YOUR RULE STEPS IN: NOTHING SENDS, EVERY PATH REVERSIBLE &middot; SIMULATED DATA</span>
+            <button class="demo-reset">RESET DEMO VIEW</button>
+          </div>
+          <p class="demo-note">Fully interactive version ships with the deployed site (v2/tenet-proto/).</p>
+          <p class="demo-mobile-note">Small screen: the workstation demo needs room. Use OPEN FULL PROTOTYPE &#8599; above.</p>
+        </div>
+      </section>
+
+      <!-- quick numbers -->
+      <section class="proj-sec">
+        <div class="rule"></div>
+        <div class="sechead"><span class="lead">THE SHAPE OF THE PROJECT</span><span>HONEST NUMBERS ONLY</span></div>
+        <div class="chips" style="padding: 0 0 8px">
+          <div class="chip rv"><div class="in"><div class="n">3</div><div class="l">WORKING SURFACES &middot; TWO HOSTS + ONE COMPANION</div></div></div>
+          <div class="chip rv" style="--d:80ms"><div class="in"><div class="n">4</div><div class="l">STAGED SCENARIOS IN THE HOST DEMO, ALL INTERACTIVE</div></div></div>
+          <div class="chip rv" style="--d:160ms"><div class="in"><div class="n" data-static>0</div><div class="l">USER STUDIES COMPLETED &middot; FIRST STUDY PLANNED BELOW</div></div></div>
+        </div>
+      </section>
+
+      <!-- 01 problem -->
+      <section class="proj-sec" id="problem">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">01 &middot; THE<br>PROBLEM</h2>
+          <p class="statement">Two interfaces, one failure mode: the next order becomes automatic. A hypothesis, not a research finding. How might a trader's <em>own rule</em> interrupt the momentum without becoming a lock, a punishment, or a trading signal?</p>
+        </div>
+      </section>
+
+      <!-- 02 boundary -->
+      <section class="proj-sec" id="boundary">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">02 &middot; SCOPE &amp;<br>ETHICAL BOUNDARY</h2>
+          <div>
+            <p class="proj-p"><strong>What Tenet never does:</strong> send an order automatically, or lock a trader out.</p>
+            <ul class="feat-list">
+              <li><strong>What is simulated:</strong> Dart and Meridian are fictional; quotes, fills, and history are simulated and labeled. Broker integration and the import/analysis pipeline remain future work</li>
+              <li><strong>What Tenet is not:</strong> a broker, a trading journal, a signal generator, financial advice, or a promise of profitability. One narrow job: restore a single reflective moment at send</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 system model -->
+      <section class="proj-sec" id="system">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">03 &middot; SYSTEM<br>MODEL</h2>
+          <div>
+            <p class="proj-p">One loop, closed after the close: Companion &rarr; rules &rarr; host check at send &rarr; reversible intervention &rarr; result + reason &rarr; Record &rarr; reflection. The ethics live in three asymmetries.</p>
+            <div class="decisions">
+              <div class="decision"><div class="dt">Stricter &rarr; immediate.</div><div class="dd">Tightening syncs to both hosts right away; you can raise your bar mid-day.</div></div>
+              <div class="decision"><div class="dt">Looser &rarr; next open.</div><div class="dd">Loosening arms at the next open, so a rule can't be talked down in the moment it exists to interrupt.</div></div>
+              <div class="decision"><div class="dt">Failure &rarr; fail open.</div><div class="dd">If the connection drops, trading proceeds; the gap is recorded in plain view.</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 two hosts -->
+      <section class="proj-sec" id="hosts">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">04 &middot; ONE RULE SET,<br>TWO KINDS OF SPEED</h2>
+          <div>
+            <p class="proj-p">The central call was that Dart and Meridian shouldn't be responsive versions of one interface. The same rule arrives in each broker wearing that broker's own language.</p>
+            <div class="fig-duo phones" style="margin-top: 22px">
+              <figure class="figure">
+                <div class="fig-live shot-img" data-fig="tenet-host-ticket" role="img" aria-label="Dart, the fictional gamified mobile broker, at 9:53 with a 4-day streak badge and SPY 0DTE puts: a contracts stepper set to 12 of MAX 86, '12 × $1.42 = $1,704 premium at risk', and a lime 'Swipe to buy 12 contracts' rail with 'tenet · 4 rules on · cap 5' beneath" style="max-width:236px; border-radius:18px"></div>
+                <figcaption class="figcap"><span class="fk">Dart &middot; rendered live from the prototype</span>Stimulation-heavy by design. Tenet waits silently underneath: 4 rules on, cap 5.</figcaption>
+              </figure>
+              <figure class="figure fig-down">
+                <div class="fig-live shot-img" data-fig="tenet-host-intervention" role="img" aria-label="The same Dart screen after the swipe: '2 of your rules stepped in — nothing sent. Cooldown — 3 losing entries this morning, 9:41 / 9:46 / 9:52. Size — you asked for 12, your cap today is 5. Nothing was sent. Three ways forward:' with buttons Reduce to 5 contracts, Hold to start 9-minute cooldown, Override with a reason, and Cancel order — nothing sends" style="max-width:236px; border-radius:18px"></div>
+                <figcaption class="figcap"><span class="fk">The moment &middot; rendered live</span>Two rules step in, name their reasons in the trader's own terms, and hold. Nothing sent, every exit open.</figcaption>
+              </figure>
+            </div>
+            <p class="proj-p" style="margin-top:16px"><a class="doc-link" href="tenet-proto/host.html">Open the live Dart host prototype: four scenarios &rarr;</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- the cooldown -->
+      <section class="proj-sec" id="cooldown">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">THE COOLDOWN,<br>HELD HONESTLY</h2>
+          <div>
+            <p class="proj-p">The cooldown holds the order &mdash; <em>held, not queued to fire</em>. When it ends the trader reviews a refreshed quote and sends or cancels. Meridian holds a revenge-sized 1,000-share short the same way, every fill labeled <span class="lbl sim">SIMULATED FILL</span>.</p>
+            <div class="fig-duo phones" style="margin-top: 22px">
+              <figure class="figure">
+                <div class="fig-live shot-img" data-fig="tenet-host-cooldown" role="img" aria-label="Dart during the cooldown: 'Cooldown running — your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.' A progress rail reads COOLDOWN · 5:00 LEFT with 'Cancel cooldown and order' beneath" style="max-width:236px; border-radius:18px"></div>
+                <figcaption class="figcap"><span class="fk">Cooldown running &middot; rendered live</span>The copy does the ethical work: held, not queued; review, then decide; cancel always present.</figcaption>
+              </figure>
+              <figure class="figure fig-note">
+                <figcaption class="figcap" style="max-width:300px; margin:0"><span class="fk">Why a refreshed quote</span>Quotes move during a cooldown, so the approved order no longer exists when it ends. Queue-and-send and auto-cancel both take the decision away from the trader; I rejected both. The review shows the delta.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- meridian -->
+      <section class="proj-sec" id="meridian">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">MERIDIAN &mdash;<br>THE QUIET HOST</h2>
+          <div>
+            <p class="proj-p">Tenet answers Meridian in the workstation's own register: a quiet header chip (<em>4 rules &middot; 3 apply here</em>) and an Ink Blue panel at transmit. Chart, ladder, order context, and positions are never touched. A chart annotation marks it: <em>9:53 &mdash; your rule stepped in</em>.</p>
+            <figure class="figure" style="margin-top: 22px">
+              <div class="fig-live shot-img" data-fig="tenet-meridian-stepped" role="img" aria-label="Meridian Trader, the fictional light-themed desktop workstation: SPY chart falling with a dashed annotation '9:53 — your rule stepped in', Level 2 ladder live, three losing round trips totaling −$360, and an Ink Blue panel over the order ticket reading 'Loss cooldown stepped in — nothing sent. Your rule: after 3 losing trades before noon, the next order waits nine minutes… this order flips you short at 2× your largest size today. Size cap not triggered — 1,000 of 1,500 shares. Start 9-minute cooldown / Override with a reason'"></div>
+              <figcaption class="figcap"><span class="fk">Meridian &middot; rendered live from the prototype</span>The only colored object in a near-neutral room. Everything else keeps printing.</figcaption>
+            </figure>
+            <p class="proj-p" style="margin-top:16px"><a class="doc-link" href="tenet-proto/desktop.html">Open the live Meridian prototype &rarr;</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 three decisions -->
+      <section class="proj-sec" id="decisions">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">05 &middot; THREE KEY<br>DESIGN DECISIONS</h2>
+          <div>
+            <div class="decisions">
+              <div class="decision"><div class="dt">A &middot; &ldquo;Stepped in,&rdquo; not &ldquo;blocked.&rdquo;</div><div class="dd">Earlier explorations said &ldquo;blocked,&rdquo; which misdescribed a reversible system and shifted authorship from trader to tool. The final copy is <em>&ldquo;Your rule stepped in.&rdquo;</em> Softer language deters less; the point is only that the trader decides.</div></div>
+              <div class="decision"><div class="dt">B &middot; Nothing sends by itself.</div><div class="dd">A cooldown that ends by sending would make Tenet an execution actor. So it returns to review; reduce, wait, override, and cancel are parallel paths, none the default. The extra confirmation costs time in fast markets, the price of the pause.</div></div>
+              <div class="decision"><div class="dt">C &middot; Evidence without false certainty.</div><div class="dd">&ldquo;Tenet saved you $X&rdquo; is a causal claim the system cannot support. Counts of interventions and outcomes lead; financial figures are demoted: <strong>EST</strong> until settled, sample-size language, fee/slippage exclusions. Hedged evidence persuades less; I traded weaker marketing for stronger trust.</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 companion / final experience -->
+      <section class="proj-sec" id="companion">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">06 &middot; THE COMPANION &mdash;<br>RULES / PATTERNS / RECORD</h2>
+          <div>
+            <p class="proj-p">In the after-close app, &ldquo;What your rules did&rdquo; leads with counts: <em>7&times; stepped in &middot; 6&times; waited or trimmed &middot; 1&times; continued past</em>. Below them, estimated loss avoided <strong>$1,240 EST</strong> sits beside realized on overrides <strong>&minus;$310 ACTUAL</strong>. Neither is money earned; both are labeled.</p>
+            <div class="phone-grid" style="margin-top: 22px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))">
+              <figure><div class="fig-live" data-fig="tenet-companion-home" role="img" aria-label="Companion home at 16:12, market closed: 'What your rules did · Jul 27–31' labeled illustrative prototype data — 7× stepped in, 6× waited or trimmed, 1× continued past — a week list of cooldown, size-cap, wind-down and pacing events, a logged 17-minute feed outage, and the estimates block: estimated loss avoided $1,240 EST, realized on overrides −$310 ACTUAL, with the mark-to-close method note"></div><figcaption>Home &middot; counts lead, estimates carry their method and exclusions</figcaption></figure>
+              <figure><div class="fig-live" data-fig="tenet-companion-rules" role="img" aria-label="Companion Rules tab: the four authored rules with their enforceable parameters, each showing where it applies and its stricter-immediate / looser-at-next-open arming state"></div><figcaption>Rules &middot; enforceable parameters and their arming states</figcaption></figure>
+              <figure><div class="fig-live" data-fig="tenet-companion-record" role="img" aria-label="Companion Record tab: filters for waited, overrode, changes, outages and notes across Dart and Meridian; a 30-day summary 'overrode 3× · 1 paid off · net −$98 · settled · excl. fees'; and an immutable event list including 'feed lost 17 min — trading unaffected — outage' and 'continued past the cap — $310'. Footer: intervention events are preserved; add a note or report an error — the original entry stays"></div><figcaption>Record &middot; immutable, host-tagged, outages logged with the same weight</figcaption></figure>
+            </div>
+            <p class="proj-p" style="margin-top:16px"><a class="doc-link" href="tenet-proto/companion.html">Open the live Companion &rarr;</a>&ensp;&middot;&ensp;<a class="doc-link" href="tenet-proto/duo.html">Host + Companion, synchronized side by side &rarr;</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07 trust / failure / accessibility -->
+      <section class="proj-sec" id="trust">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">07 &middot; TRUST, FAILURE &amp;<br>ACCESSIBILITY</h2>
+          <div>
+            <p class="proj-p">Built to expect doubt:</p>
+            <ul class="feat-list">
+              <li><strong>Trust &amp; data.</strong> Tenet reads order tickets at send and fills after close, conceptually via an embedded broker SDK, never your screen or other accounts. In the proposed model, disconnecting stops rules from arming and deleting the account removes rules and Record</li>
+              <li><strong>Failure behavior.</strong> Failed sync surfaces an explicit retry. Connection loss fails open: trading proceeds and the gap shows in the Record (&ldquo;feed lost 17 min &middot; trading unaffected &middot; logged&rdquo;). Events are immutable; notes and error annotations attach alongside</li>
+              <li><strong>Accessibility, as implemented in the prototypes:</strong> every intervention path is keyboard-complete; option groups use real radio semantics with arrow keys; status changes are announced live; charts carry text alternatives; reduced motion is respected. No WCAG certification is claimed</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 iteration -->
+      <section class="proj-sec" id="iteration">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">08 &middot; ITERATION &mdash;<br>THREE HONEST CHANGES</h2>
+          <div>
+            <p class="proj-p">All three earlier states are superseded:</p>
+            <ul class="feat-list">
+              <li><strong>Everything, therefore nothing &rarr; one job.</strong> The first concept was a broad trading-journal product: import, session analysis, annotation, plus interventions. It narrowed to the intervention layer; the journal ambitions were deferred</li>
+              <li><strong>&ldquo;Blocked&rdquo; &rarr; a legible state machine.</strong> Early framing left unclear whether the order was stopped or the system could act alone. It became hold &rarr; choose (reduce / wait / override / cancel) &rarr; explicit re-confirmation. Nothing automatic</li>
+              <li><strong>Outcome-led evidence &rarr; behavior-led Record.</strong> A headline dollar figure implying Tenet made money became a synchronized Record computed live from prototype interactions: explicit estimates, settled-vs-EST, SIMULATED FILL labels throughout</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 limitations -->
+      <section class="proj-sec" id="limitations">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400">09 &middot; LIMITATIONS &amp;<br>VALIDATION PLAN</h2>
+          <div>
+            <p class="proj-p"><span class="lbl plan">PROPOSED</span>&ensp;What this work cannot claim yet:</p>
+            <ul class="feat-list">
+              <li>No moderated study yet; nothing here is validated with users</li>
+              <li>The broker SDK and import pipeline are conceptual; feasibility is argued, not proven</li>
+              <li>Market outcomes cannot validate behavioral effectiveness; a &ldquo;saved&rdquo; trade may have been a missed winner</li>
+              <li>Free-text override reasons and deeper evidence-to-fill linkage remain deferred</li>
+            </ul>
+            <p class="proj-p" style="margin-top:14px"><strong>Planned first study:</strong> moderated think-aloud sessions on the working prototypes with 6&ndash;8 active options/futures traders, including prop-evaluation users. It would test comprehension of why a rule fired, estimate versus actual, stricter-immediate versus looser-at-open, tone at the intervention moment, and whether the design could inadvertently encourage more trading. A sample this size supports comprehension and tone findings, not efficacy claims.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 reflection -->
+      <section class="results rv">
+        <div class="bloom"></div>
+        <span class="k">10 &middot; REFLECTION</span>
+        <div class="results-grid">
+          <p class="big">The strongest thing Tenet does is <em>remain reversible</em>. The intervention moment is the product: a pause that names its reason and leaves every exit open. The next step is moderated research and a feasibility conversation about the broker SDK.</p>
+          <div class="ledger">
+            <div><span>Friction, never a block</span><b>reduce &middot; wait &middot; override &middot; cancel</b></div>
+            <div><span>Failure mode</span><b>fails open &middot; visible in the Record</b></div>
+            <div><span>Evidence run</span><b>none yet &middot; 6&ndash;8-trader study planned</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- next project -->
+      <a class="next-proj" href="morsel.html">
+        <span><span class="k">NEXT PROJECT &mdash; &#8470; 02</span><span class="t">Morsel &mdash; trust and safety in photo-first food discovery</span></span>
+        <span class="arw">&rarr;</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="figures.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+name: Deploy portfolio to GitHub Pages
+
+# Deploys the site assembled by build-site.sh.
+# Nothing goes live until GitHub Pages is enabled in
+# Settings -> Pages -> Source: "GitHub Actions".
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build _site
+        run: bash build-site.sh
+        env:
+          # Set a repository variable SITE_URL (Settings -> Secrets and
+          # variables -> Actions -> Variables) once your domain is live,
+          # e.g. https://lananguyen.com — makes social previews absolute.
+          # falls back to the default Pages URL so link previews work before a custom domain exists
+          SITE_URL: ${{ vars.SITE_URL || 'https://lanchinguyen.github.io/portfolio' }}
+
+      # Creating the Pages site can't be done with the workflow token on a
+      # user repo — it needs one manual click: Settings -> Pages -> Source:
+      # "GitHub Actions". Until then, skip deployment cleanly instead of
+      # failing (no more red-X emails).
+      - name: Check whether GitHub Pages is enabled
+        id: pages-check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages")
+          echo "enabled=$([ "$code" = "200" ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          if [ "$code" != "200" ]; then
+            echo "::notice title=Pages not enabled yet::Enable it once in Settings -> Pages -> Source: GitHub Actions, then re-run this workflow (or push). Skipping deploy, not failing."
+          fi
+
+      - if: steps.pages-check.outputs.enabled == 'true'
+        uses: actions/configure-pages@v5
+
+      - if: steps.pages-check.outputs.enabled == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - if: steps.pages-check.outputs.enabled == 'true'
+        id: deployment
+        uses: actions/deploy-pages@v4
