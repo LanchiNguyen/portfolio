@@ -100,6 +100,45 @@ git checkout main && git merge preview && git push
 `preview` is optional. Delete the branch and the staging build simply stops
 being published; production is unaffected.
 
+## Editing pages in the browser
+
+Add `?edit` to any preview URL — `https://lananguyen.xyz/preview/tenet.html?edit`
+— and the page becomes editable in place. Click text and type. Images carry
+**ALT** and **PHOTO** badges: retype the alt text, or pick (or drag in) a
+replacement photo, which is resized to 2× its rendered width and encoded as
+webp. **Reorder** turns the homepage cards into drag handles.
+
+**Save** writes one commit to `preview`. The live site is untouched until you
+merge. There is no editor on the live site at all: `build-site.sh` ships
+`editor.js` only in the preview build.
+
+Saving needs a GitHub token — the **Token** button explains it. Create a
+fine-grained token at *Settings → Developer settings → Personal access tokens →
+Fine-grained*, restricted to this one repository, with **Contents: Read and
+write**. It is kept in that browser's local storage and used only to commit to
+`preview`. Anyone can open `?edit` and type; without a token, nothing can be
+saved, and the preview site is `noindex` and disallowed in `robots.txt`.
+
+What the editor deliberately will not touch: layout, spacing, colors, the
+generated case-study figures, and the prototypes. Those stay code. Evidence
+labels (`MEASURED`, `SIMULATED`, …) are frozen as single units inside editable
+text, and deleting one prompts a confirmation before it can be committed.
+
+### How an edit finds its way back to the source
+
+Every editable element carries `data-ed="N"`, added to the source by
+`stamp-editable.mjs`. The editor fetches the file's source, finds that
+attribute, and rewrites only the bytes inside that one element — the file is
+never re-serialised, so a one-word change is a one-line diff. `build-site.sh`
+strips `data-ed` from the production build.
+
+Re-run the stamper after adding or removing content:
+
+```bash
+node stamp-editable.mjs           # write stamps
+node stamp-editable.mjs --check   # exit 1 if anything is unstamped
+```
+
 GitHub Pages needs one manual switch the first time: **Settings → Pages →
 Source: "GitHub Actions"**. Until that is set, deploy runs skip cleanly with a
 notice instead of failing. Once enabled, the site is at
