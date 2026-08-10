@@ -15,6 +15,8 @@ rm -rf _site
 mkdir -p _site
 
 cp *.html *.css script.js figures.js favicon.png _site/
+# the custom domain must travel with the published artifact, or Pages drops it
+[ -f CNAME ] && cp CNAME _site/
 cp -r images morsel-docs morsel-proto tenet-proto _site/
 
 # absolute social-preview URLs when a domain is known

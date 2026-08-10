@@ -33,7 +33,7 @@ jobs:
           # variables -> Actions -> Variables) once your domain is live,
           # e.g. https://lananguyen.com — makes social previews absolute.
           # falls back to the default Pages URL so link previews work before a custom domain exists
-          SITE_URL: ${{ vars.SITE_URL || 'https://lanchinguyen.github.io/portfolio' }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://lananguyen.xyz' }}
 
       # Creating the Pages site can't be done with the workflow token on a
       # user repo — it needs one manual click: Settings -> Pages -> Source:
