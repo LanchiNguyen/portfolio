@@ -67,7 +67,35 @@ file with every asset inlined and no external requests.
 ## Deploy
 
 `build-site.sh` assembles `_site/`, and `.github/workflows/deploy.yml` publishes
-it to GitHub Pages on every push to `main`.
+it to GitHub Pages.
+
+Two branches publish to one Pages site:
+
+| Branch | URL | What it is |
+|--------|-----|------------|
+| `main` | `https://lananguyen.xyz/` | the live site |
+| `preview` | `https://lananguyen.xyz/preview/` | staging: banner on every page, `noindex`, excluded in `robots.txt` |
+
+A push to **either** branch rebuilds **both**, because a Pages deploy replaces
+the entire published artifact — uploading only one would delete the other.
+
+Working on a change:
+
+```bash
+git checkout preview
+git merge main          # start from what's live
+# ...edit, commit...
+git push                # visible at /preview/ in about a minute
+```
+
+When it looks right, merge it down:
+
+```bash
+git checkout main && git merge preview && git push
+```
+
+`preview` is optional. Delete the branch and the staging build simply stops
+being published; production is unaffected.
 
 GitHub Pages needs one manual switch the first time: **Settings → Pages →
 Source: "GitHub Actions"**. Until that is set, deploy runs skip cleanly with a

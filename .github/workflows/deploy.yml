@@ -1,11 +1,18 @@
 name: Deploy portfolio to GitHub Pages
 
-# Deploys the site assembled by build-site.sh.
+# One Pages site, two builds:
+#   main    -> https://lananguyen.xyz/
+#   preview -> https://lananguyen.xyz/preview/   (banner, noindex, staging)
+#
+# A push to EITHER branch rebuilds BOTH. That is deliberate: a Pages deploy
+# replaces the whole published artifact, so uploading only one build would
+# delete the other one.
+#
 # Nothing goes live until GitHub Pages is enabled in
 # Settings -> Pages -> Source: "GitHub Actions".
 on:
   push:
-    branches: [main]
+    branches: [main, preview]
   workflow_dispatch:
 
 permissions:
@@ -24,16 +31,45 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out main (production)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
 
-      - name: Build _site
-        run: bash build-site.sh
+      # The preview branch is optional. If it has not been created yet, skip
+      # the staging build instead of failing the production deploy.
+      - name: Check out preview (staging)
+        id: preview-checkout
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          ref: preview
+          path: preview
+
+      - name: Build production site
+        run: bash main/build-site.sh
         env:
           # Set a repository variable SITE_URL (Settings -> Secrets and
-          # variables -> Actions -> Variables) once your domain is live,
-          # e.g. https://lananguyen.com — makes social previews absolute.
-          # falls back to the default Pages URL so link previews work before a custom domain exists
+          # variables -> Actions -> Variables) if the domain ever changes.
           SITE_URL: ${{ vars.SITE_URL || 'https://lananguyen.xyz' }}
+
+      - name: Build preview site into /preview/
+        if: steps.preview-checkout.outcome == 'success'
+        run: |
+          PREVIEW=1 bash preview/build-site.sh
+          mv preview/_site main/_site/preview
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://lananguyen.xyz' }}/preview
+
+      - name: Report what is being published
+        run: |
+          echo "root pages:    $(ls main/_site/*.html | wc -l)"
+          if [ -d main/_site/preview ]; then
+            echo "preview pages: $(ls main/_site/preview/*.html | wc -l) (from branch preview)"
+          else
+            echo "preview pages: none (branch 'preview' does not exist)"
+          fi
 
       # Creating the Pages site can't be done with the workflow token on a
       # user repo — it needs one manual click: Settings -> Pages -> Source:
@@ -59,7 +95,7 @@ jobs:
       - if: steps.pages-check.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: main/_site
 
       - if: steps.pages-check.outputs.enabled == 'true'
         id: deployment
