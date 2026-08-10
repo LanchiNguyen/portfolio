@@ -78,6 +78,9 @@ Two branches publish to one Pages site:
 
 A push to **either** branch rebuilds **both**, because a Pages deploy replaces
 the entire published artifact — uploading only one would delete the other.
+Pages only lets its `github-pages` environment deploy from the default branch,
+so a push to `preview` is handled by `restage-preview.yml`, which asks the
+deploy workflow to run on `main` and pick the preview content up from there.
 
 Working on a change:
 

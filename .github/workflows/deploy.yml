@@ -4,15 +4,18 @@ name: Deploy portfolio to GitHub Pages
 #   main    -> https://lananguyen.xyz/
 #   preview -> https://lananguyen.xyz/preview/   (banner, noindex, staging)
 #
-# A push to EITHER branch rebuilds BOTH. That is deliberate: a Pages deploy
-# replaces the whole published artifact, so uploading only one build would
-# delete the other one.
+# Every run rebuilds BOTH. That is deliberate: a Pages deploy replaces the
+# whole published artifact, so uploading only one build would delete the other.
+#
+# This only ever runs on `main`. Pages restricts its `github-pages` environment
+# to the default branch, so a run on the `preview` ref dies before its first
+# step; restage-preview.yml turns a push to `preview` into a dispatch here.
 #
 # Nothing goes live until GitHub Pages is enabled in
 # Settings -> Pages -> Source: "GitHub Actions".
 on:
   push:
-    branches: [main, preview]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

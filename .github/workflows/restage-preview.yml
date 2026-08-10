@@ -1,0 +1,35 @@
+name: Restage preview
+
+# GitHub Pages restricts its `github-pages` environment to the default branch,
+# so a workflow run on the `preview` ref cannot deploy — it fails immediately
+# with no job logs. Pushing to `preview` therefore asks the deploy workflow to
+# run on `main` instead; that run checks out both branches and republishes the
+# root site and /preview/ together.
+#
+# (The alternative is to add `preview` under Settings -> Environments ->
+# github-pages -> Deployment branches. This file means nobody has to.)
+on:
+  push:
+    branches: [preview]
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask deploy.yml to rebuild from main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # workflow_dispatch is one of the two events GITHUB_TOKEN is still
+          # allowed to trigger, so this does start a real run.
+          code=$(curl -sS -o /tmp/resp.json -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/dispatches" \
+            -d '{"ref":"main"}')
+          echo "dispatch HTTP $code"
+          if [ "$code" != "204" ]; then cat /tmp/resp.json; exit 1; fi
+          echo "::notice title=Preview restaged::deploy.yml is rebuilding the site from main; /preview/ picks up ${GITHUB_SHA:0:7}."
