@@ -45,6 +45,16 @@ else
   # data-ed exists so the editor can map the page back to the source; the live
   # site has no editor, so strip the attributes rather than serve dead weight
   perl -pi -e 's/ data-ed="\d+"//g' _site/*.html
+  # [ADD:] chips are the private punch list. CSS already hides them, but the
+  # production build removes them outright so they never appear in view-source
+  # or via ?draft. Chips with data-clean keep their honest visitor fallback
+  # (normally injected by script.js) as a static clean-fill span.
+  perl -0777 -pi -e '
+    s|<span class="addm" data-clean="([^"]*)">.*?</span>|<span class="clean-fill">$1</span>|gs;
+    s|<span class="addm">.*?</span>||gs;
+    s|<span class="addm" [^>]*>.*?</span>||gs;
+    s|[ \t]*<!--[^<]*\[ADD[^>]*-->\n?||gs;
+  ' _site/*.html
   printf 'User-agent: *\nAllow: /\nDisallow: /preview/\n' > _site/robots.txt
 fi
 

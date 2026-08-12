@@ -82,7 +82,7 @@
           <div class="chip rv" style="--d:80ms"><div class="in"><div class="n">21%</div><div class="l">SEE NO REASON TO</div></div></div>
           <div class="chip rv" style="--d:160ms"><div class="in"><div class="n">13%</div><div class="l">DON'T HAVE TIME</div></div></div>
         </div>
-        <p class="proj-p" style="padding: 10px var(--px) 0; font-size: 13px; color: var(--meta)" data-ed="19"><span class="lbl real">MEASURED</span>&ensp;The top three barriers from our Qualtrics survey of 60 college students who don't use reusable cups.<span class="addm"> [ADD: the remaining 31% breakdown, or link the survey summary]</span></p>
+        <p class="proj-p" style="padding: 10px var(--px) 0; font-size: 13px; color: var(--meta)" data-ed="19"><span class="lbl real">MEASURED</span>&ensp;The top three barriers from our Qualtrics survey of 60 college students who don't use reusable cups; the remaining 31% of answers spread across smaller reasons, none above 13%.<span class="addm"> [ADD: the full response breakdown, or link the survey summary]</span></p>
       </section>
 
       <!-- overview -->
@@ -263,26 +263,14 @@
             <p class="proj-p" style="margin-top:26px" data-ed="61"><span class="lbl retro">RETROSPECTIVE</span>&ensp;The verification mechanic I'd design first:</p>
             <p class="proj-p" style="margin-top:8px" data-ed="62">The customer's barcode scan already tells the register <em>who</em> is paying. Verification only has to answer <em>did they bring a mug</em>, a yes/no the barista knows on sight. The scan fires the discount as "pending"; one barista-side tap (or an existing modifier key) confirms it. No new hardware, and a wrong tap costs one small discount: cheap enough that speed beats policing. Multi-register cafés and rush-hour honesty drift stay unsolved; both are pilot-testable.</p>
 
-            <p class="proj-p" style="margin-top:26px" data-ed="63"><span class="lbl sim">SIMULATED</span>&ensp;The caf&eacute;-side study we should have run. No real baristas participated; profiles and quotes are illustrative:</p>
-            <p class="proj-p" style="margin-top:8px" data-ed="64"><strong>Objective:</strong> would independent caf&eacute;s fund a bring-your-own-mug discount, and can verification survive a rush? <strong>Method:</strong> 15-minute intercepts with 5 staff across 3 independent caf&eacute;s (2 owners, 2 baristas, 1 shift lead), off-peak. <strong>Limitation:</strong> intercepts surface objections, not adoption behavior.</p>
-            <div class="ev-wrap"><table class="ev-table">
-              <tr><th>Simulated finding</th><th>Product implication</th><th>Proposed response</th><th>Confidence</th></tr>
-              <tr><td>Owners frame the discount as marketing spend, not margin loss &mdash; <em>if</em> the app demonstrably brings new faces</td><td>The caf&eacute; pitch must lead with discovery, not sustainability</td><td>Surface "new customers from Mug" in a merchant view</td><td>Low &mdash; needs real intercepts</td></tr>
-              <tr><td>Baristas reject anything adding &gt;2&ndash;3 seconds at the register during rush</td><td>Verification must ride the existing scan</td><td>The pending-discount tap above</td><td>Medium &mdash; consistent with POS research generally</td></tr>
-              <tr><td>Mixed on fraud: some owners shrug ("it's a coffee discount"), others want control</td><td>Policing is a setting, not a feature</td><td>Per-caf&eacute; toggle: auto-approve vs. confirm</td><td>Low</td></tr>
-            </table></div>
-            <div class="quotes" style="margin-top:16px">
-              <div class="quote-card sim"><div class="q">"If it slows my line at 8am, I don't care what it saves."</div><div class="a">SIMULATED BARISTA VOICE &mdash; ILLUSTRATIVE, NOT A REAL PARTICIPANT</div></div>
-              <div class="quote-card sim"><div class="q">"I'd fund 25 cents a cup if it walks students in the door."</div><div class="a">SIMULATED OWNER VOICE &mdash; ILLUSTRATIVE, NOT A REAL PARTICIPANT</div></div>
-            </div>
+            <p class="proj-p" style="margin-top:26px" data-ed="63"><span class="lbl plan">PROPOSED</span>&ensp;The caf&eacute;-side study we should have run: 15-minute intercepts with owners and baristas across a few independent caf&eacute;s, testing three hypotheses we never checked:</p>
+            <ul class="feat-list">
+              <li>Owners will treat the discount as marketing spend rather than margin loss only if the app demonstrably walks new customers in the door, so the caf&eacute; pitch has to lead with discovery</li>
+              <li>Baristas will reject anything that adds more than a couple of seconds at the register during rush, which is why verification must ride the existing scan</li>
+              <li>Appetite for policing fraud will vary by shop, making auto-approve vs. confirm a per-caf&eacute; setting rather than a product decision</li>
+            </ul>
 
-            <p class="proj-p" style="margin-top:26px" data-ed="65"><span class="lbl plan">PROPOSED</span>&ensp;How success would be measured if this shipped:</p>
-            <div class="ev-wrap"><table class="ev-table">
-              <tr><th>Metric</th><th>Definition</th><th>How</th><th>Goal (not a result)</th><th>Limitation</th></tr>
-              <tr><td><b>Repeat bring-rate</b></td><td>% of users whose 2nd+ visit includes a mug scan</td><td>Scan events per user</td><td>Baseline first, then grow it</td><td>Confounded by discount size</td></tr>
-              <tr><td><b>Register time delta</b></td><td>Seconds added per transaction at pilot caf&eacute;s</td><td>Timed observation, 1 rush hour per caf&eacute;</td><td>&le;3s or the mechanic fails</td><td>Small sample; observer effect</td></tr>
-              <tr><td><b>Caf&eacute; retention</b></td><td>Pilot caf&eacute;s still active after 8 weeks</td><td>Merchant dashboard</td><td>The business-side truth test</td><td>Tiny n in a pilot</td></tr>
-            </table></div>
+            <p class="proj-p" style="margin-top:26px" data-ed="65"><span class="lbl plan">PROPOSED</span>&ensp;If this shipped, three numbers would tell the truth about it: the share of users whose later visits include a mug scan, the seconds added per transaction at pilot caf&eacute;s (three at most, or the mechanic fails), and how many pilot caf&eacute;s are still active after eight weeks.</p>
           </div>
         </div>
       </section>

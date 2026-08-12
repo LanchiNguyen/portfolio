@@ -60,7 +60,7 @@
       <!-- TL;DR -->
       <div class="tldr rv">
         <div class="cell"><span class="k" data-ed="12">The problem</span><span class="v" data-ed="13">Retail apps can remove reflection through <strong>stimulation</strong>: streaks, confetti, one-tap re-entry. Workstations remove it through <strong>efficiency</strong>: hotkeys, dense ladders, sub-second tickets. After a losing sequence both arrive at an order sent before the trader has decided.</span></div>
-        <div class="cell"><span class="k" data-ed="14">The boundary</span><span class="v" data-ed="15">Friction, never a block. Tenet never sends an order automatically and never locks a trader out; waiting, reducing, editing, overriding, and canceling stay available. Overrides are recorded as <strong>context, not moral failure</strong>.</span></div>
+        <div class="cell"><span class="k" data-ed="14">The boundary</span><span class="v" data-ed="15">Friction, never a block. Tenet never sends an order automatically and never locks a trader out; waiting, reducing, editing, overriding, and canceling stay available. Overrides are recorded as <strong>context rather than moral failure</strong>.</span></div>
         <div class="cell"><span class="k" data-ed="16">Status</span><span class="v" data-ed="17"><span class="status-flag">Functional prototype &middot; not shipped</span> The rules, intervention state machines, cross-surface sync, and Record are fully functional. Brokers, quotes, fills, and history are simulated; no user study has been completed.</span></div>
       </div>
 
@@ -115,7 +115,7 @@
         <div class="rule"></div>
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="25">01 &middot; THE<br>PROBLEM</h2>
-          <p class="statement" data-ed="26">Two interfaces, one failure mode: the next order becomes automatic. A hypothesis, not a research finding. How might a trader's <em>own rule</em> interrupt the momentum without becoming a lock, a punishment, or a trading signal?</p>
+          <p class="statement" data-ed="26">Two interfaces share one failure mode: the next order becomes automatic. That reading is a hypothesis; no study here backs it yet. How might a trader's <em>own rule</em> interrupt the momentum without becoming a lock, a punishment, or a trading signal?</p>
         </div>
       </section>
 
@@ -182,7 +182,7 @@
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="tenet-host-cooldown" role="img" aria-label="Dart during the cooldown: 'Cooldown running — your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.' A progress rail reads COOLDOWN · 5:00 LEFT with 'Cancel cooldown and order' beneath" style="max-width:236px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="40"><span class="fk">Cooldown running &middot; rendered live</span>The copy does the ethical work: held, not queued; review, then decide; cancel always present.</figcaption>
+                <figcaption class="figcap" data-ed="40"><span class="fk">Cooldown running &middot; rendered live</span>The copy does the ethical work: the order is held rather than queued, review comes before any send, and cancel stays on screen the whole time.</figcaption>
               </figure>
               <figure class="figure fig-note">
                 <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="41"><span class="fk">Why a refreshed quote</span>Quotes move during a cooldown, so the approved order no longer exists when it ends. Queue-and-send and auto-cancel both take the decision away from the trader; I rejected both. The review shows the delta.</figcaption>
@@ -216,7 +216,7 @@
           <div>
             <div class="decisions">
               <div class="decision"><div class="dt">A &middot; &ldquo;Stepped in,&rdquo; not &ldquo;blocked.&rdquo;</div><div class="dd">Earlier explorations said &ldquo;blocked,&rdquo; which misdescribed a reversible system and shifted authorship from trader to tool. The final copy is <em>&ldquo;Your rule stepped in.&rdquo;</em> Softer language deters less; the point is only that the trader decides.</div></div>
-              <div class="decision"><div class="dt">B &middot; Nothing sends by itself.</div><div class="dd">A cooldown that ends by sending would make Tenet an execution actor. So it returns to review; reduce, wait, override, and cancel are parallel paths, none the default. The extra confirmation costs time in fast markets, the price of the pause.</div></div>
+              <div class="decision"><div class="dt">B &middot; Nothing sends by itself.</div><div class="dd">A cooldown that ends by sending would make Tenet an execution actor. So it returns to review; reduce, wait, override, and cancel are parallel paths with no default among them. The extra confirmation costs time in fast markets. That cost is the price of the pause.</div></div>
               <div class="decision"><div class="dt">C &middot; Evidence without false certainty.</div><div class="dd">&ldquo;Tenet saved you $X&rdquo; is a causal claim the system cannot support. Counts of interventions and outcomes lead; financial figures are demoted: <strong>EST</strong> until settled, sample-size language, fee/slippage exclusions. Hedged evidence persuades less; I traded weaker marketing for stronger trust.</div></div>
             </div>
           </div>
@@ -264,7 +264,7 @@
           <div>
             <p class="proj-p" data-ed="59">All three earlier states are superseded:</p>
             <ul class="feat-list">
-              <li data-ed="60"><strong>Everything, therefore nothing &rarr; one job.</strong> The first concept was a broad trading-journal product: import, session analysis, annotation, plus interventions. It narrowed to the intervention layer; the journal ambitions were deferred</li>
+              <li data-ed="60"><strong>A broad journal &rarr; one job.</strong> The first concept was a wide trading-journal product: import, session analysis, annotation, plus interventions. It tried to do everything, so it narrowed to the intervention layer alone; the journal ambitions were deferred</li>
               <li data-ed="61"><strong>&ldquo;Blocked&rdquo; &rarr; a legible state machine.</strong> Early framing left unclear whether the order was stopped or the system could act alone. It became hold &rarr; choose (reduce / wait / override / cancel) &rarr; explicit re-confirmation. Nothing automatic</li>
               <li data-ed="62"><strong>Outcome-led evidence &rarr; behavior-led Record.</strong> A headline dollar figure implying Tenet made money became a synchronized Record computed live from prototype interactions: explicit estimates, settled-vs-EST, SIMULATED FILL labels throughout</li>
             </ul>

@@ -258,16 +258,20 @@ a { color: inherit; text-decoration: none; }
   position: absolute; left: var(--px); bottom: 36px;
   display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
   max-width: 700px;
+  /* sits above the card cluster so the headline can never slide underneath it
+     (fallback serifs run wider than Fraunces and used to collide at ~1440px) */
+  z-index: 2;
 }
 .hero-copy h1 {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(44px, 8vw, 98px);
+  font-size: clamp(44px, 7.4vw, 92px);
   line-height: 0.99; letter-spacing: -0.01em;
   color: var(--card);
 }
 .hero-copy h1 em { color: var(--rose-lt); text-shadow: 0 0 38px rgba(216,162,168,0.55); }
-.hero-tag { display: flex; align-items: baseline; gap: 24px; flex-wrap: wrap; }
-.hero-tag p { font-size: 16.5px; line-height: 1.5; color: var(--on-dark-2); max-width: 440px; }
+.hero-tag { display: flex; flex-direction: column; gap: 20px; }
+.hero-tag p { font-size: 17.5px; line-height: 1.55; color: var(--on-dark); max-width: 470px; }
+.hero-ctas { display: flex; align-items: baseline; gap: 28px; flex-wrap: wrap; }
 .hero-cta {
   border-bottom: 1.5px solid var(--rose-lt); padding-bottom: 4px;
   font-weight: 600; font-size: 13px; letter-spacing: 0.1em; color: var(--rose-lt);
@@ -982,6 +986,16 @@ a.bar-loc:hover { color: var(--gold); }
 .demo-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(74,59,44,0.2); box-shadow: 0 22px 44px rgba(30,18,8,0.16); background: #101318; }
 .demo-frame.is-phone { max-width: 400px; margin: 0 auto; border-radius: 30px; }
 .demo-frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
+/* shown when a loaded embed is still blank after a few seconds (blocked CDN etc.) */
+.demo-stall {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 3;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; font-weight: 600;
+  padding: 10px 16px; border-radius: 999px; white-space: nowrap; max-width: calc(100% - 24px);
+  overflow: hidden; text-overflow: ellipsis;
+  background: rgba(16,19,24,0.88); color: #F2EDE2; border: 1.5px solid rgba(255,255,255,0.4);
+  display: none;
+}
+.demo-stage.is-slow .demo-stall { display: block; }
 .demo-poster { position: absolute; inset: 0; width: 100%; height: 100%; }
 .demo-poster img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 .demo-load { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; font-weight: 600; padding: 14px 22px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.5); background: rgba(16,19,24,0.82); color: #F2EDE2; cursor: pointer; backdrop-filter: blur(3px); }
