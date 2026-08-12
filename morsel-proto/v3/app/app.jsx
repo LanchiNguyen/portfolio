@@ -264,13 +264,28 @@ function MorselApp() {
 }
 
 // ---- page mount: phone centered + scaled to fit viewport ----
+// ?bare drops the page furniture (footer links, outer scaling) so the app can be
+// embedded at its true size — the case-study page supplies the surrounding frame.
+function isBare() {
+  try { return /[?&]bare/.test(window.location.search); } catch (e) { return false; }
+}
+
 function MorselPage() {
   const [scale, setScale] = React.useState(1);
+  const bare = isBare();
   React.useEffect(() => {
+    if (bare) return;
     const fit = () => setScale(Math.min(1, (window.innerHeight - 70) / 900));
     fit(); window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
-  }, []);
+  }, [bare]);
+  if (bare) {
+    return (
+      <div style={{ width: 402, height: 874, margin: "0 auto" }}>
+        <MorselApp />
+      </div>
+    );
+  }
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, padding: "16px 0" }}>
       <div style={{ width: 402 * scale, height: 874 * scale }}>
@@ -282,10 +297,10 @@ function MorselPage() {
         <div style={{ display: "flex", gap: 14, alignItems: "center", whiteSpace: "nowrap" }}>
           <span style={{ fontWeight: 700, color: "#5C4B38" }}>Morsel v3</span>
           <span>final iteration</span>
-          <a href="../morsel-docs/wireflow.html" style={{ color: "#B0542F", fontWeight: 600 }}>wireflow →</a>
-          <a href="../morsel-docs/explorations.html" style={{ color: "#B0542F", fontWeight: 600 }}>explorations →</a>
-          <a href="../morsel-docs/ds-addendum.html" style={{ color: "#B0542F", fontWeight: 600 }}>ds addendum →</a>
-          <a href="../morsel.html" style={{ color: "#B0542F", fontWeight: 600 }}>v2 →</a>
+          <a href="../morsel-docs/wireflow.html" target="_top" style={{ color: "#B0542F", fontWeight: 600 }}>wireflow →</a>
+          <a href="../morsel-docs/explorations.html" target="_top" style={{ color: "#B0542F", fontWeight: 600 }}>explorations →</a>
+          <a href="../morsel-docs/ds-addendum.html" target="_top" style={{ color: "#B0542F", fontWeight: 600 }}>ds addendum →</a>
+          <a href="../morsel.html" target="_top" style={{ color: "#B0542F", fontWeight: 600 }}>case study →</a>
         </div>
         <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Prototype: all diner counts, scores, save numbers, names, and quotes are illustrative seed data — not real customer evidence.</div>
       </div>

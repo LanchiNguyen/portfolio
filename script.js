@@ -146,13 +146,18 @@
         w: parseInt(el.getAttribute("data-w"), 10),
         h: parseInt(el.getAttribute("data-h"), 10),
         poster: el.getAttribute("data-poster"),
-        title: el.getAttribute("data-title") || "Interactive prototype"
+        title: el.getAttribute("data-title") || "Interactive prototype",
+        // "device": the prototype draws its own phone bezel, so the stage
+        // must not wrap it in a second one
+        chrome: el.getAttribute("data-chrome")
       };
     }
     function fit() {
       var c = current; if (!c) return;
       var cw = frame.clientWidth;
-      var scale = cw / c.w;
+      // a device-chrome prototype renders at its own pixel size; only shrink it
+      // when the column is genuinely narrower than the phone
+      var scale = c.chrome === "device" ? Math.min(1, cw / c.w) : cw / c.w;
       frame.style.height = Math.round(c.h * scale) + "px";
       if (iframe) {
         iframe.style.width = c.w + "px";
@@ -164,6 +169,7 @@
       var c = cfg(); current = c;
       frame.classList.toggle("is-wide", c.w > 700);
       frame.classList.toggle("is-phone", c.w <= 700);
+      frame.classList.toggle("is-device", c.chrome === "device");
       if (posterImg && c.poster) { posterImg.src = c.poster; }
       if (openLink) openLink.href = c.src;
       fit();

@@ -985,6 +985,10 @@ a.bar-loc:hover { color: var(--gold); }
 .demo-open { margin-left: auto; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; font-weight: 600; color: var(--rose-link); border-bottom: 1.5px solid var(--rose-2); padding-bottom: 2px; }
 .demo-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(74,59,44,0.2); box-shadow: 0 22px 44px rgba(30,18,8,0.16); background: #101318; }
 .demo-frame.is-phone { max-width: 400px; margin: 0 auto; border-radius: 30px; }
+/* the prototype supplies its own device bezel: drop ours so there is no
+   frame inside a frame, and let the page ground show through */
+.demo-frame.is-device { max-width: 402px; border: 0; background: transparent; box-shadow: none; border-radius: 0; overflow: visible; }
+.demo-frame.is-device iframe { background: transparent; }
 .demo-frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
 /* shown when a loaded embed is still blank after a few seconds (blocked CDN etc.) */
 .demo-stall {
