@@ -45,7 +45,7 @@
         <div class="proj-hero-grid">
           <div class="rv">
             <h1 data-ed="0">Tenet &mdash; one deliberate <em>moment</em></h1>
-            <p class="proj-lede" data-ed="1">Guardrails a trader writes for herself: rules authored after the close become reversible friction at order-send, inside the fictional brokers <strong>Dart</strong> (mobile, 0DTE options) and <strong>Meridian</strong> (desktop, equities), backed by one shared <strong>Record</strong>.</p>
+            <p class="proj-lede" data-ed="1">A trader writes rules for herself after the market closes. The next day, those rules step in when she tries to send an impulsive order. Everything runs inside two fictional brokers, <strong>Dart</strong> (mobile, 0DTE options) and <strong>Meridian</strong> (desktop, equities), with one shared <strong>Record</strong> underneath.</p>
           </div>
           <div class="meta-rail rv" style="--d:120ms">
             <div><span class="k" data-ed="2">ROLE</span><span class="v" data-ed="3">Product design, interaction design, UX writing</span></div>
@@ -59,8 +59,8 @@
 
       <!-- TL;DR -->
       <div class="tldr rv">
-        <div class="cell"><span class="k" data-ed="12">The problem</span><span class="v" data-ed="13">Retail apps can remove reflection through <strong>stimulation</strong>: streaks, confetti, one-tap re-entry. Workstations remove it through <strong>efficiency</strong>: hotkeys, dense ladders, sub-second tickets. After a losing sequence both arrive at an order sent before the trader has decided.</span></div>
-        <div class="cell"><span class="k" data-ed="14">The boundary</span><span class="v" data-ed="15">Friction, never a block. Tenet never sends an order automatically and never locks a trader out; waiting, reducing, editing, overriding, and canceling stay available. Overrides are recorded as <strong>context rather than moral failure</strong>.</span></div>
+        <div class="cell"><span class="k" data-ed="12">The problem</span><span class="v" data-ed="13">Retail apps push you to keep trading with <strong>streaks, confetti, and one-tap re-entry</strong>. Pro workstations do it with <strong>speed</strong>: hotkeys, dense ladders, sub-second tickets. Either way, after a few losses it's easy to send an order you haven't actually decided on.</span></div>
+        <div class="cell"><span class="k" data-ed="14">The boundary</span><span class="v" data-ed="15">Friction, never a block. Tenet never sends an order on its own and never locks anyone out. You can always wait, reduce, edit, override, or cancel. <strong>Overrides just get logged; the Record doesn't editorialize about them.</strong></span></div>
         <div class="cell"><span class="k" data-ed="16">Status</span><span class="v" data-ed="17"><span class="status-flag">Functional prototype &middot; not shipped</span> The rules, intervention state machines, cross-surface sync, and Record are fully functional. Brokers, quotes, fills, and history are simulated; no user study has been completed.</span></div>
       </div>
 
@@ -115,7 +115,7 @@
         <div class="rule"></div>
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="25">01 &middot; THE<br>PROBLEM</h2>
-          <p class="statement" data-ed="26">Two interfaces share one failure mode: the next order becomes automatic. That reading is a hypothesis; no study here backs it yet. How might a trader's <em>own rule</em> interrupt the momentum without becoming a lock, a punishment, or a trading signal?</p>
+          <p class="statement" data-ed="26">On both kinds of interface, the next order can become automatic. That's my read, and it's untested. The design question: can a trader's <em>own rule</em> interrupt that momentum without turning into a lock, a punishment, or a trading signal?</p>
         </div>
       </section>
 
@@ -140,10 +140,10 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="31">03 &middot; SYSTEM<br>MODEL</h2>
           <div>
-            <p class="proj-p" data-ed="32">One loop, closed after the close: Companion &rarr; rules &rarr; host check at send &rarr; reversible intervention &rarr; result + reason &rarr; Record &rarr; reflection. The ethics live in three asymmetries.</p>
+            <p class="proj-p" data-ed="32">The whole system is one loop: write rules in the Companion after the close, the broker checks them at send, the intervention stays reversible, and the result lands in the Record. Three deliberate asymmetries hold it together:</p>
             <div class="decisions">
               <div class="decision"><div class="dt">Stricter &rarr; immediate.</div><div class="dd">Tightening syncs to both hosts right away; you can raise your bar mid-day.</div></div>
-              <div class="decision"><div class="dt">Looser &rarr; next open.</div><div class="dd">Loosening arms at the next open, so a rule can't be talked down in the moment it exists to interrupt.</div></div>
+              <div class="decision"><div class="dt">Looser &rarr; next open.</div><div class="dd">Loosening waits until the next open. Otherwise you could talk yourself out of a rule at the exact moment it's supposed to stop you.</div></div>
               <div class="decision"><div class="dt">Failure &rarr; fail open.</div><div class="dd">If the connection drops, trading proceeds; the gap is recorded in plain view.</div></div>
             </div>
           </div>
@@ -156,7 +156,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="33">04 &middot; ONE RULE SET,<br>TWO KINDS OF SPEED</h2>
           <div>
-            <p class="proj-p" data-ed="34">The central call was that Dart and Meridian shouldn't be responsive versions of one interface. The same rule arrives in each broker wearing that broker's own language.</p>
+            <p class="proj-p" data-ed="34">The main call: Dart and Meridian are not responsive versions of one design. The same rule shows up in each broker looking like it belongs there.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="tenet-host-ticket" role="img" aria-label="Dart, the fictional gamified mobile broker, at 9:53 with a 4-day streak badge and SPY 0DTE puts: a contracts stepper set to 12 of MAX 86, '12 × $1.42 = $1,704 premium at risk', and a lime 'Swipe to buy 12 contracts' rail with 'tenet · 4 rules on · cap 5' beneath" style="max-width:236px; border-radius:18px"></div>
@@ -164,7 +164,7 @@
               </figure>
               <figure class="figure fig-down">
                 <div class="fig-live shot-img" data-fig="tenet-host-intervention" role="img" aria-label="The same Dart screen after the swipe: '2 of your rules stepped in — nothing sent. Cooldown — 3 losing entries this morning, 9:41 / 9:46 / 9:52. Size — you asked for 12, your cap today is 5. Nothing was sent. Three ways forward:' with buttons Reduce to 5 contracts, Hold to start 9-minute cooldown, Override with a reason, and Cancel order — nothing sends" style="max-width:236px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="36"><span class="fk">The moment &middot; rendered live</span>Two rules step in, name their reasons in the trader's own terms, and hold. Nothing sent, every exit open.</figcaption>
+                <figcaption class="figcap" data-ed="36"><span class="fk">The moment &middot; rendered live</span>Two rules step in and say why, in the trader's own words. Nothing was sent, and every way out is still there.</figcaption>
               </figure>
             </div>
             <p class="proj-p" style="margin-top:16px" data-ed="37"><a class="doc-link" href="tenet-proto/host.html">Open the live Dart host prototype: four scenarios &rarr;</a></p>
@@ -178,14 +178,14 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="38">THE COOLDOWN,<br>HELD HONESTLY</h2>
           <div>
-            <p class="proj-p" data-ed="39">The cooldown holds the order &mdash; <em>held, not queued to fire</em>. When it ends the trader reviews a refreshed quote and sends or cancels. Meridian holds a revenge-sized 1,000-share short the same way, every fill labeled <span class="lbl sim">SIMULATED FILL</span>.</p>
+            <p class="proj-p" data-ed="39">The cooldown holds the order; it is not queued to fire. When the timer ends, the trader reviews a refreshed quote and either sends or cancels. Meridian handles a revenge-sized 1,000-share short the same way, with every fill labeled <span class="lbl sim">SIMULATED FILL</span>.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="tenet-host-cooldown" role="img" aria-label="Dart during the cooldown: 'Cooldown running — your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.' A progress rail reads COOLDOWN · 5:00 LEFT with 'Cancel cooldown and order' beneath" style="max-width:236px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="40"><span class="fk">Cooldown running &middot; rendered live</span>The copy does the ethical work: the order is held rather than queued, review comes before any send, and cancel stays on screen the whole time.</figcaption>
+                <figcaption class="figcap" data-ed="40"><span class="fk">Cooldown running &middot; rendered live</span>The UI copy carries the promise. &ldquo;Held, not queued to fire&rdquo; is the exact wording, and cancel never leaves the screen.</figcaption>
               </figure>
               <figure class="figure fig-note">
-                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="41"><span class="fk">Why a refreshed quote</span>Quotes move during a cooldown, so the approved order no longer exists when it ends. Queue-and-send and auto-cancel both take the decision away from the trader; I rejected both. The review shows the delta.</figcaption>
+                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="41"><span class="fk">Why a refreshed quote</span>Prices move during a cooldown, so the order you approved no longer exists by the time it ends. Auto-sending and auto-canceling would both take the decision away from the trader, so I rejected both. You review the new quote and see how much moved.</figcaption>
               </figure>
             </div>
           </div>
@@ -198,7 +198,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="42">MERIDIAN &mdash;<br>THE QUIET HOST</h2>
           <div>
-            <p class="proj-p" data-ed="43">Tenet answers Meridian in the workstation's own register: a quiet header chip (<em>4 rules &middot; 3 apply here</em>) and an Ink Blue panel at transmit. Chart, ladder, order context, and positions are never touched. A chart annotation marks it: <em>9:53 &mdash; your rule stepped in</em>.</p>
+            <p class="proj-p" data-ed="43">In Meridian, Tenet stays quiet: a small header chip (<em>4 rules &middot; 3 apply here</em>) and a blue panel that appears at transmit. The chart, ladder, and positions are never touched. The only other trace is a chart annotation: <em>9:53 &mdash; your rule stepped in</em>.</p>
             <figure class="figure" style="margin-top: 22px">
               <div class="fig-live shot-img" data-fig="tenet-meridian-stepped" role="img" aria-label="Meridian Trader, the fictional light-themed desktop workstation: SPY chart falling with a dashed annotation '9:53 — your rule stepped in', Level 2 ladder live, three losing round trips totaling −$360, and an Ink Blue panel over the order ticket reading 'Loss cooldown stepped in — nothing sent. Your rule: after 3 losing trades before noon, the next order waits nine minutes… this order flips you short at 2× your largest size today. Size cap not triggered — 1,000 of 1,500 shares. Start 9-minute cooldown / Override with a reason'"></div>
               <figcaption class="figcap" data-ed="44"><span class="fk">Meridian &middot; rendered live from the prototype</span>The only colored object in a near-neutral room. Everything else keeps printing.</figcaption>
@@ -215,9 +215,9 @@
           <h2 class="side" style="margin:0;font-weight:400" data-ed="46">05 &middot; THREE KEY<br>DESIGN DECISIONS</h2>
           <div>
             <div class="decisions">
-              <div class="decision"><div class="dt">A &middot; &ldquo;Stepped in,&rdquo; not &ldquo;blocked.&rdquo;</div><div class="dd">Earlier explorations said &ldquo;blocked,&rdquo; which misdescribed a reversible system and shifted authorship from trader to tool. The final copy is <em>&ldquo;Your rule stepped in.&rdquo;</em> Softer language deters less; the point is only that the trader decides.</div></div>
-              <div class="decision"><div class="dt">B &middot; Nothing sends by itself.</div><div class="dd">A cooldown that ends by sending would make Tenet an execution actor. So it returns to review; reduce, wait, override, and cancel are parallel paths with no default among them. The extra confirmation costs time in fast markets. That cost is the price of the pause.</div></div>
-              <div class="decision"><div class="dt">C &middot; Evidence without false certainty.</div><div class="dd">&ldquo;Tenet saved you $X&rdquo; is a causal claim the system cannot support. Counts of interventions and outcomes lead; financial figures are demoted: <strong>EST</strong> until settled, sample-size language, fee/slippage exclusions. Hedged evidence persuades less; I traded weaker marketing for stronger trust.</div></div>
+              <div class="decision"><div class="dt">A &middot; &ldquo;Stepped in,&rdquo; not &ldquo;blocked.&rdquo;</div><div class="dd">Early versions said &ldquo;blocked.&rdquo; That was wrong twice: nothing is actually blocked, and it makes the tool the author instead of the trader. The final copy is <em>&ldquo;Your rule stepped in.&rdquo;</em> The softer wording probably deters less, but deterrence was never the job. The trader deciding is.</div></div>
+              <div class="decision"><div class="dt">B &middot; Nothing sends by itself.</div><div class="dd">If the cooldown ended by sending the order, Tenet would be the one trading. So it ends in review instead, with reduce, wait, override, and cancel as equal options and none preselected. The extra confirmation costs real time in a fast market. I accepted that.</div></div>
+              <div class="decision"><div class="dt">C &middot; Evidence without false certainty.</div><div class="dd">&ldquo;Tenet saved you $X&rdquo; is a claim the system can't actually prove, so it never says it. Counts lead: how often rules stepped in, what happened next. Dollar figures come second, marked <strong>EST</strong> until they settle, with fees and slippage called out as excluded. Hedged numbers are worse marketing. I think they're better for trust.</div></div>
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="47">06 &middot; THE COMPANION &mdash;<br>RULES / PATTERNS / RECORD</h2>
           <div>
-            <p class="proj-p" data-ed="48">In the after-close app, &ldquo;What your rules did&rdquo; leads with counts: <em>7&times; stepped in &middot; 6&times; waited or trimmed &middot; 1&times; continued past</em>. Below them, estimated loss avoided <strong>$1,240 EST</strong> sits beside realized on overrides <strong>&minus;$310 ACTUAL</strong>. Neither is money earned; both are labeled.</p>
+            <p class="proj-p" data-ed="48">In the after-close app, &ldquo;What your rules did&rdquo; leads with counts: <em>7&times; stepped in &middot; 6&times; waited or trimmed &middot; 1&times; continued past</em>. Below them, estimated loss avoided <strong>$1,240 EST</strong> sits beside realized on overrides <strong>&minus;$310 ACTUAL</strong>. Neither claims to be money earned, and both say what they are.</p>
             <div class="phone-grid" style="margin-top: 22px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))">
               <figure><div class="fig-live" data-fig="tenet-companion-home" role="img" aria-label="Companion home at 16:12, market closed: 'What your rules did · Jul 27–31' labeled illustrative prototype data — 7× stepped in, 6× waited or trimmed, 1× continued past — a week list of cooldown, size-cap, wind-down and pacing events, a logged 17-minute feed outage, and the estimates block: estimated loss avoided $1,240 EST, realized on overrides −$310 ACTUAL, with the mark-to-close method note"></div><figcaption data-ed="49">Home &middot; counts lead, estimates carry their method and exclusions</figcaption></figure>
               <figure><div class="fig-live" data-fig="tenet-companion-rules" role="img" aria-label="Companion Rules tab: the four authored rules with their enforceable parameters, each showing where it applies and its stricter-immediate / looser-at-next-open arming state"></div><figcaption data-ed="50">Rules &middot; enforceable parameters and their arming states</figcaption></figure>
@@ -246,7 +246,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="53">07 &middot; TRUST, FAILURE &amp;<br>ACCESSIBILITY</h2>
           <div>
-            <p class="proj-p" data-ed="54">Built to expect doubt:</p>
+            <p class="proj-p" data-ed="54">The parts a skeptical trader would ask about first:</p>
             <ul class="feat-list">
               <li data-ed="55"><strong>Trust &amp; data.</strong> Tenet reads order tickets at send and fills after close, conceptually via an embedded broker SDK, never your screen or other accounts. In the proposed model, disconnecting stops rules from arming and deleting the account removes rules and Record</li>
               <li data-ed="56"><strong>Failure behavior.</strong> Failed sync surfaces an explicit retry. Connection loss fails open: trading proceeds and the gap shows in the Record (&ldquo;feed lost 17 min &middot; trading unaffected &middot; logged&rdquo;). Events are immutable; notes and error annotations attach alongside</li>
@@ -262,11 +262,11 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="58">08 &middot; ITERATION &mdash;<br>THREE HONEST CHANGES</h2>
           <div>
-            <p class="proj-p" data-ed="59">All three earlier states are superseded:</p>
+            <p class="proj-p" data-ed="59">Three things changed along the way:</p>
             <ul class="feat-list">
-              <li data-ed="60"><strong>A broad journal &rarr; one job.</strong> The first concept was a wide trading-journal product: import, session analysis, annotation, plus interventions. It tried to do everything, so it narrowed to the intervention layer alone; the journal ambitions were deferred</li>
-              <li data-ed="61"><strong>&ldquo;Blocked&rdquo; &rarr; a legible state machine.</strong> Early framing left unclear whether the order was stopped or the system could act alone. It became hold &rarr; choose (reduce / wait / override / cancel) &rarr; explicit re-confirmation. Nothing automatic</li>
-              <li data-ed="62"><strong>Outcome-led evidence &rarr; behavior-led Record.</strong> A headline dollar figure implying Tenet made money became a synchronized Record computed live from prototype interactions: explicit estimates, settled-vs-EST, SIMULATED FILL labels throughout</li>
+              <li data-ed="60"><strong>A broad journal &rarr; one job.</strong> The first concept was a full trading journal with interventions bolted on: import, session analysis, annotation. I cut it down to just the intervention layer and shelved the rest</li>
+              <li data-ed="61"><strong>&ldquo;Blocked&rdquo; &rarr; a legible state machine.</strong> In early versions it wasn't clear whether the order was gone for good or whether the system might act on its own. The final flow spells it out: hold, then choose (reduce / wait / override / cancel), then re-confirm. Nothing happens automatically</li>
+              <li data-ed="62"><strong>Outcome-led evidence &rarr; behavior-led Record.</strong> The first evidence screen led with a big dollar figure, which implied Tenet makes you money. It doesn't, so that screen became the Record: computed live from what you actually do in the prototype, estimates marked EST, every fill labeled simulated</li>
             </ul>
           </div>
         </div>
@@ -295,7 +295,7 @@
         <div class="bloom"></div>
         <span class="k" data-ed="70">10 &middot; REFLECTION</span>
         <div class="results-grid">
-          <p class="big" data-ed="71">The strongest thing Tenet does is <em>remain reversible</em>. The intervention moment is the product: a pause that names its reason and leaves every exit open. The next step is moderated research and a feasibility conversation about the broker SDK.</p>
+          <p class="big" data-ed="71">The thing I'd defend hardest is that every path stays <em>reversible</em>. The product is really one moment: a pause that says why it happened and keeps every exit open. Next steps: run the study, and have a real feasibility conversation about the broker SDK.</p>
           <div class="ledger">
             <div><span>Friction, never a block</span><b>reduce &middot; wait &middot; override &middot; cancel</b></div>
             <div><span>Failure mode</span><b>fails open &middot; visible in the Record</b></div>

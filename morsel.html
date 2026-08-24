@@ -45,7 +45,7 @@
         <div class="proj-hero-grid">
           <div class="rv">
             <h1 data-ed="0">Morsel &mdash; eat with your <em>eyes</em></h1>
-            <p class="proj-lede" data-ed="1">A self-directed concept: keep photo-first discovery immediate, and be blunt about what the app knows. In one line, <strong>safety context follows the dish, from discovery through ordering.</strong></p>
+            <p class="proj-lede" data-ed="1">A self-directed concept. The idea: keep photo browsing fast, and be blunt about what the app actually knows. The rule that runs through the whole design is that <strong>safety context follows the dish, from feed to checkout.</strong></p>
           </div>
           <div class="meta-rail rv" style="--d:120ms">
             <div><span class="k" data-ed="2">ROLE</span><span class="v" data-ed="3">Product design, interaction design, prototyping</span></div>
@@ -59,7 +59,7 @@
 
       <!-- TL;DR -->
       <div class="tldr rv">
-        <div class="cell"><span class="k" data-ed="12">The bet</span><span class="v" data-ed="13">A photo-first app should earn <strong>more trust</strong> for being blunt about what's in a dish, how good the evidence is, and where coverage ends. The bet is untested; nothing here validates it yet.</span></div>
+        <div class="cell"><span class="k" data-ed="12">The bet</span><span class="v" data-ed="13">Being blunt about what's in a dish, how good the evidence is, and where coverage ends should <strong>earn trust instead of costing it</strong>. Untested so far.</span></div>
         <div class="cell"><span class="k" data-ed="14">The principles</span><span class="v" data-ed="15"><strong>Lead with appetite:</strong> the photo is the interface; metadata earns its way in. <strong>Preferences rank; allergies protect:</strong> taste re-ranks, lifestyle filters, allergies exclude and flag. <strong>Never imply more certainty than the evidence supports.</strong></span></div>
         <div class="cell"><span class="k" data-ed="16">Status</span><span class="v" data-ed="17"><span class="status-flag">Functional prototype &middot; v3.1 &middot; not shipped</span> Not evaluated with users; restaurants, diner identities, quotes, order counts, and trust scores are illustrative prototype data.</span></div>
       </div>
@@ -110,7 +110,7 @@
         <div class="rule"></div>
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="24">APPETITE IS EMOTIONAL.<br>CHOOSING SAFELY IS NOT.</h2>
-          <p class="statement" data-ed="25">Food apps optimize for the scroll. Give a diner a real constraint (an allergy, a vegetarian kitchen, an uncovered city) and most photo feeds go quiet or quietly lie. Building the feed turned out to be the easy part; <em>the work was in the system around it.</em></p>
+          <p class="statement" data-ed="25">Food apps optimize for the scroll. Give someone a real constraint (an allergy, a vegetarian kitchen, a city the app doesn't cover) and most photo feeds either go quiet or quietly lie. The feed was the easy part of this project. <em>The work was everything around it.</em></p>
         </div>
       </section>
 
@@ -120,7 +120,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="26">DECISION 1 &middot;<br>PREFERENCE VS<br>PROTECTION</h2>
           <div>
-            <p class="proj-p" data-ed="27">v1 had one flat &ldquo;dietary needs&rdquo; list, with Vegetarian and Nut allergy as equivalent chips. That's a category error: one is a preference, the other a hazard. In v3.1 I split the model into tiers. Lifestyle choices filter the feed and loosen in one tap; allergies are a hard rule everywhere the dish travels. No reset or &ldquo;clear filters&rdquo; path ever touches allergy settings.</p>
+            <p class="proj-p" data-ed="27">v1 had one flat &ldquo;dietary needs&rdquo; list, with Vegetarian and Nut allergy as equivalent chips. Those aren't the same kind of thing: one is a preference, the other can put someone in the hospital. In v3.1 I split the model into tiers. Lifestyle choices filter the feed and loosen in one tap; allergies are a hard rule everywhere the dish travels. No reset or &ldquo;clear filters&rdquo; path ever touches allergy settings.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <img class="shot-img" src="images/morsel/v1-dietary-flat-2x.webp" alt="v1 onboarding: a single flat 'dietary needs' chip list where Nut allergy sits beside Vegetarian and other preferences as visually equal choices" width="804" height="1748" loading="lazy" style="max-width:225px; border-radius:18px" data-ed="28" />
@@ -144,7 +144,7 @@
                 <figcaption class="figcap" data-ed="37"><span class="fk">Before &middot; v1</span>The order sheet carried zero safety context.</figcaption>
               </figure>
               <figure class="figure fig-note">
-                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="38"><span class="fk">Why a gate, not a banner</span>The order handoff is where Morsel can do real harm. A banner treats the hazard as information; the gate treats it as a decision: &ldquo;we told you&rdquo; versus &ldquo;you decided.&rdquo;</figcaption>
+                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="38"><span class="fk">Why a gate, not a banner</span>The order handoff is where this app could actually hurt someone. A banner just informs; the gate makes the diner decide. There's a difference between &ldquo;we told you&rdquo; and &ldquo;you decided.&rdquo;</figcaption>
               </figure>
             </div>
           </div>
@@ -157,7 +157,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="39">DECISION 2 &middot;<br>EVIDENCE WITHOUT<br>MANUFACTURED CERTAINTY</h2>
           <div>
-            <p class="proj-p" data-ed="40">Star ratings compress bias, self-selection, and revenge reviews into one unfalsifiable number. Morsel proposes <strong>&ldquo;X% would order again,&rdquo;</strong> counted from repeat orders through the app's own handoffs. Too new for honest math? The design abstains: <em>&ldquo;New on Morsel &mdash; no score yet.&rdquo;</em></p>
+            <p class="proj-p" data-ed="40">Star ratings mash bias, self-selection, and revenge reviews into one number nobody can check. Morsel's proposed signal is <strong>&ldquo;X% would order again,&rdquo;</strong> counted from repeat orders through the app's own checkout. When a dish is too new for that math to mean anything, it shows <em>&ldquo;New on Morsel &mdash; no score yet&rdquo;</em> instead of a made-up number.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="morsel-v31-trust-method" role="img" aria-label="The trust signal expanded: the would-order-again percentage with its visible sample size and the plain-language method sheet one tap away, labeled as a proposed measurement model with illustrative data" style="max-width:225px; border-radius:18px"></div>
@@ -165,7 +165,7 @@
               </figure>
               <figure class="figure fig-down">
                 <div class="fig-live shot-img" data-fig="morsel-v31-detail-coldstart" role="img" aria-label="A dish page for a new dish where the design abstains from scoring: 'New on Morsel — no score yet' in place of a manufactured number" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="42"><span class="fk">v3.1 &middot; cold start</span>Too new for honest math &rarr; abstain.</figcaption>
+                <figcaption class="figcap" data-ed="42"><span class="fk">v3.1 &middot; cold start</span>No honest math yet, so no score.</figcaption>
               </figure>
             </div>
           </div>
@@ -178,7 +178,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="43">DECISION 3 &middot;<br>APPETITE VS<br>INFORMATION SCENT</h2>
           <div>
-            <p class="proj-p" data-ed="44">A photo-only feed maximizes appetite but hides price, distance, and name behind a tap. After exploring labeled cards, hybrid density, and a split model, I kept the <strong>grazing feed photo-only</strong> and gave <strong>search results full labels</strong>: searchers compare, browsers graze. The tradeoff is untested; it's the first task in the plan.</p>
+            <p class="proj-p" data-ed="44">A photo-only feed looks great but hides price, distance, and even the dish name behind a tap. I tried labeled cards and a denser hybrid before landing on a split: the <strong>browsing feed stays photo-only</strong>, and <strong>search results get full labels</strong>. People searching are comparing; people scrolling are just hungry. Whether that split is right is untested; it's the first thing on the research plan.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="morsel-v31-feed-foryou-shaw" role="img" aria-label="The v3.1 For-you feed: full-bleed dish photography with minimal overlay chrome, distances disclosed as from the Shaw demo neighborhood" style="max-width:225px; border-radius:18px"></div>
@@ -199,7 +199,7 @@
         <div class="proj-row rv">
           <h2 class="side" style="margin:0;font-weight:400" data-ed="47">RESILIENCE &mdash;<br>THE UNGLAMOROUS<br>PATHS</h2>
           <div>
-            <p class="proj-p" data-ed="48">Honest states for the paths most concepts skip. Location off relabels the feed to &ldquo;For you,&rdquo; discloses that distances are from a demo neighborhood, and disables &ldquo;Nearest&rdquo; sort. No-coverage never shows one city's dishes under another city's name.</p>
+            <p class="proj-p" data-ed="48">The states most concept projects skip. With location off, the feed relabels to &ldquo;For you,&rdquo; distances say they're from a demo neighborhood, and &ldquo;Nearest&rdquo; sort turns off. In a city with no coverage, the app says so instead of showing another city's food under your city's name.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
               <figure><div class="fig-live" data-fig="morsel-v31-location-no-coverage" role="img" aria-label="No-coverage state naming the unsupported city plainly instead of mislabeling another city's dishes"></div><figcaption data-ed="49">Unsupported city, named plainly</figcaption></figure>
               <figure><div class="fig-live" data-fig="morsel-v31-zero-result-recovery" role="img" aria-label="Zero-result recovery listing each active limit by tier with separate clear actions; allergy settings are not clearable from here"></div><figcaption data-ed="50">Zero results: names each active limit; allergies untouchable</figcaption></figure>
@@ -276,7 +276,7 @@
         <div class="bloom"></div>
         <span class="k" data-ed="69">REFLECTION</span>
         <div class="results-grid">
-          <p class="big" data-ed="70">The hard part was deciding <em>when the interface stays quiet, when it explains itself, and when it interrupts momentum</em>. Appetite gets silence, evidence carries a visible method, and a flagged allergen brings everything to a full stop.</p>
+          <p class="big" data-ed="70">The actual design work was deciding <em>when the interface stays quiet, when it explains itself, and when it interrupts</em>. Browsing gets silence. Evidence shows its method. A flagged allergen stops everything.</p>
           <div class="ledger">
             <div><span>Allergy promise</span><b>aware, never &ldquo;safe&rdquo;: confirm with the kitchen</b></div>
             <div><span>Evidence rule</span><b>no score without a disclosed method</b></div>
