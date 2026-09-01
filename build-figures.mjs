@@ -2,7 +2,7 @@
  *
  * Input : figures.json (from the capture pass) — each figure is the canonical
  *         prototype's own rendered markup at the state its caption describes.
- * Output: v2/figures.css + v2/figures.js
+ * Output: figures.css + figures.js
  *
  * Figures render as real DOM, so they stay sharp at any zoom or pixel ratio.
  * Photographs inside them travel as ids and rehydrate from the one shared
@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync } from 'fs';
 
 const S = process.env.S || '.';
-const store = JSON.parse(readFileSync(S + '/figures.json', 'utf8'));
+const store = JSON.parse(readFileSync('figures.json', 'utf8'));  /* repo input, not scratch */
 
 /* ---- scope a stylesheet so it cannot leak into the host page ----
    A brace-aware walk, because a regex cannot tell a selector list from a
@@ -179,9 +179,9 @@ const fontCss = faces.filter(b => {
   seen.add(key); return true;
 }).join('\n');
 
-writeFileSync('v2/figures.css', css);
-writeFileSync('v2/figures-fonts.css', fontCss);
-writeFileSync('v2/figures.js', js);
+writeFileSync('figures.css', css);
+writeFileSync('figures-fonts.css', fontCss);
+writeFileSync('figures.js', js);
 console.log('figures:', Object.keys(figs).length);
 console.log('figures.css      ', Math.round(css.length / 1024) + 'KB');
 console.log('figures-fonts.css', Math.round(fontCss.length / 1024) + 'KB', '(' + seen.size + ' faces)');

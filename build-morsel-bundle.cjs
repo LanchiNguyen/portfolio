@@ -4,7 +4,7 @@ const path=require('path');
 global.window = global; global.self = global; // UMD shim
 const mod = require(process.env.S+'/cdn/pkg-babel/package/babel.min.js');
 const Babel = global.Babel || global.window.Babel || mod;
-const P='v2/morsel-proto';
+const P='morsel-proto';
 // script order exactly as in the canonical index.html
 const html=fs.readFileSync(P+'/index.html','utf8');
 const order=[...html.matchAll(/<script type="text\/babel" src="([^"]+)"><\/script>/g)].map(m=>m[1]);
