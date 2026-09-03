@@ -16,7 +16,10 @@
 @media (max-width:920px){:root{--frameCols:1fr;--frameRows:auto;--tickSpan:auto}}
 button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}
 button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}
+/* ?bare — the case-study embed shows the workstation, not the board around it */
+:root[data-bare] [data-scaffold]{display:none !important}
+:root[data-bare] body>div:first-child{padding-bottom:16px}</style></helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 32px 64px;box-sizing:border-box">
 <div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;width:100%;max-width:1360px;position:sticky;top:0;z-index:30;background:#E9EAEB;padding:14px 0 10px">
@@ -27,7 +30,7 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 </div>
 
-<div style="width:100%;max-width:1360px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin:14px 0 26px">
+<div data-scaffold style="width:100%;max-width:1360px;display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin:14px 0 26px">
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="font:800 34px/1 'Plus Jakarta Sans';letter-spacing:-.02em;color:#24282B">TENET</div>
 <div style="font:600 15px/1.4 'Plus Jakarta Sans';color:#24282B">Self-authored guardrails for impulsive trading.</div>
@@ -213,8 +216,8 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 <div style="display:var(--annD);max-width:640px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;margin:14px 0 0">▸ Two contained changes: a quiet status indicator in the header and an active intervention at transmit. The chart, market depth, order context, and positions remain untouched.</div>
 
-<div style="width:100%;max-width:1360px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288;margin:44px 0 10px">02 · WITHOUT TENET — THE SAME MOMENT, FOR COMPARISON</div>
-<div style="width:1360px;max-width:100%;background:#FBFBFA;border:1px solid #DEE0E1;border-radius:14px;box-shadow:0 30px 60px -38px rgba(30,36,40,.45);color:#212528;display:flex;flex-direction:column;overflow:hidden">
+<div data-scaffold style="width:100%;max-width:1360px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288;margin:44px 0 10px">02 · WITHOUT TENET — THE SAME MOMENT, FOR COMPARISON</div>
+<div data-scaffold style="width:1360px;max-width:100%;background:#FBFBFA;border:1px solid #DEE0E1;border-radius:14px;box-shadow:0 30px 60px -38px rgba(30,36,40,.45);color:#212528;display:flex;flex-direction:column;overflow:hidden">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid #E9EBEB;background:#F2F3F3">
 <div style="display:flex;gap:18px;align-items:center"><span style="font:700 13px 'Plus Jakarta Sans'">Meridian Trader</span><span style="font:500 11px 'Plus Jakarta Sans';color:#6E767C">Workspace: Equities — SPY</span></div>
 <div style="display:flex;gap:16px;align-items:center;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#6E767C">ACCT 7734-2 · 4:1</span><span style="color:#6E767C">09:53:12 ET</span><span style="color:#C13A3F">DAY P&amp;L −$360.00</span></div>
@@ -267,14 +270,14 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 <div style="display:var(--annD);max-width:640px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;margin:14px 0 0">▸ Meridian does not gamify trading. Its risk is speed: after three losses, a revenge-sized short remains one keystroke away.</div>
 
-<div style="display:flex;gap:44px;margin-top:44px;flex-wrap:wrap;width:100%;max-width:1360px;justify-content:flex-start">
+<div data-scaffold style="display:flex;gap:44px;margin-top:44px;flex-wrap:wrap;width:100%;max-width:1360px;justify-content:flex-start">
 <div style="max-width:320px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C">▸ THE ONLY COLORED OBJECT — the broker is deliberately near-neutral, so the card carries all the register change. When the guard speaks, the room changes; nothing else moves.</div>
 <div style="max-width:320px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C">▸ CONTAINMENT — two contained changes: a quiet status indicator and an active intervention at transmit. Diff the frames and chart, depth, order context, and positions are identical.</div>
 <div style="max-width:320px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C">▸ The market keeps printing while the countdown runs — waiting happens in front of a moving chart. The guard holds the door, never the room.</div>
 </div>
 
-<div style="width:100%;max-width:1360px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288;margin:44px 0 10px">03 · VISUAL DIRECTION — FINAL &amp; EXPLORED</div>
-<div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:flex-start;width:100%;max-width:1360px">
+<div data-scaffold style="width:100%;max-width:1360px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288;margin:44px 0 10px">03 · VISUAL DIRECTION — FINAL &amp; EXPLORED</div>
+<div data-scaffold style="display:flex;gap:24px;flex-wrap:wrap;justify-content:flex-start;width:100%;max-width:1360px">
 <div style="width:340px;background:#F6F7F7;border:1px solid #DEE0E1;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box">
 <div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">FINAL — INK BLUE</div>
 <div style="background:#182430;border:1px solid #2A3B49;border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 14px 30px -14px rgba(20,30,40,.5)">
@@ -297,7 +300,7 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 </div>
 
-<div style="margin-top:32px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;text-align:left;width:100%;max-width:1360px;border-top:1px solid #DEE0E1;padding-top:14px">◆ TENET — behavioral risk layer · concept &amp; design 2026 · brokers, quotes, and fills are simulated — the rules, interventions, and shared record are functional<br><a href="duo.html">mobile host + companion prototypes →</a></div>
+<div data-scaffold style="margin-top:32px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;text-align:left;width:100%;max-width:1360px;border-top:1px solid #DEE0E1;padding-top:14px">◆ TENET — behavioral risk layer · concept &amp; design 2026 · brokers, quotes, and fills are simulated — the rules, interventions, and shared record are functional<br><a href="duo.html">mobile host + companion prototypes →</a></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:2300},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ink blue&quot;,&quot;umber&quot;],&quot;default&quot;:&quot;ink blue&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Card&quot;},&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;},&quot;cooldownSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:36,&quot;min&quot;:6,&quot;max&quot;:120,&quot;step&quot;:6,&quot;unit&quot;:&quot;s served / s held&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
@@ -347,8 +350,12 @@ class Component extends DCLogic {
       : { '--c-bg': '#182430', '--c-bd': '#2A3B49', '--c-a1': '#DFB05C', '--c-txt': '#C9D3DB', '--c-dim': '#8FA3B3' };
     const r = document.documentElement.style;
     for (const k in m) r.setProperty(k, m[k]);
-    r.setProperty('--annD', (this.props.annotations ?? true) ? 'block' : 'none');
+    const bare = this.bare();
+    /* embedded in the case study: the product only, no board scaffold */
+    document.documentElement.toggleAttribute('data-bare', bare);
+    r.setProperty('--annD', (!bare && (this.props.annotations ?? true)) ? 'block' : 'none');
   }
+  bare() { try { return /[?&]bare/.test(location.search); } catch (e) { return false; } }
   localReset() { this.setState({ mode: 'armed', sec: 540, refreshed: false, rulesOpen: false, reason: null, side: 'short', qty: 1000, editTrim: false, cancelNote: '', sentFill: '', sentHead: '', sentNote: '', liveMsg: 'Demo reset to baseline.', pos: null, execs: [] }); }
   fmt(s) { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }
   fmtN(n) { return (n || 0).toLocaleString('en-US'); }

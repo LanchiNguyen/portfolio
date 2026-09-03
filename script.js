@@ -146,6 +146,7 @@
         w: parseInt(el.getAttribute("data-w"), 10),
         h: parseInt(el.getAttribute("data-h"), 10),
         poster: el.getAttribute("data-poster"),
+        posterAlt: el.getAttribute("data-poster-alt"),
         title: el.getAttribute("data-title") || "Interactive prototype"
       };
     }
@@ -164,8 +165,13 @@
       var c = cfg(); current = c;
       frame.classList.toggle("is-wide", c.w > 700);
       frame.classList.toggle("is-phone", c.w <= 700);
-      if (posterImg && c.poster) { posterImg.src = c.poster; }
-      if (openLink) openLink.href = c.src;
+      if (posterImg && c.poster) {
+        posterImg.src = c.poster;
+        /* the poster changes with the tab, so its description must too */
+        if (c.posterAlt) posterImg.alt = c.posterAlt;
+      }
+      /* c.src carries ?bare for the embed; the escape hatch wants the full page */
+      if (openLink) openLink.href = c.src.replace(/[?&]bare\b/, "");
       fit();
     }
     function load() {
@@ -177,13 +183,43 @@
       iframe.src = c.src;
       frame.appendChild(iframe);
       stage.classList.add("is-live");
+      stage.classList.remove("is-slow");
       if (poster) poster.style.display = "none";
       fit();
       iframe.focus();
+      watchBoot(c);
+    }
+    /* if the embed hasn't finished loading after a while (e.g. a blocked CDN),
+       point at the standalone prototype instead of leaving a silent blank frame */
+    function watchBoot(c) {
+      var mine = iframe;
+      setTimeout(function () {
+        if (iframe !== mine || !stage.classList.contains("is-live")) return;
+        var stuck = false;
+        try {
+          var doc = mine.contentDocument;
+          stuck = !doc || doc.readyState === "loading" || !doc.body || doc.body.childElementCount === 0;
+        } catch (e) { /* cross-origin: assume it loaded */ }
+        if (!stuck) return;
+        var note = stage.querySelector(".demo-stall");
+        if (!note) {
+          note = document.createElement("a");
+          note.className = "demo-stall";
+          note.href = c.src;
+          note.textContent = "Taking a while to load here — open the full prototype ↗";
+          frame.appendChild(note);
+        } else {
+          note.href = c.src;
+        }
+        stage.classList.add("is-slow");
+      }, 7000);
     }
     function reset() {
       if (iframe) { iframe.remove(); iframe = null; }
+      var note = stage.querySelector(".demo-stall");
+      if (note) note.remove();
       stage.classList.remove("is-live");
+      stage.classList.remove("is-slow");
       if (poster) poster.style.display = "";
       applyPoster();
       if (loadBtn) loadBtn.focus();

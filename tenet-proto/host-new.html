@@ -8,7 +8,8 @@
 <body>
 <x-dc>
 <helmet>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 <style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
@@ -79,13 +80,13 @@
 <sc-if value="{{ monStepped }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ {{ monSteppedTitle }}</div>
-<div style="display:flex;gap:8px;align-items:baseline"><span style="font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A;border:1px solid rgba(230,195,106,.45);border-radius:4px;padding:2px 5px;flex:none">COOLDOWN</span><span style="font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:#CBB78A">3 losing entries this morning</span></div>
+<div style="display:flex;gap:8px;align-items:baseline"><span style="font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A;border:1px solid rgba(230,195,106,.45);border-radius:4px;padding:2px 5px;flex:none">COOLDOWN</span><span style="font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:#CBB78A">3 losing round trips this morning</span></div>
 <div style="display:flex;gap:5px;align-items:center;padding-left:2px"><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span style="font:400 10px 'IBM Plex Mono',monospace;color:#A6957A">9:41</span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span style="font:400 10px 'IBM Plex Mono',monospace;color:#A6957A">9:46</span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span style="font:400 10px 'IBM Plex Mono',monospace;color:#A6957A">9:52</span></div>
 <sc-if value="{{ monShowSizeLine }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:8px;align-items:baseline"><span style="font:600 9px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A;border:1px solid rgba(230,195,106,.45);border-radius:4px;padding:2px 5px;flex:none">SIZE</span><span style="display:flex;gap:14px;align-items:baseline"><span><span style="font:700 15px 'IBM Plex Mono',monospace;color:#E9EDF2">{{ monAskedStr }}</span><span style="font:400 9px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#98A1AB;padding-left:5px">YOU ASKED</span></span><span><span style="font:700 15px 'IBM Plex Mono',monospace;color:#E6C36A">{{ monCapStr }}</span><span style="font:400 9px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#98A1AB;padding-left:5px">YOUR CAP TODAY</span></span></span></div><sc-if value="{{ monPendingOn }}" hint-placeholder-val="{{ false }}"><div style="font:400 9.5px/1.5 'IBM Plex Mono',monospace;color:#98A1AB;padding-left:2px">{{ monPendingText }}</div></sc-if></sc-if>
 <sc-if value="{{ monReducedOn }}" hint-placeholder-val="{{ false }}"><div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">◇ {{ monReducedNote }}</div></sc-if>
-<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">Nothing was sent. Three ways forward:</div>
 </div>
 <div style="flex:1"></div>
+<div style="font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">{{ monWaysLine }}</div>
 <sc-if value="{{ monShowReduce }}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{ monReduce }}" style="min-height:48px;border-radius:999px;border:1px solid #C8F65D;display:flex;align-items:center;justify-content:center;font:700 12.5px 'Plus Jakarta Sans';color:#C8F65D;padding:0 16px">{{ monReduceLabel }}</button>
 </sc-if>
@@ -228,7 +229,7 @@
 </sc-if>
 <sc-if value="{{ wedFlat }}" hint-placeholder-val="{{ false }}">
 <div style="min-height:52px;border-radius:999px;border:1px dashed #A6957A;display:flex;align-items:center;justify-content:center;font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#CBB78A;text-align:center;padding:0 14px">FLAT AT 3:55 — YOUR RULE</div>
-<div style="text-align:center;font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">The one hard stop, five minutes before expiry — written by you, edited any evening in the Companion.</div>
+<div style="text-align:center;font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">The one hard stop on new 0DTE orders, five minutes before expiry — written by you, edited any evening in the Companion. Orders that close a position are never held.</div>
 </sc-if>
 </div>
 </sc-if>
@@ -522,7 +523,7 @@ class Component extends DCLogic {
     const tabs = TABS.map(([k, label]) => ({ label, pressed: String(k === sc), onClick: () => this.resetScenario(k),
       border: k === sc ? '1px solid #212528' : '1px solid #A9B4BC', bg: k === sc ? '#212528' : 'transparent', color: k === sc ? '#F2F5F7' : '#4E5B65' }));
     const INTROS = {
-      mon: 'Three losing 0DTE entries this morning; the next order is revenge-sized. Size it and swipe.',
+      mon: 'Three losing 0DTE round trips this morning; the next order is revenge-sized. Size it and swipe.',
       tue: 'A red day, and your size cap of ' + cap + ' is live.',
       wed: 'A green afternoon. From 3:00 your allowance steps down, flat by 3:55.',
       thu: 'Five entries in six minutes. The next order queues for two minutes.' };
@@ -554,7 +555,7 @@ class Component extends DCLogic {
     return {
       tabs, scenarioIntro: INTROS[sc], isMon: sc === 'mon', isTue: sc === 'tue', isWed: sc === 'wed', isThu: sc === 'thu',
       statusClock: sc === 'wed' ? wedClocks[s.wedStep] : { mon: '9:53', tue: '10:18', thu: '10:42' }[sc],
-      chartAlt: { mon: 'SPY intraday chart, drifting lower through the morning, last 602.15', tue: 'SPY intraday chart, grinding lower, last 602.05', wed: 'SPY intraday chart, rising through the afternoon, last 603.40', thu: 'SPY intraday chart, choppy and falling, last 601.88' }[sc],
+      chartAlt: { mon: 'SPY intraday chart, grinding higher through the morning, last 602.15', tue: 'SPY intraday chart, drifting higher, last 602.05', wed: 'SPY intraday chart, rising through the afternoon, last 603.40', thu: 'SPY intraday chart, choppy and falling, last 601.88' }[sc],
       phoneFilter: sc === 'wed' ? wedFilters[s.wedStep] : 'none',
       dragX: s.dragX, knobTransition: s.dragging ? 'none' : 'transform .28s cubic-bezier(.2,.8,.3,1)',
       railLabelOpacity: Math.max(0, 1 - s.dragX / 150),
@@ -573,6 +574,7 @@ class Component extends DCLogic {
       monLiveRailLabel: s.monQty === 0 ? 'Enter a quantity' : 'Swipe to buy ' + s.monQty + (s.monQty === 1 ? ' contract' : ' contracts'),
       monSteppedTitle: (monOverCap ? '2 OF YOUR RULES STEPPED IN' : 'YOUR COOLDOWN STEPPED IN') + ' — NOTHING SENT',
       monShowSizeLine: monOverCap, monSizeLine: 'you asked for ' + s.monQty + ' · your cap today is ' + cap + pendingNote,
+      monWaysLine: 'Nothing was sent. ' + (monOverCap ? 'Three' : 'Two') + ' ways forward, or cancel:',
       monAskedStr: String(s.monQty), monCapStr: String(cap), monPendingOn: sh.capPending != null, monPendingText: sh.capPending != null ? 'cap goes to ' + sh.capPending + ' tomorrow 9:30' : '',
       monReducedOn: s.monReduced && !monOverCap, monReducedNote: 'size settled — reduced to your cap of ' + cap + ' · the cooldown still applies',
       monShowReduce: monOverCap, monReduceLabel: 'REDUCE TO ' + cap + ' CONTRACTS',

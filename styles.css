@@ -982,6 +982,16 @@ a.bar-loc:hover { color: var(--gold); }
 .demo-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(74,59,44,0.2); box-shadow: 0 22px 44px rgba(30,18,8,0.16); background: #101318; }
 .demo-frame.is-phone { max-width: 400px; margin: 0 auto; border-radius: 30px; }
 .demo-frame iframe { position: absolute; left: 0; top: 0; border: 0; transform-origin: 0 0; background: #fff; }
+/* shown when a loaded embed is still blank after a few seconds (blocked CDN etc.) */
+.demo-stall {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 3;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; font-weight: 600;
+  padding: 10px 16px; border-radius: 999px; white-space: nowrap; max-width: calc(100% - 24px);
+  overflow: hidden; text-overflow: ellipsis;
+  background: rgba(16,19,24,0.88); color: #F2EDE2; border: 1.5px solid rgba(255,255,255,0.4);
+  display: none;
+}
+.demo-stage.is-slow .demo-stall { display: block; }
 .demo-poster { position: absolute; inset: 0; width: 100%; height: 100%; }
 .demo-poster img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
 .demo-load { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; font-weight: 600; padding: 14px 22px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,0.5); background: rgba(16,19,24,0.82); color: #F2EDE2; cursor: pointer; backdrop-filter: blur(3px); }
