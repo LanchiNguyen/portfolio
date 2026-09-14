@@ -8,7 +8,7 @@
  * Photographs inside them travel as ids and rehydrate from the one shared
  * canonical photo map rather than being duplicated per figure.
  */
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 const S = process.env.S || '.';
 const store = JSON.parse(readFileSync('figures.json', 'utf8'));  /* repo input, not scratch */
@@ -90,6 +90,7 @@ const css = [
   store.css.morsel,
   scopeSafely(store.css['tenet-host'], '.tfig'),
   scopeSafely(store.css['tenet-desktop'], '.tfig'),
+  scopeSafely(store.css['tenet-desktop-new'] || '', '.tfig-new'),
   scopeSafely(store.css['doc-wf'] || '', '.docfig-wf'),
   scopeSafely(store.css['doc-ex'] || '', '.docfig-ex'),
   scopeSafely(store.css['doc-ds'] || '', '.docfig-ds'),
@@ -164,7 +165,9 @@ window.__FIGS = ${JSON.stringify(figs)};
    and stop looking like the product. Shipped as a separate sheet because the
    artifact build already ships these faces through its own keepUsedFaces pass;
    only the standalone site pages need this file. */
-const allFaces = readFileSync(S + '/proto-fonts-inline.css', 'utf8');
+// Reuse the checked-in faces when the original capture font bundle is absent.
+const fontSource = S + '/proto-fonts-inline.css';
+const allFaces = readFileSync(existsSync(fontSource) ? fontSource : 'figures-fonts.css', 'utf8');
 const corpus = JSON.stringify(figs) + css;
 const faces = (allFaces.match(/@font-face\{[^}]*\}/g) || []).filter(b => {
   const m = /font-family:\s*'([^']+)'/.exec(b);

@@ -15,7 +15,17 @@
 @media (max-width:1180px){:root{--frameCols:1fr 260px 300px}}
 @media (max-width:920px){:root{--frameCols:1fr;--frameRows:auto;--tickSpan:auto}}
 button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}
-button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
+button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
+.order-ticket{background:#F6F7F7;padding:14px 16px;display:flex;flex-direction:column;gap:8px;grid-row:var(--tickSpan);min-height:0;overflow:hidden;box-sizing:border-box}
+.ticket-details{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px 3px 8px;scrollbar-gutter:stable}
+.ticket-details>*{flex-shrink:0}
+.ticket-summary{order:1;display:flex;flex-direction:column;gap:8px}
+.ticket-actions{flex:none;display:flex;flex-direction:column;gap:8px;border-top:1px solid #D5DADD;padding-top:10px}
+.ticket-action-group{display:flex;flex-direction:column;gap:8px;background:var(--c-bg);border:1px solid var(--c-bd);border-radius:12px;padding:10px}
+.ticket-actions button{flex-shrink:0;min-height:44px;border-radius:8px;box-sizing:border-box}
+.ticket-cancel{border:1px solid var(--c-dim);color:var(--c-txt);font:600 12px 'Plus Jakarta Sans';text-align:center;padding:8px}
+.ticket-cancel:hover{background:rgba(255,255,255,.07)}
+@media (max-width:920px){.order-ticket{min-height:440px;max-height:560px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}
 /* ?bare — the case-study embed shows the workstation, not the board around it */
 :root[data-bare] [data-scaffold]{display:none !important}
@@ -34,7 +44,7 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 <div style="display:flex;flex-direction:column;gap:8px">
 <div style="font:800 34px/1 'Plus Jakarta Sans';letter-spacing:-.02em;color:#24282B">TENET</div>
 <div style="font:600 15px/1.4 'Plus Jakarta Sans';color:#24282B">Self-authored guardrails for impulsive trading.</div>
-<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">FRICTION, NEVER A BLOCK · THE GUARD FOLLOWS THE PERSON, NOT THE PRODUCT</div>
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#8C6A25">YOUR RULES AT ORDER SEND · REVIEW BEFORE EXECUTION</div>
 </div>
 <div style="font:400 13px/1.65 'Plus Jakarta Sans';color:#5C6367;max-width:520px">Dart removes reflection through stimulation. Meridian removes reflection through efficiency. Tenet restores one deliberate moment in both. Here: the same cooldown that guards 0DTE options on a phone, holding a revenge-sized short sale in a professional equities workstation.</div>
 </div>
@@ -64,7 +74,7 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 <div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25">SIZE CAP · PER INSTRUMENT</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#4E5B65">0DTE: 5 contracts · equities: 1,500 shares. This order: 1,000 of 1,500 — within the cap, not triggered.</span></div>
 <div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25">PACING · UNIVERSAL</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#4E5B65">Two minutes between rapid entries.</span></div>
 <div style="display:flex;flex-direction:column;gap:3px"><span style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#7A8288">WIND-DOWN · NOT APPLICABLE HERE</span><span style="font:400 11.5px/1.5 'Plus Jakarta Sans';color:#7A8288">0DTE size steps down into the close — options only.</span></div>
-<div style="border-top:1px solid #E9EBEB;padding-top:9px;font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:#6E767C">written by you · edited any evening in the <a href="duo.html">Companion →</a></div>
+<div style="border-top:1px solid #E9EBEB;padding-top:9px;font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:#6E767C">written by you · view your rules in the <a href="duo-new.html">Companion →</a></div>
 </div>
 </sc-if>
 </div>
@@ -90,24 +100,22 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 <div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C;padding-top:8px">ladder live — the guard never touches it</div>
 </div>
-<div style="background:#F6F7F7;padding:14px 16px;display:flex;flex-direction:column;gap:8px;grid-row:var(--tickSpan);overflow-y:auto;box-sizing:border-box">
-<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 12px 'Plus Jakarta Sans'">Order — SPY</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C">MKT · DAY · SMART</span></div>
+<div class="order-ticket" onKeyDown="{{ reasonKey }}" ref="{{ reasonRef }}">
+<div style="display:flex;justify-content:space-between;align-items:baseline;flex-shrink:0"><span style="font:600 12px 'Plus Jakarta Sans'">Order — SPY</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#6E767C">MKT · DAY · SMART</span></div>
+<div class="ticket-details" role="region" aria-label="Order details and rule context" tabIndex="0" ref="{{ detailsRef }}">
+<div class="ticket-summary">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#6E767C">Side</span><span style="display:flex;gap:7px;align-items:center"><span style="font:600 13px 'Plus Jakarta Sans';color:{{ sideColor }}">{{ sideLabel }}</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#6E767C;border:1px solid #E4E6E7;border-radius:4px;padding:2px 5px">SHORTABLE · ETB</span></span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#6E767C">Qty</span><span style="font:600 15px 'IBM Plex Mono',monospace">{{ qtyDisp }}</span></div>
 <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#2F8F5B;white-space:nowrap">BID {{ bid }} × {{ bidSize }}</span><span style="color:#C13A3F;white-space:nowrap">ASK {{ ask }} × 890</span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#6E767C">Est. execution</span><span style="font:600 12.5px 'IBM Plex Mono',monospace">≈ {{ execPx }} <span style="font-weight:400;color:#6E767C">({{ execAt }})</span></span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#6E767C">Est. notional</span><span style="font-weight:600">{{ notional }}</span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;font-size:12.5px"><span style="color:#6E767C">Buying power</span><span style="font-weight:600;color:#6E767C">{{ buyingPower }}</span></div>
-<div style="flex:1"></div>
-
+</div>
 <sc-if value="{{ isStepped }}" hint-placeholder-val="{{ false }}">
 <div style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 14px 30px -14px rgba(20,30,40,.5)">
 <div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ LOSS COOLDOWN STEPPED IN — NOTHING SENT</div>
 <div style="font:400 12px/1.6 'Plus Jakarta Sans';color:var(--c-txt)">Your rule: after 3 losing trades before noon, the next order waits nine minutes. Losing exits 9:41 / 9:46 / 9:52 (−$360.00) · this order flips you short at 2× your largest size today.</div>
 <div style="font:400 11px/1.5 'IBM Plex Mono',monospace;color:var(--c-dim)">size cap not triggered — 1,000 of 1,500 shares · only this rule holds the order</div>
-<button type="button" onClick="{{ startCooldown }}" style-hover="background:rgba(223,176,92,.1)" style="border:1px solid var(--c-a1);color:var(--c-a1);border-radius:8px;min-height:44px;text-align:center;font:600 12.5px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Start 9-minute cooldown</button>
-<button type="button" onClick="{{ openReason }}" style-hover="background:rgba(255,255,255,.05)" style="border:1px solid var(--c-bd);color:var(--c-txt);border-radius:8px;min-height:44px;text-align:center;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Override with a reason</button>
-<button type="button" onClick="{{ cancelOrder }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel order — nothing sends</button>
 </div>
 </sc-if>
 
@@ -116,12 +124,11 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 <div role="timer" aria-label="Cooldown remaining" style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ COOLDOWN — {{ cd }} LEFT</div>
 <div aria-hidden="true" style="height:4px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden"><div style="height:100%;width:{{ coolPct }};background:var(--c-a1);transition:width .2s linear"></div></div>
 <div style="font:400 12px/1.6 'Plus Jakarta Sans';color:var(--c-txt)">Your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.</div>
-<button type="button" onClick="{{ cancelCooldown }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel cooldown and order</button>
 </div>
 </sc-if>
 
 <sc-if value="{{ isReason }}" hint-placeholder-val="{{ false }}">
-<div role="dialog" aria-modal="false" aria-label="Override with a reason" onKeyDown="{{ reasonKey }}" ref="{{ reasonRef }}" style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px">
+<div role="group" aria-label="Override with a reason" style="background:var(--c-bg);border:1px solid var(--c-bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--c-a1)">◆ BEFORE YOU CONTINUE</div>
 <div style="font:400 11.5px/1.55 'Plus Jakarta Sans';color:var(--c-txt)">You’re continuing past your cooldown. Pick the reason that fits — it’s recorded next to the trade as context.</div>
 <div role="radiogroup" aria-label="Override reason" ref="{{ rgRef }}" onKeyDown="{{ rgKey }}" style="display:flex;flex-direction:column;gap:7px">
@@ -129,8 +136,6 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 <button type="button" role="radio" aria-checked="{{ r.checked }}" tabIndex="{{ r.ti }}" onClick="{{ r.onClick }}" style="border:{{ r.border }};background:{{ r.bg }};border-radius:9px;padding:9px 10px;display:flex;gap:8px;align-items:center;min-height:44px;box-sizing:border-box;width:100%"><span aria-hidden="true" style="width:13px;height:13px;border-radius:50%;border:{{ r.dot }};flex:none;box-sizing:border-box"></span><span style="font:500 11.5px 'Plus Jakarta Sans';color:{{ r.color }}">{{ r.label }}</span></button>
 </sc-for>
 </div>
-<button type="button" onClick="{{ reasonContinue }}" aria-disabled="{{ continueDisabled }}" style-hover="background:rgba(223,176,92,.1)" style="min-height:44px;border-radius:8px;border:1px solid var(--c-a1);display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:var(--c-a1);opacity:{{ continueOpacity }}">Continue to order review</button>
-<button type="button" onClick="{{ reasonCancel }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel — keep the pause</button>
 </div>
 </sc-if>
 
@@ -140,10 +145,6 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 <div style="font:400 11.5px/1.6 'IBM Plex Mono',monospace;color:var(--c-txt)">Market refreshed 10:02 · bid 602.12 → 601.85</div>
 <div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:var(--c-a1)">⚠ BID MOVED −$0.27 WHILE YOU WAITED</div>
 <div style="font:400 11px/1.55 'IBM Plex Mono',monospace;color:var(--c-dim)">est. notional now $601,850 · market execution may differ</div>
-<div style="display:flex;gap:7px">
-<button type="button" onClick="{{ editOrder }}" style-hover="background:rgba(255,255,255,.05)" style="flex:1;border:1px solid var(--c-bd);color:var(--c-txt);border-radius:8px;min-height:44px;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Edit order</button>
-<button type="button" onClick="{{ cancelOrder }}" style-hover="background:rgba(255,255,255,.05)" style="flex:1;border:1px solid var(--c-bd);color:var(--c-dim);border-radius:8px;min-height:44px;font:600 12px 'Plus Jakarta Sans';display:flex;align-items:center;justify-content:center">Cancel order</button>
-</div>
 </div>
 </sc-if>
 
@@ -166,7 +167,6 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 <div style="font:400 11px/1.5 'IBM Plex Mono',monospace;color:var(--c-dim)">{{ editCapNote }}</div>
 <div style="font:400 11px/1.55 'IBM Plex Mono',monospace;color:var(--c-txt)">est. {{ execPx }} ({{ execAt }}) · notional {{ notional }} · transmit sends — cooldown served</div>
-<button type="button" onClick="{{ cancelOrder }}" style="min-height:44px;text-align:center;color:var(--c-dim);font:500 11.5px 'IBM Plex Mono',monospace;text-decoration:underline">Cancel order — nothing sends</button>
 </div>
 </sc-if>
 
@@ -175,25 +175,52 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 <div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5C6367">◇ ORDER CANCELLED · NOTHING SENT · COOLDOWN RECORDED</div>
 <div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#8A9196">{{ cancelNote }} · trading unaffected · on your record</div>
 </div>
-<button type="button" onClick="{{ newOrder }}" style-hover="background:rgba(90,99,103,.06)" style="min-height:44px;border:1px solid #9AA0A4;border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#5C6367">New order</button>
 </sc-if>
 
 <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid #BFDCC9;background:#F0F7F2;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;text-align:center">
 <div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#2B8E59">{{ sentHead }}</div>
 <div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#6E767C">{{ sentNote }}</div>
-<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C">on the shared record — open the <a href="duo.html">Companion</a> to see it</div>
+<div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#6E767C">on the shared record — open the <a href="duo-new.html">Companion</a> to see it</div>
 </div>
-<button type="button" onClick="{{ newOrder }}" style-hover="background:rgba(90,99,103,.06)" style="min-height:44px;border:1px solid #9AA0A4;border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5C6367">NEW ORDER</button>
 </sc-if>
-
+</div>
+<div class="ticket-actions" role="group" aria-label="Order actions">
+<sc-if value="{{ isStepped }}" hint-placeholder-val="{{ false }}">
+<div class="ticket-action-group">
+<div style="font:600 10.5px 'IBM Plex Mono',monospace;color:var(--c-a1)">NOTHING SENT — CHOOSE WHAT HAPPENS NEXT</div>
+<button type="button" onClick="{{ startCooldown }}" style-hover="background:rgba(223,176,92,.1)" style="border:1px solid var(--c-a1);color:var(--c-a1);text-align:center;font:600 12.5px 'Plus Jakarta Sans'">Start 9-minute cooldown</button>
+<button type="button" onClick="{{ openReason }}" ref="{{ overrideBtnRef }}" style-hover="background:rgba(255,255,255,.05)" style="border:1px solid var(--c-dim);color:var(--c-txt);text-align:center;font:600 12px 'Plus Jakarta Sans'">Override with a reason</button>
+<button type="button" onClick="{{ cancelOrder }}" class="ticket-cancel">Cancel order — nothing sends</button>
+</div>
+</sc-if>
+<sc-if value="{{ isCooling }}" hint-placeholder-val="{{ false }}">
+<div class="ticket-action-group"><button type="button" onClick="{{ cancelCooldown }}" class="ticket-cancel">Cancel cooldown and order</button></div>
+</sc-if>
+<sc-if value="{{ isReason }}" hint-placeholder-val="{{ false }}">
+<div class="ticket-action-group">
+<button type="button" onClick="{{ reasonContinue }}" aria-disabled="{{ continueDisabled }}" style-hover="background:rgba(223,176,92,.1)" style="border:1px solid var(--c-a1);text-align:center;font:600 12px 'Plus Jakarta Sans';color:var(--c-a1);opacity:{{ continueOpacity }}">Continue to order review</button>
+<button type="button" onClick="{{ reasonCancel }}" class="ticket-cancel">Back — keep the pause</button>
+<button type="button" onClick="{{ cancelOrder }}" class="ticket-cancel">Cancel order — nothing sends</button>
+</div>
+</sc-if>
+<sc-if value="{{ isReview }}" hint-placeholder-val="{{ false }}">
+<div class="ticket-action-group" style="flex-direction:row">
+<button type="button" onClick="{{ editOrder }}" class="ticket-cancel" style="flex:1">Edit order</button>
+<button type="button" onClick="{{ cancelOrder }}" class="ticket-cancel" style="flex:1">Cancel order</button>
+</div>
+</sc-if>
+<sc-if value="{{ cancelAtReview }}" hint-placeholder-val="{{ false }}">
+<div class="ticket-action-group"><button type="button" onClick="{{ cancelOrder }}" class="ticket-cancel">Cancel order — nothing sends</button></div>
+</sc-if>
+<sc-if value="{{ newOrderOn }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ newOrder }}" style-hover="background:rgba(90,99,103,.06)" style="border:1px solid #9AA0A4;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#5C6367">New order</button>
+</sc-if>
 <sc-if value="{{ sellOn }}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{ sell }}" style-hover="filter:brightness(1.08)" style="background:{{ sellBg }};color:#FDF5F4;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-align:center;padding:13px;border-radius:4px;min-height:46px;width:100%;box-sizing:border-box">{{ sellLabel }}</button>
 </sc-if>
-<sc-if value="{{ sellMutedOn }}" hint-placeholder-val="{{ false }}">
-<div aria-hidden="true" style="border:1px solid #E4E6E7;color:#B0B6BA;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-align:center;padding:13px;border-radius:4px;user-select:none">SELL SHORT 1,000 SPY MKT · ⇧⏎</div>
-</sc-if>
 <div style="border-top:1px solid #E9EBEB;padding-top:8px;font:400 10.5px 'IBM Plex Mono',monospace;color:{{ footC }};text-align:center">{{ footLine }}</div>
+</div>
 </div>
 <div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
 <div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#6E767C;padding-bottom:10px">ROUND TRIPS — TODAY</div>
@@ -300,7 +327,7 @@ button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 </div>
 </div>
 
-<div data-scaffold style="margin-top:32px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;text-align:left;width:100%;max-width:1360px;border-top:1px solid #DEE0E1;padding-top:14px">◆ TENET — behavioral risk layer · concept &amp; design 2026 · brokers, quotes, and fills are simulated — the rules, interventions, and shared record are functional<br><a href="duo.html">mobile host + companion prototypes →</a></div>
+<div data-scaffold style="margin-top:32px;font:11.5px/1.65 'IBM Plex Mono',monospace;color:#6E767C;text-align:left;width:100%;max-width:1360px;border-top:1px solid #DEE0E1;padding-top:14px">◆ TENET — behavioral risk layer · concept &amp; design 2026 · brokers, quotes, and fills are simulated — the rules, interventions, and shared record are functional<br><a href="duo-new.html">mobile host + companion prototypes →</a></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:2300},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ink blue&quot;,&quot;umber&quot;],&quot;default&quot;:&quot;ink blue&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Card&quot;},&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Board&quot;},&quot;cooldownSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:36,&quot;min&quot;:6,&quot;max&quot;:120,&quot;step&quot;:6,&quot;unit&quot;:&quot;s served / s held&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
@@ -341,7 +368,7 @@ class Component extends DCLogic {
     this._kb = (e) => { if (e.shiftKey && e.key === 'Enter') { const t = e.target; if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')) return; e.preventDefault(); this.doSell(); } };
     window.addEventListener('keydown', this._kb);
   }
-  componentDidUpdate() { this.applyVars(); }
+  componentDidUpdate() { this.applyVars(); if (this._lastMode !== this.state.mode) { if (this._detailsEl) this._detailsEl.scrollTop = 0; this._lastMode = this.state.mode; } }
   componentWillUnmount() { clearInterval(this.iv); window.removeEventListener('storage', this._st); window.removeEventListener('keydown', this._kb); }
   applyVars() {
     const umber = (this.props.cardStyle ?? 'ink blue') === 'umber';
@@ -356,6 +383,7 @@ class Component extends DCLogic {
     r.setProperty('--annD', (!bare && (this.props.annotations ?? true)) ? 'block' : 'none');
   }
   bare() { try { return /[?&]bare/.test(location.search); } catch (e) { return false; } }
+  keepPause() { this.setState({ mode: 'stepped', reason: null, liveMsg: 'Kept the pause.' }); setTimeout(() => { if (this._overrideBtn) this._overrideBtn.focus(); }, 30); }
   localReset() { this.setState({ mode: 'armed', sec: 540, refreshed: false, rulesOpen: false, reason: null, side: 'short', qty: 1000, editTrim: false, cancelNote: '', sentFill: '', sentHead: '', sentNote: '', liveMsg: 'Demo reset to baseline.', pos: null, execs: [] }); }
   fmt(s) { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }
   fmtN(n) { return (n || 0).toLocaleString('en-US'); }
@@ -400,19 +428,21 @@ class Component extends DCLogic {
       isStepped: m === 'stepped', isCooling: m === 'cooling', isReason: m === 'reason', isReview: m === 'review',
       isEdited: m === 'edited', isOverridden: m === 'overridden', isCancelled: m === 'cancelled', isSent: m === 'sent',
       sellOn: m === 'armed' || m === 'review' || m === 'edited' || m === 'overridden',
-      sellMutedOn: m === 'stepped' || m === 'cooling' || m === 'reason',
+      cancelAtReview: m === 'edited' || m === 'overridden', newOrderOn: m === 'cancelled' || m === 'sent',
       sellBg: m === 'review' || m === 'overridden' ? '#8A6D2F' : '#C13A3F',
       sellLabel: m === 'review' ? 'CONFIRM — SELL SHORT 1,000 SPY @ EST. 601.85' : m === 'overridden' ? 'CONFIRM — SELL SHORT 1,000 SPY @ EST. 602.12' : m === 'edited' ? ((s.side === 'short' ? 'SELL SHORT ' : 'BUY ') + this.fmtN(s.qty) + ' SPY @ EST. ' + (s.side === 'short' ? '601.85' : '601.88') + ' · ⇧⏎') : 'SELL SHORT 1,000 SPY MKT · ⇧⏎',
       sell: () => this.doSell(),
       startCooldown: () => this.setState({ mode: 'cooling', sec: 540, liveMsg: 'Nine minute cooldown started. Your order is held; you review it after.' }),
       openReason: () => { this.setState({ mode: 'reason', reason: null }); setTimeout(() => { if (this._reasonEl) { const b = this._reasonEl.querySelector('[role=radio]'); if (b) b.focus(); } }, 60); },
       reasonRef: (el) => { this._reasonEl = el; },
-      reasonKey: (e) => { if (e.key === 'Escape') { e.stopPropagation(); this.setState({ mode: 'stepped', reason: null, liveMsg: 'Kept the pause.' }); } },
+      detailsRef: (el) => { this._detailsEl = el; },
+      overrideBtnRef: (el) => { this._overrideBtn = el; },
+      reasonKey: (e) => { if (s.mode === 'reason' && e.key === 'Escape') { e.stopPropagation(); this.keepPause(); } },
       reasons, reasonShort: s.reason == null ? '—' : SHORT[s.reason],
       continueDisabled: String(s.reason == null), continueOpacity: s.reason == null ? '.45' : '1',
       reasonContinue: () => { if (s.reason == null) { this.setState({ liveMsg: 'Pick a reason first — it is recorded with the trade.' }); return; }
         this.setState({ mode: 'overridden', liveMsg: 'Override recorded. You are back at order review — confirm to send at the current bid.' }); },
-      reasonCancel: () => this.setState({ mode: 'stepped', reason: null, liveMsg: 'Kept the pause.' }),
+      reasonCancel: () => this.keepPause(),
       editOrder: () => this.setState({ mode: 'edited', side: 'short', qty: 1000, editTrim: false, liveMsg: 'Editing. Side and quantity are editable; the quote stays refreshed. Transmit sends — the cooldown is served.' }),
       qtyStr: s.qty === 0 ? '' : String(s.qty),
       qtyChange: (e) => { const d = String(e.target.value).replace(/[^0-9]/g, '').slice(0, 4); let v = d === '' ? 0 : parseInt(d, 10); let trim = false; if (v > 1500) { v = 1500; trim = true; } this.setState({ qty: v, editTrim: trim }); },

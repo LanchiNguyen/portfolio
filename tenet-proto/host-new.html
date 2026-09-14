@@ -90,19 +90,21 @@
 <sc-if value="{{ monShowReduce }}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{ monReduce }}" style="min-height:48px;border-radius:999px;border:1px solid #C8F65D;display:flex;align-items:center;justify-content:center;font:700 12.5px 'Plus Jakarta Sans';color:#C8F65D;padding:0 16px">{{ monReduceLabel }}</button>
 </sc-if>
+<sc-if value="{{ monShowHold }}" hint-placeholder-val="{{ false }}">
 <button type="button" onPointerDown="{{ holdDown }}" onKeyDown="{{ holdKey }}" aria-label="Hold, or press Enter, to start the 9 minute cooldown" style="position:relative;min-height:52px;width:100%;border-radius:999px;border:1px solid #E6C36A;background:linear-gradient(90deg,rgba(230,195,106,.3) 0 {{ holdPct }},rgba(230,195,106,.06) {{ holdPct }} 100%);display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;box-sizing:border-box"><span style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A;pointer-events:none">{{ monHoldLabel }}</span></button>
-<button type="button" onClick="{{ openSheetMon }}" style="min-height:44px;border-radius:999px;border:1px solid #3A3F46;display:flex;align-items:center;justify-content:center;font:600 11.5px 'Plus Jakarta Sans';color:#C6CDD4;padding:0 16px">Override with a reason</button>
-<button type="button" onClick="{{ monCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order — nothing sends</button>
+</sc-if>
+<button type="button" onClick="{{ openSheetMon }}" style="min-height:44px;border-radius:999px;border:1px solid #69737D;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#C6CDD4;padding:0 16px">Override with a reason</button>
+<button type="button" onClick="{{ monCancel }}" style="min-height:44px;border:1px solid #69737D;border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#E9EDF2;padding:0 12px">Cancel order — nothing sends</button>
 </sc-if>
 
 <sc-if value="{{ monCooling }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:13px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ COOLDOWN RUNNING</div>
-<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Your order is held, not queued to fire. When the timer ends you review a refreshed quote — nothing sends by itself.</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">{{ monCoolingNote }}</div>
 </div>
 <div style="flex:1"></div>
 <div role="timer" aria-label="Cooldown remaining" style="position:relative;height:52px;border-radius:999px;border:1px solid #E6C36A;background:linear-gradient(90deg,rgba(230,195,106,.28) 0 {{ monCoolPct }},rgba(230,195,106,.05) {{ monCoolPct }} 100%);display:flex;align-items:center;justify-content:center"><span style="font:600 12.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#E6C36A">COOLDOWN · {{ monClock }} LEFT</span></div>
-<button type="button" onClick="{{ monCancelCooldown }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel cooldown and order</button>
+<button type="button" onClick="{{ monCancelCooldown }}" style="min-height:44px;border:1px solid #69737D;border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#E9EDF2;padding:0 12px">Cancel cooldown and order</button>
 </sc-if>
 
 <sc-if value="{{ monReview }}" hint-placeholder-val="{{ false }}">
@@ -117,7 +119,7 @@
 <button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
 <span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
 <span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ monReviewRail }}</span></button>
-<button type="button" onClick="{{ monCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order</button>
+<button type="button" onClick="{{ monCancel }}" style="min-height:44px;border:1px solid #69737D;border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#E9EDF2;padding:0 12px">Cancel order</button>
 </sc-if>
 
 <sc-if value="{{ monOverridden }}" hint-placeholder-val="{{ false }}">
@@ -176,8 +178,8 @@
 <button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
 <span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
 <span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ tueRailLabel }}</span></button>
-<button type="button" onClick="{{ openSheetTue }}" style="min-height:44px;border-radius:999px;border:1px solid #3A3F46;display:flex;align-items:center;justify-content:center;font:600 11.5px 'Plus Jakarta Sans';color:#C6CDD4;padding:0 16px">Override the cap with a reason</button>
-<button type="button" onClick="{{ tueCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order — nothing sends</button>
+<button type="button" onClick="{{ openSheetTue }}" style="min-height:44px;border-radius:999px;border:1px solid #69737D;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#C6CDD4;padding:0 16px">Override the cap with a reason</button>
+<button type="button" onClick="{{ tueCancel }}" style="min-height:44px;border:1px solid #69737D;border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#E9EDF2;padding:0 12px">Cancel order — nothing sends</button>
 </sc-if>
 
 <sc-if value="{{ tueOverridden }}" hint-placeholder-val="{{ false }}">
@@ -200,14 +202,14 @@
 <div style="border:1px solid rgba(230,195,106,.3);background:rgba(230,195,106,.05);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ WIND-DOWN — YOUR 3:00 RULE STEPPED IN</div>
 <div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">0DTE premium decays fastest into the close. In your last 45 days, 61% of give-back came after 3:00. Size steps down to expiry; typing above the allowance just trims it.</div>
-<div role="img" aria-label="Allowance steps down from 5 contracts at 3:00 to flat at 3:55" style="display:flex;gap:4px;align-items:flex-end;height:26px">
+<div role="img" aria-label="New-order allowance steps down from 5 contracts at 3:00 to zero at 3:55" style="display:flex;gap:4px;align-items:flex-end;height:26px">
 <div style="flex:1;height:26px;background:rgba(230,195,106,.5);border-radius:3px"></div>
 <div style="flex:1;height:19px;background:rgba(230,195,106,.38);border-radius:3px"></div>
 <div style="flex:1;height:13px;background:rgba(230,195,106,.26);border-radius:3px"></div>
 <div style="flex:1;height:8px;background:rgba(230,195,106,.16);border-radius:3px"></div>
 <div style="flex:1;height:3px;background:rgba(230,195,106,.1);border-radius:3px"></div>
 </div>
-<div style="display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#A6957A"><span>3:00 · 5 contracts</span><span>3:55 · flat</span></div>
+<div style="display:flex;justify-content:space-between;font:400 10px 'IBM Plex Mono',monospace;color:#A6957A"><span>3:00 · 5 contracts</span><span>3:55 · no new orders</span></div>
 </div>
 </sc-if>
 <div style="flex:1"></div>
@@ -228,8 +230,8 @@
 <span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ wedRailLabel }}</span></button>
 </sc-if>
 <sc-if value="{{ wedFlat }}" hint-placeholder-val="{{ false }}">
-<div style="min-height:52px;border-radius:999px;border:1px dashed #A6957A;display:flex;align-items:center;justify-content:center;font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#CBB78A;text-align:center;padding:0 14px">FLAT AT 3:55 — YOUR RULE</div>
-<div style="text-align:center;font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">The one hard stop on new 0DTE orders, five minutes before expiry — written by you, edited any evening in the Companion. Orders that close a position are never held.</div>
+<div style="min-height:52px;border-radius:999px;border:1px dashed #A6957A;display:flex;align-items:center;justify-content:center;font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#CBB78A;text-align:center;padding:0 14px">NO NEW 0DTE ORDERS AFTER 3:55</div>
+<div style="text-align:center;font:400 10px/1.6 'IBM Plex Mono',monospace;color:#98A1AB">This preset is a hard limit: new 0DTE orders stop at 3:55, with no in-session override. It does not close existing positions. Editing this preset and closing positions are outside this prototype.</div>
 </sc-if>
 </div>
 </sc-if>
@@ -296,7 +298,7 @@
 <button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
 <span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
 <span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">{{ thuReviewRail }}</span></button>
-<button type="button" onClick="{{ thuCancel }}" style="min-height:44px;display:flex;align-items:center;justify-content:center;font:600 11px 'IBM Plex Mono',monospace;color:#98A1AB;text-decoration:underline">Cancel order</button>
+<button type="button" onClick="{{ thuCancel }}" style="min-height:44px;border:1px solid #69737D;border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 12px 'Plus Jakarta Sans';color:#E9EDF2;padding:0 12px">Cancel order</button>
 </sc-if>
 
 <sc-if value="{{ thuCancelled }}" hint-placeholder-val="{{ false }}">
@@ -485,7 +487,7 @@ class Component extends DCLogic {
     const s = this.state, cap = this.cap(), R = ['This setup was planned before the losses', 'This rule needs review', 'Continue despite my rule'];
     if (s.scenario === 'mon') {
       if (s.monPhase === 'live') { if (s.monQty === 0) { this.setState({ dragX: 0 }); return; }
-        this.setState({ monPhase: 'stepped', dragX: 0, monNote: null, liveMsg: (s.monQty > cap ? 'Two of your rules stepped in.' : 'Your cooldown stepped in.') + ' Nothing was sent. Choose: reduce, start the cooldown, or override.' }); }
+        this.setState({ monPhase: 'stepped', dragX: 0, monNote: null, liveMsg: (s.monQty > cap ? 'Two of your rules stepped in.' : 'Your cooldown stepped in.') + (s.monQty > cap ? ' Nothing was sent. Reduce to ' + cap + ' and wait nine minutes, override both rules, or cancel.' : ' Nothing was sent. Start the cooldown, override, or cancel.') }); }
       else if (s.monPhase === 'review') { const q = Math.min(s.monQty, cap);
         this.addEvent({ day: 'MON', time: '10:02', rule: 'LOSS COOLDOWN', what: 'loss cooldown · waited 9:00 · reviewed & sent' + (s.monQty > cap ? ' at your cap' : ''), size: (s.monQty > cap ? s.monQty + '→' : '') + q + '× 602P', result: 'sent @ $1.36', out: '✓ sent', kind: 'held' });
         this.showSent({ t: 'Bought ' + q + '× SPY 602P', p: '@ $1.36 · $' + this.fmtN(q * 136) + ' premium · 10:03', g: '◇ waited 9:00 · reviewed the refreshed quote · you confirmed the send' }); }
@@ -507,7 +509,7 @@ class Component extends DCLogic {
     else if (s.scenario === 'wed') {
       if (s.wedQty === 0) { this.setState({ dragX: 0 }); return; }
       if (s.wedStep >= 1) this.addEvent({ day: 'WED', time: ['', '15:04', '15:34', '15:52', ''][s.wedStep] || '15:04', rule: 'WIND-DOWN', what: 'wind-down · sent within the allowance', size: s.wedQty + '× 604C', result: 'sent @ $0.88', out: '✓ sent', kind: 'held' });
-      this.showSent({ t: 'Bought ' + s.wedQty + '× SPY 604C', p: '@ $0.88 · $' + this.fmtN(s.wedQty * 88) + ' premium', g: s.wedStep === 0 ? '◇ before 3:00 — nothing guards this' : '◇ within your wind-down allowance · flat by 3:55' });
+      this.showSent({ t: 'Bought ' + s.wedQty + '× SPY 604C', p: '@ $0.88 · $' + this.fmtN(s.wedQty * 88) + ' premium', g: s.wedStep === 0 ? '◇ before 3:00 — nothing guards this' : '◇ within your wind-down allowance · no new orders after 3:55' });
     }
     else if (s.scenario === 'thu') {
       if (s.thuPhase === 'ready') this.setState({ thuPhase: 'queued', thuQueue: 120, thuNote: null, dragX: 0, liveMsg: 'Pacing rule stepped in. Order queued for two minutes — you can edit, leave the queue, or cancel. Nothing sends by itself.' });
@@ -525,7 +527,7 @@ class Component extends DCLogic {
     const INTROS = {
       mon: 'Three losing 0DTE round trips this morning; the next order is revenge-sized. Size it and swipe.',
       tue: 'A red day, and your size cap of ' + cap + ' is live.',
-      wed: 'A green afternoon. From 3:00 your allowance steps down, flat by 3:55.',
+      wed: 'A green afternoon. Your preset reduces the new-order allowance from 3:00 to zero at 3:55.',
       thu: 'Five entries in six minutes. The next order queues for two minutes.' };
     const pendingNote = sh.capPending != null ? ' (goes to ' + sh.capPending + ' tomorrow 9:30)' : '';
     const monOverCap = s.monQty > cap;
@@ -538,12 +540,12 @@ class Component extends DCLogic {
     const wedAllow = this.wedAllow();
     const wedClocks = ['14:58', '15:04', '15:34', '15:52', '15:55'];
     const wedToCloseArr = ['62 min to expiry', '56 min to expiry', '26 min to expiry', '8 min to expiry', '5 min to expiry'];
-    const wedShares = ['CONTRACTS', 'CONTRACTS — 3:04 ALLOWANCE: 5', 'CONTRACTS — 3:34 ALLOWANCE: 2', 'CONTRACTS — 3:52 ALLOWANCE: 1', 'CONTRACTS — FLAT'];
+    const wedShares = ['CONTRACTS', 'CONTRACTS — 3:04 ALLOWANCE: 5', 'CONTRACTS — 3:34 ALLOWANCE: 2', 'CONTRACTS — 3:52 ALLOWANCE: 1', 'NEW ORDERS STOPPED'];
     const wedFilters = ['none', 'saturate(.62) sepia(.2) brightness(.86)', 'saturate(.5) sepia(.28) brightness(.78)', 'saturate(.42) sepia(.32) brightness(.72)', 'saturate(.34) sepia(.36) brightness(.65)'];
     const HINTS = {
-      mon: [['1', 'Type any contract count (12 is staged) and swipe.'], ['2', 'Your rules step in at send; nothing is sent. Three paths: reduce to your cap, hold (or press Enter) to start the 9-minute cooldown, or override with a reason.'], ['3', 'After the cooldown you review a refreshed quote and send or cancel — an old order never fires by itself.'], ['4', 'Cancel is always available. Every path lands in the Companion Record.']],
+      mon: [['1', 'Type any contract count (12 is staged) and swipe.'], ['2', 'Both rules apply. Reduce to the cap and start the 9-minute wait together, override with a reason, or cancel.'], ['3', 'After the cooldown you review a refreshed quote and send or cancel — an old order never fires by itself.'], ['4', 'Cancel is always available. Every path lands in the Companion Record.']],
       tue: [['1', 'Send ' + cap + ' or fewer — the guard is silent inside your own rules.'], ['2', 'Type 12 (or MAX) and swipe: the order is changed before sending, showing original vs revised risk.'], ['3', 'Confirm the revised size with a fresh swipe, cancel, or override with a reason.'], ['4', 'Tighten the cap in the Companion and this scenario enforces the new number immediately.']],
-      wed: [['1', 'Before 3:00 the ticket is unguarded — type anything.'], ['2', 'ADVANCE THE CLOCK (above): the room dims, the allowance steps down, typing above it trims.'], ['3', 'Swipe to buy within the allowance.'], ['4', 'At 3:55 the rail goes flat — five minutes before expiry, by your rule.']],
+      wed: [['1', 'Before 3:00 the ticket is unguarded — type anything.'], ['2', 'ADVANCE THE CLOCK (above): the room dims, the allowance steps down, typing above it trims.'], ['3', 'Swipe to buy within the allowance.'], ['4', 'At 3:55 new orders stop. This preset has no override and does not close existing positions.']],
       thu: [['1', 'Swipe to buy — the order queues instead of sending; the pacing card explains why.'], ['2', 'While queued: edit the size, leave the queue, or cancel. The timer never fires the order.'], ['3', 'When it ends you get READY TO REVIEW — a refreshed quote and a fresh swipe to send.'], ['4', 'A price warning shows if the quote moved while you waited.']] };
     const monFill = Math.round(((540 - s.monRemaining) / 540) * 100);
     const qtyStr = (n) => n === 0 ? '' : String(n);
@@ -574,17 +576,18 @@ class Component extends DCLogic {
       monLiveRailLabel: s.monQty === 0 ? 'Enter a quantity' : 'Swipe to buy ' + s.monQty + (s.monQty === 1 ? ' contract' : ' contracts'),
       monSteppedTitle: (monOverCap ? '2 OF YOUR RULES STEPPED IN' : 'YOUR COOLDOWN STEPPED IN') + ' — NOTHING SENT',
       monShowSizeLine: monOverCap, monSizeLine: 'you asked for ' + s.monQty + ' · your cap today is ' + cap + pendingNote,
-      monWaysLine: 'Nothing was sent. ' + (monOverCap ? 'Three' : 'Two') + ' ways forward, or cancel:',
+      monWaysLine: monOverCap ? 'Both rules apply: reduce to ' + cap + ' and wait 9 minutes before reviewing. Override skips both rules.' : 'Wait 9 minutes, override with a reason, or cancel. Nothing sends without review.',
       monAskedStr: String(s.monQty), monCapStr: String(cap), monPendingOn: sh.capPending != null, monPendingText: sh.capPending != null ? 'cap goes to ' + sh.capPending + ' tomorrow 9:30' : '',
       monReducedOn: s.monReduced && !monOverCap, monReducedNote: 'size settled — reduced to your cap of ' + cap + ' · the cooldown still applies',
-      monShowReduce: monOverCap, monReduceLabel: 'REDUCE TO ' + cap + ' CONTRACTS',
-      monReduce: () => this.setState({ monQty: cap, monReduced: true, liveMsg: 'Order reduced to your cap of ' + cap + '. The cooldown still applies.' }),
+      monShowReduce: monOverCap, monShowHold: !monOverCap, monReduceLabel: 'REDUCE TO ' + cap + ' + WAIT 9 MIN',
+      monReduce: () => { this.unbind(); this.setState({ monQty: cap, monReduced: true, holding: false, holdProg: 0, monPhase: 'cooling', monRemaining: 540, liveMsg: 'Order reduced to ' + cap + '. Nine minute cooldown started. Review the refreshed quote before sending.' }); },
       monCancel: () => { this.addEvent({ day: 'MON', time: '9:55', rule: 'LOSS COOLDOWN', what: 'stepped in · you cancelled the order', size: s.monQty + '× 602P', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
         this.setState({ monPhase: 'live', monReduced: false, dragX: 0, monNote: '◇ order cancelled 9:55 · nothing sent · trading unaffected · on your record', liveMsg: 'Order cancelled. Nothing was sent.' }); },
       monCancelCooldown: () => { this.addEvent({ day: 'MON', time: '9:56', rule: 'LOSS COOLDOWN', what: 'cooldown cancelled with the order', size: s.monQty + '× 602P', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
         this.setState({ monPhase: 'live', monRemaining: 540, monReduced: false, dragX: 0, monNote: '◇ cooldown cancelled 9:56 · nothing sent · trading unaffected · on your record', liveMsg: 'Cooldown cancelled. Nothing was sent.' }); },
       monNoteOn: !!s.monNote, monNote: s.monNote,
       monClock: this.fmt(s.monRemaining), monCoolPct: monFill + '%',
+      monCoolingNote: (s.monReduced ? 'Reduced to ' + s.monQty + ' contracts. ' : '') + 'Your order is held. When the wait ends, review a refreshed quote and choose send or cancel. Nothing sends by itself.',
       monReviewTrimOn: s.monQty > cap, monReviewTrimNote: 'size reduced from ' + s.monQty + ' to your cap of ' + cap + pendingNote,
       monReviewCost: this.fmtC(Math.min(s.monQty, cap), 136),
       monReviewRail: 'Swipe to send ' + Math.min(s.monQty, cap) + ' at $1.36',
@@ -608,7 +611,7 @@ class Component extends DCLogic {
       tueCancel: () => { this.addEvent({ day: 'TUE', time: '10:18', rule: 'SIZE CAP', what: 'stepped in · you cancelled the order', size: (s.tueOrig || s.tueQty) + '× 602P', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
         this.setState({ tuePhase: 'live', dragX: 0, tueNote: '◇ order cancelled 10:18 · nothing sent · trading unaffected · on your record', liveMsg: 'Order cancelled. Nothing was sent.' }); },
       tueNoteOn: !!s.tueNote, tueNote: s.tueNote,
-      wedQtyStr: qtyStr(s.wedQty), wedCost: s.wedStep === 4 ? 'flat · nothing at risk' : this.fmtC(s.wedQty, 88),
+      wedQtyStr: qtyStr(s.wedQty), wedCost: s.wedStep === 4 ? 'no new orders · existing positions unchanged' : this.fmtC(s.wedQty, 88),
       wedQtyChange: (e) => this.setWedQty(this.parseQty(e.target.value)),
       wedMinus: () => this.setState({ wedQty: Math.max(0, s.wedQty - 1) }),
       wedPlus: () => this.setWedQty(s.wedQty + 1),
@@ -620,7 +623,7 @@ class Component extends DCLogic {
       wedArmed: sc === 'wed' && s.wedStep >= 1, wedOpen: sc === 'wed' && s.wedStep < 4, wedFlat: sc === 'wed' && s.wedStep === 4,
       wedRailLabel: s.wedQty === 0 ? 'Enter a quantity' : 'Swipe to buy ' + s.wedQty + (s.wedQty === 1 ? ' contract' : ' contracts'),
       advanceClock: () => { const st = this.state; if (st.wedStep < 4) { const ns = st.wedStep + 1, a = [138, 5, 2, 1, 0][ns]; this.setState({ wedStep: ns, wedQty: Math.min(st.wedQty, a), dragX: 0, liveMsg: 'Clock advanced to ' + wedClocks[ns] + '. Allowance is now ' + a + '.' }); } },
-      wedAdvLabel: s.wedStep === 0 ? 'ADVANCE PAST 3:00 ⟶' : s.wedStep === 4 ? 'FLAT · 3:55' : 'ADVANCE THE CLOCK ⟶',
+      wedAdvLabel: s.wedStep === 0 ? 'ADVANCE PAST 3:00 ⟶' : s.wedStep === 4 ? 'NEW ORDERS STOPPED · 3:55' : 'ADVANCE THE CLOCK ⟶',
       wedAdvOpacity: s.wedStep === 4 ? '.45' : '1', wedAdvDisabled: String(s.wedStep === 4),
       thuReady: sc === 'thu' && s.thuPhase === 'ready', thuQueued: sc === 'thu' && s.thuPhase === 'queued',
       thuReview: sc === 'thu' && s.thuPhase === 'review', thuCancelled: sc === 'thu' && s.thuPhase === 'cancelled',
