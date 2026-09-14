@@ -172,7 +172,11 @@
         if (c.posterAlt) posterImg.alt = c.posterAlt;
       }
       /* c.src carries ?bare for the embed; the escape hatch wants the full page */
-      if (openLink) openLink.href = c.src.replace(/[?&]bare\b/, "");
+      if (openLink) {
+        var full = new URL(c.src, document.baseURI);
+        full.searchParams.delete('bare');
+        openLink.href = full.href;
+      }
       fit();
     }
     function load(focusFrame) {
