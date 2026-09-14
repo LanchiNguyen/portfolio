@@ -160,10 +160,10 @@
           <div>
             <p class="proj-p" data-ed="35">In Companion’s Patterns tab, the illustrative &ldquo;Revenge sizing after losses&rdquo; card connects the behavior to two existing rules: loss cooldown and size cap. Open Rules to inspect their sentences, trigger conditions, and consequences. Tighten the size cap and the same value appears in Dart; a looser cap waits until the next open.</p>
             <div class="fig-duo phones" style="margin-top:22px">
-              <figure class="figure"><div class="fig-live" style="max-width:236px;border-radius:18px" data-fig="tenet-companion2-rules" role="img" aria-label="Companion Rules tab: the four authored rules with their enforceable parameters, each showing where it applies and its stricter-immediate / looser-at-next-open arming state"></div><figcaption data-ed="36">Rules &middot; enforceable parameters and their arming states</figcaption></figure>
+              <figure class="figure"><div class="tenet-live-frame" data-w="322" data-h="900" style="max-width:236px;border-radius:18px"><iframe src="tenet-proto/companion-new.html?embed&amp;tab=rules" title="Interactive Tenet Companion — inspect and edit rules" loading="lazy" width="322" height="900"></iframe></div><figcaption class="figcap" data-ed="36"><span class="fk">Rules &middot; interactive prototype</span>Inspect the parameters and their arming states.</figcaption></figure>
               <figure class="figure fig-note"><figcaption class="figcap" style="max-width:300px;margin:0" data-ed="37"><span class="fk">Try authoring a new rule</span>In Patterns, open &ldquo;See the 6 events&rdquo; for the separate Friday example, then &ldquo;Draft a rule.&rdquo; Edit the sentence, choose what happens, and inspect the host preview before saving. It appears in Rules and the Record with a future start time. The staged Dart walkthrough below uses the existing cooldown and size cap.</figcaption></figure>
             </div>
-            <p class="proj-p" style="margin-top:16px" data-ed="38"><a class="doc-link" href="tenet-proto/companion-new.html">Open the live Companion &rarr;</a>&ensp;&middot;&ensp;<a class="doc-link" href="tenet-proto/duo-new.html">Host + Companion, synchronized side by side &rarr;</a></p>
+            <p class="proj-p" style="margin-top:16px" data-ed="38"><a class="doc-link" href="tenet-proto/companion-new.html">Open full Companion prototype &rarr;</a>&ensp;&middot;&ensp;<a class="doc-link" href="tenet-proto/duo-new.html">Host + Companion, synchronized side by side &rarr;</a></p>
           </div>
         </div>
       </section>
@@ -177,15 +177,15 @@
             <p class="proj-p" data-ed="40">In Dart, send the staged 12-contract order after three simulated losses. The intervention names both reasons: the loss cooldown and the size cap. The combined action says &ldquo;Reduce to 5 + wait 9 min&rdquo; and does both, making the consequence clear before the trader chooses. The cap follows the value saved in Companion.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
-                <div class="fig-live shot-img" data-fig="tenet-host-ticket" role="img" aria-label="Dart, the fictional gamified mobile broker, at 9:53 with a 4-day streak badge and SPY 0DTE puts: a contracts stepper set to 12 of MAX 86, '12 × $1.42 = $1,704 premium at risk', and a lime 'Swipe to buy 12 contracts' rail with 'tenet · 4 rules on · cap 5' beneath" style="max-width:236px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="41"><span class="fk">Dart &middot; rendered live from the prototype</span>Stimulation-heavy by design. Tenet waits silently underneath: 4 rules on, cap 5.</figcaption>
+                <div class="tenet-live-frame" data-w="322" data-h="660" style="max-width:236px;border-radius:18px"><iframe src="tenet-proto/host-new.html?embed&amp;state=live" title="Interactive Dart order ticket — send the staged order to trigger your rules" loading="lazy" width="322" height="660"></iframe></div>
+                <figcaption class="figcap" data-ed="41"><span class="fk">Dart &middot; interactive prototype</span>Stimulation-heavy by design. Tenet waits silently underneath: 4 rules on, cap 5.</figcaption>
               </figure>
               <figure class="figure fig-down">
-                <div class="fig-live shot-img" data-fig="tenet-host2-intervention" role="img" aria-label="The same Dart screen after the swipe: '2 of your rules stepped in — nothing sent.' A labeled ledger: COOLDOWN, 3 losing round trips this morning, with a dot timeline 9:41, 9:46, 9:52; SIZE, 12 you asked beside 5 your cap today. 'Nothing was sent' with buttons Reduce to 5 + wait 9 min, Override with a reason, and Cancel order — nothing sends" style="max-width:236px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="42"><span class="fk">The moment &middot; rendered live</span>Two rules step in. One action reduces the size and starts the required wait; override and cancel remain separate, visible choices.</figcaption>
+                <div class="tenet-live-frame" data-w="322" data-h="660" style="max-width:236px;border-radius:18px"><iframe src="tenet-proto/host-new.html?embed&amp;state=stepped" title="Interactive Dart intervention — reduce and wait, override, or cancel" loading="lazy" width="322" height="660"></iframe></div>
+                <figcaption class="figcap" data-ed="42"><span class="fk">The moment &middot; interactive prototype</span>Two rules step in. One action reduces the size and starts the required wait; override and cancel remain separate, visible choices.</figcaption>
               </figure>
             </div>
-            <p class="proj-p" style="margin-top:16px" data-ed="43"><a class="doc-link" href="tenet-proto/host-new.html">Open the live Dart host prototype: four scenarios &rarr;</a></p>
+            <p class="proj-p" style="margin-top:16px" data-ed="43"><a class="doc-link" href="tenet-proto/host-new.html">Open full Dart prototype: four scenarios &rarr;</a></p>
           </div>
         </div>
       </section>
@@ -199,8 +199,8 @@
             <p class="proj-p" data-ed="45">Choose the combined reduce-and-wait action, or override before starting. During the cooldown, the order is held and can be cancelled. When the timer ends, the quote refreshes and the trader must review and confirm again. The timer never sends an order; every fill shown here is simulated.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
-                <div class="fig-live shot-img" data-fig="tenet-host2-cooldown" role="img" aria-label="Dart during the cooldown: the order is reduced to 5 contracts and held. After the wait, review a refreshed quote and choose send or cancel; nothing sends by itself. A timer shows the remaining cooldown with 'Cancel cooldown and order' beneath" style="max-width:236px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="46"><span class="fk">Cooldown running &middot; rendered live</span>The copy does the ethical work: held, not queued; review, then decide; cancel always present.</figcaption>
+                <div class="tenet-live-frame" data-w="322" data-h="660" style="max-width:236px;border-radius:18px"><iframe src="tenet-proto/host-new.html?embed&amp;state=cooling" title="Interactive Dart cooldown — review the refreshed quote when the wait ends" loading="lazy" width="322" height="660"></iframe></div>
+                <figcaption class="figcap" data-ed="46"><span class="fk">Cooldown running &middot; interactive prototype</span>The copy does the ethical work: held, not queued; review, then decide; cancel always present.</figcaption>
               </figure>
               <figure class="figure fig-note">
                 <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="47"><span class="fk">Why a refreshed quote</span>Quotes move during a cooldown. The review shows the price change and the final size before a fresh confirmation. Holding an order is a separate state from sending it.</figcaption>
@@ -218,8 +218,8 @@
           <div>
             <p class="proj-p" data-ed="49">After confirming or cancelling in Dart, open the Companion Record. The new event carries the host, rule, size, and decision; an override also carries the selected reason. Open it to inspect the entry or add a note. In the side-by-side prototype, that event appears without re-entering it.</p>
             <div class="fig-duo phones" style="margin-top:22px">
-              <figure class="figure"><div class="fig-live" style="max-width:236px;border-radius:18px" data-fig="tenet-companion-record" role="img" aria-label="Companion Record tab: filters for waited, overrode, changes, outages and notes across Dart and Meridian; a 30-day summary 'overrode 3× · 1 paid off · net −$98 · settled · excl. fees'; and an immutable event list including 'feed lost 17 min — trading unaffected — outage' and 'continued past the cap — $310'. Footer: intervention events are preserved; add a note or report an error — the original entry stays"></div><figcaption data-ed="50">Record &middot; immutable, host-tagged, outages logged with the same weight</figcaption></figure>
-              <figure class="figure"><div class="fig-live" style="max-width:236px;border-radius:18px" data-fig="tenet-companion-home" role="img" aria-label="Companion home at 16:12, market closed: 'What your rules did · Jul 27–31' labeled illustrative prototype data — 7× stepped in, 6× waited or trimmed, 1× continued past — a week list of cooldown, size-cap, wind-down and pacing events, a logged 17-minute feed outage, and the estimates block: estimated loss avoided $1,240 EST, realized on overrides −$310 ACTUAL, with the mark-to-close method note"></div><figcaption data-ed="51">Home &middot; counts lead, estimates carry their method and exclusions</figcaption></figure>
+              <figure class="figure"><div class="tenet-live-frame" data-w="322" data-h="900" style="max-width:236px;border-radius:18px"><iframe src="tenet-proto/companion-new.html?embed&amp;tab=ledger" title="Interactive Tenet Companion Record — inspect decisions and add a note" loading="lazy" width="322" height="900"></iframe></div><figcaption class="figcap" data-ed="50"><span class="fk">Record &middot; interactive prototype</span>Open an event, inspect the decision, or add a note.</figcaption></figure>
+              <figure class="figure"><div class="tenet-live-frame" data-w="322" data-h="900" style="max-width:236px;border-radius:18px"><iframe src="tenet-proto/companion-new.html?embed&amp;tab=home" title="Interactive Tenet Companion home — explore the illustrative weekly summary" loading="lazy" width="322" height="900"></iframe></div><figcaption class="figcap" data-ed="51"><span class="fk">Home &middot; interactive prototype</span>Counts lead; estimates carry their method and exclusions.</figcaption></figure>
             </div>
             <p class="proj-p" style="margin-top:16px" data-ed="52">Home summarizes the illustrative week as counts: <em>7&times; stepped in &middot; 6&times; waited or trimmed &middot; 1&times; continued past</em>. Dollar figures sit below with EST or ACTUAL labels and their method. These simulated results are not evidence of Tenet’s effectiveness.</p>
           </div>
@@ -234,10 +234,10 @@
           <div>
             <p class="proj-p" data-ed="54">The same journey fits Meridian’s denser workstation. A header chip stays quiet until transmit; then the rule explanation appears beside the ticket. Its action area stays visible as the explanation scrolls, so starting the wait, overriding, or cancelling does not require hunting below the panel. The chart, ladder, and positions keep their place.</p>
             <figure class="figure" style="margin-top: 22px">
-              <div class="fig-live shot-img" data-fig="tenet-meridian2-stepped" role="img" aria-label="Meridian Trader, the fictional light-themed desktop workstation: SPY chart falling with a dashed annotation '9:53 — your rule stepped in', Level 2 ladder live, three losing round trips totaling −$360, and an Ink Blue panel over the order ticket reading 'Loss cooldown stepped in — nothing sent. Your rule: after 3 losing trades before noon, the next order waits nine minutes… this order flips you short at 2× your largest size today. Size cap not triggered — 1,000 of 1,500 shares. Start 9-minute cooldown / Override with a reason'"></div>
-              <figcaption class="figcap" data-ed="55"><span class="fk">Meridian &middot; rendered live from the prototype</span>The only colored object in a near-neutral room. Everything else keeps printing.</figcaption>
+              <div class="tenet-live-frame" data-w="1218" data-h="590"><iframe src="tenet-proto/desktop-new.html?embed&amp;state=stepped" title="Interactive Meridian workstation — start the cooldown, override, or cancel" loading="lazy" width="1218" height="590"></iframe></div>
+              <figcaption class="figcap" data-ed="55"><span class="fk">Meridian &middot; interactive prototype</span>The only colored object in a near-neutral room. Everything else keeps printing.</figcaption>
             </figure>
-            <p class="proj-p" style="margin-top:16px" data-ed="56"><a class="doc-link" href="tenet-proto/desktop-new.html">Open the live Meridian prototype &rarr;</a></p>
+            <p class="proj-p" style="margin-top:16px" data-ed="56"><a class="doc-link" href="tenet-proto/desktop-new.html">Open full Meridian prototype &rarr;</a></p>
           </div>
         </div>
       </section>

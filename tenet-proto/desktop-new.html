@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="embed.css">
+<script src="embed.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -31,8 +33,8 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 :root[data-bare] [data-scaffold]{display:none !important}
 :root[data-bare] body>div:first-child{padding-bottom:16px}</style></helmet>
 
-<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 32px 64px;box-sizing:border-box">
-<div style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;width:100%;max-width:1360px;position:sticky;top:0;z-index:30;background:#E9EAEB;padding:14px 0 10px">
+<div class="prototype-shell" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 32px 64px;box-sizing:border-box">
+<div data-embed-hidden style="display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;width:100%;max-width:1360px;position:sticky;top:0;z-index:30;background:#E9EAEB;padding:14px 0 10px">
 <div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — DESKTOP HOST · MERIDIAN</div>
 <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
 <span style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#7A8288">“MERIDIAN” IS AN INVENTED BROKER</span>
@@ -49,7 +51,7 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 <div style="font:400 13px/1.65 'Plus Jakarta Sans';color:#5C6367;max-width:520px">Dart removes reflection through stimulation. Meridian removes reflection through efficiency. Tenet restores one deliberate moment in both. Here: the same cooldown that guards 0DTE options on a phone, holding a revenge-sized short sale in a professional equities workstation.</div>
 </div>
 
-<div style="width:100%;max-width:1360px;display:flex;flex-direction:column;gap:8px;margin:0 0 12px">
+<div data-embed-hidden style="width:100%;max-width:1360px;display:flex;flex-direction:column;gap:8px;margin:0 0 12px">
 <div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.16em;color:#7A8288">01 · WITH TENET — 9:53, THREE LOSING ROUND TRIPS, FLAT, A 1,000-SHARE SHORT TYPED · INTERACTIVE</div>
 <div style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center">
 <div style="max-width:760px;font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">» Transmit with the button or ⇧⏎ — the loss cooldown steps in at send with three ways forward: start the 9-minute cooldown, override with a reason, or cancel. After the wait you confirm at a refreshed bid, or edit, or cancel. Nothing sends by itself. Demo time runs ~36× faster.</div>
@@ -357,6 +359,8 @@ class Component extends DCLogic {
   addEvent(ev) { const s = this.sh(); const n = { ...s, events: [{ id: 'd' + Date.now() + Math.random().toString(36).slice(2, 5), sync: 'synced', tone: 'ok', host: 'meridian', ...ev }, ...s.events] }; try { localStorage.setItem(SKEY, JSON.stringify(n)); } catch (e) {} }
   componentDidMount() {
     this.applyVars();
+    const query = new URLSearchParams(location.search);
+    if (query.has('embed') && query.get('state') === 'stepped') this.setState({ mode: 'stepped' });
     this.iv = setInterval(() => { const s = this.state;
       if (s.mode === 'cooling') { const r = s.sec - (this.props.cooldownSpeed ?? 36) / 10;
         if (r <= 0) this.setState({ sec: 0, mode: 'review', refreshed: true, liveMsg: 'Cooldown complete. Review the refreshed bid — nothing was sent. Confirm, edit, or cancel.' });
@@ -382,7 +386,7 @@ class Component extends DCLogic {
     document.documentElement.toggleAttribute('data-bare', bare);
     r.setProperty('--annD', (!bare && (this.props.annotations ?? true)) ? 'block' : 'none');
   }
-  bare() { try { return /[?&]bare/.test(location.search); } catch (e) { return false; } }
+  bare() { try { const q = new URLSearchParams(location.search); return q.has('bare') || q.has('embed'); } catch (e) { return false; } }
   keepPause() { this.setState({ mode: 'stepped', reason: null, liveMsg: 'Kept the pause.' }); setTimeout(() => { if (this._overrideBtn) this._overrideBtn.focus(); }, 30); }
   localReset() { this.setState({ mode: 'armed', sec: 540, refreshed: false, rulesOpen: false, reason: null, side: 'short', qty: 1000, editTrim: false, cancelNote: '', sentFill: '', sentHead: '', sentNote: '', liveMsg: 'Demo reset to baseline.', pos: null, execs: [] }); }
   fmt(s) { s = Math.max(0, Math.ceil(s)); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }

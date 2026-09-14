@@ -1,0 +1,8 @@
+/* Case-study embeds run the same app, with only the surrounding demo board hidden. */
+:root[data-embed] body { margin: 0; background: transparent; }
+:root[data-embed] [data-embed-hidden],
+:root[data-embed] [data-scaffold] { display: none !important; }
+:root[data-embed] .prototype-shell { padding: 0 !important; min-height: 0 !important; }
+:root[data-embed] [data-screen-label="Host phone"],
+:root[data-embed] [data-screen-label="Companion phone"],
+:root[data-embed] [data-screen-label="Meridian — with Tenet"] { box-shadow: none !important; box-sizing: border-box; }

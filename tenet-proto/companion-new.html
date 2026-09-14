@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="embed.css">
+<script src="embed.js"></script>
 <script src="./support.js"></script>
+<style>
+html[data-embed] .prototype-shell,html[data-embed] .prototype-stage,html[data-embed] .prototype-phone-wrap{display:block!important;width:322px!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important}
+html[data-embed] [data-embed-phone]{margin:0!important;box-shadow:none!important}
+</style>
 </head>
 <body>
 <x-dc>
@@ -12,15 +18,15 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 <style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
 
-<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
+<div class="prototype-shell" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
 <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
-<div style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
+<div data-embed-hidden style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
 <div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — COMPANION APP v2 · RULES / PATTERNS / RECORD</div>
 <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">HOST-AGNOSTIC — THE SAME RULES ARM DART OR A DESKTOP</div>
 </div>
 </sc-if>
 
-<div role="group" aria-label="Prototype demo controls" style="width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;margin-top:20px">
+<div data-embed-hidden role="group" aria-label="Prototype demo controls" style="width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;margin-top:20px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.2em;color:#5E6B75">PROTOTYPE — AFTER-CLOSE COMPANION</div>
 <div style="max-width:720px;font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">Rules, patterns, and the Record live here. Tighten the size cap and the Host enforces it immediately; loosen it and it waits for the next open. Everything the Host does lands in the Record.</div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed #9AA0A4;border-radius:16px;padding:8px 10px 8px 16px;align-self:flex-start">
@@ -32,10 +38,10 @@
 </div>
 </div>
 
-<div style="width:100%;max-width:1100px;display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;margin-top:18px">
+<div class="prototype-stage" style="width:100%;max-width:1100px;display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start;margin-top:18px">
 
-<div style="display:flex;flex-direction:column;gap:12px;align-items:center">
-<div data-screen-label="Companion phone" style="width:322px;background:#101013;border:1px solid #2a2620;border-radius:34px;padding:14px 13px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;color:#e8e4da;min-height:680px;box-shadow:0 26px 50px -30px rgba(10,14,18,.55);position:relative;overflow:hidden">
+<div class="prototype-phone-wrap" style="display:flex;flex-direction:column;gap:12px;align-items:center">
+<div data-embed-phone data-screen-label="Companion phone" style="width:322px;background:#101013;border:1px solid #2a2620;border-radius:34px;padding:14px 13px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;color:#e8e4da;min-height:680px;box-shadow:0 26px 50px -30px rgba(10,14,18,.55);position:relative;overflow:hidden">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:0 6px"><span style="font:600 10px 'IBM Plex Mono',monospace">16:12</span><span aria-hidden="true" style="font:600 9.5px 'IBM Plex Mono',monospace;color:#5b6167;letter-spacing:.14em">▮▮▮ ▰</span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#e6c36a">◆ TENET</span>
 <button type="button" onClick="{{ toggleBroker }}" aria-pressed="{{ brokerOffStr }}" aria-label="{{ brokerAria }}" style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;min-height:44px;padding:0 6px;display:flex;align-items:center;gap:5px">{{ brokerChip }}</button>
@@ -370,7 +376,7 @@
 </div>
 
 <sc-if value="{{ showHints }}" hint-placeholder-val="{{ true }}">
-<div style="display:flex;flex-direction:column;gap:14px;max-width:340px;padding-top:8px">
+<div data-embed-hidden style="display:flex;flex-direction:column;gap:14px;max-width:340px;padding-top:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#8C6A25">TRY THIS</div>
 <sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
 <div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#8C6A25;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
@@ -410,8 +416,9 @@ class Component extends DCLogic {
     this.put({ events: [{ id: replaceId || ('c' + Date.now() + Math.random().toString(36).slice(2, 5)), sync: this.state.broker === 'on' ? 'synced' : 'pending', tone: 'ok', ...ev }, ...list] }); }
 
   componentDidMount() {
-    const t = this.props.initialTab;
-    this.setState({ sh: this.sh(), tab: t || 'home' });
+    const params = this.embedParams(), t = params ? params.get('tab') : this.props.initialTab;
+    // Tab selection is local. Existing rules and Record entries stay intact.
+    this.setState({ sh: this.sh(), tab: ['home', 'rules', 'patterns', 'ledger'].includes(t) ? t : 'home' });
     this._st = (e) => { if (e && e.key && e.key !== SKEY) return; const n = this.sh(); const old = this.state.sh || BASELINE;
       if (n.resetSeq !== old.resetSeq) this.localReset(n); else this.setState({ sh: n }); };
     window.addEventListener('storage', this._st);
@@ -421,7 +428,8 @@ class Component extends DCLogic {
     patView: 'summary', sentence: 'No adding to a losing position after 2:00 on Fridays.', friction: 'trim', formErr: null, firstRun: false, frBroker: 'off', broker: 'on', liveMsg: 'Demo reset to baseline.' }); }
   resetDemo() { const base = JSON.parse(JSON.stringify(BASELINE)); base.resetSeq = (this.sh().resetSeq || 0) + 1; try { localStorage.setItem(SKEY, JSON.stringify(base)); } catch (e) {} this.localReset(base); }
   go(tab) { this.setState({ tab, openEvent: null, noting: false }); }
-  bare() { try { return /[?&]bare/.test(location.search); } catch (e) { return false; } }
+  embedParams() { try { const params = new URLSearchParams(location.search); return params.has('embed') ? params : null; } catch (e) { return null; } }
+  bare() { try { return /[?&](?:bare|embed)(?:[=&]|$)/.test(location.search); } catch (e) { return false; } }
 
   saveRule() {
     const s = this.state, txt = (s.sentence || '').trim();

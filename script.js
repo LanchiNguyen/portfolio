@@ -126,6 +126,37 @@
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Interactive walkthrough screens: keep each real app fitted as its state changes. */
+  document.querySelectorAll('.tenet-live-frame').forEach(function (frame) {
+    var iframe = frame.querySelector('iframe');
+    var width = Number(frame.getAttribute('data-w'));
+    var height = Number(frame.getAttribute('data-h'));
+    var restart = document.createElement('button');
+    restart.type = 'button';
+    restart.className = 'tenet-live-reset';
+    restart.textContent = 'Restart this step';
+    restart.setAttribute('aria-label', 'Restart: ' + iframe.title);
+    restart.addEventListener('click', function () { iframe.src = iframe.getAttribute('src'); });
+    frame.insertAdjacentElement('afterend', restart);
+    function fit() {
+      var scale = Math.min(1, frame.clientWidth / width);
+      frame.style.height = Math.ceil(height * scale) + 'px';
+      iframe.style.width = width + 'px';
+      iframe.style.height = height + 'px';
+      iframe.style.transform = 'scale(' + scale + ')';
+    }
+    window.addEventListener('message', function (event) {
+      if (event.origin !== location.origin || event.source !== iframe.contentWindow) return;
+      if (!event.data || event.data.type !== 'tenet-embed-size') return;
+      var next = Number(event.data.height);
+      if (!Number.isFinite(next) || next < 100 || next > 6000) return;
+      height = next;
+      fit();
+    });
+    new ResizeObserver(fit).observe(frame);
+    fit();
+  });
+
   /* demo stages: lazy click-to-load sandboxed iframes, scaled to fit */
   document.querySelectorAll(".demo-stage").forEach(function (stage) {
     if (stage.classList.contains("demo-static")) return;
