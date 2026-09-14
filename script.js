@@ -126,37 +126,6 @@
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* Interactive walkthrough screens: keep each real app fitted as its state changes. */
-  document.querySelectorAll('.tenet-live-frame').forEach(function (frame) {
-    var iframe = frame.querySelector('iframe');
-    var width = Number(frame.getAttribute('data-w'));
-    var height = Number(frame.getAttribute('data-h'));
-    var restart = document.createElement('button');
-    restart.type = 'button';
-    restart.className = 'tenet-live-reset';
-    restart.textContent = 'Restart this step';
-    restart.setAttribute('aria-label', 'Restart: ' + iframe.title);
-    restart.addEventListener('click', function () { iframe.src = iframe.getAttribute('src'); });
-    frame.insertAdjacentElement('afterend', restart);
-    function fit() {
-      var scale = Math.min(1, frame.clientWidth / width);
-      frame.style.height = Math.ceil(height * scale) + 'px';
-      iframe.style.width = width + 'px';
-      iframe.style.height = height + 'px';
-      iframe.style.transform = 'scale(' + scale + ')';
-    }
-    window.addEventListener('message', function (event) {
-      if (event.origin !== location.origin || event.source !== iframe.contentWindow) return;
-      if (!event.data || event.data.type !== 'tenet-embed-size') return;
-      var next = Number(event.data.height);
-      if (!Number.isFinite(next) || next < 100 || next > 6000) return;
-      height = next;
-      fit();
-    });
-    new ResizeObserver(fit).observe(frame);
-    fit();
-  });
-
   /* demo stages: lazy click-to-load sandboxed iframes, scaled to fit */
   document.querySelectorAll(".demo-stage").forEach(function (stage) {
     if (stage.classList.contains("demo-static")) return;
@@ -168,6 +137,7 @@
     var poster = stage.querySelector(".demo-poster");
     var posterImg = poster ? poster.querySelector("img") : null;
     var current = null, iframe = null;
+    var liveOnLoad = stage.hasAttribute('data-live-on-load');
 
     function cfg() {
       var t = stage.querySelector('.demo-tab[aria-selected="true"]');
@@ -205,8 +175,9 @@
       if (openLink) openLink.href = c.src.replace(/[?&]bare\b/, "");
       fit();
     }
-    function load() {
-      var c = cfg(); current = c;
+    function load(focusFrame) {
+      applyPoster();
+      var c = current;
       if (iframe) { iframe.remove(); iframe = null; }
       iframe = document.createElement("iframe");
       iframe.setAttribute("title", c.title);
@@ -217,7 +188,7 @@
       stage.classList.remove("is-slow");
       if (poster) poster.style.display = "none";
       fit();
-      iframe.focus();
+      if (focusFrame !== false) iframe.focus();
       watchBoot(c);
     }
     /* if the embed hasn't finished loading after a while (e.g. a blocked CDN),
@@ -249,6 +220,7 @@
       if (iframe) { iframe.remove(); iframe = null; }
       var note = stage.querySelector(".demo-stall");
       if (note) note.remove();
+      if (liveOnLoad) { load(false); return; }
       stage.classList.remove("is-live");
       stage.classList.remove("is-slow");
       if (poster) poster.style.display = "";
@@ -265,6 +237,7 @@
     if (resetBtn) resetBtn.addEventListener("click", reset);
     window.addEventListener("resize", fit);
     applyPoster();
+    if (liveOnLoad) load(false);
   });
 
 })();

@@ -7,37 +7,31 @@ const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-function loadPrototype(name, { search = '', shared, props = {} } = {}) {
+function loadPrototype(name) {
   const filename = path.join(__dirname, '..', 'tenet-proto', name + '.html');
   const html = readFileSync(filename, 'utf8');
   const script = html.match(/<script\b[^>]*\bdata-dc-script\b[^>]*>([\s\S]*?)<\/script>/);
   assert.ok(script, filename + ' must contain the actual Component script');
   const storage = new Map();
-  if (shared) storage.set('tenetSharedV3', JSON.stringify(shared));
-  let storageWrites = 0;
   class DCLogic {
-    props = props;
+    props = {};
     setState(patch) { this.state = { ...this.state, ...patch }; }
   }
   const context = vm.createContext({
-    DCLogic, URLSearchParams,
+    DCLogic,
     localStorage: {
       getItem: key => storage.get(key) ?? null,
-      setItem: (key, value) => { storageWrites++; storage.set(key, String(value)); },
+      setItem: (key, value) => storage.set(key, String(value)),
     },
     // Animation/focus timers are irrelevant here. Advance the real trading
     // timer through Component.tick() explicitly instead of waiting in tests.
     setTimeout: () => 0, clearTimeout() {},
     setInterval: () => 0, clearInterval() {},
     window: { addEventListener() {}, removeEventListener() {} },
-    document: { documentElement: { style: { setProperty() {} }, toggleAttribute() {} } },
-    location: { search },
+    location: { search: '' },
   });
   const Component = new vm.Script(script[1] + '\nComponent;', { filename }).runInContext(context);
-  return { component: new Component(), html,
-    get storageWrites() { return storageWrites; },
-    storedShared: () => storage.get('tenetSharedV3'),
-  };
+  return { component: new Component(), html };
 }
 
 function enterMonday(component, quantity) {
@@ -207,84 +201,5 @@ test('desktop decisions and final confirmation stay outside the scrolling detail
     const binding = 'onClick="{{ ' + handler + ' }}"';
     assert.ok(actions.includes(binding), handler + ' must remain in the persistent action region');
     assert.ok(!details.includes(binding), handler + ' must not require scrolling the detail region');
-  }
-});
-
-function mountEmbed(name, search) {
-  const baseline = loadPrototype(name).component.sh();
-  // A visitor may already have tightened a rule and created Record entries
-  // in another live panel. Initializing an embed must preserve that session.
-  const shared = JSON.parse(JSON.stringify(baseline));
-  shared.cap = 3;
-  shared.capPending = 8;
-  shared.events.unshift({ id: 'existing-session-event', rule: 'SIZE CAP', what: 'visitor note', note: 'Keep this note' });
-  const before = JSON.stringify(shared);
-  const harness = loadPrototype(name, { search, shared });
-  harness.component.componentDidMount();
-  function assertUnchanged() {
-    assert.equal(harness.storageWrites, 0, 'opening a panel must never write shared storage');
-    assert.equal(harness.storedShared(), before, 'existing rules and Record must survive initialization');
-    if (harness.component.state.sh) assert.equal(JSON.stringify(harness.component.state.sh), before);
-  }
-  assertUnchanged();
-  return { ...harness, assertUnchanged };
-}
-
-for (const phase of ['live', 'stepped', 'cooling']) {
-  test(`host embed opens ${phase} locally without altering rules or the Record`, () => {
-    const harness = mountEmbed('host-new', '?embed&state=' + phase);
-    const c = harness.component;
-    assert.equal(c.state.scenario, 'mon');
-    assert.equal(c.state.monPhase, phase);
-    assert.equal(c.bare(), true);
-    assert.equal(c.state.sent, null);
-    if (phase === 'cooling') {
-      assert.equal(c.state.monQty, 3, 'use the active cap, not the default or pending looser cap');
-      assert.equal(c.state.monReduced, true);
-      assert.equal(c.state.monRemaining, 540);
-      c.tick();
-      assert.equal(c.state.monRemaining, 534, 'the embedded cooldown remains functional');
-      finishCooldown(c);
-      assert.equal(c.state.sent, null);
-    }
-    harness.assertUnchanged();
-    c.componentWillUnmount();
-  });
-}
-
-for (const tab of ['home', 'rules', 'patterns', 'ledger']) {
-  test(`Companion embed opens ${tab} without changing saved rules or Record`, () => {
-    const { component: c, assertUnchanged } = mountEmbed('companion-new', '?embed&tab=' + tab);
-    assert.equal(c.state.tab, tab);
-    assert.equal(c.bare(), true);
-    assertUnchanged();
-    c.componentWillUnmount();
-  });
-}
-
-test('desktop stepped embed shows an intervention without recording a trade or fill', () => {
-  const { component: c, assertUnchanged } = mountEmbed('desktop-new', '?embed&state=stepped');
-  assert.equal(c.state.mode, 'stepped');
-  assert.equal(c.bare(), true);
-  assert.equal(c.state.pos, null);
-  assert.equal(c.state.execs.length, 0);
-  assert.equal(c.state.sentFill, '');
-  assertUnchanged();
-  c.componentWillUnmount();
-});
-
-test('invalid or unscoped embed parameters fall back to ordinary initial views', () => {
-  for (const [name, query, field, expected] of [
-    ['host-new', '?embed&state=overridden', 'monPhase', 'live'],
-    ['host-new', '?state=stepped', 'monPhase', 'live'],
-    ['companion-new', '?embed&tab=unknown', 'tab', 'home'],
-    ['companion-new', '?tab=rules', 'tab', 'home'],
-    ['desktop-new', '?embed&state=sent', 'mode', 'armed'],
-    ['desktop-new', '?state=stepped', 'mode', 'armed'],
-  ]) {
-    const { component: c, assertUnchanged } = mountEmbed(name, query);
-    assert.equal(c.state[field], expected, name + query);
-    assertUnchanged();
-    c.componentWillUnmount();
   }
 });
