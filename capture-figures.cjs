@@ -98,6 +98,10 @@ const TENET = [
     drive: async p => { await p.evaluate(() => { const r = window.__hit('swipe to buy'); if (r) { r.focus(); r.click(); } });
       await p.keyboard.press('Enter'); } },
 
+  { key: 'host2-intervention', page: 'host-new.html?bare', expect: /stepped in/i,
+    drive: async p => { await p.evaluate(() => { const r = window.__hit('swipe to buy'); if (r) { r.focus(); r.click(); } });
+      await p.keyboard.press('Enter'); } },
+
   { key: 'host-cooldown', page: 'host.html?bare', expect: /cooldown/i,
     drive: async p => { await p.evaluate(() => { const r = window.__hit('swipe to buy'); if (r) { r.focus(); r.click(); } });
       await p.keyboard.press('Enter'); await p.waitForTimeout(2000);
@@ -221,7 +225,7 @@ const grabTenet = (p, flat) => p.evaluate((flat) => {
 
   /* --- prototype stylesheets, shipped once each --- */
   const css = {};
-  css.morsel = fs.readFileSync('/home/user/redesigned-computing-machine/v2/morsel-proto/v3/app/styles.css', 'utf8');
+  css.morsel = fs.readFileSync('morsel-proto/v3/app/styles.css', 'utf8');
   for (const page of ['host', 'companion', 'desktop']) {
     const p = await b.newPage({ viewport: { width: 1360, height: 1120 } });
     await p.goto(BASE + '/tenet-proto/' + page + '.html?bare', { waitUntil: 'load', timeout: 60000 });

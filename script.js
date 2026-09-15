@@ -11,9 +11,6 @@
       el.parentNode.insertBefore(s, el);
     }
   });
-  if (/[?&#]draft/.test(location.search + location.hash)) {
-    document.documentElement.classList.add("draft");
-  }
 })();
 
 (function () {
@@ -137,6 +134,7 @@
     var poster = stage.querySelector(".demo-poster");
     var posterImg = poster ? poster.querySelector("img") : null;
     var current = null, iframe = null;
+    var liveOnLoad = stage.hasAttribute('data-live-on-load');
 
     function cfg() {
       var t = stage.querySelector('.demo-tab[aria-selected="true"]');
@@ -146,14 +144,26 @@
         w: parseInt(el.getAttribute("data-w"), 10),
         h: parseInt(el.getAttribute("data-h"), 10),
         poster: el.getAttribute("data-poster"),
+        posterAlt: el.getAttribute("data-poster-alt"),
         title: el.getAttribute("data-title") || "Interactive prototype"
       };
     }
     function fit() {
       var c = current; if (!c) return;
       var cw = frame.clientWidth;
-      var scale = cw / c.w;
-      frame.style.height = Math.round(c.h * scale) + "px";
+      var pan = c.w > 700 && cw < 900;
+      var scale = pan ? 1 : cw / c.w;
+      frame.classList.toggle('is-pan', pan);
+      frame.style.height = (pan ? Math.min(c.h, Math.max(420, window.innerHeight * 0.7)) : Math.round(c.h * scale)) + "px";
+      if (pan) {
+        frame.setAttribute('tabindex', '0');
+        frame.setAttribute('role', 'region');
+        frame.setAttribute('aria-label', 'Scrollable Meridian workstation prototype');
+      } else {
+        frame.removeAttribute('tabindex');
+        frame.removeAttribute('role');
+        frame.removeAttribute('aria-label');
+      }
       if (iframe) {
         iframe.style.width = c.w + "px";
         iframe.style.height = c.h + "px";
@@ -164,12 +174,22 @@
       var c = cfg(); current = c;
       frame.classList.toggle("is-wide", c.w > 700);
       frame.classList.toggle("is-phone", c.w <= 700);
-      if (posterImg && c.poster) { posterImg.src = c.poster; }
-      if (openLink) openLink.href = c.src;
+      if (posterImg && c.poster) {
+        posterImg.src = c.poster;
+        /* the poster changes with the tab, so its description must too */
+        if (c.posterAlt) posterImg.alt = c.posterAlt;
+      }
+      /* c.src carries ?bare for the embed; the escape hatch wants the full page */
+      if (openLink) {
+        var full = new URL(c.src, document.baseURI);
+        full.searchParams.delete('bare');
+        openLink.href = full.href;
+      }
       fit();
     }
-    function load() {
-      var c = cfg(); current = c;
+    function load(focusFrame) {
+      applyPoster();
+      var c = current;
       if (iframe) { iframe.remove(); iframe = null; }
       iframe = document.createElement("iframe");
       iframe.setAttribute("title", c.title);
@@ -177,27 +197,68 @@
       iframe.src = c.src;
       frame.appendChild(iframe);
       stage.classList.add("is-live");
+      stage.classList.remove("is-slow");
       if (poster) poster.style.display = "none";
       fit();
-      iframe.focus();
+      if (focusFrame !== false) iframe.focus();
+      watchBoot(c);
+    }
+    /* if the embed hasn't finished loading after a while (e.g. a blocked CDN),
+       point at the standalone prototype instead of leaving a silent blank frame */
+    function watchBoot(c) {
+      var mine = iframe;
+      setTimeout(function () {
+        if (iframe !== mine || !stage.classList.contains("is-live")) return;
+        var stuck = false;
+        try {
+          var doc = mine.contentDocument;
+          stuck = !doc || doc.readyState === "loading" || !doc.body || doc.body.childElementCount === 0;
+        } catch (e) { /* cross-origin: assume it loaded */ }
+        if (!stuck) return;
+        var note = stage.querySelector(".demo-stall");
+        if (!note) {
+          note = document.createElement("a");
+          note.className = "demo-stall";
+          note.href = c.src;
+          note.textContent = "Taking a while to load here — open the full prototype ↗";
+          frame.appendChild(note);
+        } else {
+          note.href = c.src;
+        }
+        stage.classList.add("is-slow");
+      }, 7000);
     }
     function reset() {
       if (iframe) { iframe.remove(); iframe = null; }
+      var note = stage.querySelector(".demo-stall");
+      if (note) note.remove();
+      if (liveOnLoad) { load(false); return; }
       stage.classList.remove("is-live");
+      stage.classList.remove("is-slow");
       if (poster) poster.style.display = "";
       applyPoster();
       if (loadBtn) loadBtn.focus();
     }
     tabs.forEach(function (tab) {
+      tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1;
       tab.addEventListener("click", function () {
-        tabs.forEach(function (t) { t.setAttribute("aria-selected", t === tab ? "true" : "false"); });
+        tabs.forEach(function (t) { t.setAttribute("aria-selected", t === tab ? "true" : "false"); t.tabIndex = t === tab ? 0 : -1; });
         if (stage.classList.contains("is-live")) { load(); } else { applyPoster(); }
+      });
+      tab.addEventListener('keydown', function (e) {
+        var keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+        if (keys.indexOf(e.key) < 0) return;
+        e.preventDefault();
+        var list = Array.prototype.slice.call(tabs), i = list.indexOf(tab);
+        var next = e.key === 'Home' ? 0 : e.key === 'End' ? list.length - 1 : (i + (e.key === 'ArrowRight' ? 1 : -1) + list.length) % list.length;
+        list[next].click(); list[next].focus();
       });
     });
     if (loadBtn) loadBtn.addEventListener("click", load);
     if (resetBtn) resetBtn.addEventListener("click", reset);
     window.addEventListener("resize", fit);
     applyPoster();
+    if (liveOnLoad) load(false);
   });
 
 })();

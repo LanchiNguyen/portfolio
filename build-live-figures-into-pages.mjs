@@ -10,7 +10,7 @@
  */
 import { readFileSync, writeFileSync } from 'fs';
 
-const figs = JSON.parse(readFileSync('v2/figures.js', 'utf8')
+const figs = JSON.parse(readFileSync('figures.js', 'utf8')
   .match(/window\.__FIGS = ([\s\S]*?);\n\(function/)[1]);
 const HAVE = new Set(Object.keys(figs));
 
@@ -22,7 +22,7 @@ const IMG = /<img\b([^>]*?)src="\.\.\/images\/(tenet|morsel)\/([a-z0-9-]+)\.webp
 
 let swapped = 0; const kept = [];
 
-for (const page of ['v2/tenet.html', 'v2/morsel.html']) {
+for (const page of ['tenet.html', 'morsel.html']) {
   let html = readFileSync(page, 'utf8');
 
   html = html.replace(IMG, (m, pre, proj, name, post) => {
@@ -48,7 +48,7 @@ for (const page of ['v2/tenet.html', 'v2/morsel.html']) {
 
 console.log('swapped to live figures:', swapped);
 console.log('captured but unused:', [...HAVE].filter(k => {
-  const t = readFileSync('v2/tenet.html', 'utf8') + readFileSync('v2/morsel.html', 'utf8');
+  const t = readFileSync('tenet.html', 'utf8') + readFileSync('morsel.html', 'utf8');
   return !t.includes('data-fig="' + k + '"');
 }).join(', ') || '(none)');
 console.log('still raster (no capture exists):');

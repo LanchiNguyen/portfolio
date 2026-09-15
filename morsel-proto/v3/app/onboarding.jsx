@@ -125,7 +125,7 @@ function ObTaste({ picked, setPicked, onNext, onSkip, onBack }) {
           )}
         </div>
         <div style={{ display: "flex", gap: 10 }}>
-          <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} onClick={onBack}><MIcon name="back" /></button>
+          <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
           <button className="m-btn m-btn-primary" style={{ flex: 1 }} disabled={!enough} onClick={onNext}>
             {enough ? "Next" : `Tap ${4 - picked.length} more dish${4 - picked.length === 1 ? "" : "es"}`}
           </button>
@@ -182,7 +182,7 @@ function ObSafety({ lifestyle, setLifestyle, allergies, setAllergies, onDone, on
         )}
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "28px 24px 30px", display: "flex", gap: 10, background: "linear-gradient(to top, var(--paper) 55%, transparent)" }}>
-        <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} onClick={onBack}><MIcon name="back" /></button>
+        <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
         <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={onDone}>Start browsing</button>
       </div>
     </div>

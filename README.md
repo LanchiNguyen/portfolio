@@ -4,17 +4,10 @@ A product and UX design portfolio. Static HTML, CSS, and a little JavaScript: no
 framework, no build step required to view it. Open `index.html` in a browser, or
 serve the folder with `python3 -m http.server`.
 
-Seven projects, in the order the homepage shows them:
-
-| № | Project | What it is |
-|---|---------|------------|
-| 01 | **Tenet** (`tenet.html`) | Order-time behavioral guardrails for trading. Self-authored rules become reversible friction at the moment an order is sent, inside two fictional brokers (Dart mobile, Meridian desktop) that share one Record. |
-| 02 | **Morsel** (`morsel.html`) | Photo-first food discovery with a three-tier dietary model, an allergy-gated order sheet, and an evidence model that abstains when it lacks data. |
-| 03 | **Hey Period** (`heyperiod.html`) | Brand identity, marketing site, and app UI for a femtech startup. |
-| 04 | **Nhat Huong** (`nhathuong.html`) | Brand refresh for a Vietnamese baking brand established in 1998. |
-| 05 | **Mug** (`mug.html`) | Rewards concept for bringing your own cup. |
-| 06 | **Matrix** (`matrix.html`) | Eleven build-ready screens in one week, inside a client's style guide. |
-| 07 | **Chatter** (`chatter.html`) | Two concepts, honest feedback, one pivot. |
+Selected work leads with **Morsel**, **Tenet**, then **Hey Period**. Matrix and
+Nhat Huong are supporting cases; Mug and Chatter remain available as earlier
+concepts linked from About. The current IKEA title is owner-confirmed. Dates,
+full employment scope and a current résumé still need owner records.
 
 Plus `about.html` and `sketchbook.html` (illustration and painting).
 
@@ -25,19 +18,19 @@ Plus `about.html` and `sketchbook.html` (illustration and painting).
 study runs the actual application in the page — you can trigger a Dart
 intervention or walk Morsel's onboarding, feed, and allergy gate.
 
-**Evidence is labeled, always.** Every claim on a case study carries a tag:
-`MEASURED` for real checkable data, `RETROSPECTIVE` for reasoning documented
-after the fact, `SIMULATED` for illustrative prototype data, and `PROPOSED` for
-a goal or plan that was never run. Nothing simulated is presented as a result.
-Tenet and Morsel are independent concept prototypes, not shipped products, and
-say so.
+**Evidence has limits.** Concept data is simulated, new validation plans are
+proposed, and reasoning reconstructed later stays visibly retrospective.
+Unsupported participant counts, quotations and rollout claims are removed.
+Tenet and Morsel are working concept prototypes, not shipped products or
+completed user studies. Build-time filtering removes entire working-note
+subtrees and rejects uncontained draft markers; `?draft` cannot reveal them.
 
 ## Layout
 
 ```
 index.html, *.html        the site
 styles.css, script.js     shared styles and behavior
-figures.js / .css         case-study figures, rendered as live prototype DOM
+figures.js / .css         captured illustrative DOM states, not interactive demos
 tenet-proto/              the Tenet build (host, desktop, companion)
 morsel-proto/             the Morsel v3 build
 morsel-docs/             process documents: wireflow, explorations, DS addendum, testing plan
@@ -46,7 +39,8 @@ images/                   photography and remaining rasters
 
 ### Case-study figures
 
-The screens in the case studies are not screenshots. `capture-figures.cjs` drives
+The lower case-study figures are fixed snapshots of rendered DOM. They do not
+respond to clicks; the separate top demo embeds run the actual apps. `capture-figures.cjs` drives
 the real prototypes to the state each caption describes and serialises the
 rendered DOM; `build-figures.mjs` turns those captures into `figures.js` and
 `figures.css`. The figures scale with a CSS transform, so they stay sharp at any
@@ -58,7 +52,7 @@ To regenerate after changing a prototype:
 ```bash
 node capture-figures.cjs        # drive the prototypes, write figures.json
 node build-figures.mjs          # emit figures.js / figures.css
-node build-live-figures-into-pages.mjs   # swap <img> for live figures in pages
+node build-live-figures-into-pages.mjs   # replace lower illustrations with DOM snapshots
 ```
 
 `build-artifact.mjs` bundles the whole site into a single self-contained HTML
@@ -66,7 +60,27 @@ file with every asset inlined and no external requests.
 
 ## Deploy
 
-`build-site.sh` assembles `_site/`, and `.github/workflows/deploy.yml` publishes
+`build-site.sh` assembles `_site/` using Node.js and Python 3. It precompiles
+Morsel JSX with the checked-in Babel version and serves production React,
+partitions figure data per case and externalizes duplicated fonts. No dependency
+download is needed. Run `node build-figures.mjs` after editing `figures.json`.
+
+`tenet.html` is the canonical case study. `tenet-new.html` and the old prototype
+URLs redirect to the reviewed case and matching `*-new.html` live builds while
+preserving query strings and anchors.
+
+Verify before publishing:
+
+```bash
+node stamp-editable.mjs --check
+node --test tests/tenet-new.test.cjs
+bash build-site.sh
+python3 tests/site-build.test.py
+PREVIEW=1 bash build-site.sh
+PREVIEW=1 python3 tests/site-build.test.py
+```
+
+The generated `_site/` directory is not committed. The workflow in `.github/workflows/deploy.yml` publishes
 it to GitHub Pages.
 
 Two branches publish to one Pages site:
@@ -74,7 +88,7 @@ Two branches publish to one Pages site:
 | Branch | URL | What it is |
 |--------|-----|------------|
 | `main` | `https://lananguyen.xyz/` | the live site |
-| `preview` | `https://lananguyen.xyz/preview/` | staging: banner on every page, `noindex`, excluded in `robots.txt` |
+| `preview` | `https://lananguyen.xyz/preview/` | staging: page banner and `noindex` on every HTML document |
 
 A push to **either** branch rebuilds **both**, because a Pages deploy replaces
 the entire published artifact — uploading only one would delete the other.
@@ -117,7 +131,8 @@ fine-grained token at *Settings → Developer settings → Personal access token
 Fine-grained*, restricted to this one repository, with **Contents: Read and
 write**. It is kept in that browser's local storage and used only to commit to
 `preview`. Anyone can open `?edit` and type; without a token, nothing can be
-saved, and the preview site is `noindex` and disallowed in `robots.txt`.
+saved, and preview HTML carries `noindex`. Crawling remains allowed so search engines
+can read that directive; staging is public, not access-controlled.
 
 What the editor deliberately will not touch: layout, spacing, colors, the
 generated case-study figures, and the prototypes. Those stay code. Evidence

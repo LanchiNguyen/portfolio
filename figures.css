@@ -312,6 +312,26 @@
 .tfig button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}
 .tfig button:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.tfig,.tfig *,.tfig *::before,.tfig *::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}
+.tfig-new{margin:0;background:#E9EAEB;color:#24282B;font-family:'Plus Jakarta Sans',sans-serif}.tfig-new a{color:#8C6A25}.tfig-new a:hover{color:#6E521C}
+.tfig-new{--c-bg:#182430;--c-bd:#2A3B49;--c-a1:#DFB05C;--c-txt:#C9D3DB;--c-dim:#8FA3B3;--annD:block;--frameCols:1fr 300px 320px;--frameRows:300px 230px;--tickSpan:span 2}
+
+
+.tfig-new button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}
+.tfig-new button:focus-visible,.tfig-new input:focus-visible,.tfig-new .ticket-details:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}
+.tfig-new .order-ticket{background:#F6F7F7;padding:14px 16px;display:flex;flex-direction:column;gap:8px;grid-row:var(--tickSpan);min-height:0;overflow:hidden;box-sizing:border-box}
+.tfig-new .ticket-details{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px 3px 8px;scrollbar-gutter:stable}
+.tfig-new .ticket-details>*{flex-shrink:0}
+.tfig-new .ticket-summary{order:1;display:flex;flex-direction:column;gap:8px}
+.tfig-new .ticket-actions{flex:none;display:flex;flex-direction:column;gap:8px;border-top:1px solid #D5DADD;padding-top:10px}
+.tfig-new .ticket-action-group{display:flex;flex-direction:column;gap:8px;background:var(--c-bg);border:1px solid var(--c-bd);border-radius:12px;padding:10px}
+.tfig-new .ticket-actions button{flex-shrink:0;min-height:44px;border-radius:8px;box-sizing:border-box}
+.tfig-new .ticket-cancel{border:1px solid var(--c-dim);color:var(--c-txt);font:600 12px 'Plus Jakarta Sans';text-align:center;padding:8px}
+.tfig-new .ticket-cancel:hover{background:rgba(255,255,255,.07)}
+
+@media (prefers-reduced-motion:reduce){.tfig-new,.tfig-new *,.tfig-new *::before,.tfig-new *::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}
+.tfig-new /* ?bare — the case-study embed shows the workstation,.tfig-new not the board around it */
+:root[data-bare] [data-scaffold]{display:none !important}
+.tfig-new[data-bare] body>div:first-child{padding-bottom:16px}
 
   .docfig-wf,.docfig-wf { margin: 0; overflow-x: hidden; }
   .docfig-wf { font-family: "Hanken Grotesk", sans-serif; background: #EDE6D8; }

@@ -22,8 +22,8 @@ function SearchScreen({ onBack, onOpen, gridCols, prefs, onEditDiet }) {
         </button>
         <div style={{ flex: 1, display: "flex", alignItems: "center", gap: 8, background: "var(--sunken)", borderRadius: 99, padding: "0 16px", minHeight: 46 }}>
           <div style={{ color: "var(--ink-3)", flex: "none" }}><MIcon name="search" size={17} /></div>
-          <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="A dish, a place, a craving…"
-            style={{ flex: 1, minWidth: 0, border: "none", outline: "none", background: "none", font: "inherit", fontSize: 16, color: "var(--ink)" }} />
+          <input aria-label="Search dishes, restaurants, and cuisines" autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="A dish, a place, a craving…"
+            style={{ flex: 1, minWidth: 0, border: "none",  background: "none", font: "inherit", fontSize: 16, color: "var(--ink)" }} />
           {q && <button className="m-caption" style={{ color: "var(--ink-2)", fontWeight: 700, flex: "none" }} onClick={() => setQ("")}>Clear</button>}
         </div>
       </div>
