@@ -55,7 +55,7 @@
             <div><span class="k" data-ed="6">SCOPE</span><span class="v" data-ed="7">0&rarr;1 behavioral intervention system</span></div>
             <div><span class="k" data-ed="8">STATUS</span><span class="v" data-ed="9">Functional interactive prototype &middot; not shipped</span></div>
             <div><span class="k" data-ed="10">TEAM &middot; YEAR</span><span class="v" data-ed="11">Independent &middot; 2026</span></div>
-            <div><span class="k" data-ed="12">BUILD</span><span class="v" data-ed="13">HTML/CSS/JavaScript prototype &middot; AI&#8209;assisted with Claude Design and Fable</span></div>
+            <div><span class="k" data-ed="12">BUILD</span><span class="v" data-ed="13">HTML/CSS/JavaScript prototype &middot; Claude Design and Fable</span></div>
           </div>
         </div>
       </section>
@@ -203,7 +203,7 @@
                 <figcaption class="figcap" data-ed="46"><span class="fk">Cooldown running &middot; prototype snapshot</span>The copy does the ethical work: held, not queued; review, then decide; cancel always present.</figcaption>
               </figure>
               <figure class="figure fig-note">
-                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="47"><span class="fk">Why a refreshed quote</span>Quotes move during a cooldown. The review shows the price change and the final size before a fresh confirmation. Holding an order is a separate state from sending it.</figcaption>
+                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="47"><span class="fk">Retrospective design review</span>A quote can change during the cooldown. I separated waiting from sending so the trader sees the updated quote and confirms again. The timer never sends an order. It adds a step, but the final choice uses the price available at that moment.</figcaption>
               </figure>
             </div>
           </div>
@@ -266,7 +266,7 @@
             <p class="proj-p" data-ed="59">A tool that interrupts trades has to explain its access, its failures, and its limits.</p>
             <ul class="feat-list">
               <li data-ed="60"><strong>Trust &amp; data.</strong> Tenet reads order tickets at send and fills after the close, conceptually through an embedded broker SDK. It never reads the screen or other accounts. In the proposed model, disconnecting stops rules from arming and deleting the account removes rules and Record</li>
-              <li data-ed="61"><strong>Failure behavior.</strong> The cloud-sync outage demo keeps rules running locally and records events for later sync; retry is explicit. A broker integration or enforcement failure is a different, unimplemented condition. A production fallback policy would need broker and risk review. The prototype does not establish that policy. Notes attach alongside existing events</li>
+              <li data-ed="61"><strong>Failure behavior &middot; retrospective review.</strong> The earlier case-study copy treated connection failures too broadly. I narrowed it to what the prototype shows: rules keep running on the device during a cloud-sync outage, with events waiting to sync. A failure in broker-side enforcement needs a separate fallback policy, which this prototype does not implement.</li>
               <li data-ed="62"><strong>Accessibility, as implemented in the prototypes:</strong> the send rail supports Enter, intervention choices have named controls, and status messages are exposed to assistive technology. The tested core flow retains cancellation and explicit confirmation. Full screen-reader, touch, contrast and zoom evaluation remain outstanding</li>
             </ul>
           </div>
