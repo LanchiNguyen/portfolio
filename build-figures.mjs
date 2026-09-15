@@ -2,16 +2,16 @@
  *
  * Input : figures.json (from the capture pass) — each figure is the canonical
  *         prototype's own rendered markup at the state its caption describes.
- * Output: v2/figures.css + v2/figures.js
+ * Output: figures.css + figures.js
  *
  * Figures render as real DOM, so they stay sharp at any zoom or pixel ratio.
  * Photographs inside them travel as ids and rehydrate from the one shared
  * canonical photo map rather than being duplicated per figure.
  */
-import { readFileSync, writeFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 const S = process.env.S || '.';
-const store = JSON.parse(readFileSync(S + '/figures.json', 'utf8'));
+const store = JSON.parse(readFileSync('figures.json', 'utf8'));  /* repo input, not scratch */
 
 /* ---- scope a stylesheet so it cannot leak into the host page ----
    A brace-aware walk, because a regex cannot tell a selector list from a
@@ -90,6 +90,7 @@ const css = [
   store.css.morsel,
   scopeSafely(store.css['tenet-host'], '.tfig'),
   scopeSafely(store.css['tenet-desktop'], '.tfig'),
+  scopeSafely(store.css['tenet-desktop-new'] || '', '.tfig-new'),
   scopeSafely(store.css['doc-wf'] || '', '.docfig-wf'),
   scopeSafely(store.css['doc-ex'] || '', '.docfig-ex'),
   scopeSafely(store.css['doc-ds'] || '', '.docfig-ds'),
@@ -119,7 +120,7 @@ window.__FIGS = ${JSON.stringify(figs)};
   var F = window.__FIGS;
   function photoSrc(id) {
     if (window.__MORSEL_PHOTOS && window.__MORSEL_PHOTOS[id]) return window.__MORSEL_PHOTOS[id];
-    return (window.__FIG_PHOTO_BASE || '../images/morsel-photos/') + id + '.webp';
+    return (window.__FIG_PHOTO_BASE || 'images/morsel-photos/') + id + '.webp';
   }
   function fit(box) {
     var inner = box.firstElementChild; if (!inner) return;
@@ -164,7 +165,9 @@ window.__FIGS = ${JSON.stringify(figs)};
    and stop looking like the product. Shipped as a separate sheet because the
    artifact build already ships these faces through its own keepUsedFaces pass;
    only the standalone site pages need this file. */
-const allFaces = readFileSync(S + '/proto-fonts-inline.css', 'utf8');
+// Reuse the checked-in faces when the original capture font bundle is absent.
+const fontSource = S + '/proto-fonts-inline.css';
+const allFaces = readFileSync(existsSync(fontSource) ? fontSource : 'figures-fonts.css', 'utf8');
 const corpus = JSON.stringify(figs) + css;
 const faces = (allFaces.match(/@font-face\{[^}]*\}/g) || []).filter(b => {
   const m = /font-family:\s*'([^']+)'/.exec(b);
@@ -179,9 +182,9 @@ const fontCss = faces.filter(b => {
   seen.add(key); return true;
 }).join('\n');
 
-writeFileSync('v2/figures.css', css);
-writeFileSync('v2/figures-fonts.css', fontCss);
-writeFileSync('v2/figures.js', js);
+writeFileSync('figures.css', css);
+writeFileSync('figures-fonts.css', fontCss);
+writeFileSync('figures.js', js);
 console.log('figures:', Object.keys(figs).length);
 console.log('figures.css      ', Math.round(css.length / 1024) + 'KB');
 console.log('figures-fonts.css', Math.round(fontCss.length / 1024) + 'KB', '(' + seen.size + ' faces)');

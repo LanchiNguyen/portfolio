@@ -40,7 +40,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
     <div className="m-screen m-fade" style={{ background: "var(--paper)" }}>
       <div style={{ position: "absolute", top: 58, left: 14, right: 14, zIndex: 30, display: "flex", justifyContent: "space-between" }}>
         <button className="m-glass m-glass-icon" aria-label="Back" onClick={onBack}><MIcon name="back" size={18} /></button>
-        <button className="m-glass m-glass-icon" aria-label="Share" onClick={() => ping("Link copied")}><MIcon name="share" size={18} /></button>
+        <button className="m-glass m-glass-icon" aria-label="Share" onClick={() => ping("Demo share — no public dish link yet")}><MIcon name="share" size={18} /></button>
       </div>
 
       <div className="m-scroll">
@@ -104,7 +104,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
           <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", borderRadius: "var(--r)", background: "var(--sunken)", marginBottom: 18 }}>
             <PctRing pct={dish.pct} />
             <div style={{ flex: 1 }}>
-              <div className="m-second" style={{ fontWeight: 700 }}>{dish.pct}% would order again</div>
+              <div className="m-second" style={{ fontWeight: 700 }}>{dish.pct}% ordered again within 90 days</div>
               <div className="m-caption" style={{ color: "var(--ink-2)" }}>
                 {37 + dish.pct} verified diners (illustrative) · <button onClick={() => setShowHow(!showHow)} aria-expanded={showHow} style={{ color: "var(--accent)", fontWeight: 700, fontSize: 13 }}>how we know</button>
               </div>
@@ -119,7 +119,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
 
           {showHow && !dish.fresh && (
             <div className="m-caption m-fade" style={{ background: "var(--sunken)", borderRadius: 14, padding: "10px 14px", marginTop: -8, marginBottom: 18, color: "var(--ink-2)" }}>
-              Counted from repeat orders: diners who got this dish through a Morsel handoff or pickup, then ordered it again within 90 days. Never self-reported. Never stars.
+              Proposed measure: of unique diners with a verified first order and a complete 90-day follow-up, the share who ordered this same dish again within those 90 days. Each diner counts once. Excludes cancelled or refunded first orders and incomplete follow-up. This measures observed repeat ordering, not satisfaction or safety.
               <span style={{ display: "block", marginTop: 6, color: "var(--ink-3)" }}>Prototype note: counts shown here are illustrative seed data, not real orders.</span>
             </div>
           )}
@@ -130,7 +130,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
             onClick={() => {onToggleSave(dish.id);if (isSaved) ping("Removed from saves");}}>
               <MIcon name="heart" filled={isSaved} />
             </button>
-            <button className="m-btn m-btn-quiet" style={{ flex: 1 }} onClick={() => ping("Opening Maps…")}>
+            <button className="m-btn m-btn-quiet" style={{ flex: 1 }} onClick={() => ping("Demo directions — no map connection")}>
               <MIcon name="nav" size={18} /> Directions
             </button>
             {dish.soldOut ? (

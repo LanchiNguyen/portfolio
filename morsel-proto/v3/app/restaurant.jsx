@@ -36,7 +36,7 @@ function RestaurantScreen({ restName, onBack, onOpen, conflictsOf }) {
         <div style={{ padding: "16px 22px 30px" }}>
           <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
             {[
-              { big: avgPct + "%", small: "would order again" },
+              { big: avgPct + "%", small: "ordered again within 90 days" },
               { big: priceRange, small: "dishes on Morsel" },
               { big: first.dist, small: "from you" }
             ].map((s) => (
@@ -49,7 +49,7 @@ function RestaurantScreen({ restName, onBack, onOpen, conflictsOf }) {
           <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: -8, marginBottom: 16 }}>Scores and diner counts are illustrative prototype data.</div>
 
           <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
-            <button className="m-btn m-btn-quiet" style={{ flex: 1 }} onClick={() => ping("Opening Maps…")}><MIcon name="nav" size={18} /> Directions</button>
+            <button className="m-btn m-btn-quiet" style={{ flex: 1 }} onClick={() => ping("Demo directions — no map connection")}><MIcon name="nav" size={18} /> Directions</button>
             {closedNow ? (
               <button className="m-btn m-btn-primary" style={{ flex: 1 }} disabled>Opens 8 AM</button>
             ) : (

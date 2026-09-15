@@ -1,9 +1,9 @@
 // Morsel — seed data, set in Washington DC / the DMV.
-// Photos: Unsplash via wsrv.nl proxy (direct unsplash is blocked here).
+// Photos: the checked-in portfolio image set; no runtime proxy request.
 // v3.1 audit: every dish photo visually verified against its name, description,
 // and dietary attributes (d08/d09/d10/d11/d22/d24/d26 corrected).
 function u(id, w) {
-  return "https://wsrv.nl/?url=images.unsplash.com/photo-" + id + "&w=" + (w || 700) + "&q=72";
+  return "../images/morsel-photos/" + id + ".webp";
 }
 
 const MORSEL_DISHES = [

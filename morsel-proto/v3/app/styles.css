@@ -204,3 +204,7 @@
 .m-rise { animation: m-rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .m-fade { animation: m-fade 0.25s ease both; }
 @media (prefers-reduced-motion: reduce) { .m-rise, .m-fade, .m-skel { animation: none; } .m-zoom { display: none; } }
+
+/* Keep input and icon-button focus visible across every prototype surface. */
+.morsel-app :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.morsel-app input:focus-visible,.morsel-app textarea:focus-visible{outline:3px solid var(--ink) !important;outline-offset:3px}

@@ -215,6 +215,16 @@ function MorselApp() {
         </div>
       </IOSDevice>
 
+      <details className="m-demo-controls" style={{fontFamily:"system-ui, sans-serif",fontSize:13,maxWidth:402,marginTop:16,color:"#34291f"}}>
+        <summary style={{cursor:"pointer",padding:12}}>Prototype controls · simulated states</summary>
+        <div style={{display:"flex",flexDirection:"column",gap:10,padding:12}}>
+          <label>Scenario <select value={t.sim} onChange={(e)=>setTweak("sim",e.target.value)} style={{padding:8}}>
+            <option value="none">Normal</option><option value="loading">Feed loading</option><option value="offline">Offline</option><option value="imgfail">Images unavailable</option><option value="handoff">Provider handoff failure</option>
+          </select></label>
+          <button style={{padding:10}} onClick={()=>{localStorage.removeItem("morsel3_state");window.location.reload();}}>Reset prototype and replay onboarding</button>
+          <span>These controls change the demo only. No order is placed.</span>
+        </div>
+      </details>
       <TweaksPanel>
         <TweakSection label="Direction" />
         <TweakSelect label="Visual direction" value={t.direction}
@@ -267,25 +277,25 @@ function MorselApp() {
 function MorselPage() {
   const [scale, setScale] = React.useState(1);
   React.useEffect(() => {
-    const fit = () => setScale(Math.min(1, (window.innerHeight - 70) / 900));
+    const fit = () => setScale(Math.max(0.5, Math.min(1, (window.innerWidth - 24) / 402, (window.innerHeight - 70) / 900)));
     fit(); window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
   }, []);
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, padding: "16px 0" }}>
-      <div style={{ width: 402 * scale, height: 874 * scale }}>
+      <div style={{ width: 402 * scale, height: 874 * scale + 190 }}>
         <div style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}>
           <MorselApp />
         </div>
       </div>
       <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 13, color: "#8A7A66", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-        <div style={{ display: "flex", gap: 14, alignItems: "center", whiteSpace: "nowrap" }}>
+        <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap", justifyContent: "center", padding: "0 16px" }}>
           <span style={{ fontWeight: 700, color: "#5C4B38" }}>Morsel v3</span>
           <span>final iteration</span>
           <a href="../morsel-docs/wireflow.html" style={{ color: "#B0542F", fontWeight: 600 }}>wireflow →</a>
           <a href="../morsel-docs/explorations.html" style={{ color: "#B0542F", fontWeight: 600 }}>explorations →</a>
           <a href="../morsel-docs/ds-addendum.html" style={{ color: "#B0542F", fontWeight: 600 }}>ds addendum →</a>
-          <a href="../morsel.html" style={{ color: "#B0542F", fontWeight: 600 }}>v2 →</a>
+          <a href="../morsel.html" style={{ color: "#B0542F", fontWeight: 600 }}>case study →</a>
         </div>
         <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Prototype: all diner counts, scores, save numbers, names, and quotes are illustrative seed data — not real customer evidence.</div>
       </div>

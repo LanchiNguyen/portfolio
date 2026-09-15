@@ -18,6 +18,18 @@ function morselCarriersFor(rest) {
   return list.length ? list : [MORSEL_CARRIERS[n % 3]];
 }
 
+const MorselCarrierRow = ({ icon, title, sub, right, onPick, disabled }) => (
+    <button onClick={onPick} disabled={disabled} style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "11px 6px", borderRadius: 14, minHeight: 56, opacity: disabled ? 0.4 : 1 }}>
+      {icon}
+      <div style={{ flex: 1, minWidth: 0, textAlign: "left" }}>
+        <div className="m-second" style={{ fontWeight: 700 }}>{title}</div>
+        <div className="m-caption" style={{ color: "var(--ink-3)" }}>{sub}</div>
+      </div>
+      <div className="m-caption" style={{ color: "var(--ink-2)", fontWeight: 700, flex: "none" }}>{right}</div>
+      <div style={{ color: "var(--ink-3)", flex: "none", transform: "rotate(180deg)" }}><MIcon name="back" size={14} /></div>
+    </button>
+  );
+
 function OrderSheet({ dish, conflict = [], onClose, onPing }) {
   const { u } = window.MorselData;
   // Modal focus management: name the dialog, move focus in on open, trap Tab,
@@ -51,20 +63,10 @@ function OrderSheet({ dish, conflict = [], onClose, onPing }) {
   const allergyText = conflict.join(" and ").toLowerCase();
   const tryCarrier = (c) => {
     if ((window.MorselSim || {}).handoffFail) { setFailed(c); return; }
-    onPing("Opening " + c.name + "…"); onClose();
+    onPing("Demo handoff to " + c.name + " — no order placed"); onClose();
   };
 
-  const Row = ({ icon, title, sub, right, onPick, disabled }) => (
-    <button onClick={onPick} disabled={disabled} style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "11px 6px", borderRadius: 14, minHeight: 56, opacity: disabled ? 0.4 : 1 }}>
-      {icon}
-      <div style={{ flex: 1, minWidth: 0, textAlign: "left" }}>
-        <div className="m-second" style={{ fontWeight: 700 }}>{title}</div>
-        <div className="m-caption" style={{ color: "var(--ink-3)" }}>{sub}</div>
-      </div>
-      <div className="m-caption" style={{ color: "var(--ink-2)", fontWeight: 700, flex: "none" }}>{right}</div>
-      <div style={{ color: "var(--ink-3)", flex: "none", transform: "rotate(180deg)" }}><MIcon name="back" size={14} /></div>
-    </button>
-  );
+
 
   return (
     <div ref={sheetRef} role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1} style={{ position: "absolute", inset: 0, zIndex: 60, display: "flex", flexDirection: "column", justifyContent: "flex-end", outline: "none" }}>
@@ -100,11 +102,11 @@ function OrderSheet({ dish, conflict = [], onClose, onPing }) {
         )}
 
         {failed && (
-          <div style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "rgba(194,73,43,.10)", border: "1.5px solid var(--accent)", borderRadius: 14, padding: "11px 13px", marginBottom: 12 }}>
+          <div role="alert" style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "rgba(194,73,43,.10)", border: "1.5px solid var(--accent)", borderRadius: 14, padding: "11px 13px", marginBottom: 12 }}>
             <div style={{ color: "var(--accent)", flex: "none", fontWeight: 900, fontSize: 13, width: 20, height: 20, borderRadius: 99, border: "2px solid var(--accent)", display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
             <div style={{ flex: 1 }}>
               <div className="m-caption" style={{ fontWeight: 800, color: "var(--accent)" }}>Couldn't open {failed.name}</div>
-              <div className="m-caption" style={{ color: "var(--ink-2)" }}>It may not be installed. Try again, pick another app, or grab it yourself — pickup never fails.</div>
+              <div className="m-caption" style={{ color: "var(--ink-2)" }}>This is a simulated provider failure. Try again, choose another provider, or check pickup availability.</div>
               <button className="m-caption" style={{ color: "var(--accent)", fontWeight: 800, marginTop: 4, minHeight: 28 }} onClick={() => tryCarrier(failed)}>Try again</button>
             </div>
           </div>
@@ -114,7 +116,7 @@ function OrderSheet({ dish, conflict = [], onClose, onPing }) {
         {carriers.length ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 2, marginBottom: 14 }}>
             {carriers.map((c) => (
-              <Row key={c.key} disabled={locked}
+              <MorselCarrierRow key={c.key} disabled={locked}
                 icon={<div style={{ width: 38, height: 38, borderRadius: 12, flex: "none", display: "flex", alignItems: "center", justifyContent: "center", background: c.tone, color: "#fff", fontWeight: 800, fontSize: 16 }}>{c.name[0]}</div>}
                 title={c.name} sub={locked ? "Locked — confirm the allergy notice above" : `${c.eta[0]}–${c.eta[1]} min · ${c.fee} fee`} right="Open"
                 onPick={() => tryCarrier(c)} />
@@ -129,10 +131,10 @@ function OrderSheet({ dish, conflict = [], onClose, onPing }) {
 
         <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 6 }}>Skip the fees</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <Row disabled={locked}
+          <MorselCarrierRow disabled={locked}
             icon={<div style={{ width: 38, height: 38, borderRadius: 12, flex: "none", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--sunken)", color: "var(--ink-2)" }}><MIcon name="bag" size={18} /></div>}
             title="Pickup" sub={locked ? "Locked — confirm the allergy notice above" : `Ready in ~${pickupMin} min · ${dish.walk}`} right="Free"
-            onPick={() => { onPing("Calling it in…"); onClose(); }} />
+            onPick={() => { onPing("Demo pickup selected — no order placed"); onClose(); }} />
         </div>
       </div>
     </div>
