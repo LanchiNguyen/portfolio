@@ -66,13 +66,13 @@ function ObWelcome({ onNext }) {
       <div style={{ position: "relative", marginTop: "auto", padding: "0 28px 30px", display: "flex", flexDirection: "column", gap: 16, color: "#FFF7EB" }}>
         <div className="m-display m-rise" style={{ fontSize: 42 }}>Find a dish,<br />then check it.</div>
         <div className="m-body m-rise" style={{ color: "rgba(255,247,235,.78)", maxWidth: 300, animationDelay: ".06s" }}>
-          Browse dishes nearby, see the price and distance before you open one, and save a few worth trying.
+          See what looks good, compare a few dishes, and save your favorites.
         </div>
         <button className="m-btn m-btn-primary m-rise" style={{ marginTop: 8, alignSelf: "stretch", animationDelay: ".12s" }} onClick={onNext}>
           Explore the DC demo
         </button>
         <div className="m-caption" style={{ textAlign: "center", color: "rgba(255,247,235,.55)" }}>
-          Demo area: {demoArea.hood}, Washington DC · {dishes.length} illustrative dishes. Nothing is requested from your device, and you can change the area from the feed.
+          {dishes.length} sample dishes around {demoArea.hood}, DC. Restaurants and menu details are fictional.
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@ function ObTaste({ picked, setPicked, onDone, onBack }) {
     <div className="m-screen m-fade" style={{ background: "var(--paper)" }}>
       <div style={{ padding: "64px 24px 4px", display: "flex", flexDirection: "column", gap: 14 }}>
         <div className="m-title">Tap what looks<br />good to you.</div>
-        <div className="m-second" style={{ color: "var(--ink-2)" }}>Cuisines you tap get a moderate boost in your feed. Nothing is hidden by this; it only tunes what comes first.</div>
+        <div className="m-second" style={{ color: "var(--ink-2)" }}>Pick a few dishes you like. Similar cuisines will appear higher in your feed.</div>
       </div>
       <div className="m-scroll" style={{ padding: "14px 24px 150px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
@@ -115,10 +115,10 @@ function ObTaste({ picked, setPicked, onDone, onBack }) {
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "34px 24px 30px", display: "flex", flexDirection: "column", gap: 12, background: "linear-gradient(to top, var(--paper) 62%, transparent)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", minHeight: 30 }}>
           {tags.length === 0 ? (
-            <div className="m-caption" style={{ color: "var(--ink-3)" }}>Cuisines you tap show up here…</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)" }}>Choose any dishes that catch your eye.</div>
           ) : (
             <React.Fragment>
-              <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600 }}>Boosting:</div>
+              <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600 }}>Your picks:</div>
               {tags.map((t) => (
                 <div key={t} className="m-fade" style={{ borderRadius: 99, background: "var(--ink)", color: "var(--paper)", padding: "5px 12px", fontSize: 12, fontWeight: 700 }}>{t}</div>
               ))}
@@ -128,7 +128,7 @@ function ObTaste({ picked, setPicked, onDone, onBack }) {
         <div style={{ display: "flex", gap: 10 }}>
           <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
           <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={onDone}>
-            {picked.length ? "Done" : "Done — no boost"}
+            {picked.length ? "Done" : "Skip"}
           </button>
         </div>
       </div>
@@ -146,11 +146,11 @@ function ObDietary({ lifestyle, setLifestyle, allergies, setAllergies, onDone, o
       <div style={{ padding: "64px 24px 16px", display: "flex", flexDirection: "column", gap: 14 }}>
         {!editing && <ObDots step={1} />}
         <div className="m-title">Dietary settings</div>
-        <div className="m-second" style={{ color: "var(--ink-2)" }}>Optional now, and always in Profile. Lifestyle narrows the feed. Allergies remove dishes whose menu lists that ingredient.</div>
+        <div className="m-second" style={{ color: "var(--ink-2)" }}>Choose any preferences or allergies you want to use while browsing. You can change these in Profile.</div>
       </div>
       <div className="m-scroll" style={{ padding: "8px 24px 150px" }}>
         <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 4 }}>Lifestyle</div>
-        <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>Filters the feed to matching dishes. Change anytime.</div>
+        <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>Show dishes that fit your preference.</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
           {lifestyles.map((d, i) => (
             <button key={d} className="m-chip m-rise" data-on={lifestyle === d} aria-pressed={lifestyle === d} style={{ animationDelay: `${i * 0.03}s` }}
@@ -160,7 +160,7 @@ function ObDietary({ lifestyle, setLifestyle, allergies, setAllergies, onDone, o
           ))}
         </div>
         <div className="m-micro" style={{ color: "var(--accent)", marginBottom: 4 }}>Allergies</div>
-        <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>Dishes whose menu lists one of these <b>leave your feed and search</b>. Dishes with no ingredient information are listed separately and never counted as a match. Saved dishes stay visible, labeled.</div>
+        <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>We <b>hide dishes that list these ingredients</b> from recommendations. Missing ingredient details appear separately from matches. Saved dishes stay visible with a warning.</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
           {allergens.map((d, i) => {
             const on = allergies.includes(d);
@@ -174,7 +174,7 @@ function ObDietary({ lifestyle, setLifestyle, allergies, setAllergies, onDone, o
           })}
         </div>
         <div className="m-caption m-fade" style={{ color: "var(--ink-2)", marginTop: 16, background: "var(--sunken)", borderRadius: 14, padding: "10px 14px" }}>
-          Menu listings are the only source here. They don't cover preparation or shared surfaces, and this demo tracks only these four. Tell the kitchen either way.
+          This demo includes only these four categories. Ingredient lists do not cover preparation or cross-contact. Always confirm with the restaurant.
         </div>
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "28px 24px 30px", display: "flex", flexDirection: "column", gap: 10, background: "linear-gradient(to top, var(--paper) 55%, transparent)" }}>
@@ -184,7 +184,7 @@ function ObDietary({ lifestyle, setLifestyle, allergies, setAllergies, onDone, o
         </div>
         {!editing && (
           <button className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 700, alignSelf: "center", minHeight: 32 }} onClick={onSkip}>
-            Skip for now — set it later in Profile
+            Skip for now
           </button>
         )}
       </div>

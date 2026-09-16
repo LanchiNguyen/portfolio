@@ -75,7 +75,7 @@ function FiltersSheet({ filters, prefs, onChange, onClose }) {
         </div>
 
         <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 4 }}>Menu price per dish</div>
-        <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>The listed price only. Tax, tip and extras are not included.</div>
+        <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Excludes tax, tip and extras.</div>
         <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
           {MORSEL_PRICE_BANDS.map((p) => (
             <button key={p.b} className="m-chip" data-on={f.price.includes(p.b)} aria-pressed={f.price.includes(p.b)} onClick={() => togglePrice(p.b)}
@@ -86,7 +86,7 @@ function FiltersSheet({ filters, prefs, onChange, onClose }) {
         </div>
 
         <div className="m-micro" id="mi-label" style={{ color: "var(--ink-3)", marginBottom: 4 }}>Distance from Shaw</div>
-        <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Straight-line miles from the demo area. Not a travel time.</div>
+        <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Straight-line distance from the demo area.</div>
         <div role="radiogroup" aria-labelledby="mi-label" style={{ display: "flex", gap: 8, marginBottom: 22 }}>
           {MI_STOPS.map((s) => (
             <button key={s.mi} className="m-chip" data-on={f.maxMi === s.mi} role="radio" aria-checked={f.maxMi === s.mi} onClick={() => onChange({ ...f, maxMi: s.mi })}
@@ -101,7 +101,7 @@ function FiltersSheet({ filters, prefs, onChange, onClose }) {
         </button>
         <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 10, textAlign: "center" }}>
           {unpriced > 0 ? `${unpriced} dish${unpriced === 1 ? " has" : "es have"} no listed price and ${unpriced === 1 ? "is" : "are"} set aside while a price filter is on. ` : ""}
-          Dietary settings are separate and never cleared here.
+          Clearing these filters keeps your dietary settings.
         </div>
       </div>
     </div>

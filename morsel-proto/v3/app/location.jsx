@@ -44,7 +44,7 @@ function LocationSheet({ loc, onChange, onClose }) {
         {!stage2 ? (
           <React.Fragment>
             <div className="m-heading" style={{ marginBottom: 4, flex: "none" }}>Where are you eating?</div>
-            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12, flex: "none" }}>This demo has dishes for Washington, DC only. Other places show an honest "not covered" state.</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12, flex: "none" }}>This demo includes Washington, DC only.</div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--sunken)", borderRadius: 99, padding: "0 16px", minHeight: 48, flex: "none", marginBottom: 6 }}>
               <div style={{ color: "var(--ink-3)", flex: "none" }}><MIcon name="search" size={16} /></div>
               <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="City or neighborhood" aria-label="City or neighborhood"
@@ -61,7 +61,7 @@ function LocationSheet({ loc, onChange, onClose }) {
                   </div>
                   <div style={{ flex: 1, textAlign: "left" }}>
                     <div className="m-second" style={{ fontWeight: 700 }}>Demo area · {demoArea.hood}, Washington DC</div>
-                    <div className="m-caption" style={{ color: "var(--ink-3)" }}>Distances are measured from here. Not your device's location.</div>
+                    <div className="m-caption" style={{ color: "var(--ink-3)" }}>Demo distances are measured from Shaw.</div>
                   </div>
                   {onDemo && <div style={{ color: "var(--accent)", flex: "none" }}><MIcon name="check" size={18} /></div>}
                 </button>
@@ -93,7 +93,7 @@ function LocationSheet({ loc, onChange, onClose }) {
               </button>
               <div>
                 <div className="m-heading" style={{ fontSize: 20 }}>{stage2.city}</div>
-                <div className="m-caption" style={{ color: "var(--ink-3)" }}>Pick a neighborhood, or take the whole city</div>
+                <div className="m-caption" style={{ color: "var(--ink-3)" }}>Choose a neighborhood or the whole city</div>
               </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 14 }}>

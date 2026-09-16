@@ -71,11 +71,11 @@
 <div class="page">
   <a href="../morsel.html">← back to case study</a> · <a href="../morsel-proto/index.html">live prototype →</a>
   <h1 style="margin-top:16px;">Structural explorations</h1>
-  <p class="sub" style="margin-top:12px;">Four decisions, explored as real alternatives with tradeoffs. Each ends with what v3.1 chose, what the v3.2 design review changed and why, and how to test it. The earlier choices are kept on the page: the point is the reversal, not a clean record. Mock content is illustrative.</p>
+  <p class="sub" style="margin-top:12px;">A retrospective comparison of four design decisions. Each section shows the earlier approach, the current choice and a question for future testing. All menu content is sample data.</p>
 
   <!-- ============ A ============ -->
   <h2><span class="k">A</span>Feed information density</h2>
-  <p class="sub">How much belongs on the card? The founding bet was "photos decide". The review found that zero text forced a detail round-trip for every comparison.</p>
+  <p class="sub">The original feed showed photos without labels. Comparing names and prices meant opening each dish.</p>
   <div class="rule"></div>
   <div class="opts">
     <div class="opt">
@@ -85,7 +85,7 @@
         <div class="mcol"><div class="ph" style="aspect-ratio:1.1;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" /></div><div class="ph" style="aspect-ratio:.85;"><img src="../images/morsel-photos/1568901346375-23c9450c58cd.webp" alt="" /></div></div>
       </div></div>
       <ul>
-        <li><b>Scan:</b> fastest; pure appetite response</li>
+        <li><b>Scan:</b> few visual elements; scanning speed untested</li>
         <li><b>Decisions:</b> name, price and distance need a tap each</li>
         <li><b>A11y:</b> weakest; image-only targets</li>
         <li><b>Review:</b> two dishes cannot be compared without opening both</li>
@@ -98,9 +98,9 @@
         <div class="mcol"><div class="ph" style="aspect-ratio:1.1;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" /><div class="chip">$17</div></div><div class="ph" style="aspect-ratio:.85;"><img src="../images/morsel-photos/1568901346375-23c9450c58cd.webp" alt="" /><div class="chip">$14 · 0.8 mi</div></div></div>
       </div></div>
       <ul>
-        <li><b>Scan:</b> near-parity; chips read peripherally</li>
+        <li><b>Scan:</b> small labels over the photos; scanning speed untested</li>
         <li><b>Decisions:</b> price in-feed, but no name; long names clip in a glass pill</li>
-        <li><b>A11y:</b> text on photo needs a veil to pass contrast</li>
+        <li><b>A11y:</b> text on photos needs contrast testing</li>
       </ul>
     </div>
     <div class="opt">
@@ -110,9 +110,9 @@
         <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" /></div><div class="under">Shoyu Ramen No. 4<span>Paper Lantern · H Street</span><span><b>$17</b> · 1.2 mi</span></div></div>
       </div></div>
       <ul>
-        <li><b>Scan:</b> slower; eye alternates photo and text</li>
+        <li><b>Scan:</b> more information to read; scanning speed untested</li>
         <li><b>Decisions:</b> complete; names wrap instead of clipping</li>
-        <li><b>A11y:</b> best; one button with a full name, save as a sibling</li>
+        <li><b>A11y:</b> descriptive button names; a separate Save control</li>
         <li><b>Without a photo:</b> the card still works</li>
       </ul>
     </div>
@@ -125,11 +125,11 @@
       <ul>
         <li><b>Scan:</b> clean until invoked</li>
         <li><b>Decisions:</b> gated behind an undiscoverable gesture</li>
-        <li><b>A11y:</b> worst; long-press is invisible and hard for motor-impaired users</li>
+        <li><b>A11y:</b> requires an alternative to long-press and a visible cue</li>
       </ul>
     </div>
   </div>
-  <div class="rec"><span class="badge">Review · v3.2</span><p><b>A3 in every grid.</b> v3.1 kept A1 for the feed and used labels only in search, on the theory that browsers graze and searchers compare. The review reversed it: the journey this case is about ends in a choice, and a choice needs the name, the price and the distance in the same glance. The hero stays photo-led as one editorial pick. <b>Test:</b> Round B task 1. If people still open cards only to check price, the card is missing something; if they stop opening cards at all, the photo has lost its job.</p></div>
+  <div class="rec"><span class="badge">Review · v3.2</span><p><b>A3 in every grid.</b> I added text below the photos so names, prices and distances stay visible. The larger cards show fewer dishes at once; the featured image still gives the food room. <b>To test:</b> can people compare options without opening each one?</p></div>
 
   <!-- ============ B ============ -->
   <h2><span class="k">B</span>Entry model</h2>
@@ -178,7 +178,7 @@
       </ul>
     </div>
   </div>
-  <div class="rec"><span class="badge">Review · v3.2</span><p><b>B3.</b> The dietary step stays early because an allergy setting changes what the feed shows; it is skippable because it should never stand between someone and their first look. Taste calibration moved to Profile: it only re-ranks, so it never needed to be a step. The location permission theater went entirely; the demo has no location to ask for. <b>Test:</b> Round B tasks 1 and 6, and whether anyone finds "Tune" without prompting. If nobody does and the feed suffers for it, revisit.</p></div>
+  <div class="rec"><span class="badge">Review · v3.2</span><p><b>B3.</b> Dietary settings are offered before browsing and can be skipped. Taste preferences moved to Profile, where they can be added later. The welcome screen names the demo area instead of asking for device location. <b>To test:</b> can people start browsing and find these settings when they need them?</p></div>
 
   <!-- ============ C ============ -->
   <h2><span class="k">C</span>Evidence on the dish page</h2>
@@ -193,12 +193,12 @@
     <div class="opt">
       <h3>C2 · % + sample + method <span class="was">v3.1 choice</span></h3>
       <div class="mock"><div class="statcard"><div class="ring"></div><div><div class="t">94% ordered again within 90 days</div><div class="s">131 verified diners · <span style="color:var(--accent);font-weight:800;">how we know</span></div></div></div></div>
-      <ul><li>The most honest version of a number that has no source</li><li>Needs order attribution, consent, a follow-up window and item identity across menu changes; none exist</li></ul>
+      <ul><li>Clearer wording, but still no real order data</li><li>Needs order attribution, consent, a follow-up window and item identity across menu changes; none exist</li></ul>
     </div>
     <div class="opt">
       <h3>C4 · Cold start <span class="was">v3.1 choice</span></h3>
       <div class="mock"><div class="statcard" style="border:1.5px dashed var(--ink3); background:transparent;"><div style="flex:none;width:30px;height:30px;border-radius:99px;border:2px dashed var(--ink3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--ink2);">NEW</div><div><div class="t">New — no score yet</div><div class="s">too few repeat orders</div></div></div></div>
-      <ul><li>Admitting "not enough data" was right</li><li>But it documented a pipeline that did not exist, for one dish, while every other dish showed a number</li></ul>
+      <ul><li>Admitting "not enough data" was right</li><li>There was no order data for any of the dishes</li></ul>
     </div>
     <div class="opt">
       <h3>C5 · Facts with a source and a date <span class="shipped">v3.2 choice</span></h3>
@@ -208,10 +208,10 @@
         <div class="r"><span class="l">On the menu</span><span class="v">Listed<small>As of Sep 2026</small></span></div>
         <div class="r"><span class="l">Ingredients</span><span class="v">Menu lists shellfish<small>Not preparation or shared surfaces</small></span></div>
       </div></div>
-      <ul><li>Everything shown has a stated source and a checked date</li><li>No number the prototype cannot produce</li><li>The description is labeled as an edited menu description, not a review</li></ul>
+      <ul><li>Sample prices and dates show where source details would appear</li><li>The repeat-order percentage is removed</li><li>The description is labeled as an edited menu description, not a review</li></ul>
     </div>
   </div>
-  <div class="rec"><span class="badge">Review · v3.2</span><p><b>C5, and no score at all.</b> Correctly labeling the measure ("ordered again within 90 days") made it precise, not feasible. Access, meaning and aggregation were all open: an outbound link does not reveal an order; repeat behavior is not quality; averaging dish percentages is not a restaurant rate. The dish page now shows what a diner could check: price, distance, menu status, listed ingredients, each with its basis. If a repeat-order signal is ever revived, feasibility comes first and it is a separate project. <b>Test:</b> Round B task 4 and Round C prompt C1, for whether "as of" dates and "menu lists" are read as the limited claims they are.</p></div>
+  <div class="rec"><span class="badge">Review · v3.2</span><p><b>C5.</b> I removed the repeat-order score because the prototype has no order records. The detail page now uses sample prices, menu listings and ingredient information to demonstrate the layout. <b>To test:</b> do people understand the limits of that information and know what to check with the restaurant?</p></div>
 
   <!-- ============ D ============ -->
   <h2><span class="k">D</span>The action</h2>
@@ -234,7 +234,7 @@
         <div class="btnrow"><div class="b q icon">♥</div><div class="b q">Directions</div><div class="b p">Order</div></div>
         <div class="btnrow"><div class="b q icon">♥</div><div class="b p">Directions</div><div class="b q dis">Opens 8 AM</div></div>
       </div>
-      <ul><li>Always one honest primary</li><li>Depended on hours and carrier data the catalog does not have</li></ul>
+      <ul><li>One primary action based on availability</li><li>Depended on hours and carrier data the catalog does not have</li></ul>
     </div>
     <div class="opt">
       <h3>D4 · Next step, named for its destination <span class="shipped">v3.2 choice</span></h3>
@@ -244,10 +244,10 @@
         <div class="btnrow"><div class="b q icon">♥</div><div class="b p">Check with restaurant</div></div>
         <div class="cap">then: destination · scope · date checked · "no order was placed"</div>
       </div>
-      <ul><li>Label chosen from the destination model per restaurant</li><li>The sheet says where it lands and what may have changed</li><li>A listed conflict gets no next step at all: other dishes, or the restaurant</li></ul>
+      <ul><li>Label chosen from the destination model per restaurant</li><li>The sheet says where it lands and what may have changed</li><li>A listed conflict offers other dishes and the restaurant menu</li></ul>
     </div>
   </div>
-  <div class="rec"><span class="badge">Review · v3.2</span><p><b>D4.</b> "Order" promised a cart Morsel never had. The next step now says what is actually known: a dish page, a restaurant menu, or a phone number, with the date the link was last checked, and the demo ends by saying no order was placed. Directions left the dish page; the restaurant page is the place for going somewhere. <b>Test:</b> Round B task 4. Success is predicting the destination and knowing nothing was ordered; any belief that an order happened is S1.</p></div>
+  <div class="rec"><span class="badge">Review · v3.2</span><p><b>D4.</b> The button describes the destination: a dish page, restaurant menu or contact details. A confirmation makes clear that the demo has not placed an order. <b>To test:</b> can people predict what the button will do before they press it?</p></div>
 
   <table class="meta">
     <tr><td>Method note</td><td>All comparisons are rendered in the Toast visual system so differences are structural, not cosmetic. "Review · v3.2" marks a change made from a design review of the v3.1 build in September 2026, not from participant evidence. Recommendations stay provisional until the <a href="testing-plan.html">research plan</a> runs.</td></tr>

@@ -116,7 +116,7 @@ function UnknownSection({ dishes, cols, onOpen, saved, onToggleSave, prefs }) {
       <div style={{ padding: "0 16px 10px" }}>
         <div className="m-heading" style={{ fontSize: "calc(18px * var(--ts))" }}>Ingredient information unavailable</div>
         <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 4 }}>
-          {dishes.length === 1 ? "This dish is" : "These " + dishes.length + " dishes are"} not counted as a match. We don't have ingredient information, so we can't say whether {dishes.length === 1 ? "it fits" : "they fit"} your allergy settings. Check with the restaurant before deciding.
+          {dishes.length} dish{dishes.length === 1 ? " has" : "es have"} missing ingredient details and {dishes.length === 1 ? "is" : "are"} excluded from the match count. Check with the restaurant about your allergy.
         </div>
       </div>
       <FeedGrid dishes={dishes} cols={cols} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} prefs={prefs} />
@@ -258,7 +258,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
             </div>
             <div className="m-title">{loc.city.split(",")[0]} isn't<br />in this demo.</div>
             <div className="m-second" style={{ color: "var(--ink-2)", maxWidth: 280, marginTop: 6 }}>
-              This demo covers Washington, DC only. Nothing from another city is shown under this label.
+              The sample dishes are in Washington, DC. Choose the demo area to browse them.
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 22, alignSelf: "stretch" }}>
               <button className="m-btn m-btn-primary" onClick={onResetLoc}>Explore the DC sample area</button>
@@ -275,7 +275,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
               <div style={{ flex: "none", width: 8, height: 8, borderRadius: 99, background: "var(--ink-3)" }}></div>
               <div style={{ flex: 1 }}>
                 <div className="m-caption" style={{ fontWeight: 700 }}>You're offline</div>
-                <div className="m-caption" style={{ color: "var(--ink-2)" }}>Showing your last loaded feed. Prices and availability may have changed since.</div>
+                <div className="m-caption" style={{ color: "var(--ink-2)" }}>Showing the last loaded dishes. Prices and availability may be out of date.</div>
               </div>
             </div>
           )}
@@ -286,7 +286,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
               <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600, whiteSpace: "nowrap" }}>{pool.length} dish{pool.length === 1 ? "" : "es"}</div>
             </div>
             <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 3 }}>
-              Sorted by distance from {demoArea.hood} (demo){tasteTags.length ? `, with a boost for ${tasteTags.map((t) => t.toLowerCase()).join(", ")} because you tapped them` : ""}.
+              {tasteTags.length ? `Sorted by distance and your picks: ${tasteTags.map((t) => t.toLowerCase()).join(", ")}.` : `Nearest to ${demoArea.hood} first (demo distances).`}
             </div>
           </div>
           {anyConstraint && <ConstraintBar prefs={prefs} filters={filters} onFilters={onFilters} onClearFilters={onClearFilters} onEditDiet={onEditDiet} />}
@@ -302,7 +302,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
             /* zero-result recovery — names the cause, never clears allergies with "clear filters" */
             <div style={{ margin: "10px 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "24px 20px" }}>
               <div className="m-second" style={{ fontWeight: 800, marginBottom: 6 }}>No dish fits every setting right now</div>
-              <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 14 }}>The constraints above are all still on. Loosen one deliberately; nothing is widened for you.</div>
+              <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 14 }}>Try a different price range or distance.</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {fCount > 0 && (
                   <button className="m-btn m-btn-primary" style={{ minHeight: 46 }} onClick={onClearFilters}>Clear browsing filters</button>
@@ -314,7 +314,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
               </div>
               {dietaryActive && (
                 <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 12 }}>
-                  Allergy settings are never cleared by these buttons — edit them deliberately.
+                  Clearing browsing filters keeps your dietary settings.
                 </div>
               )}
             </div>

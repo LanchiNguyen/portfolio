@@ -55,7 +55,7 @@ const MORSEL = [
   { key: 'v32-search-unknown', expect: /no ingredient information/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setFilters({ price: [], maxMi: 99 }); window.morselDebug.setQuery('tasting'); window.morselDebug.setScreen('search'); }, PREFS_NUTS); } },
 
-  { key: 'v32-detail-top', expect: /Menu price as of/i,
+  { key: 'v32-detail-top', expect: /Sample menu price/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); }, PREFS_NONE); } },
 
   { key: 'v32-detail-conflict', expect: /which you asked to avoid/i,
@@ -67,7 +67,7 @@ const MORSEL = [
   { key: 'v32-detail-unlisted', expect: /No longer on the menu/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d19'); }, PREFS_NONE); } },
 
-  { key: 'v32-textscale-140', expect: /Menu price as of/i,
+  { key: 'v32-textscale-140', expect: /Sample menu price/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); window.morselDebug.setTweak('textScale', 140); }, PREFS_NONE); } },
 
   { key: 'v32-next-step', expect: /Opens elderandash/i,

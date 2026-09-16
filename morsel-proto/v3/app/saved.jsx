@@ -44,7 +44,7 @@ function SavedStateNote({ items, prefs }) {
   return (
     <div className="m-caption" style={{ color: "var(--ink-2)", padding: "0 16px 12px" }}>
       {conflicts > 0 && <span style={{ color: "var(--accent)", fontWeight: 800 }}>! </span>}
-      {parts.join("; ")}. All kept and labeled; nothing is removed by a settings change.
+      {parts.join("; ")}. These dishes stay in your saves.
     </div>
   );
 }
@@ -116,7 +116,7 @@ function SavedScreen({ saved, savedAt, collections, onOpen, onOpenCol, onCreateC
         </div>
         {savedDishes.length > 1 && (
           <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 10px" }}>
-            {sort === "nearest" ? "By distance from Shaw (demo)." : untimed ? `Newest first. ${untimed} save${untimed === 1 ? "" : "s"} from before save times were recorded ${untimed === 1 ? "sits" : "sit"} last, in catalog order.` : "Newest first."}
+            {sort === "nearest" ? "By distance from Shaw (demo)." : untimed ? `Newest first. ${untimed} older save${untimed === 1 ? " has" : "s have"} no date and appear${untimed === 1 ? "s" : ""} at the end.` : "Newest first."}
           </div>
         )}
         <SavedStateNote items={savedDishes} prefs={prefs} />

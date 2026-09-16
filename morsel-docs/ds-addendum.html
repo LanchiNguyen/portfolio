@@ -81,7 +81,7 @@
 <div class="page">
   <a href="../morsel.html">← back to case study</a> · <a href="../morsel-proto/index.html">live prototype →</a>
   <h1 style="margin-top:16px;">Design system addendum</h1>
-  <p class="sub" style="margin-top:12px;">Patterns added or changed in the v3.2 review round, plus the earlier ones that survive it. Retired components are kept at the end, with what replaced them, so the record shows the reversal. The core system — palette, type, spacing, buttons, sheets — is unchanged. Tokens shown are the Toast direction.</p>
+  <p class="sub" style="margin-top:12px;">Component notes from the v3.2 design review. The palette, typography and spacing remain from the earlier version. Replaced components are listed at the end for reference.</p>
 
   <div class="comp">
     <h2>Labeled card <span class="v">v3.2</span></h2>
@@ -93,7 +93,7 @@
       </div>
     </div>
     <div class="notes">
-      Photo first, then the four facts a choice needs: name, restaurant and neighborhood, menu price, distance. Fixed 4:5 photo so cards compare; names wrap rather than clip. A missing price reads "Price not listed", never a guess. One card everywhere, so what a diner learns on the feed holds in search and in saves.
+      Each card shows a photo, dish name, restaurant, neighborhood, menu price and distance. Images use a 4:5 ratio and names can wrap. Missing prices read "Price not listed". The same card is used in the feed, search and saves.
       <span class="copy">Price is the listed menu price only. Distance is straight-line miles from the demo area, never a walk time.</span>
       <span class="a11y">The card is one <code>button</code> whose accessible name reads the dish, restaurant, price, distance and any state chip. Save is a sibling control with <code>aria-pressed</code>, never nested. Without a photo the card is still complete.</span>
     </div>
@@ -107,7 +107,7 @@
     </div>
     <div class="notes">
       Marks a dish on a memory or context surface (saves, collections, restaurant menu) whose state needs attention: the menu lists an allergen the diner avoids; no ingredient information exists; the dish has left the menu. Recommendation surfaces never show the conflict chip, because conflicts are excluded upstream by the shared classifier. Top-left, kept clear of the save control.
-      <span class="copy">Name the fact, not a verdict: "Lists nuts", "Ingredients unknown", "No longer on menu". Never "unsafe", never "safe".</span>
+      <span class="copy">Use specific labels: "Lists nuts", "Ingredients unknown", "No longer on menu". Never "unsafe", never "safe".</span>
       <span class="a11y">"!" for conflict, "?" for unknown, solid ink for unlisted: each state carries a glyph or treatment as well as a color. The chip text is part of the card's accessible name.</span>
     </div>
   </div>
@@ -119,7 +119,7 @@
       <div class="constraints"><span class="constraint">Vegetarian</span><span class="constraint warn">! No nuts</span><span class="constraint">Under $15 · $15–24</span><span class="constraint">within 1 mi</span><span style="color:var(--accent); font-weight:800; font-size:12px;">Clear filters</span></div>
     </div>
     <div class="notes">
-      The active constraints, in the order they apply: lifestyle, allergies, price, distance. Each chip opens its own editor; browsing chips open the filter sheet, dietary chips open dietary settings. "Clear filters" clears browsing chips only. The same bar appears on search, so the diner never wonders whether the budget followed them.
+      The active constraints, in the order they apply: lifestyle, allergies, price, distance. Each chip opens its own editor; browsing chips open the filter sheet, dietary chips open dietary settings. "Clear filters" clears browsing chips only. The same bar appears in search to show which filters are active.
       <span class="copy">Allergy chips use the accent and the "!" glyph; nothing else on the bar does.</span>
       <span class="a11y">Chips are buttons named "Browsing filter: within 1 mi. Edit" and so on. The bar is a labeled group.</span>
     </div>
@@ -130,7 +130,7 @@
     <div class="demo" style="align-items:stretch;">
       <span class="cap">Dish page, above the primary action</span>
       <div class="facts">
-        <div class="r"><span class="l">Price</span><span class="v">$32<small>Menu price as of Sep 2026. Tax, tip and extras not included.</small></span></div>
+        <div class="r"><span class="l">Price</span><span class="v">$32<small>Sample menu price: Sep 2026. Tax, tip and extras not included.</small></span></div>
         <div class="r"><span class="l">Distance</span><span class="v">0.9 mi from Shaw<small>Straight-line distance from the demo area. Not a travel time.</small></span></div>
         <div class="r"><span class="l">On the menu</span><span class="v">Listed<small>As of Sep 2026. Being on the menu doesn't mean it's available tonight.</small></span></div>
         <div class="r"><span class="l">Ingredients</span><span class="v">Menu lists shellfish<small>Tracked: nuts, gluten, dairy, shellfish. Menu data doesn't cover preparation or shared surfaces.</small></span></div>
@@ -147,7 +147,7 @@
     <h2>Dietary notes: listed conflict · unknown <span class="v">v3.2</span></h2>
     <div class="demo" style="align-items:stretch;">
       <span class="cap">Dish page, direct open with a nut allergy set</span>
-      <div class="banner"><div class="x">!</div><div><div class="t">The menu lists nuts, which you asked to avoid</div><div class="s">There's no step here that makes this dish fit. Look at other dishes, or ask the restaurant what can change.</div></div></div>
+      <div class="banner"><div class="x">!</div><div><div class="t">The menu lists nuts, which you asked to avoid</div><div class="s">Contact the restaurant about ingredients and preparation. Look at other dishes, or ask the restaurant what can change.</div></div></div>
       <span class="cap">No ingredient information</span>
       <div class="banner unknown"><div class="x">?</div><div><div class="t">We don't have ingredient information for this dish</div><div class="s">It isn't counted as a match for your allergy settings. Check with the restaurant before deciding.</div></div></div>
     </div>
@@ -165,10 +165,10 @@
       <div class="sheet"><div class="h">View the restaurant menu</div><div class="d"><b>Opens elderandash.example</b><br />Lands on the restaurant's menu, not on this dish; you'll find it there. Price and availability may have changed since Sep 2026.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Open menu (demo)</span><span class="btn q" style="flex:1;">Not now</span></div></div>
       <div class="sheet"><div class="h">Check with Hollis</div><div class="d"><b>No online menu to link to</b><br />Call (202) 555-0140, or visit in Logan Circle. Morsel can't confirm price or availability for this restaurant.</div></div>
       <span class="cap">Demo endpoint</span>
-      <div class="sheet"><div class="d"><b>Demo complete</b><br />In a live version this would open elderandash.example's menu. No order was placed, and nothing left this prototype.</div></div>
+      <div class="sheet"><div class="d"><b>Demo complete</b><br />In a live version this would open elderandash.example's menu. No website was opened, call made or order placed.</div></div>
     </div>
     <div class="notes">
-      Replaces the order sheet. The label and body come from a per-restaurant destination model, never from a template: a dish-level page, a restaurant menu, or a phone number. The sheet keeps the dish and restaurant visible, names the destination, says what it lands on and when the link was last checked (stale links say so), and ends the demo at an explicit "no order was placed". A simulated failure keeps the dish and offers a retry.
+      Replaces the order sheet. The label and body depend on the available destination: a dish-level page, a restaurant menu, or a phone number. The sheet keeps the dish and restaurant visible, names the destination, says what it lands on and when the link was last checked (stale links say so), and ends the demo at an explicit "no order was placed". A simulated failure keeps the dish and offers a retry.
       <span class="copy">Never promise a cart, a fee, an ETA or that the dish is in stock. "Opens", "lands on", "may have changed since" are the verbs.</span>
       <span class="a11y">A named <code>role="dialog"</code> that moves focus in, traps Tab, closes on Escape and returns focus to its opener. The endpoint is <code>role="status"</code>.</span>
     </div>
@@ -199,7 +199,7 @@
     </div>
     <div class="notes">
       Lifestyle is single-select in ink; allergies are multi-select in the accent, because they are a different tier and must look like it. The step is optional at entry and always in Profile.
-      <span class="copy">Promise precisely: "dishes whose menu lists one of these leave your feed and search; dishes with no ingredient information are listed separately and never counted as a match; saved dishes stay visible, labeled." Never "removed everywhere", never "safe".</span>
+      <span class="copy">Describe the behavior: "dishes whose menu lists one of these leave your feed and search; dishes with no ingredient information are listed separately and never counted as a match; saved dishes stay visible, labeled." Never "removed everywhere", never "safe".</span>
       <span class="a11y">Real buttons with <code>aria-pressed</code>; selection is fill + check glyph, not color alone. Min target 44pt.</span>
     </div>
   </div>
@@ -245,8 +245,8 @@
     <div class="demo" style="align-items:stretch;">
       <span class="cap">Gone, and why</span>
       <div style="font-size:12px; color:var(--ink2); line-height:1.6;">
-        <b style="color:var(--ink);">Trust &amp; methodology disclosure</b> → Facts list. No pipeline could produce the number.<br />
-        <b style="color:var(--ink);">Order-sheet allergy acknowledgement</b> → Dietary notes. A checkbox changed nothing about the dish.<br />
+        <b style="color:var(--ink);">Trust &amp; methodology disclosure</b> → Facts list. No order records supported the score.<br />
+        <b style="color:var(--ink);">Order-sheet allergy acknowledgement</b> → Dietary notes. Acknowledging a warning did not resolve the ingredient conflict.<br />
         <b style="color:var(--ink);">Carrier rows with fees and ETAs; pickup timing</b> → Next-step sheet. Invented operational data.<br />
         <b style="color:var(--ink);">Search-result glass label</b> → Labeled card. One card for every surface.<br />
         <b style="color:var(--ink);">Availability status (closed · sold out)</b> → Menu status. No hours model exists.<br />

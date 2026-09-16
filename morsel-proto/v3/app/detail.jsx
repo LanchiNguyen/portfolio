@@ -102,13 +102,13 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
             {dish.rest} · {dish.hood}{otherAtRest && <span style={{ display: "inline-flex", transform: "rotate(180deg)", color: "var(--ink-3)" }}><MIcon name="back" size={13} /></span>}
           </button>
           <div className="m-second" style={{ color: "var(--ink-2)", marginBottom: 4 }}>{dish.desc}</div>
-          <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Menu description, edited for this demo. Not a review.</div>
+          <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Sample menu description</div>
 
           {(() => {
             const aff = window.MorselData.affinity(prefs && prefs.picked);
             return aff[dish.tag] && st.state === "match" ? (
               <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12 }}>
-                Ranked up in your feed because you tapped {dish.tag.toLowerCase()} in taste setup.
+                Shown higher because you chose {dish.tag.toLowerCase()}.
               </div>
             ) : null;
           })()}
@@ -117,7 +117,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
             <div style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "var(--ink)", color: "var(--paper)", borderRadius: "var(--r)", padding: "12px 14px", marginBottom: 14 }}>
               <div style={{ flex: 1 }}>
                 <div className="m-second" style={{ fontWeight: 800 }}>No longer on the menu</div>
-                <div className="m-caption" style={{ opacity: .8 }}>Not listed as of {checked}. Kept here because you can still remember it; the restaurant may have replaced it.</div>
+                <div className="m-caption" style={{ opacity: .8 }}>Not listed as of {checked} in this sample menu. You can still keep it in your saves.</div>
               </div>
             </div>
           )}
@@ -127,7 +127,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
               <div aria-hidden="true" style={{ color: "var(--accent)", flex: "none", fontWeight: 900, fontSize: 14, width: 22, height: 22, borderRadius: 99, border: "2px solid var(--accent)", display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
               <div>
                 <div className="m-second" style={{ fontWeight: 800, color: "var(--accent)" }}>The menu lists {st.conflicts.join(" and ").toLowerCase()}, which you asked to avoid</div>
-                <div className="m-caption" style={{ color: "var(--ink-2)" }}>There's no step here that makes this dish fit. Look at other dishes, or ask the restaurant what can change.</div>
+                <div className="m-caption" style={{ color: "var(--ink-2)" }}>Choose another dish, or contact the restaurant about ingredients and preparation.</div>
               </div>
             </div>
           )}
@@ -136,15 +136,15 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
               <div aria-hidden="true" style={{ color: "var(--ink-2)", flex: "none", fontWeight: 900, fontSize: 14, width: 22, height: 22, borderRadius: 99, border: "2px solid var(--ink-3)", display: "flex", alignItems: "center", justifyContent: "center" }}>?</div>
               <div>
                 <div className="m-second" style={{ fontWeight: 800 }}>We don't have ingredient information for this dish</div>
-                <div className="m-caption" style={{ color: "var(--ink-2)" }}>It isn't counted as a match for your allergy settings. Check with the restaurant before deciding.</div>
+                <div className="m-caption" style={{ color: "var(--ink-2)" }}>We can't confirm whether it fits your allergy settings. Check with the restaurant before deciding.</div>
               </div>
             </div>
           )}
 
           <div style={{ marginBottom: 18 }}>
-            <FactRow label="Price" value={p ? p : "Not listed"} sub={p ? "Menu price as of " + checked + ". Tax, tip and extras not included." : "Check the restaurant menu for price."} tone={p ? undefined : "var(--ink-2)"} />
-            <FactRow label="Distance" value={dist(dish) + " from " + demoArea.hood} sub="Straight-line distance from the demo area. Not a travel time." />
-            <FactRow label="On the menu" value={dish.listed === false ? "Not listed" : "Listed"} sub={"As of " + checked + ". Being on the menu doesn't mean it's available tonight."} />
+            <FactRow label="Price" value={p ? p : "Not listed"} sub={p ? "Sample menu price: " + checked + ". Tax, tip and extras not included." : "Check the restaurant menu for price."} tone={p ? undefined : "var(--ink-2)"} />
+            <FactRow label="Distance" value={dist(dish) + " from " + demoArea.hood} sub="Straight-line distance from the demo area." />
+            <FactRow label="On the menu" value={dish.listed === false ? "Not listed" : "Listed"} sub={"As of " + checked + ". Sample listing; availability is not confirmed."} />
             <FactRow label="Ingredients" value={ingredientRow.value} sub={ingredientRow.sub} tone={ingredientRow.tone} />
           </div>
 
@@ -170,7 +170,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
             </div>
           )}
           <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: -14, marginBottom: 24 }}>
-            {dest.kind === "none" ? `${dish.rest} has no online menu we can link to.` : `Opens ${dest.host}. Morsel never places an order.`}
+            {dest.kind === "none" ? `${dish.rest} has no online menu we can link to.` : `Menu preview: ${dest.host} (demo).`}
           </div>
 
           {strip.length > 0 &&
@@ -186,7 +186,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
                 </div>
               }
               </button>
-              <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12 }}>Same dietary settings as your feed.</div>
+              <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12 }}>Based on your dietary settings.</div>
               <div style={{ margin: "0 -22px" }}>
                 <FeedGrid dishes={strip} cols={strip.length >= 3 ? 3 : 2} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} />
               </div>

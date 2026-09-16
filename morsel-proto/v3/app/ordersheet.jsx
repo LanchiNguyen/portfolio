@@ -66,7 +66,7 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
             <div style={{ background: "var(--sunken)", borderRadius: 14, padding: "14px 14px", marginBottom: 14 }}>
               <div className="m-second" style={{ fontWeight: 800, marginBottom: 4 }}>Demo complete</div>
               <div className="m-caption" style={{ color: "var(--ink-2)" }}>
-                In a live version this would {dest.kind === "none" ? "start a call to " + dest.phone : "open " + dest.host + (dest.kind === "dish" ? " at this dish" : "'s menu")}. No order was placed, and nothing left this prototype.
+                In a live version this would {dest.kind === "none" ? "start a call to " + dest.phone : "open " + dest.host + (dest.kind === "dish" ? " at this dish" : "'s menu")}. No website was opened, call made or order placed.
               </div>
             </div>
             <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={onClose}>{dish ? "Back to the dish" : "Back to " + restName}</button>
@@ -83,8 +83,8 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
                 <div className="m-second" style={{ fontWeight: 700 }}>Opens {dest.host}</div>
                 <div className="m-caption" style={{ color: "var(--ink-2)" }}>
                   {dest.kind === "dish"
-                    ? "Lands on this dish's page. Price and availability may have changed since " + dest.checked + "."
-                    : "Lands on the restaurant's menu, not on this dish; you'll find it there. Price and availability may have changed since " + dest.checked + "."}
+                    ? "This would open the dish page. Sample menu date: " + dest.checked + "."
+                    : "This would open the full restaurant menu. Sample menu date: " + dest.checked + "."}
                 </div>
                 {stale && <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 6 }}><span style={{ fontWeight: 800 }}>Link last checked {dest.checked}.</span> It may have moved.</div>}
                 {dish && dish.listed === false && <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 6 }}>This dish is no longer listed as of {checked}. The menu may show what replaced it.</div>}
@@ -96,7 +96,7 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
                 <div aria-hidden="true" style={{ color: "var(--accent)", flex: "none", fontWeight: 900, fontSize: 13, width: 20, height: 20, borderRadius: 99, border: "2px solid var(--accent)", display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
                 <div style={{ flex: 1 }}>
                   <div className="m-caption" style={{ fontWeight: 800, color: "var(--accent)" }}>Couldn't open {dest.kind === "none" ? "the call" : dest.host}</div>
-                  <div className="m-caption" style={{ color: "var(--ink-2)" }}>This is a simulated failure. Your dish is still here. Try again, or check with the restaurant another way.</div>
+                  <div className="m-caption" style={{ color: "var(--ink-2)" }}>Simulated connection error. Try again or return to the dish.</div>
                 </div>
               </div>
             )}
@@ -107,7 +107,7 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
               </button>
               <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={onClose}>Not now</button>
             </div>
-            <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 10, textAlign: "center" }}>Morsel never places an order. This demo stops at the handoff.</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 10, textAlign: "center" }}>Demo only. Menu links and calls are simulated.</div>
           </div>
         )}
       </div>

@@ -44,14 +44,14 @@ function SearchScreen({ onBack, onOpen, gridCols, prefs, onEditDiet, filters, on
           {fCount > 0 && <div aria-hidden="true" style={{ position: "absolute", top: -3, right: -3, minWidth: 18, height: 18, borderRadius: 99, background: "var(--accent)", color: "var(--accent-ink)", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>{fCount}</div>}
         </button>
       </div>
-      <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 6px" }}>Searching near {areaName}{loc && loc.city ? "" : " (demo area)"}. Clearing the query keeps your filters.</div>
+      <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 6px" }}>Near {areaName}{loc && loc.city ? "" : " (demo area)"} · Filters stay on when you clear a search.</div>
       <ConstraintBar prefs={prefs} filters={filters} onFilters={onFilters} onClearFilters={onClearFilters} onEditDiet={onEditDiet} />
 
       <div className="m-scroll" ref={scrollRef} onScroll={onScroll} style={{ paddingBottom: 40 }}>
         {noCoverage ? (
           <div style={{ margin: "10px 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "24px 20px", textAlign: "center" }}>
             <div className="m-second" style={{ fontWeight: 800, marginBottom: 4 }}>{loc.city.split(",")[0]} isn't in this demo</div>
-            <div className="m-caption" style={{ color: "var(--ink-2)" }}>This demo covers Washington, DC. Change the area from the feed to search the sample catalog.</div>
+            <div className="m-caption" style={{ color: "var(--ink-2)" }}>The sample dishes are in Washington, DC. Choose that area from the feed to browse them.</div>
           </div>
         ) : !results ? (
           <div>
@@ -77,7 +77,7 @@ function SearchScreen({ onBack, onOpen, gridCols, prefs, onEditDiet, filters, on
             {allergyOn && <UnknownSection dishes={unknownResults} cols={2} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} prefs={prefs} />}
             {related.length > 0 && (
               <div style={{ padding: "20px 16px 0" }}>
-                <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Pull another thread</div>
+                <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Related searches</div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {related.map((t) => (
                     <button key={t} className="m-chip" style={{ minHeight: 40, padding: "8px 16px", fontSize: 14 }} onClick={() => onQuery(t)}>{t}</button>
@@ -128,7 +128,7 @@ function SearchScreen({ onBack, onOpen, gridCols, prefs, onEditDiet, filters, on
                   )}
                   {byAllergy.length > 0 && (
                     <div className="m-caption" style={{ color: "var(--ink-2)" }}>
-                      <span style={{ color: "var(--accent)", fontWeight: 800 }}>! </span>{byAllergy.length} {byAllergy.length === 1 ? "lists" : "list"} {alHits.join(" or ").toLowerCase()}, which you asked to avoid. Allergy settings are never cleared from here.
+                      <span style={{ color: "var(--accent)", fontWeight: 800 }}>! </span>{byAllergy.length} {byAllergy.length === 1 ? "lists" : "list"} {alHits.join(" or ").toLowerCase()}, which you asked to avoid. Your allergy settings stay on.
                     </div>
                   )}
                   {unknownResults.length > 0 && (

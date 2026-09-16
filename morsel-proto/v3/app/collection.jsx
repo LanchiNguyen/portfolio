@@ -23,8 +23,8 @@ function CollectionScreen({ col, onBack, onOpen, prefs, saved, onToggleSave }) {
           <FeedGrid dishes={items} cols={2} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} prefs={prefs} />
         ) : (
           <div style={{ margin: "20px 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "28px 24px", textAlign: "center" }}>
-            <div className="m-second" style={{ fontWeight: 700, marginBottom: 4 }}>Empty shelf</div>
-            <div className="m-caption" style={{ color: "var(--ink-2)" }}>Save a dish and file it here.</div>
+            <div className="m-second" style={{ fontWeight: 700, marginBottom: 4 }}>No dishes yet</div>
+            <div className="m-caption" style={{ color: "var(--ink-2)" }}>Save a dish to add it to this collection.</div>
           </div>
         )}
       </div>
