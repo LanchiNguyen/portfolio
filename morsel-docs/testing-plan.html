@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="../favicon.png" />
-<meta name="description" content="Morsel process document: two-round usability testing plan (proposed; not yet run)." />
+<meta name="description" content="Morsel process document: research plan in three rounds (proposed; not yet run)." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Morsel — usability testing plan (two rounds)</title>
+<title>Morsel — research plan (three rounds, unexecuted)</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; }
@@ -31,6 +31,7 @@
   a { color: var(--accent); font-weight: 700; text-decoration: none; }
   a:hover { text-decoration: underline; }
   .note { background: var(--sunken); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink2); margin-top: 14px; }
+  pre { background: var(--sunken); border-radius: 12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.6; color: var(--ink2); white-space: pre-wrap; margin-top: 12px; }
   /* wide protocol tables scroll inside their own box on narrow screens */
   @media (max-width: 640px) {
     table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -39,75 +40,98 @@
 </head>
 <body>
 <div class="page">
-  <a href="../morsel.html">← back to case study</a> · <a href="../morsel.html">live prototype (parent project) →</a>
-  <h1 style="margin-top:16px;">Usability testing plan</h1>
-  <p class="sub" style="margin-top:12px;">Two moderated rounds on the v3.1 prototype (phone-sized browser window or device). Round 1 pressure-tests the general discovery assumptions on the <a href="wireflow.html">wireflow</a> — info scent, trust comprehension, recovery. Round 2 is a dedicated safety round on the dietary model, with participants who live with food allergies and a domain reviewer. <b>Neither round has been run</b> — all findings tables are intentionally empty.</p>
+  <a href="../morsel.html">← back to case study</a> · <a href="../morsel-proto/index.html">live prototype →</a> · <a href="wireflow.html">wireflow →</a>
+  <h1 style="margin-top:16px;">Research plan</h1>
+  <p class="sub" style="margin-top:12px;">Three rounds, in order. Round A asks whether the problem is real before anyone reacts to screens. Round B tests the v3.2 flow with neutral tasks on the <a href="wireflow.html">wireflow</a>. Round C is a separate, smaller comprehension round on the three dietary states, with people who manage food allergies. <b>None of the rounds has been run</b>; every findings table is intentionally empty. Participant counts are planning ranges for qualitative work, not statistical claims.</p>
 
-  <h2>Round 1 — general discovery</h2>
+  <h2>Round A — recent behavior and problem relevance</h2>
   <div class="rule"></div>
   <div class="card">
-    <h3>Participants — 5 sessions, ~30 min each</h3>
+    <h3>5–6 conversations, 30–40 minutes each</h3>
     <ul>
-      <li><b>5 participants</b> who order out or eat out ≥2× a week and decide from photos (screener: "show me the last food photo that made you order something"). The "urban, 22–35" framing is a recruitment hypothesis, not an established segment.</li>
-      <li>Mix: ≥2 who primarily use delivery apps, ≥2 who primarily walk in.</li>
-      <li>Exclude: food-industry professionals, UX designers.</li>
-      <li>Device: their own phone if possible (mirrors real grip + text size), else provided device.</li>
+      <li>Recruit by <b>behavior</b>, not by an invented persona: people who recently chose an unfamiliar casual meal in a city they know, including some who started from a photo or a saved post and some who went straight to a maps or delivery app. Include one person who tried an alternative food app and stopped.</li>
+      <li>Friends can pilot the script; they should not be the only evidence.</li>
+      <li>No screens are shown. Ask about the last relevant decision, using a non-sensitive saved post or search if they are comfortable. Do not collect unrelated messages, precise home locations, or medical details. Consent for recording; notes are enough if they prefer.</li>
+      <li>Do not introduce allergies as the assumed problem. Ask broadly about constraints and follow what they mention.</li>
     </ul>
   </div>
   <div class="card">
-    <h3>Moderator script</h3>
-    <p class="q">"Thanks for making time. This is an early prototype of a food-discovery app I designed — some data is fake and some buttons are intentionally limited; none of that reflects on you. I'll ask you to do a few things and think out loud. There are no wrong answers: if something is confusing, that's the design failing, not you. You won't hurt my feelings — blunt is the most useful thing you can be."</p>
-    <ul style="margin-top:8px;">
-      <li>Warm-up (3 min): "Walk me through how you picked the last place you ate that wasn't routine."</li>
-      <li>Core tasks 1–6 below, in order. Task 6 has two variants; alternate them across sessions.</li>
-      <li>Wrap (3 min): "If this existed tomorrow, when would you actually open it? What would make you delete it?"</li>
+    <h3>Prompts</h3>
+    <ol>
+      <li class="q">"Tell me about the last time you wanted something to eat but didn't know where to get it."</li>
+      <li class="q">"What happened first? What did you open next?"</li>
+      <li class="q">"What were you trying to check at each step?"</li>
+      <li class="q">"Was there a dish or place you considered and then ruled out? Why?"</li>
+      <li class="q">"How did you know you had enough information to decide?"</li>
+      <li class="q">"Did you save anything? Have you gone back to it?"</li>
+      <li class="q">"When has your usual method worked well?"</li>
+      <li class="q">"What would make trying another app not worth the effort?"</li>
+    </ol>
+  </div>
+  <div class="note"><b>Gate.</b> Continue with "choose a dish soon" if several independent examples show a similar unresolved step between an appealing dish and a usable choice. Reframe toward save-and-retrieve if remembering is the stronger problem. Pause the direction if the main problem is fees, group coordination, reservations, or menu accuracy this scope cannot address. A preference for attractive screens is not demand evidence.</div>
+
+  <h2>Round B — information architecture and usability</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <h3>5–6 moderated sessions, 35–45 minutes each</h3>
+    <ul>
+      <li>Likely users from Round A's profile, fresh where possible. Their own phone if they have one.</li>
+      <li>Open with a neutral statement: the catalog is simulated, the restaurants are fictional, and nothing can be ordered. Then let them choose their path; think aloud; never name the intended button.</li>
+      <li>Record for each task: completed unaided / completed with help / not completed; the actual obstacle; the information used. Task time is diagnostic only.</li>
     </ul>
   </div>
   <table style="margin-top:16px;">
-    <tr><th style="width:34px;">#</th><th>Task (read aloud)</th><th>Tests</th><th>Success criteria</th></tr>
-    <tr><td>1</td><td>"You have 20 minutes to decide on dinner. Use the app to pick something."<span class="tag">feed</span></td><td>Photo-only info scent (Exploration A)</td><td>Reaches a decision ≤5 min; note every detail-open made <i>only</i> to check price/distance</td></tr>
-    <tr><td>2</td><td>"What made you choose that one? What information did you use?"</td><td>Decision drivers</td><td>Articulates photo + at least one non-photo signal without prompting</td></tr>
-    <tr><td>3</td><td>"Save that dish to your Date night list."<span class="tag">save flow</span></td><td>Instant save + opt-in collection model</td><td>Completes via toast or detail heart ≤3 taps after save; no hunting for the sheet</td></tr>
-    <tr><td>4</td><td>"Find ramen near you."<span class="tag">search</span></td><td>Search entry + labeled results</td><td>Uses search chip (not scrolling); interprets result labels correctly</td></tr>
-    <tr><td>5</td><td>"This dish says 90% ordered again within 90 days. What do you think that means — who counted that?"<span class="tag">trust</span></td><td>Trust-signal comprehension (Exploration C)</td><td>Describes repeat orders / verified diners, not star-like satisfaction; bonus if they find "how we know"</td></tr>
-    <tr><td>6a</td><td>"Set the price filter to $ and distance to 'Steps away'. What happened, and how do you get dishes back?"<span class="tag">recovery</span></td><td>Zero-result recovery</td><td>Identifies which limits caused it; uses the correct button to recover</td></tr>
-    <tr><td>6b</td><td>"You're visiting Los Angeles next week. Point the app there."<span class="tag">location</span></td><td>No-coverage honesty</td><td>Understands why the feed is empty; finds the way back; no belief that the app is broken</td></tr>
+    <tr><th style="width:34px;">#</th><th>Task (read aloud)</th><th>What to observe</th><th>Design decision it informs</th></tr>
+    <tr><td>1</td><td>"You want dinner soon near the demo area. Pick something you would consider, keeping the menu price within $20."<span class="tag">feed</span></td><td>What they notice, how they narrow, whether they compare without opening every card</td><td>Card content and information order</td></tr>
+    <tr><td>2</td><td>"You're in the mood for noodles. Find an option you would consider, then look at another and go back."<span class="tag">search</span></td><td>Query and constraint retention, comparison, backtracking</td><td>Search and navigation state</td></tr>
+    <tr><td>3</td><td>"You can't decide yet. Keep two options somewhere you can find them later."<span class="tag">save</span></td><td>Discovery of Save; whether collections help or interrupt</td><td>Save interaction and saved-card content</td></tr>
+    <tr><td>4</td><td>"Now you're ready to get one of them. Show me what you would do next."<span class="tag">next step</span></td><td>Expected destination; menu versus checkout; whether they believe an order happened</td><td>Next-step sheet and handoff copy</td></tr>
+    <tr><td>5</td><td>"This one isn't available in this scenario. What would you do?"<span class="tag">off the menu</span></td><td>Context retention and recovery without starting over</td><td>Unavailable-item handling</td></tr>
+    <tr><td>6</td><td>"You want to look at another area."<span class="tag">area</span></td><td>Understanding of demo coverage; no belief that the app is broken</td><td>Area and not-covered state</td></tr>
   </table>
-  <div class="note">Follow-ups — always non-leading: "What did you expect to happen?" · "What would you do next?" · "You hesitated there — what were you weighing?" · "Say more about that face you made." Never: "Did you like…", "Wasn't that easy?"</div>
+  <div class="note">Follow-ups, always non-leading: "What did you expect to happen?" · "What would you do next?" · "You hesitated there — what were you weighing?" Never: "Did you like…", "Wasn't that easy?" With a fictional catalog this round tests comprehension and interaction. It cannot show that someone would buy a dish, trust the catalog, or stop using another app.</div>
+  <div class="note"><b>Gate.</b> Any belief that an order was placed, that a device location was detected, or that missing ingredient information means the dish is fine is a critical comprehension issue. Fix repeated decision barriers before polishing secondary screens.</div>
 
-  <h2>Round 2 — dedicated safety round</h2>
+  <h2>Round C — dietary information comprehension</h2>
   <div class="rule"></div>
   <div class="card">
-    <h3>Participants — 4 sessions + 1 domain review</h3>
+    <h3>3–4 sessions with people who manage a food allergy, plus a domain reviewer if one is available</h3>
     <ul>
-      <li><b>4 participants who manage a real food allergy</b> — their own or a household member's. Recruited separately from Round 1; the allergy model must be tested by the people it exists for, not simulated by proxies.</li>
-      <li><b>1 domain review session</b> with a food-allergy professional (registered dietitian, allergy nurse/educator, or a food-service allergen-compliance manager): walk the full allergy path and the copy, and ask where the design overstates what it can promise.</li>
-      <li>Same moderator script as Round 1, plus: "This app can flag allergens in its data, but it can never guarantee a kitchen is safe — I want to know if the design makes that clear or blurs it."</li>
+      <li>Test how the information is understood. Do not ask anyone to order or eat based on the prototype.</li>
+      <li>Fixtures: a listed conflict, a dish with no ingredient information, a saved conflict, a related-dish route, and a restaurant page showing flagged dishes for context.</li>
+      <li>Collect the initial interpretation before explaining anything; then clarify the prototype's limits.</li>
+      <li>If no domain reviewer is available, keep the limitation and do not present the feature as validated.</li>
     </ul>
   </div>
   <table style="margin-top:16px;">
-    <tr><th style="width:34px;">#</th><th>Task (read aloud)</th><th>Tests</th><th>Success criteria</th></tr>
-    <tr><td>S1</td><td>"Set up the app the way you would for your own allergy, then tell me what you expect it to do from now on."<span class="tag">setup</span></td><td>Three-tier dietary model comprehension</td><td>Finds setup; expectation matches the promise: excluded from feed/search, saved dishes kept + warned — and <b>not</b> "the app keeps me safe"</td></tr>
-    <tr><td>S2</td><td>"Open the dan dan noodles you saved earlier." (conflicting save present)<span class="tag">retained save</span></td><td>Conflict warning on retained saves</td><td>Notices the warn chip and banner; explains why it's still visible in their saves</td></tr>
-    <tr><td>S3</td><td>"A friend sends you this dish. What is the app telling you?" (direct-open conflict)<span class="tag">direct open</span></td><td>Direct-open warning comprehension</td><td>Reads contains-X + why-visible + confirm-with-kitchen as three distinct facts</td></tr>
-    <tr><td>S4</td><td>"Go ahead and order it anyway."<span class="tag">gated handoff</span></td><td>Acknowledgement-gated order sheet</td><td>Understands why providers are locked; the acknowledgement reads as a deliberate safety step, not a nag; warning persists after unlock</td></tr>
-    <tr><td>S5</td><td>"Search for that dish by name. What is the app telling you now?"<span class="tag">search</span></td><td>Diet-aware empty state</td><td>Distinguishes "doesn't exist here" from "excluded by my settings"; knows allergy rules are edited deliberately, never by "clear filters"</td></tr>
+    <tr><th style="width:34px;">#</th><th>Prompt</th><th>What to observe</th></tr>
+    <tr><td>C1</td><td class="q">"What does this information tell you? What does it leave unanswered?"</td><td>Whether "menu lists" is read as an ingredient claim only, not a preparation claim</td></tr>
+    <tr><td>C2</td><td class="q">"Why do you think this item is or isn't in these results?"</td><td>Whether the listed-apart section is understood as "unknown", not "fine" or "bad"</td></tr>
+    <tr><td>C3</td><td class="q">"What would you need to check before making a decision?"</td><td>Whether "check with the restaurant" is a plan or a shrug</td></tr>
+    <tr><td>C4</td><td class="q">"What do you expect this next step to do?"</td><td>Whether the handoff is read as leaving the app, not as ordering</td></tr>
   </table>
-  <div class="note">Any misreading of the allergy promise in Round 2 is <b>S1 by default</b>. The prototype's own framing under test: Morsel is allergy-<i>aware</i>, never allergy-<i>safe</i> — diners must confirm ingredients and preparation with the restaurant.</div>
+  <div class="note"><b>Gate.</b> If the information repeatedly reads as a guarantee, reduce the feature's claim and scope. More disclaimers are not the answer. The wording under test: Morsel excludes dishes whose menu lists an avoided ingredient, sets aside dishes with no ingredient information, and never calls anything safe.</div>
 
-  <h2>Observation table</h2>
+  <h2>Evidence record</h2>
   <div class="rule"></div>
-  <p class="sub">One row per participant × task. Print or duplicate per session.</p>
-  <table style="margin-top:12px;">
-    <tr><th>Task</th><th>Completion</th><th>Misclicks</th><th>Confidence (1–5, self-report)</th><th>Quotes / behavior</th><th>Severity</th></tr>
-    <tr><td>1</td><td>✓ / partial / ✗</td><td>count + where</td><td>"How sure are you that was a good pick?"</td><td></td><td></td></tr>
-    <tr><td>…</td><td></td><td></td><td></td><td></td><td></td></tr>
-  </table>
+  <p class="sub">One record per observation, source inspection, or design-review finding. Keep observation, interpretation and decision in separate fields. Blank by design; nothing here is prefilled.</p>
+<pre>Record ID:
+Date and prototype version:
+Source type: participant session / source inspection / design review
+Participant code, if applicable:
+Task or context:
+Observed action or exact quote:
+Interpretation:
+Alternative explanation:
+Decision and reason:
+Artifact or commit changed:
+Follow-up check:
+Permission to publish this material:</pre>
   <div class="card" style="margin-top:16px;">
     <h3>Severity scale</h3>
     <ul style="list-style:none; padding-left:0;">
-      <li><span class="sev" style="background:#C2492B;"></span><b>S1 — safety/trust breach:</b> user misunderstands the allergy promise or the trust metric in a way that could cause harm or distrust. Fix before any release.</li>
-      <li><span class="sev" style="background:#C97C1B;"></span><b>S2 — task blocker:</b> cannot complete a core task (choose, save, order handoff) without moderator help.</li>
+      <li><span class="sev" style="background:#C2492B;"></span><b>S1 — trust or comprehension breach:</b> the diner believes an order was placed, a location was detected, or missing information means the dish is fine. Fix before anything else.</li>
+      <li><span class="sev" style="background:#C97C1B;"></span><b>S2 — task blocker:</b> cannot complete a core task (compare, save, hand off) without moderator help.</li>
       <li><span class="sev" style="background:#B89A4F;"></span><b>S3 — friction:</b> completes with detours, misclicks, or visible hesitation.</li>
       <li><span class="sev" style="background:#8C9A6B;"></span><b>S4 — polish:</b> cosmetic or preference-level.</li>
     </ul>
@@ -116,23 +140,23 @@
   <h2>Findings → iteration matrix</h2>
   <div class="rule"></div>
   <table style="margin-top:12px;">
-    <tr><th>Finding (evidence)</th><th>Sessions</th><th>Severity</th><th>Hypothesis</th><th>Design response</th><th>Owner / status</th></tr>
-    <tr><td colspan="6" style="color:var(--ink3); font-weight:600;">Fill after sessions — one row per distinct finding, merged across participants.</td></tr>
+    <tr><th>Finding (evidence)</th><th>Sessions</th><th>Severity</th><th>Hypothesis</th><th>Design response</th><th>Status</th></tr>
+    <tr><td colspan="6" style="color:var(--ink3); font-weight:600;">Fill after sessions — one row per distinct finding, merged across participants. Report counts with context ("three of five missed the price"), never small-sample percentages.</td></tr>
   </table>
 
   <h2>Before / after template</h2>
   <div class="rule"></div>
   <div class="card">
-    <p>For each S1–S2 finding that changes the design, produce one before/after pair for the case study:</p>
+    <p>For each S1–S2 finding that changes the design, produce one pair for the case study:</p>
     <ol>
-      <li><b>Before:</b> screenshot of the v3.1 state + one-line finding ("4/5 read 90% as a satisfaction score").</li>
-      <li><b>After:</b> screenshot of the revised state + what changed and why it addresses the evidence.</li>
-      <li><b>Verdict line:</b> how you'll know it worked (re-test criterion or metric).</li>
+      <li><b>Before:</b> the v3.2 state and the one-line finding, with the count.</li>
+      <li><b>After:</b> the revised state, what changed, and why it addresses the evidence.</li>
+      <li><b>Verdict line:</b> the re-test criterion.</li>
     </ol>
-    <p style="margin-top:8px;">Keep pairs at identical crop/zoom so the change reads instantly (template: two phone frames side by side, finding above, response below).</p>
+    <p style="margin-top:8px;">Identical crop and zoom for both frames so the change reads instantly. Retrospective design-review pairs (the v3.1 → v3.2 changes) stay labeled as review, not as findings.</p>
   </div>
 
-  <div class="note">This plan is ready to run but has <b>not been run</b> — all findings tables are intentionally empty. Any populated example content elsewhere in the case-study package is labeled illustrative.</div>
+  <div class="note">This plan is ready to run and has <b>not been run</b>. Until it has, the case study claims improved consistency and clearer information from a design review, and nothing about user value.</div>
 </div>
 </body>
 </html>

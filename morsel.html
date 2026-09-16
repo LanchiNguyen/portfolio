@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Morsel &middot; Case study &middot; Lana Nguyen</title>
-  <meta name="description" content="Morsel is a working food-discovery concept that keeps photos central while carrying dietary and allergy context through ordering." />
+  <meta name="description" content="Morsel is a working food-discovery concept: find a dish nearby, then check price, distance, menu status and what is known about ingredients before you go." />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Morsel — trust and safety in photo-first food discovery" />
-  <meta property="og:description" content="Safety context follows the dish — from discovery through ordering. Allergy-aware, never 'allergy-safe'; no score without a disclosed method; no silent failure. Functional prototype, not evaluated with users." />
+  <meta property="og:title" content="Morsel — find a dish, then check it" />
+  <meta property="og:description" content="Photo-first browsing with the decision information on the card. One shared dietary classifier; unknowns stay visibly unknown; the next step is named for where it really goes. Working prototype, reviewed but not yet tested with users." />
   <meta property="og:image" content="images/morsel/card.webp" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -41,16 +41,16 @@
       <!-- hero -->
       <section class="proj-hero" id="case">
         <div class="bloom"></div>
-        <a class="backlink" href="index.html#home-work">&larr; WORK / &#8470; 02 &middot; PROTOTYPE &middot; iOS</a>
+        <a class="backlink" href="index.html#home-work">&larr; WORK / &#8470; 01 &middot; PROTOTYPE &middot; iOS</a>
         <div class="proj-hero-grid">
           <div class="rv">
-            <h1 data-ed="0">Morsel &mdash; eat with your <em>eyes</em></h1>
-            <p class="proj-lede" data-ed="1">A photo-first food app with a stricter rule underneath: dietary and allergy context follows a dish from the feed to the order handoff.</p>
+            <h1 data-ed="0">Morsel &mdash; find a dish, <em>then check it</em></h1>
+            <p class="proj-lede" data-ed="1">A photo-first food app for one decision: pick a specific dish nearby, then see the price, the distance, and what is and isn&rsquo;t known about it before you go.</p>
           </div>
           <div class="meta-rail rv" style="--d:120ms">
             <div><span class="k" data-ed="2">ROLE</span><span class="v" data-ed="3">Product design, interaction design, prototyping</span></div>
             <div><span class="k" data-ed="4">SCOPE</span><span class="v" data-ed="5">0&rarr;1 mobile product concept</span></div>
-            <div><span class="k" data-ed="6">STATUS</span><span class="v" data-ed="7">Functional interactive prototype &middot; not shipped</span></div>
+            <div><span class="k" data-ed="6">STATUS</span><span class="v" data-ed="7">Working prototype &middot; v3.2 &middot; not shipped</span></div>
             <div><span class="k" data-ed="8">TEAM &middot; YEAR</span><span class="v" data-ed="9">Independent &middot; 2026</span></div>
             <div><span class="k" data-ed="10">BUILD</span><span class="v" data-ed="11">HTML/CSS/JavaScript prototype &middot; Claude Design and Fable</span></div>
           </div>
@@ -59,39 +59,39 @@
 
       <!-- TL;DR -->
       <div class="tldr rv">
-        <div class="cell"><span class="k" data-ed="12">The idea</span><span class="v" data-ed="13">Keep browsing visual, but be plain about ingredients, evidence, and coverage.</span></div>
-        <div class="cell"><span class="k" data-ed="14">The model</span><span class="v" data-ed="15">Taste changes ranking. Lifestyle choices filter. Allergies exclude dishes and trigger a warning before ordering.</span></div>
-        <div class="cell"><span class="k" data-ed="16">Status</span><span class="v" data-ed="17"><span class="status-flag">Functional prototype &middot; v3.1 &middot; not shipped</span> Not evaluated with users; restaurants, diner identities, quotes, order counts, and trust scores are illustrative prototype data.</span></div>
+        <div class="cell"><span class="k" data-ed="12">The idea</span><span class="v" data-ed="13">Keep browsing visual, but make price, distance, menu status and ingredient status as easy to read as the photo.</span></div>
+        <div class="cell"><span class="k" data-ed="14">The model</span><span class="v" data-ed="15">Taste re-ranks. Lifestyle filters. An allergy removes dishes whose menu lists that ingredient; dishes with no ingredient information are set apart and never counted as a match.</span></div>
+        <div class="cell"><span class="k" data-ed="16">Status</span><span class="v" data-ed="17"><span class="status-flag">Working prototype &middot; v3.2 &middot; not shipped</span> Not evaluated with users. Restaurants, prices, menu links and &ldquo;last checked&rdquo; dates are illustrative fixtures.</span></div>
       </div>
 
-      <p class="method-note rv" data-ed="18"><strong>Prototype status:</strong> the flows work, but the restaurants, diner profiles, quotes, order counts, and scores are illustrative. Morsel is allergy-aware, never allergy-safe; diners are always told to confirm with the restaurant. No usability sessions have been run.</p>
+      <p class="method-note rv" data-ed="18"><strong>Prototype status:</strong> the flows work; the catalog is fictional. v3.2 is a design-review revision. I audited the v3.1 build against the journey it claimed to support and rebuilt what did not hold. No usability sessions have been run; the changes below are reasoned, not yet observed.</p>
 
-      <!-- cover: source portfolio card art -->
+      <!-- cover -->
       <div class="cover rv">
         <div class="lit"><div class="lit-in">
-          <img class="shot-img" src="images/morsel/card.webp" alt="Morsel portfolio card, labeled 'v3.1 concept prototype · illustrative data': the saves screen with two conflicting saves kept and flagged with Nuts chips, a photo-led dish page with a Location-off chip, and the Allergy Gate order sheet — 'Contains nuts, an allergy you flagged. Ordering stays locked until you confirm below' with an unchecked acknowledgement and Uber Eats shown locked" width="1600" height="900" data-ed="19" />
+          <img class="shot-img" src="images/morsel/card.webp" alt="Morsel v3.2 cover: the feed with labeled dish cards showing name, restaurant, price and distance; the dish page with price, distance, menu status and ingredient status above one primary action; and the next-step sheet that names the destination and says no order is placed" width="1600" height="900" data-ed="19" />
         </div></div>
       </div>
 
       <!-- try the prototype -->
       <section class="proj-sec" id="try" aria-label="Try the Morsel prototype">
         <div class="rule"></div>
-        <div class="sechead"><span class="lead" data-ed="20">TRY THE PROTOTYPE</span><span>V3 BUILD &middot; ILLUSTRATIVE DATA</span></div>
-        <p class="method-note" data-ed="21"><strong>Try one task:</strong> browse without location, choose a dietary preference, save a dish, then inspect a flagged save and open Order. The data and provider handoffs are simulated.</p>
-        <div class="demo-stage rv" data-src="morsel-proto/index.html" data-w="430" data-h="900" data-poster="images/morsel/stage-morsel.webp" data-title="Morsel v3 interactive prototype — onboarding, feed, dish detail, saves, and the allergy-gated order sheet">
+        <div class="sechead"><span class="lead" data-ed="20">TRY THE PROTOTYPE</span><span>V3.2 BUILD &middot; ILLUSTRATIVE DATA</span></div>
+        <p class="method-note" data-ed="21"><strong>Try one task:</strong> find a dinner option near Shaw within your budget, save an alternative, open one, and see where the next step takes you. Then go back and notice that your search, filters and place are still there. Everything is simulated; no order is placed.</p>
+        <div class="demo-stage rv" data-src="morsel-proto/index.html" data-w="430" data-h="900" data-poster="images/morsel/stage-morsel.webp" data-title="Morsel v3.2 interactive prototype — entry, feed, search, dish detail, saves, and the next-step sheet">
           <div class="demo-head">
-            <span class="demo-kicker">MORSEL V3 &middot; FULL FLOW</span>
+            <span class="demo-kicker">MORSEL V3.2 &middot; FULL FLOW</span>
             <a class="demo-open" href="morsel-proto/index.html">OPEN FULL PROTOTYPE &#8599;</a>
           </div>
           <div class="demo-frame">
-            <div class="demo-poster"><img src="images/morsel/stage-morsel.webp" alt="Poster: the Morsel v3 prototype welcome screen — 'Eat with your eyes' over a dish photo grid, with Show me what's good and Continue without location" width="430" height="900" data-ed="22" /></div>
+            <div class="demo-poster"><img src="images/morsel/stage-morsel.webp" alt="Poster: the Morsel v3.2 prototype welcome screen — 'Find a dish, then check it' over a dish photo grid, with Explore the DC demo" width="430" height="900" data-ed="22" /></div>
             <button class="demo-load">&#9654;&ensp;TRY THE LIVE PROTOTYPE</button>
           </div>
           <div class="demo-foot">
-            <span class="demo-note-txt">SANDBOXED EMBED &middot; FLAG A NUT ALLERGY IN ONBOARDING, THEN TRY TO ORDER A CONFLICTING DISH &middot; ILLUSTRATIVE DATA</span>
+            <span class="demo-note-txt">SANDBOXED EMBED &middot; SET A BUDGET AND DISTANCE, OPEN A DISH, GO BACK &middot; ILLUSTRATIVE DATA</span>
             <button class="demo-reset">RESET DEMO VIEW</button>
           </div>
-          <p class="demo-note" data-ed="23">Fully interactive version ships with the deployed site (v2/morsel-proto/).</p>
+          <p class="demo-note" data-ed="23">Fully interactive version ships with the deployed site (morsel-proto/).</p>
         </div>
       </section>
 
@@ -100,116 +100,122 @@
         <div class="rule"></div>
         <div class="sechead"><span class="lead" data-ed="24">THE SHAPE OF THE PROJECT</span><span>WORKING PROTOTYPE</span></div>
         <div class="chips" style="padding: 0 0 8px">
-          <div class="chip rv"><div class="in"><div class="n">3</div><div class="l">TIERS IN THE DIETARY MODEL: TASTE, LIFESTYLE, ALLERGY</div></div></div>
-          <div class="chip rv" style="--d:80ms"><div class="in"><div class="n">16</div><div class="l">ILLUSTRATED PROTOTYPE STATES</div></div></div>
-          <div class="chip rv" style="--d:160ms"><div class="in"><div class="n" data-static>0</div><div class="l">USABILITY SESSIONS RUN; TWO-ROUND PLAN BELOW</div></div></div>
+          <div class="chip rv"><div class="in"><div class="n">1</div><div class="l">SHARED DIETARY CLASSIFIER, USED BY EVERY SURFACE</div></div></div>
+          <div class="chip rv" style="--d:80ms"><div class="in"><div class="n">3</div><div class="l">STATES A DISH CAN CARRY: LISTED CONFLICT, UNKNOWN, OFF THE MENU</div></div></div>
+          <div class="chip rv" style="--d:160ms"><div class="in"><div class="n" data-static>0</div><div class="l">USABILITY SESSIONS RUN; NEUTRAL TASKS PLANNED BELOW</div></div></div>
         </div>
       </section>
 
-      <!-- problem / hypothesis -->
+      <!-- problem -->
       <section class="proj-sec" id="hypothesis">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="25">THE FEED WAS THE<br>EASY PART</h2>
-          <p class="statement" data-ed="26">A wall of good food photos is easy to make. The harder question was what happens when a diner has a nut allergy, saves a conflicting dish, opens it from a shared link, or lives outside the covered area.</p>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="25">FOOD WAS EASY TO NOTICE<br>AND HARD TO COMPARE</h2>
+          <div>
+            <p class="statement" data-ed="26">The v3.1 feed was a wall of good photos. To compare two dishes you opened each one. Search forgot the budget and distance set on the feed. The dish page led with a repeat-order score no pipeline could produce, and the order sheet asked for a checkbox that changed nothing about the dish.</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="27">So I reviewed the build against one journey and nothing else: <strong>choose an area, browse or search, narrow by budget and distance, open a dish, save it or find where to get it, and come back without losing your place.</strong> The people this is for already do this with a maps app, a delivery app and a screenshot folder. Morsel only earns a place if it removes repeated checks between an appealing photo and a choice they can act on. That advantage is a hypothesis, not a finding.</p>
+          </div>
         </div>
       </section>
 
       <!-- decision 1 -->
-      <section class="proj-sec" id="protection">
+      <section class="proj-sec" id="cards">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="27">AN ALLERGY CANNOT<br>BE JUST ANOTHER CHIP</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="28">PUT THE DECISION<br>ON THE CARD</h2>
           <div>
-            <p class="proj-p" data-ed="28">The first version put Vegetarian and Nut allergy in one flat list. I split that list into three levels. Taste changes ranking, lifestyle choices filter, and allergies remove conflicting dishes from feed and search. Clearing filters never changes allergy settings.</p>
+            <p class="proj-p" data-ed="29">Every grid now uses one card: photo, dish name, restaurant and neighborhood, menu price and distance. The photo still leads; the name and the price no longer need a tap. The same card serves the feed, search, saves, collections and restaurant pages, so what you learn on one surface holds on the next.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
-                <img class="shot-img" src="images/morsel/v1-dietary-flat-2x.webp" alt="v1 onboarding: a single flat 'dietary needs' chip list where Nut allergy sits beside Vegetarian and other preferences as visually equal choices" width="804" height="1748" loading="lazy" style="max-width:225px; border-radius:18px" data-ed="29" />
-                <figcaption class="figcap" data-ed="30"><span class="fk">Before &middot; v1</span>One flat list: a nut allergy modeled like a lifestyle choice.</figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-v31-feed-foryou-shaw" role="img" aria-label="v3.1 feed: a full-bleed photo hero over a masonry grid of unlabeled dish photos; no name, price or distance is visible without opening a dish" style="max-width:225px; border-radius:18px"></div>
+                <figcaption class="figcap" data-ed="30"><span class="fk">Before &middot; v3.1</span>Photo-only. Appetite, then a tap for every fact.</figcaption>
               </figure>
               <figure class="figure fig-down">
-                <div class="fig-live shot-img" data-fig="morsel-v31-onboarding-dietary" role="img" aria-label="v3.1 dietary onboarding: lifestyle choices in one tier and allergies in a visually distinct protected tier with different mechanics, plus the note that Morsel is allergy-aware, not allergy-safe — always confirm with the kitchen" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="31"><span class="fk">After &middot; v3.1</span>Lifestyle filters; allergies exclude, flag, and follow the dish.</figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-v32-feed-cards" role="img" aria-label="v3.2 feed: a shorter featured dish labeled as a demo pick, then labeled cards with the dish name, restaurant and neighborhood, menu price and distance, with a count and the sort explained" style="max-width:225px; border-radius:18px"></div>
+                <figcaption class="figcap" data-ed="31"><span class="fk">After &middot; v3.2</span>Name, place, price and distance before you open anything.</figcaption>
               </figure>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="32"><strong>The warning had to follow the dish.</strong> Hiding conflicting dishes in the feed only covers one way in. A diner can still open one from their saves. I kept those saves visible, repeated the warning on the dish page, and <strong>locked delivery and pickup until the diner acknowledged the conflict</strong>.</p>
+            <p class="proj-p" style="margin-top: 26px" data-ed="32"><strong>The dish page moved its facts above the action.</strong> Price with its basis and date, distance with what it measures, menu status, and what the menu lists. Scores, diner counts and quotes are gone because the prototype has no source for them. The description is labeled as an edited menu description, not a review. Filters say &ldquo;Under $15&rdquo; and &ldquo;1 mi&rdquo; instead of dollar signs and walk times the data cannot back.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-v31-saved-conflicts" role="img" aria-label="All saves: '2 saves conflict with your allergy settings — kept and flagged, never auto-deleted', with Nuts warning chips on the conflicting tiles"></div><figcaption data-ed="33">Saves kept and flagged, never auto-deleted</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-detail-conflict-warning" role="img" aria-label="A dish opened directly showing an allergen conflict warning that explains why the dish is still visible and tells the diner to confirm with the kitchen"></div><figcaption data-ed="34">Direct open: warned and explained, still reachable</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-order-allergy-locked" role="img" aria-label="The Allergy Gate order sheet: 'Contains nuts — an allergy you flagged. Ordering stays locked until you confirm below. Tell the kitchen about your allergy either way — menu data can lag.' Delivery providers show as locked; the acknowledgement checkbox is unchecked"></div><figcaption data-ed="35">Order sheet locked; acknowledgement never pre-checked</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-order-allergy-unlocked" role="img" aria-label="The same order sheet after the diner has explicitly acknowledged the conflict: providers unlocked, the allergy warning still visible"></div><figcaption data-ed="36">After an explicit yes: unlocked, warning still present</figcaption></figure>
-            </div>
-            <div class="fig-duo phones" style="margin-top: 24px">
-              <figure class="figure">
-                <img class="shot-img" src="images/morsel/v1-order-no-context-2x.webp" alt="v1 order sheet: delivery providers listed with no allergy context at all — the dish's nut conflict is invisible at the moment of ordering" width="804" height="1748" loading="lazy" style="max-width:225px; border-radius:18px" data-ed="37" />
-                <figcaption class="figcap" data-ed="38"><span class="fk">Before &middot; v1</span>The order sheet carried zero safety context.</figcaption>
-              </figure>
-              <figure class="figure fig-note">
-                <figcaption class="figcap" style="max-width:300px; margin:0" data-ed="39"><span class="fk">Retrospective design review</span>This adds a step before ordering and keeps the diner in control of their saves. Acknowledgement does not make a dish safe. I still need to test whether the warning is understood at that point.</figcaption>
-              </figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-detail-top" role="img" aria-label="v3.2 dish page: photo, then dish name, restaurant, a one-line menu description labeled as edited, and a facts list of price with date, distance from the demo area, menu status and listed allergens, followed by one primary next-step button"></div><figcaption data-ed="33">Facts first, one primary next step</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-filters" role="img" aria-label="v3.2 filters sheet: menu price per dish with explicit amounts, distance from Shaw in miles labeled as straight-line, and a note that dietary settings are never cleared here"></div><figcaption data-ed="34">Explicit amounts and miles; no &ldquo;open now&rdquo; without an hours model</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-imgfail" role="img" aria-label="v3.2 feed with images failing: each card still shows the cuisine, dish name, restaurant, price and distance in place of the photo"></div><figcaption data-ed="35">Without photos, the card still works</figcaption></figure>
             </div>
           </div>
         </div>
       </section>
 
       <!-- decision 2 -->
-      <section class="proj-sec" id="evidence">
+      <section class="proj-sec" id="context">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="40">THE LABEL HAD TO<br>MATCH THE MEASURE</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="36">KEEP THE DINER&rsquo;S<br>PLACE</h2>
           <div>
-            <p class="method-note" data-ed="41"><strong>Retrospective design review</strong></p>
-            <p class="proj-p" data-ed="42">My original label, &ldquo;would order again,&rdquo; sounded like a statement of preference. The proposed measure was based on repeat orders. I changed the label to <strong>&ldquo;ordered again within 90 days&rdquo;</strong> and put the sample size and method beside it. That describes the behavior being counted; it does not explain why someone returned or establish food safety.</p>
-            <p class="proj-p" style="margin-top:18px" data-ed="43">The proposed denominator is unique diners with a verified first order and a complete 90-day follow-up. Cancelled or refunded first orders and incomplete follow-up are excluded; each diner counts once. No order pipeline exists in this prototype, and the displayed scores are illustrative. New dishes say, <em>&ldquo;New on Morsel &mdash; no score yet.&rdquo;</em></p>
+            <p class="proj-p" data-ed="37">In v3.1 the search screen owned its own query and knew nothing about the feed&rsquo;s filters, so a budget set on the feed vanished in search and the query vanished on Back. In v3.2 area, filters and query live in one place. Search inherits them and shows them as chips. Back from a dish returns to the same results, the same scroll position and the card that was opened, with focus on it.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
-                <div class="fig-live shot-img" data-fig="morsel-v31-trust-method" role="img" aria-label="The trust signal expanded: the 90-day repeat-order percentage with its visible sample size and the plain-language method sheet one tap away, labeled as a proposed measurement model with illustrative data" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="44"><span class="fk">v3.1 &middot; the method, disclosed</span>Percentage and sample size stay visible; the method is one tap away. The model would need order attribution, diner consent, privacy work, and defenses against gaming.</figcaption>
+                <img class="shot-img" src="images/morsel/v31-search-no-context-2x.webp" alt="v3.1 search opened after setting a price and distance filter on the feed: it shows 'Trending in DC' chips and 'Everything near you' with the full catalog, ignoring both filters" width="804" height="1748" loading="lazy" style="max-width:225px; border-radius:18px" data-ed="38" />
+                <figcaption class="figcap" data-ed="39"><span class="fk">Before &middot; v3.1</span>Filters set on the feed; search shows everything.</figcaption>
               </figure>
               <figure class="figure fig-down">
-                <div class="fig-live shot-img" data-fig="morsel-v31-detail-coldstart" role="img" aria-label="A dish page for a new dish where the design abstains from scoring: 'New on Morsel — no score yet' in place of a manufactured number" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="45"><span class="fk">v3.1 &middot; cold start</span>Too new for honest math &rarr; abstain.</figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-v32-search-context" role="img" aria-label="v3.2 search for 'pizza' with the feed's price and distance filters carried in as chips above the results, a note that clearing the query keeps the filters, and labeled result cards" style="max-width:225px; border-radius:18px"></div>
+                <figcaption class="figcap" data-ed="40"><span class="fk">After &middot; v3.2</span>The same constraints, visible, on both surfaces.</figcaption>
               </figure>
+            </div>
+            <p class="proj-p" style="margin-top: 26px" data-ed="41"><strong>An empty result names the rule that emptied it.</strong> Nothing in the catalog, removed by a browsing filter, or removed by a dietary setting are three different answers with three different recoveries. Clearing the query keeps the filters. Clearing the filters never touches dietary settings. Nothing is widened silently, and an unsupported area never shows Washington dishes under another city&rsquo;s name.</p>
+            <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
+              <figure><div class="fig-live" data-fig="morsel-v32-search-excluded-filters" role="img" aria-label="v3.2 search for 'steak' with a price and distance filter on: the empty state says one steak dish exists but the browsing filters removed it, and offers to clear those filters only"></div><figcaption data-ed="42">&ldquo;Exists, but your filters removed it&rdquo;</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-zero-result" role="img" aria-label="v3.2 feed with no dish fitting every setting: the active lifestyle, allergy and filter chips remain visible with one recovery action per tier, and a note that allergy settings are never cleared by these buttons"></div><figcaption data-ed="43">One recovery per tier; allergies untouchable</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-no-coverage" role="img" aria-label="v3.2 feed after choosing Boise: 'Boise isn't in this demo', with a note that the demo covers Washington DC only and buttons to explore the sample area or choose another"></div><figcaption data-ed="44">Unsupported area, named plainly</figcaption></figure>
             </div>
           </div>
         </div>
       </section>
 
       <!-- decision 3 -->
-      <section class="proj-sec" id="scent">
+      <section class="proj-sec" id="honest">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="46">BROWSING AND SEARCH<br>NEED DIFFERENT DENSITY</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="45">SAY ONLY WHAT<br>THE DATA CAN SAY</h2>
           <div>
-            <p class="proj-p" data-ed="47">The feed stays photo-only because browsing is loose and visual. Search results show name, price, and distance because people are comparing. That split is still untested; it is the first question in the research plan.</p>
+            <p class="method-note" data-ed="46"><strong>Retrospective design review.</strong> The v3.1 gate and the repeat-order score were my own earlier decisions. Removing them is a reversal from review, not from participant evidence.</p>
+            <p class="proj-p" data-ed="47">v3.1 locked ordering behind &ldquo;I understand this dish contains nuts.&rdquo; The checkbox changed nothing about the dish; it moved responsibility. It also sat beside a score of diners who &ldquo;ordered again within 90 days,&rdquo; a measure that would need order attribution, consent and a follow-up window none of which exist. v3.2 removes both.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
-                <div class="fig-live shot-img" data-fig="morsel-v31-feed-foryou-shaw" role="img" aria-label="The v3.1 For-you feed: full-bleed dish photography with minimal overlay chrome, distances disclosed as from the Shaw demo neighborhood" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="48"><span class="fk">v3.1 &middot; the grazing feed</span>Photo-only by choice; the appetite surface stays quiet.</figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-v31-order-allergy-locked" role="img" aria-label="v3.1 order sheet: 'Contains nuts — an allergy you flagged. Ordering stays locked until you confirm below.' Delivery providers with fees and ETAs are shown locked behind an unchecked acknowledgement" style="max-width:225px; border-radius:18px"></div>
+                <figcaption class="figcap" data-ed="48"><span class="fk">Before &middot; v3.1</span>An acknowledgement that unlocked delivery apps, fees and ETAs the prototype could not know.</figcaption>
               </figure>
               <figure class="figure fig-down">
-                <div class="fig-live shot-img" data-fig="morsel-v31-search-diet-empty" role="img" aria-label="Diet-aware search empty state distinguishing 'doesn't exist here' from 'excluded by your settings', with the active limits named" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="49"><span class="fk">v3.1 &middot; search, labeled and honest</span>The empty state distinguishes &ldquo;doesn't exist here&rdquo; from &ldquo;excluded by your settings.&rdquo;</figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-v32-detail-conflict" role="img" aria-label="v3.2 dish page opened directly for a dish whose menu lists nuts while a nut allergy is set: a note that the menu lists nuts which you asked to avoid, that no step here makes it fit, and primary actions to see other dishes at the restaurant or the restaurant's menu; there is no order or unlock control" style="max-width:225px; border-radius:18px"></div>
+                <figcaption class="figcap" data-ed="49"><span class="fk">After &middot; v3.2</span>No gate. Other dishes, or the restaurant. Nothing to unlock.</figcaption>
               </figure>
+            </div>
+            <p class="proj-p" style="margin-top: 26px" data-ed="50"><strong>Three states, one classifier.</strong> Every surface asks the same function what a dish is relative to the diner&rsquo;s settings: a match, a listed conflict, or unknown. What each surface does with the answer is policy. Feed, search and related strips recommend matches only, list unknowns apart and never show conflicts. Saves and restaurant menus show everything, labeled. A dish with no ingredient information is never given a reassuring badge, never counted as a match, and says so in plain words.</p>
+            <p class="proj-p" style="margin-top: 18px" data-ed="51"><strong>&ldquo;Order&rdquo; became a next step named for where it goes.</strong> A dish page, a restaurant menu, or a phone number, chosen from what is known about each restaurant, with the date the link was last checked. The demo ends with &ldquo;no order was placed.&rdquo; A restaurant&rsquo;s own button opens its menu; it never picks a dish for you.</p>
+            <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
+              <figure><div class="fig-live" data-fig="morsel-v32-detail-unknown" role="img" aria-label="v3.2 dish page for a tasting plate with a nut allergy set: 'We don't have ingredient information for this dish. It isn't counted as a match for your allergy settings. Check with the restaurant before deciding.' The primary action reads Check with restaurant"></div><figcaption data-ed="52">Unknown stays visibly unknown</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-search-unknown" role="img" aria-label="v3.2 search for 'tasting' with a nut allergy set: no matches; a note that one dish has no ingredient information and is listed below, not counted as a match; the dish appears under an 'Ingredient information unavailable' heading with a question-mark chip"></div><figcaption data-ed="53">Listed apart, not counted</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-next-step" role="img" aria-label="v3.2 next-step sheet for a pizza: 'View the restaurant menu', the dish and price, a note that it opens the restaurant's menu and lands on the menu not the dish, that price and availability may have changed since the checked date, and buttons Open menu (demo) and Not now"></div><figcaption data-ed="54">The destination, its scope, its date</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-next-step-none" role="img" aria-label="v3.2 next-step sheet for a restaurant with no online menu: 'No online menu to link to', a phone number, and a note that Morsel cannot confirm price or availability for this restaurant"></div><figcaption data-ed="55">No destination: say so, offer the phone</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-next-step-done" role="img" aria-label="v3.2 demo endpoint: 'Demo complete. In a live version this would open the restaurant's menu. No order was placed, and nothing left this prototype.' with a Back to the dish button"></div><figcaption data-ed="56">The demo ends here, and says what it did not do</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v31-trust-method" role="img" aria-label="v3.1 dish page: a percentage ring reading 'ordered again within 90 days' with an illustrative diner count and the expanded method text; removed in v3.2"></div><figcaption data-ed="57">Removed: a score with no pipeline behind it</figcaption></figure>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- resilience -->
-      <section class="proj-sec" id="resilience">
+      <!-- saves and restaurants -->
+      <section class="proj-sec" id="memory">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="50">WHAT HAPPENS WHEN<br>THE HAPPY PATH BREAKS</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="58">SAVES ARE MEMORY,<br>NOT RECOMMENDATION</h2>
           <div>
-            <p class="proj-p" data-ed="51">With location off, the feed becomes &ldquo;For you,&rdquo; distances are labeled as demo data, and &ldquo;Nearest&rdquo; is disabled. If a city is not covered, the app says so instead of quietly showing dishes from somewhere else.</p>
+            <p class="proj-p" data-ed="59">A save is a promise to keep something, so a settings change never deletes it. Each saved card carries its state: a listed conflict, no ingredient information, or off the menu since the last check. &ldquo;Recent&rdquo; now sorts by a real timestamp; saves made before timestamps existed say so and keep their order rather than pretending to be new. Existing saves and collections survive the schema change.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-v31-location-no-coverage" role="img" aria-label="No-coverage state naming the unsupported city plainly instead of mislabeling another city's dishes"></div><figcaption data-ed="52">Unsupported city, named plainly</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-zero-result-recovery" role="img" aria-label="Zero-result recovery listing each active limit by tier with separate clear actions; allergy settings are not clearable from here"></div><figcaption data-ed="53">Zero results: names each active limit; allergies untouchable</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-offline" role="img" aria-label="Offline state naming the cause and preserving safety context"></div><figcaption data-ed="54">Offline: the cause, said plainly</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-imgfail" role="img" aria-label="Image-failure state: the photo-first interface degrading honestly when photos cannot load"></div><figcaption data-ed="55">Image failure: the photo-first app without photos</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-handoff-failure" role="img" aria-label="Order handoff failure naming the cause and offering a path forward while keeping the allergy context"></div><figcaption data-ed="56">Handoff failure: names the cause, keeps safety context</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-onboarding-taste" role="img" aria-label="Taste onboarding: preference chips that re-rank the feed — the lowest-stakes tier of the three"></div><figcaption data-ed="57">Taste tier: re-ranks only, lowest stakes of the three</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-saved-states" role="img" aria-label="v3.2 saved screen: collections rail, a Recent/Nearest sort with a note on how untimed saves are ordered, a line counting saves that list an allergen, have no ingredient information, or are off the menu, and cards carrying those chips"></div><figcaption data-ed="60">Every state kept and labeled</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-detail-unlisted" role="img" aria-label="v3.2 dish page for a saved dish that is no longer listed: a dark 'No longer on the menu' note with the checked date, kept because the diner saved it"></div><figcaption data-ed="61">Off the menu, still remembered</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-restaurant" role="img" aria-label="v3.2 restaurant page: dish count, menu price range and distance from the demo area, one View restaurant menu button, and the restaurant's dishes with conflict chips shown for context and a note that they are not recommended"></div><figcaption data-ed="62">Menu for context; the button opens the menu, not a dish</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-handoff-failure" role="img" aria-label="v3.2 next-step sheet after a simulated failure to open the menu link: the dish and restaurant stay visible, the failure is named as simulated, and Try again and Not now remain"></div><figcaption data-ed="63">A failed link keeps the dish and offers a retry</figcaption></figure>
             </div>
           </div>
         </div>
@@ -219,12 +225,33 @@
       <section class="proj-sec" id="accessibility">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="58">ACCESSIBILITY &mdash;<br>AS IMPLEMENTED</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="64">ACCESSIBILITY &mdash;<br>AS IMPLEMENTED</h2>
           <div>
-            <p class="proj-p" data-ed="59">The main path uses named Search and Back controls, a named order dialog, explicit acknowledgement, Escape-to-close, and focus return to Order. Save changes have a live status message. The illustrated enlarged-text state is a design example, not a full accessibility evaluation. Screen-reader, zoom, contrast and touch testing across the complete product remain necessary.</p>
+            <p class="proj-p" data-ed="65">Cards are single buttons whose name reads the dish, restaurant, price, distance and any state; the save control is a sibling, never nested. The next-step sheet is a named dialog that traps Tab, closes on Escape and returns focus to its opener. Back returns focus to the card that was opened. State chips carry a glyph as well as a color. The enlarged-text state below is a design check, not an evaluation; screen-reader, contrast and touch testing across the whole flow remain to be done.</p>
             <div class="phone-grid pg-solo" style="margin-top: 18px; max-width: 245px">
-              <figure><div class="fig-live" data-fig="morsel-v31-textscale-140" role="img" aria-label="The dish page rendered at 140 percent text scale, reflowing without loss of content or controls"></div><figcaption data-ed="60">140% text scale: reflow without loss</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-textscale-140" role="img" aria-label="The v3.2 dish page rendered at 140 percent text scale: the facts list and buttons reflow without truncation"></div><figcaption data-ed="66">140% text scale: reflow without loss</figcaption></figure>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- evaluation -->
+      <section class="proj-sec" id="evaluation">
+        <div class="rule"></div>
+        <div class="proj-row rv">
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="67">WHAT WAS CHECKED,<br>AND WHAT WASN&rsquo;T</h2>
+          <div>
+            <p class="method-note" data-ed="68"><strong>Design review, September 2026.</strong> Source inspection of the v3.1 build plus a walkthrough of each screen, recorded as observation, interpretation and change. Not participant research.</p>
+            <ul class="feat-list">
+              <li data-ed="69"><strong>Search ignored the feed&rsquo;s filters and forgot its query on Back.</strong> Lifted area, filters and query into shared state; Back restores results, scroll and focus.</li>
+              <li data-ed="70"><strong>A missing allergen field read as &ldquo;no conflict.&rdquo;</strong> Added an explicit unknown state, two unknown fixtures, and one classifier every surface calls.</li>
+              <li data-ed="71"><strong>Related-dish strips bypassed dietary settings.</strong> They now draw from the same recommendable pool as the feed.</li>
+              <li data-ed="72"><strong>The restaurant&rsquo;s Order button silently chose its first dish.</strong> It now opens the restaurant&rsquo;s menu.</li>
+              <li data-ed="73"><strong>&ldquo;Recent&rdquo; sorted by catalog order.</strong> Saves carry a timestamp; older saves are labeled, not backdated.</li>
+              <li data-ed="74"><strong>&ldquo;Open now,&rdquo; walk times, ETAs, fees and a repeat-order score had no model behind them.</strong> Removed, with the copy that depended on them.</li>
+              <li data-ed="75"><strong>Choosing &ldquo;use my location&rdquo; stored a location with no city and could crash the feed.</strong> The demo area is now an explicit state; nothing is requested from the device.</li>
+            </ul>
+            <p class="proj-p" style="margin-top:18px" data-ed="76"><strong>Not tested:</strong> whether people compare faster with labeled cards, whether the unknown state is read as &ldquo;check&rdquo; rather than &ldquo;fine,&rdquo; whether the next-step sheet is understood as a handoff, and whether anyone would reach for this instead of a maps app. Those are the questions the plan below is built to answer, and the case will claim nothing about them until it has.</p>
           </div>
         </div>
       </section>
@@ -233,42 +260,44 @@
       <section class="proj-sec" id="appendix">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="61">APPENDIX &mdash;<br>PROCESS ARTIFACTS</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="77">APPENDIX &mdash;<br>PROCESS ARTIFACTS</h2>
           <div>
-            <p class="proj-p" data-ed="62">The state illustrations and four process documents explain the current design. They are retrospective design artifacts and proposed evaluation plans, not records of completed user research:</p>
+            <p class="proj-p" data-ed="78">Four process documents describe the current design. They are retrospective design artifacts and a proposed evaluation plan, not records of completed research. Earlier versions of the wireflow and explorations described the gate and the score; they were revised with the prototype, and the explorations keep the earlier options with what changed.</p>
             <figure class="figure" style="margin-top: 18px">
-              <div class="fig-live shot-img" data-fig="morsel-doc-wireflow" role="img" aria-label="The Morsel wireflow: onboarding, feed, search, dish detail, order handoff, and saves — with the assumption map marking what is still untested"></div>
-              <figcaption class="figcap" data-ed="63"><span class="fk">Wireflow + assumption map</span><a class="doc-link" href="morsel-docs/wireflow.html">open the full artifact &rarr;</a></figcaption>
+              <div class="fig-live shot-img" data-fig="morsel-doc-wireflow" role="img" aria-label="The Morsel v3.2 wireflow: entry, feed, search, dish detail, restaurant, next-step sheet and saves, with green tags for implemented changes and amber tags for assumptions still to test"></div>
+              <figcaption class="figcap" data-ed="79"><span class="fk">Wireflow + assumption map</span><a class="doc-link" href="morsel-docs/wireflow.html">open the full artifact &rarr;</a></figcaption>
             </figure>
             <div class="fig-duo" style="margin-top: 24px">
               <figure class="figure">
-                <div class="fig-live shot-img" data-fig="morsel-doc-explorations-preview" role="img" aria-label="Preview of the structural explorations document: alternatives for feed density, onboarding order, trust signal, and action hierarchy, each with tradeoffs and a provisional recommendation"></div>
-                <figcaption class="figcap" data-ed="64"><span class="fk">Explorations A&ndash;D</span><a class="doc-link" href="morsel-docs/explorations.html">open the full artifact &rarr;</a></figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-doc-explorations-preview" role="img" aria-label="Preview of the structural explorations document: alternatives for feed density, entry order, evidence, and the next-step action, each with tradeoffs, the option chosen in v3.2, and what the review changed"></div>
+                <figcaption class="figcap" data-ed="80"><span class="fk">Explorations A&ndash;D</span><a class="doc-link" href="morsel-docs/explorations.html">open the full artifact &rarr;</a></figcaption>
               </figure>
               <figure class="figure">
-                <div class="fig-live shot-img" data-fig="morsel-doc-ds-preview" role="img" aria-label="Preview of the design-system addendum: component specifications with anatomy, usage rules, and accessibility notes"></div>
-                <figcaption class="figcap" data-ed="65"><span class="fk">DS addendum</span><a class="doc-link" href="morsel-docs/ds-addendum.html">open the full artifact &rarr;</a></figcaption>
+                <div class="fig-live shot-img" data-fig="morsel-doc-ds-preview" role="img" aria-label="Preview of the design-system addendum: component specifications for the labeled card, state chips, the constraint bar, the next-step sheet and the unknown-ingredient states, with usage rules and accessibility notes"></div>
+                <figcaption class="figcap" data-ed="81"><span class="fk">DS addendum</span><a class="doc-link" href="morsel-docs/ds-addendum.html">open the full artifact &rarr;</a></figcaption>
               </figure>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- unknowns / testing -->
+      <!-- testing -->
       <section class="proj-sec" id="testing">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="66">WHAT I WOULD<br>TEST FIRST</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="82">WHAT I WOULD<br>TEST FIRST</h2>
           <div>
-            <p class="proj-p" data-ed="67">No sessions have been run. I would start with five discovery sessions, then run a separate safety round with people who manage food allergies and a domain reviewer. If anyone reads &ldquo;allergy-aware&rdquo; as a safety guarantee, that gets fixed before anything else.</p>
+            <p class="proj-p" data-ed="83">No sessions have been run. The first round is not about the redesign at all: five or six conversations about a recent meal decision, to learn whether the repeated-check problem is real before asking anyone to react to screens. Only then a usability round with neutral tasks that never name the intended button:</p>
             <ul class="feat-list">
-              <li data-ed="68">Does photo-only browsing survive real decision pressure, or do users bounce to details to check price?</li>
-              <li data-ed="69">Does the trust metric read as evidence or as decoration?</li>
-              <li data-ed="70">Does the acknowledgement gate read as care or as friction?</li>
+              <li data-ed="84">&ldquo;You want dinner soon near the demo area. Pick something you would consider, keeping the menu price within $20.&rdquo;</li>
+              <li data-ed="85">&ldquo;You&rsquo;re in the mood for noodles. Find an option, look at another, then go back.&rdquo;</li>
+              <li data-ed="86">&ldquo;You can&rsquo;t decide yet. Keep two options somewhere you can find later.&rdquo;</li>
+              <li data-ed="87">&ldquo;Now you&rsquo;re ready to get one of them. Show me what you would do next.&rdquo;</li>
             </ul>
+            <p class="proj-p" style="margin-top:18px" data-ed="88">A separate, smaller round with people who manage food allergies would test only comprehension of the three states: what the information says, what it leaves unanswered, and what they would check. If anyone reads &ldquo;no ingredient information&rdquo; as reassurance, that gets fixed before anything else.</p>
             <figure class="figure" style="margin-top: 22px">
-              <div class="fig-live shot-img" data-fig="morsel-doc-testing-preview" role="img" aria-label="Preview of the two-round testing plan: a five-session discovery round and a dedicated safety round with participants who manage real food allergies, with severity definitions"></div>
-              <figcaption class="figcap" data-ed="71"><span class="fk">Testing plan &middot; unexecuted</span><a class="doc-link" href="morsel-docs/testing-plan.html">open the full artifact &rarr;</a></figcaption>
+              <div class="fig-live shot-img" data-fig="morsel-doc-testing-preview" role="img" aria-label="Preview of the research plan: a problem-relevance round of conversations about a recent meal decision, a usability round with neutral tasks, and a separate comprehension round on the dietary states, with an empty evidence record"></div>
+              <figcaption class="figcap" data-ed="89"><span class="fk">Research plan &middot; unexecuted</span><a class="doc-link" href="morsel-docs/testing-plan.html">open the full artifact &rarr;</a></figcaption>
             </figure>
           </div>
         </div>
@@ -277,20 +306,20 @@
       <!-- reflection -->
       <section class="results rv">
         <div class="bloom"></div>
-        <span class="k" data-ed="72">WHERE IT LANDED</span>
+        <span class="k" data-ed="90">WHERE IT LANDED</span>
         <div class="results-grid">
-          <p class="big" data-ed="73">Most of Morsel stays quiet. A score explains its method. A missing city says it is missing. A flagged allergen stops the order until the diner responds.</p>
+          <p class="big" data-ed="91">Morsel shows a dish, its price and distance, and what is and isn&rsquo;t known about it, then hands off to where the dish really lives. What it cannot know, it says.</p>
           <div class="ledger">
-            <div><span>Allergy promise</span><b>aware, never &ldquo;safe&rdquo;: confirm with the kitchen</b></div>
-            <div><span>Evidence rule</span><b>no score without a disclosed method</b></div>
-            <div><span>Research run</span><b>none; two-round plan, safety round included</b></div>
+            <div><span>Dietary promise</span><b>known conflicts excluded; unknowns set apart; never &ldquo;safe&rdquo;</b></div>
+            <div><span>Evidence rule</span><b>no number without a source; so no score at all</b></div>
+            <div><span>Research run</span><b>none; a review-based revision, with sessions planned</b></div>
           </div>
         </div>
       </section>
 
       <!-- next project -->
-      <a class="next-proj" href="heyperiod.html">
-        <span><span class="k" data-ed="74">NEXT PROJECT &mdash; &#8470; 03</span><span class="t" data-ed="75">Hey Period &mdash; a brand women would trust</span></span>
+      <a class="next-proj" href="tenet.html">
+        <span><span class="k" data-ed="92">NEXT PROJECT &mdash; &#8470; 02</span><span class="t" data-ed="93">Tenet &mdash; rules at order-send</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>

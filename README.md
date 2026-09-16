@@ -16,7 +16,7 @@ Plus `about.html` and `sketchbook.html` (illustration and painting).
 **The prototypes are real.** Tenet and Morsel ship as working builds in
 `tenet-proto/` and `morsel-proto/`. The "Try the prototype" section on each case
 study runs the actual application in the page — you can trigger a Dart
-intervention or walk Morsel's onboarding, feed, and allergy gate.
+intervention or walk Morsel's entry flow, feed, search, dish page, and next-step sheet.
 
 **Evidence has limits.** Concept data is simulated, new validation plans are
 proposed, and reasoning reconstructed later stays visibly retrospective.
@@ -32,7 +32,7 @@ index.html, *.html        the site
 styles.css, script.js     shared styles and behavior
 figures.js / .css         captured illustrative DOM states, not interactive demos
 tenet-proto/              the Tenet build (host, desktop, companion)
-morsel-proto/             the Morsel v3 build
+morsel-proto/             the Morsel v3.2 build
 morsel-docs/             process documents: wireflow, explorations, DS addendum, testing plan
 images/                   photography and remaining rasters
 ```
@@ -55,6 +55,13 @@ node build-figures.mjs          # emit figures.js / figures.css
 node build-live-figures-into-pages.mjs   # replace lower illustrations with DOM snapshots
 ```
 
+The Morsel recipes drive the v3.2 prototype through `window.morselDebug`; `ONLY=morsel`
+re-captures Morsel and its process docs while keeping the previous Tenet captures, and
+`KEEP_MORSEL` in `capture-figures.cjs` lists the v3.1 states retained as "before"
+evidence in the case study. `tests/morsel.test.cjs` compiles the prototype with the
+vendored Babel and checks the dietary classifier, filter semantics, the destination
+model and the saved-state migration without a browser.
+
 `build-artifact.mjs` bundles the whole site into a single self-contained HTML
 file with every asset inlined and no external requests.
 
@@ -73,7 +80,7 @@ Verify before publishing:
 
 ```bash
 node stamp-editable.mjs --check
-node --test tests/tenet-new.test.cjs
+node --test tests/tenet-new.test.cjs tests/morsel.test.cjs
 bash build-site.sh
 python3 tests/site-build.test.py
 PREVIEW=1 bash build-site.sh

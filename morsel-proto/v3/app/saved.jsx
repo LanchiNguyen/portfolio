@@ -1,5 +1,9 @@
-// Morsel v3 — saved & collections. Saves are never auto-deleted by dietary
-// changes; conflicts are kept and warned instead.
+// Morsel v3.2 — saved & collections. Saves are a memory surface, not a
+// recommendation surface: everything the diner saved stays visible, with its
+// state explained — a listed conflict, missing ingredient information, or a dish
+// that has left the menu. Nothing is auto-deleted by a settings change.
+// "Recent" sorts by the real save time. Older saves that predate timestamps keep
+// their catalog order after the timestamped ones; they are not pretended to be new.
 function CollectionCover({ col, onOpenCol }) {
   const { u, dishes } = window.MorselData;
   const imgs = col.dishes.map((id) => dishes.find((d) => d.id === id)).filter(Boolean);
@@ -9,7 +13,7 @@ function CollectionCover({ col, onOpenCol }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr", gap: 2, borderRadius: "calc(var(--r) * 0.8)", overflow: "hidden", aspectRatio: "1", width: "100%" }}>
           {imgs.slice(0, 4).map((d, i) => (
             <div key={d.id + i} style={{ position: "relative", overflow: "hidden", background: "var(--sunken)" }}>
-              <img src={u(d.img, 160)} alt={d.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src={u(d.img, 160)} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           ))}
         </div>
@@ -20,24 +24,49 @@ function CollectionCover({ col, onOpenCol }) {
       )}
       <div>
         <div className="m-caption" style={{ fontWeight: 700, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{col.name}</div>
-        <div className="m-caption" style={{ color: "var(--ink-3)", fontSize: "calc(12px * var(--ts))" }}>{col.dishes.length ? col.dishes.length + " dishes" : "empty — file a save"}</div>
+        <div className="m-caption" style={{ color: "var(--ink-3)", fontSize: "calc(12px * var(--ts))" }}>{col.dishes.length ? col.dishes.length + " dish" + (col.dishes.length === 1 ? "" : "es") : "empty — file a save"}</div>
       </div>
     </button>
   );
 }
 
-function SavedScreen({ saved, collections, onOpen, onOpenCol, onCreateCol, conflictsOf, locOff }) {
+// The explanatory line above a set of saved cards: how many carry which state.
+function SavedStateNote({ items, prefs }) {
+  const { dietState } = window.MorselData;
+  const conflicts = items.filter((d) => dietState(d, prefs).state === "conflict").length;
+  const unknown = items.filter((d) => dietState(d, prefs).state === "unknown").length;
+  const unlisted = items.filter((d) => d.listed === false).length;
+  if (!conflicts && !unknown && !unlisted) return null;
+  const parts = [];
+  if (conflicts) parts.push(`${conflicts} list${conflicts === 1 ? "s" : ""} an allergen you avoid`);
+  if (unknown) parts.push(`${unknown} ${unknown === 1 ? "has" : "have"} no ingredient information`);
+  if (unlisted) parts.push(`${unlisted} ${unlisted === 1 ? "is" : "are"} no longer on the menu`);
+  return (
+    <div className="m-caption" style={{ color: "var(--ink-2)", padding: "0 16px 12px" }}>
+      {conflicts > 0 && <span style={{ color: "var(--accent)", fontWeight: 800 }}>! </span>}
+      {parts.join("; ")}. All kept and labeled; nothing is removed by a settings change.
+    </div>
+  );
+}
+
+function SavedScreen({ saved, savedAt, collections, onOpen, onOpenCol, onCreateCol, prefs, onToggleSave }) {
   const { dishes } = window.MorselData;
   const cols = collections || window.MorselData.collections;
   const [sort, setSort] = React.useState("recent");
   const [creating, setCreating] = React.useState(false);
   const [name, setName] = React.useState("");
   const [nameErr, setNameErr] = React.useState(false);
-  // v3.1: "Nearest" needs a real or manual location — fall back to Recent
-  React.useEffect(() => { if (locOff && sort === "nearest") setSort("recent"); }, [locOff]);
+  const [scrollRef, onScroll] = useScrollMemo("saved");
+  const at = savedAt || {};
   let savedDishes = dishes.filter((d) => saved.has(d.id));
-  if (sort === "nearest") savedDishes = [...savedDishes].sort((a, b) => parseFloat(a.dist) - parseFloat(b.dist));
-  const conflicted = conflictsOf ? savedDishes.filter((d) => conflictsOf(d).length > 0) : [];
+  if (sort === "nearest") savedDishes = [...savedDishes].sort((a, b) => a.mi - b.mi || (a.id < b.id ? -1 : 1));
+  else savedDishes = [...savedDishes].sort((a, b) => {
+    const ta = at[a.id] || 0, tb = at[b.id] || 0;
+    if (ta && tb) return tb - ta;          // newest first
+    if (ta || tb) return ta ? -1 : 1;      // timestamped saves ahead of legacy ones
+    return 0;                              // legacy saves keep catalog order
+  });
+  const untimed = savedDishes.filter((d) => !at[d.id]).length;
   const create = () => {
     const n = name.trim();
     if (!n) { setNameErr(true); return; }
@@ -51,7 +80,7 @@ function SavedScreen({ saved, collections, onOpen, onOpenCol, onCreateCol, confl
           <MIcon name="plus" size={18} />
         </button>
       </div>
-      <div className="m-scroll" style={{ padding: "10px 0 120px" }}>
+      <div className="m-scroll" ref={scrollRef} onScroll={onScroll} style={{ padding: "10px 0 120px" }}>
         {creating && (
           <div style={{ padding: "2px 16px 14px" }}>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -70,46 +99,34 @@ function SavedScreen({ saved, collections, onOpen, onOpenCol, onCreateCol, confl
             {cols.map((c) => <CollectionCover key={c.id} col={c} onOpenCol={onOpenCol} />)}
           </div>
         )}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12, padding: "0 16px" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8, padding: "0 16px" }}>
           <div className="m-heading" style={{ whiteSpace: "nowrap" }}>All saves</div>
           {savedDishes.length > 1 && (
             <div role="radiogroup" aria-label="Sort saves" style={{ display: "flex", gap: 2, background: "var(--sunken)", borderRadius: 99, padding: 3 }}>
-              {[{ k: "recent", l: "Recent" }, { k: "nearest", l: "Nearest" }].map((o) => {
-                const off = o.k === "nearest" && locOff;
-                return (
-                <button key={o.k} onClick={() => setSort(o.k)} role="radio" aria-checked={sort === o.k} disabled={off}
-                  title={off ? "Needs a location — set one from the feed header" : undefined}
+              {[{ k: "recent", l: "Recent" }, { k: "nearest", l: "Nearest" }].map((o) => (
+                <button key={o.k} onClick={() => setSort(o.k)} role="radio" aria-checked={sort === o.k}
                   style={{ borderRadius: 99, padding: "6px 14px", fontSize: "calc(13px * var(--ts))", fontWeight: 700, minHeight: 30,
                     background: sort === o.k ? "var(--surface)" : "transparent",
                     color: sort === o.k ? "var(--ink)" : "var(--ink-3)",
-                    opacity: off ? 0.4 : 1,
                     boxShadow: sort === o.k ? "0 1px 3px rgba(20,12,5,.12)" : "none",
                     transition: "all .15s ease" }}>{o.l}</button>
-                );
-              })}
+              ))}
             </div>
           )}
         </div>
-        {locOff && savedDishes.length > 1 && (
-          <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 12px", marginTop: -6 }}>
-            Nearest is off while location is unavailable — set a location from the feed header to enable it.
+        {savedDishes.length > 1 && (
+          <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 10px" }}>
+            {sort === "nearest" ? "By distance from Shaw (demo)." : untimed ? `Newest first. ${untimed} save${untimed === 1 ? "" : "s"} from before save times were recorded ${untimed === 1 ? "sits" : "sit"} last, in catalog order.` : "Newest first."}
           </div>
         )}
-        {conflicted.length > 0 && (
-          <div className="m-caption" style={{ color: "var(--ink-2)", padding: "0 16px 12px" }}>
-            <span style={{ color: "var(--accent)", fontWeight: 800 }}>! </span>
-            {conflicted.length} save{conflicted.length === 1 ? "" : "s"} conflict with your allergy settings — kept and flagged, never auto-deleted.
-          </div>
-        )}
+        <SavedStateNote items={savedDishes} prefs={prefs} />
         {savedDishes.length ? (
-          <FeedGrid dishes={savedDishes} cols={2} onOpen={onOpen}
-            label={sort === "nearest" ? ((d) => d.dist) : null}
-            flag={conflictsOf} />
+          <FeedGrid dishes={savedDishes} cols={2} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} prefs={prefs} />
         ) : (
           <div style={{ margin: "0 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "28px 24px", textAlign: "center" }}>
             <div style={{ color: "var(--accent)", display: "flex", justifyContent: "center", marginBottom: 10 }}><MIcon name="heart" size={28} /></div>
             <div className="m-second" style={{ fontWeight: 700, marginBottom: 4 }}>Nothing saved yet</div>
-            <div className="m-caption" style={{ color: "var(--ink-2)" }}>Tap the heart on any dish that makes you stop scrolling.</div>
+            <div className="m-caption" style={{ color: "var(--ink-2)" }}>Tap the heart on any dish you might want later.</div>
           </div>
         )}
       </div>
@@ -117,4 +134,4 @@ function SavedScreen({ saved, collections, onOpen, onOpenCol, onCreateCol, confl
   );
 }
 
-Object.assign(window, { SavedScreen });
+Object.assign(window, { SavedScreen, SavedStateNote });

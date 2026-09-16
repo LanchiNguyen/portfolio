@@ -22,72 +22,90 @@ window.__click = (rx, scope) => { const n = window.__hit(rx, scope); if (n) { n.
 `;
 
 /* ---------- Morsel ---------- */
-const PREFS_NUTS = { picked: ['d08', 'd01'], lifestyle: null, allergies: ['Nuts'], locDenied: false };
+const PREFS_NONE = { picked: [], lifestyle: null, allergies: [] };
+const PREFS_NUTS = { picked: [], lifestyle: null, allergies: ['Nuts'] };
+const setInput = (v) => `(() => { const i = document.querySelector('.morsel-app input'); if (!i) return false;
+  const set = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+  set.call(i, ${JSON.stringify(v)}); i.dispatchEvent(new Event('input', { bubbles: true })); return true; })()`;
+
+/* v3.1 captures retained from the previous figures.json as "before" evidence in
+   the case study. They are not re-driven: the prototype no longer has those states. */
+const KEEP_MORSEL = ['morsel-v31-feed-foryou-shaw', 'morsel-v31-order-allergy-locked', 'morsel-v31-trust-method', 'morsel-v31-detail-conflict-warning', 'morsel-v31-onboarding-dietary'];
 
 const MORSEL = [
-  { key: 'v31-onboarding-taste', expect: /looks good to you/i,
-    drive: async p => { await p.evaluate(() => { window.morselDebug.setScreen('onboarding'); }); await p.waitForTimeout(700);
-      await p.evaluate(() => window.morselOb.setStep(1)); } },
+  { key: 'v32-welcome', expect: /Find a dish/i,
+    drive: async p => { await p.evaluate(() => { window.morselDebug.setOb(0); window.morselDebug.setScreen('onboarding'); }); } },
 
-  { key: 'v31-onboarding-dietary', expect: /allergy-aware|Allergies are a hard rule/i,
-    drive: async p => { await p.evaluate(() => { window.morselDebug.setScreen('onboarding'); }); await p.waitForTimeout(700);
-      await p.evaluate(() => { window.morselOb.setStep(2); window.morselOb.setLifestyle('veg'); window.morselOb.setAllergies(['Nuts']); }); } },
+  { key: 'v32-onboarding-dietary', expect: /Dietary settings/i,
+    drive: async p => { await p.evaluate(() => { window.morselDebug.setOb(0); window.morselDebug.setScreen('onboarding'); }); await p.waitForTimeout(700);
+      await p.evaluate(() => { window.morselOb.setStep(1); window.morselOb.setAllergies(['Nuts']); }); } },
 
-  { key: 'v31-feed-foryou-shaw', expect: /Shaw/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setScreen('feed'); window.morselDebug.setTab('feed'); }, PREFS_NUTS); } },
+  { key: 'v32-feed-cards', expect: /Near Shaw/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setScreen('feed'); window.morselDebug.setTab('feed'); }, PREFS_NONE); } },
 
-  { key: 'v31-detail-coldstart', expect: /New on Morsel|no score yet/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d26'); }, PREFS_NUTS); } },
+  { key: 'v32-filters', expect: /Menu price per dish/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setScreen('feed'); window.morselDebug.setFiltersOpen(true); }, PREFS_NONE); } },
 
-  { key: 'v31-detail-conflict-warning', expect: /nuts/i,
+  { key: 'v32-search-context', expect: /within 1 mi/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setFilters({ price: [1, 2], maxMi: 1.0 }); window.morselDebug.setQuery('pizza'); window.morselDebug.setScreen('search'); }, PREFS_NONE); } },
+
+  { key: 'v32-search-excluded-filters', expect: /removed by your browsing filters/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setFilters({ price: [1], maxMi: 0.5 }); window.morselDebug.setQuery('steak'); window.morselDebug.setScreen('search'); }, PREFS_NONE); } },
+
+  { key: 'v32-search-unknown', expect: /no ingredient information/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setFilters({ price: [], maxMi: 99 }); window.morselDebug.setQuery('tasting'); window.morselDebug.setScreen('search'); }, PREFS_NUTS); } },
+
+  { key: 'v32-detail-top', expect: /Menu price as of/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); }, PREFS_NONE); } },
+
+  { key: 'v32-detail-conflict', expect: /which you asked to avoid/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d11'); }, PREFS_NUTS); } },
 
-  { key: 'v31-trust-method', expect: /would order again|method|sample/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); }, PREFS_NUTS);
-      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('how we know')); } },
+  { key: 'v32-detail-unknown', expect: /don.t have ingredient information/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d14'); }, PREFS_NUTS); } },
 
-  { key: 'v31-textscale-140', expect: /./,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); window.morselDebug.setTweak('textScale', 140); }, PREFS_NUTS); } },
+  { key: 'v32-detail-unlisted', expect: /No longer on the menu/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d19'); }, PREFS_NONE); } },
 
-  { key: 'v31-order-allergy-locked', expect: /Contains nuts|locked/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d11'); }, PREFS_NUTS);
-      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('^Order$|Order')); } },
+  { key: 'v32-textscale-140', expect: /Menu price as of/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); window.morselDebug.setTweak('textScale', 140); }, PREFS_NONE); } },
 
-  { key: 'v31-order-allergy-unlocked', expect: /Uber Eats|Grubhub|Pickup/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d11'); }, PREFS_NUTS);
-      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('^Order$|Order')); await p.waitForTimeout(1200);
-      await p.evaluate(() => { const box = [...document.querySelectorAll('input[type=checkbox]')].find(n => n.offsetParent !== null);
-        if (box) { box.click(); return; } window.__click('understand|acknowledge|confirm|I know'); }); } },
+  { key: 'v32-next-step', expect: /Opens elderandash/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d01'); }, PREFS_NONE);
+      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); } },
 
-  { key: 'v31-handoff-failure', expect: /could.?n.?t|failed|try again|handoff/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setTweak('sim', 'handoff'); window.morselDebug.openDish('d08'); }, PREFS_NUTS);
-      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('^Order$|Order')); await p.waitForTimeout(1200);
-      await p.evaluate(() => window.__click('Uber Eats|Grubhub|Open')); } },
+  { key: 'v32-next-step-done', expect: /Demo complete/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d01'); }, PREFS_NONE);
+      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); await p.waitForTimeout(900);
+      await p.evaluate(() => window.__click('Open menu \\(demo\\)')); } },
 
-  { key: 'v31-saved-conflicts', expect: /conflict/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setSavedIds(['d11', 'd20', 'd08', 'd01']);
+  { key: 'v32-next-step-none', expect: /No online menu/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d22'); }, PREFS_NONE);
+      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('Check with restaurant')); } },
+
+  { key: 'v32-handoff-failure', expect: /Couldn.t open/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setTweak('sim', 'handoff'); window.morselDebug.openDish('d01'); }, PREFS_NONE);
+      await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); await p.waitForTimeout(900);
+      await p.evaluate(() => window.__click('Open menu \\(demo\\)')); } },
+
+  { key: 'v32-saved-states', expect: /All kept and labeled/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setSavedIds(['d11', 'd14', 'd08', 'd01', 'd19']);
+      window.morselDebug.setSavedAt({ d11: 1758000000000, d14: 1758100000000, d19: 1758200000000 });
       window.morselDebug.setScreen('saved'); window.morselDebug.setTab('saved'); }, PREFS_NUTS); } },
 
-  { key: 'v31-offline', expect: /offline/i,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setTweak('sim', 'offline'); window.morselDebug.setScreen('feed'); }, PREFS_NUTS); } },
+  { key: 'v32-restaurant', expect: /View restaurant menu/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setRestName('Dum & Dust'); window.morselDebug.setScreen('restaurant'); }, PREFS_NUTS); } },
 
-  { key: 'v31-imgfail', expect: /./,
-    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setTweak('sim', 'imgfail'); window.morselDebug.setScreen('feed'); }, PREFS_NUTS); } },
-
-  { key: 'v31-search-diet-empty', expect: /excluded by|matches your current dietary/i,
-    drive: async p => { await p.evaluate(pr => { window.morselDebug.setPrefs({ ...pr, lifestyle: 'Vegan' }); window.morselDebug.setScreen('search'); }, PREFS_NUTS);
-      await p.waitForTimeout(1200);
-      await p.evaluate(() => { const i = document.querySelector('.morsel-app input'); if (!i) return;
-        const set = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-        set.call(i, 'steak'); i.dispatchEvent(new Event('input', { bubbles: true })); }); } },
-
-  { key: 'v31-location-no-coverage', expect: /isn.?t.*mapped yet|on the list/i,
+  { key: 'v32-no-coverage', expect: /isn.t.*in this demo/i,
     drive: async p => { await p.evaluate(pr => { window.morselDebug.setPrefs(pr); window.morselDebug.setScreen('feed');
-      window.morselDebug.setLoc({ city: 'Boise, ID', hood: null }); }, PREFS_NUTS); } },
+      window.morselDebug.setLoc({ city: 'Boise, ID', hood: null }); }, PREFS_NONE); } },
 
-  { key: 'v31-zero-result-recovery', expect: /No dish clears every rule|Active limits/i,
+  { key: 'v32-imgfail', expect: /photo unavailable/i,
+    drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setTweak('sim', 'imgfail'); window.morselDebug.setScreen('feed'); }, PREFS_NONE); } },
+
+  { key: 'v32-zero-result', expect: /No dish fits every setting/i,
     drive: async p => { await p.evaluate(pr => { window.morselDebug.setPrefs({ ...pr, lifestyle: 'Vegan' }); window.morselDebug.setScreen('feed');
-      window.morselDebug.setFilters({ price: ['$'], maxMi: 0.2, openNow: true }); }, PREFS_NUTS); } }
+      window.morselDebug.setFilters({ price: [3], maxMi: 0.5 }); }, PREFS_NUTS); } }
 ];
 
 /* ---------- Tenet ---------- */
@@ -145,7 +163,11 @@ const grabTenet = (p, flat) => p.evaluate((flat) => {
 
 (async () => {
   const b = await chromium.launch({ executablePath: EXE, args: ['--no-sandbox', '--proxy-bypass-list=<-loopback>'] });
+  const prev = fs.existsSync('figures.json') ? JSON.parse(fs.readFileSync('figures.json', 'utf8')) : { figures: {}, css: {} };
+  const ONLY = process.env.ONLY || '';           /* ONLY=morsel skips the Tenet drive and keeps its previous captures */
   const figures = {}; const fails = [];
+  for (const k of KEEP_MORSEL) { if (prev.figures[k]) figures[k] = prev.figures[k]; else fails.push(k + ': missing from previous figures.json'); }
+  if (ONLY === 'morsel') for (const [k, v] of Object.entries(prev.figures)) { if (/^tenet-/.test(k)) figures[k] = v; }
 
   /* --- Morsel: one fresh page per figure so no state leaks between captures --- */
   for (const f of MORSEL) {
@@ -166,7 +188,7 @@ const grabTenet = (p, flat) => p.evaluate((flat) => {
   }
 
   /* --- Tenet --- */
-  for (const f of TENET) {
+  for (const f of (ONLY === 'morsel' ? [] : TENET)) {
     const p = await b.newPage({ viewport: { width: 1360, height: 1120 } });
     try {
       await p.goto(BASE + '/tenet-proto/' + f.page, { waitUntil: 'load', timeout: 60000 });
@@ -226,7 +248,7 @@ const grabTenet = (p, flat) => p.evaluate((flat) => {
   /* --- prototype stylesheets, shipped once each --- */
   const css = {};
   css.morsel = fs.readFileSync('morsel-proto/v3/app/styles.css', 'utf8');
-  for (const page of ['host', 'companion', 'desktop']) {
+  for (const page of (ONLY === 'morsel' ? [] : ['host', 'companion', 'desktop'])) {
     const p = await b.newPage({ viewport: { width: 1360, height: 1120 } });
     await p.goto(BASE + '/tenet-proto/' + page + '.html?bare', { waitUntil: 'load', timeout: 60000 });
     await p.waitForTimeout(2500);
@@ -234,6 +256,7 @@ const grabTenet = (p, flat) => p.evaluate((flat) => {
     await p.close();
   }
 
+  if (ONLY === 'morsel') for (const [k, v] of Object.entries(prev.css)) { if (/^tenet-/.test(k)) css[k] = v; }
   Object.assign(css, docCss);
   fs.writeFileSync('figures.json', JSON.stringify({ figures, css }, null, 0));
   const n = Object.keys(figures).length;

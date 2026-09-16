@@ -1,5 +1,6 @@
-// Morsel — collection detail: a named shelf of saved dishes
-function CollectionScreen({ col, onBack, onOpen, conflictsOf }) {
+// Morsel — collection detail: a named shelf of saved dishes. Same memory-surface
+// policy as Saved: everything stays visible, every state is labeled.
+function CollectionScreen({ col, onBack, onOpen, prefs, saved, onToggleSave }) {
   const { dishes } = window.MorselData;
   const items = col.dishes.map((id) => dishes.find((d) => d.id === id)).filter(Boolean);
   const hoods = [...new Set(items.map((d) => d.hood))];
@@ -12,13 +13,14 @@ function CollectionScreen({ col, onBack, onOpen, conflictsOf }) {
         <div style={{ flex: 1, minWidth: 0, paddingTop: 2 }}>
           <div className="m-title" style={{ fontSize: 26 }}>{col.name}</div>
           <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 3 }}>
-            {items.length} dish{items.length === 1 ? "" : "es"} · {hoods.slice(0, 3).join(" · ")}
+            {items.length} dish{items.length === 1 ? "" : "es"}{hoods.length ? " · " + hoods.slice(0, 3).join(" · ") : ""}
           </div>
         </div>
       </div>
       <div className="m-scroll" style={{ paddingTop: 12, paddingBottom: 40 }}>
+        <SavedStateNote items={items} prefs={prefs} />
         {items.length ? (
-          <FeedGrid dishes={items} cols={2} onOpen={onOpen} flag={conflictsOf} />
+          <FeedGrid dishes={items} cols={2} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} prefs={prefs} />
         ) : (
           <div style={{ margin: "20px 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "28px 24px", textAlign: "center" }}>
             <div className="m-second" style={{ fontWeight: 700, marginBottom: 4 }}>Empty shelf</div>

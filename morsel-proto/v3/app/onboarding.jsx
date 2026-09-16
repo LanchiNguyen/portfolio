@@ -1,4 +1,7 @@
-// Morsel — shared icons + onboarding flow (3 steps)
+// Morsel — shared icons + entry flow.
+// v3.2 entry is two screens: a welcome that names the demo area, then an
+// optional dietary step. Taste calibration is no longer a gate before food; it
+// lives in Profile ("Tune your taste") and re-ranks only.
 const MIcon = ({ name, size = 22, filled = false }) => {
   const s = { width: size, height: size, flex: "none" };
   const k = { fill: "none", stroke: "currentColor", strokeWidth: 1.9, strokeLinecap: "round", strokeLinejoin: "round" };
@@ -16,17 +19,18 @@ const MIcon = ({ name, size = 22, filled = false }) => {
     check: <path {...k} strokeWidth="2.4" d="M5 12.5l4.5 4.5L19 7.5" />,
     share: <g {...k}><path d="M12 4v12M12 4l-4 4M12 4l4 4" /><path d="M5 13v6h14v-6" /></g>,
     flame: <path {...k} d="M12 21c-3.9 0-6.5-2.5-6.5-6 0-2.6 1.7-4.5 3-6.2C9.7 7.2 10.8 5.6 11 3.5c2.6 1.6 4 4.1 3.4 6.6 1-.3 1.8-1 2.2-2 1.2 1.6 1.9 3.5 1.9 5.4 0 4-2.6 7.5-6.5 7.5z" />,
+    info: <g {...k}><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5M12 8v.5" /></g>,
     plus: <path {...k} strokeWidth="2.2" d="M12 5v14M5 12h14" />
   };
   return <svg viewBox="0 0 24 24" style={s}>{paths[name] || null}</svg>;
 };
 
-/* ============ ONBOARDING ============ */
+/* ============ ENTRY ============ */
 
 function ObDots({ step }) {
   return (
     <div style={{ display: "flex", gap: 6, justifyContent: "center" }}>
-      {[0, 1, 2].map((i) => (
+      {[0, 1].map((i) => (
         <div key={i} style={{
           width: i === step ? 22 : 6, height: 6, borderRadius: 99,
           background: i === step ? "var(--accent)" : "var(--ink-3)",
@@ -38,7 +42,7 @@ function ObDots({ step }) {
 }
 
 function ObWelcome({ onNext }) {
-  const { u } = window.MorselData;
+  const { u, demoArea, dishes } = window.MorselData;
   // Three-column slow collage behind the headline
   const cols = [
     ["1565299624946-b28f40a0ae38", "1567620905732-2d1ec7ab7445", "1569718212165-3a8278d5f624"],
@@ -60,38 +64,35 @@ function ObWelcome({ onNext }) {
       </div>
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(13,8,4,.96) 18%, rgba(13,8,4,.55) 48%, rgba(13,8,4,.18) 75%)" }}></div>
       <div style={{ position: "relative", marginTop: "auto", padding: "0 28px 30px", display: "flex", flexDirection: "column", gap: 16, color: "#FFF7EB" }}>
-        <div className="m-display m-rise" style={{ fontSize: 44 }}>Eat with<br />your eyes.</div>
-        <div className="m-body m-rise" style={{ color: "rgba(255,247,235,.75)", maxWidth: 280, animationDelay: ".06s" }}>
-          The best dishes in the District, shot by the people who ate them. No stars. No essays.
+        <div className="m-display m-rise" style={{ fontSize: 42 }}>Find a dish,<br />then check it.</div>
+        <div className="m-body m-rise" style={{ color: "rgba(255,247,235,.78)", maxWidth: 300, animationDelay: ".06s" }}>
+          Browse dishes nearby, see the price and distance before you open one, and save a few worth trying.
         </div>
-        <button className="m-btn m-btn-primary m-rise" style={{ marginTop: 8, alignSelf: "stretch", animationDelay: ".12s" }} onClick={() => onNext(false)}>
-          Show me what's good
+        <button className="m-btn m-btn-primary m-rise" style={{ marginTop: 8, alignSelf: "stretch", animationDelay: ".12s" }} onClick={onNext}>
+          Explore the DC demo
         </button>
-        <button className="m-caption" style={{ color: "rgba(255,247,235,.65)", fontWeight: 700, alignSelf: "center", minHeight: 32 }} onClick={() => onNext(true)}>
-          Continue without location
-        </button>
-        <div className="m-caption" style={{ textAlign: "center", color: "rgba(255,247,235,.5)" }}>Location only ranks what's near you — never shared, never posted. You can set it by hand anytime.</div>
+        <div className="m-caption" style={{ textAlign: "center", color: "rgba(255,247,235,.55)" }}>
+          Demo area: {demoArea.hood}, Washington DC · {dishes.length} illustrative dishes. Nothing is requested from your device, and you can change the area from the feed.
+        </div>
       </div>
     </div>
   );
 }
 
 // Taste calibration — unlabeled dish photos; cuisines are inferred from taps.
-// Mixed order so no two same-tag dishes sit adjacent.
+// Mixed order so no two same-tag dishes sit adjacent. Optional, from Profile.
 const TASTE_IDS = ["d01", "d08", "d07", "d21", "d04", "d15", "d11", "d05", "d09", "d24", "d17", "d03", "d16", "d22", "d20", "d13", "d18", "d26"];
 
-function ObTaste({ picked, setPicked, onNext, onSkip, onBack }) {
+function ObTaste({ picked, setPicked, onDone, onBack }) {
   const { u, dishes } = window.MorselData;
   const pool = TASTE_IDS.map((id) => dishes.find((d) => d.id === id));
   const toggle = (id) => setPicked((p) => p.includes(id) ? p.filter((x) => x !== id) : [...p, id]);
   const tags = [...new Set(picked.map((id) => dishes.find((d) => d.id === id).tag))];
-  const enough = picked.length >= 4;
   return (
     <div className="m-screen m-fade" style={{ background: "var(--paper)" }}>
       <div style={{ padding: "64px 24px 4px", display: "flex", flexDirection: "column", gap: 14 }}>
-        <ObDots step={1} />
         <div className="m-title">Tap what looks<br />good to you.</div>
-        <div className="m-second" style={{ color: "var(--ink-2)" }}>We'll read your taste from it. Nothing gets hidden — this only tunes what surfaces first.</div>
+        <div className="m-second" style={{ color: "var(--ink-2)" }}>Cuisines you tap get a moderate boost in your feed. Nothing is hidden by this; it only tunes what comes first.</div>
       </div>
       <div className="m-scroll" style={{ padding: "14px 24px 150px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
@@ -100,7 +101,7 @@ function ObTaste({ picked, setPicked, onNext, onSkip, onBack }) {
             return (
               <button key={d.id} className="m-photo m-rise" onClick={() => toggle(d.id)} aria-label={d.name} aria-pressed={on}
                 style={{ aspectRatio: "0.82", animationDelay: `${i * 0.03}s`, outline: on ? "3px solid var(--accent)" : "3px solid transparent", outlineOffset: -3 }}>
-                <img src={u(d.img, 320)} alt={d.name} />
+                <img src={u(d.img, 320)} alt="" />
                 {on && (
                   <div className="m-fade" style={{ position: "absolute", top: 8, right: 8, width: 26, height: 26, borderRadius: 99, background: "var(--accent)", color: "var(--accent-ink)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <MIcon name="check" size={15} />
@@ -114,10 +115,10 @@ function ObTaste({ picked, setPicked, onNext, onSkip, onBack }) {
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "34px 24px 30px", display: "flex", flexDirection: "column", gap: 12, background: "linear-gradient(to top, var(--paper) 62%, transparent)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap", minHeight: 30 }}>
           {tags.length === 0 ? (
-            <div className="m-caption" style={{ color: "var(--ink-3)" }}>Your taste shows up here as you tap…</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)" }}>Cuisines you tap show up here…</div>
           ) : (
             <React.Fragment>
-              <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600 }}>Sensing:</div>
+              <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600 }}>Boosting:</div>
               {tags.map((t) => (
                 <div key={t} className="m-fade" style={{ borderRadius: 99, background: "var(--ink)", color: "var(--paper)", padding: "5px 12px", fontSize: 12, fontWeight: 700 }}>{t}</div>
               ))}
@@ -126,31 +127,28 @@ function ObTaste({ picked, setPicked, onNext, onSkip, onBack }) {
         </div>
         <div style={{ display: "flex", gap: 10 }}>
           <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
-          <button className="m-btn m-btn-primary" style={{ flex: 1 }} disabled={!enough} onClick={onNext}>
-            {enough ? "Next" : `Tap ${4 - picked.length} more dish${4 - picked.length === 1 ? "" : "es"}`}
+          <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={onDone}>
+            {picked.length ? "Done" : "Done — no boost"}
           </button>
         </div>
-        <button className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 700, alignSelf: "center", minHeight: 32 }} onClick={onSkip}>
-          Skip for now — you can browse first
-        </button>
       </div>
     </div>
   );
 }
 
-// v2 — three tiers, three different promises:
-// taste RE-RANKS (step 2) · lifestyle FILTERS · allergies EXCLUDE + FLAG.
-function ObSafety({ lifestyle, setLifestyle, allergies, setAllergies, onDone, onBack }) {
+// Dietary settings: two tiers, two different promises.
+// Lifestyle FILTERS. Allergies EXCLUDE known conflicts and set unknowns apart.
+function ObDietary({ lifestyle, setLifestyle, allergies, setAllergies, onDone, onSkip, onBack, editing }) {
   const { lifestyles, allergens } = window.MorselData;
   const toggleAllergy = (a) => setAllergies((p) => p.includes(a) ? p.filter((x) => x !== a) : [...p, a]);
   return (
     <div className="m-screen m-fade" style={{ background: "var(--paper)" }}>
       <div style={{ padding: "64px 24px 16px", display: "flex", flexDirection: "column", gap: 14 }}>
-        <ObDots step={2} />
-        <div className="m-title">Eat your way.</div>
-        <div className="m-second" style={{ color: "var(--ink-2)" }}>Lifestyle shapes your feed. Allergies are a hard rule.</div>
+        {!editing && <ObDots step={1} />}
+        <div className="m-title">Dietary settings</div>
+        <div className="m-second" style={{ color: "var(--ink-2)" }}>Optional now, and always in Profile. Lifestyle narrows the feed. Allergies remove dishes whose menu lists that ingredient.</div>
       </div>
-      <div className="m-scroll" style={{ padding: "8px 24px 130px" }}>
+      <div className="m-scroll" style={{ padding: "8px 24px 150px" }}>
         <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 4 }}>Lifestyle</div>
         <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>Filters the feed to matching dishes. Change anytime.</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
@@ -162,7 +160,7 @@ function ObSafety({ lifestyle, setLifestyle, allergies, setAllergies, onDone, on
           ))}
         </div>
         <div className="m-micro" style={{ color: "var(--accent)", marginBottom: 4 }}>Allergies</div>
-        <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>Not a preference — dishes with these <b>leave your feed and search</b>. Anything you've saved stays visible, with a clear warning.</div>
+        <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 12 }}>Dishes whose menu lists one of these <b>leave your feed and search</b>. Dishes with no ingredient information are listed separately and never counted as a match. Saved dishes stay visible, labeled.</div>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
           {allergens.map((d, i) => {
             const on = allergies.includes(d);
@@ -175,34 +173,46 @@ function ObSafety({ lifestyle, setLifestyle, allergies, setAllergies, onDone, on
             );
           })}
         </div>
-        {allergies.length > 0 && (
-          <div className="m-caption m-fade" style={{ color: "var(--ink-2)", marginTop: 16, background: "var(--sunken)", borderRadius: 14, padding: "10px 14px" }}>
-            Always confirm with the kitchen too — restaurants share surfaces, and menu data can lag.
-          </div>
-        )}
+        <div className="m-caption m-fade" style={{ color: "var(--ink-2)", marginTop: 16, background: "var(--sunken)", borderRadius: 14, padding: "10px 14px" }}>
+          Menu listings are the only source here. They don't cover preparation or shared surfaces, and this demo tracks only these four. Tell the kitchen either way.
+        </div>
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "28px 24px 30px", display: "flex", gap: 10, background: "linear-gradient(to top, var(--paper) 55%, transparent)" }}>
-        <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
-        <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={onDone}>Start browsing</button>
+      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "28px 24px 30px", display: "flex", flexDirection: "column", gap: 10, background: "linear-gradient(to top, var(--paper) 55%, transparent)" }}>
+        <div style={{ display: "flex", gap: 10 }}>
+          <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
+          <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={onDone}>{editing ? "Save settings" : "Start browsing"}</button>
+        </div>
+        {!editing && (
+          <button className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 700, alignSelf: "center", minHeight: 32 }} onClick={onSkip}>
+            Skip for now — set it later in Profile
+          </button>
+        )}
       </div>
     </div>
   );
 }
 
-function Onboarding({ onComplete }) {
-  const [step, setStep] = React.useState(0);
-  const [picked, setPicked] = React.useState([]);
-  const [lifestyle, setLifestyle] = React.useState(null);
-  const [allergies, setAllergies] = React.useState([]);
-  const [denied, setDenied] = React.useState(false);
-  // capture/debug hook — lets tooling jump to a given onboarding state
+// Entry controller. `start` picks the screen: 0 welcome (first run), 1 dietary
+// (editing from Profile or the feed), 2 taste (from Profile). Editing returns to
+// the caller with the rest of the settings untouched.
+function Onboarding({ prefs, start, onComplete, onCancel }) {
+  const [step, setStep] = React.useState(start || 0);
+  const [picked, setPicked] = React.useState((prefs && prefs.picked) || []);
+  const [lifestyle, setLifestyle] = React.useState((prefs && prefs.lifestyle) || null);
+  const [allergies, setAllergies] = React.useState((prefs && prefs.allergies) || []);
+  const editing = !!(start && prefs);
+  // capture/debug hook — lets tooling jump to a given entry state
   React.useEffect(() => {
-    window.morselOb = { setStep, setPicked, setLifestyle, setAllergies, setDenied };
+    window.morselOb = { setStep, setPicked, setLifestyle, setAllergies };
     return () => { delete window.morselOb; };
   });
-  if (step === 0) return <ObWelcome onNext={(d) => { setDenied(!!d); setStep(1); }} />;
-  if (step === 1) return <ObTaste picked={picked} setPicked={setPicked} onNext={() => setStep(2)} onSkip={() => setStep(2)} onBack={() => setStep(0)} />;
-  return <ObSafety lifestyle={lifestyle} setLifestyle={setLifestyle} allergies={allergies} setAllergies={setAllergies} onBack={() => setStep(1)} onDone={() => onComplete({ picked, lifestyle, allergies, locDenied: denied })} />;
+  const finish = (extra) => onComplete({ picked, lifestyle, allergies, ...(extra || {}) });
+  if (step === 0) return <ObWelcome onNext={() => setStep(1)} />;
+  if (step === 2) return <ObTaste picked={picked} setPicked={setPicked} onDone={() => finish()} onBack={() => editing && onCancel ? onCancel() : setStep(1)} />;
+  return <ObDietary lifestyle={lifestyle} setLifestyle={setLifestyle} allergies={allergies} setAllergies={setAllergies} editing={editing}
+    onBack={() => editing && onCancel ? onCancel() : setStep(0)}
+    onSkip={() => onComplete({ picked, lifestyle: null, allergies: [] })}
+    onDone={() => finish()} />;
 }
 
 Object.assign(window, { MIcon, Onboarding });

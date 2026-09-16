@@ -158,6 +158,31 @@
 }
 .m-chip[data-on="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
+/* ---- v3.2: labeled cards — photo first, identifiable before it is opened ---- */
+.m-grid { display: grid; gap: 14px 10px; padding: 0 12px; align-items: start; }
+.m-card { position: relative; min-width: 0; }
+.m-card-open { display: block; width: 100%; text-align: left; border-radius: calc(var(--r) * 0.8); }
+.m-card-photo {
+  position: relative; aspect-ratio: 4 / 5; border-radius: calc(var(--r) * 0.8);
+  overflow: hidden; background: var(--sunken); transition: transform 0.18s ease;
+}
+.m-card-open:active .m-card-photo { transform: scale(0.97); }
+.m-card-photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m-card-nophoto {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 12px; text-align: center; color: var(--ink-2);
+}
+.m-card-text { padding: 8px 2px 0; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.m-card-name { font-size: calc(15px * var(--ts)); font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+.m-card-save { position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; }
+.m-statechip {
+  display: inline-flex; align-items: center; gap: 4px; max-width: 100%;
+  border-radius: 999px; padding: 5px 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-size: calc(11.5px * var(--ts)); font-weight: 800;
+}
+.m-constraints { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 0 16px 12px; }
+.m-constraint { border-radius: 999px; padding: 6px 12px; font-weight: 700; min-height: 32px; }
+
 /* ---- v3: keyboard focus, skeletons, warnings, banners ---- */
 .morsel-app :where(button, input, a):focus-visible {
   outline: 2.5px solid var(--accent); outline-offset: 2px; border-radius: 8px;
@@ -190,11 +215,11 @@
     border-radius: calc(var(--r) * 0.8); opacity: 1;
   }
   82% { opacity: 1; }
-  to { left: 0; top: 0; width: 100%; height: 440px; border-radius: 0; opacity: 0; }
+  to { left: 0; top: 0; width: 100%; height: 320px; border-radius: 0; opacity: 0; }
 }
 .m-zoom {
   position: absolute; overflow: hidden; pointer-events: none;
-  left: 0; top: 0; width: 100%; height: 440px; opacity: 0;
+  left: 0; top: 0; width: 100%; height: 320px; opacity: 0;
   animation: m-zoom 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 

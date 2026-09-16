@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="../favicon.png" />
-<meta name="description" content="Morsel process document: v3.1 wireflow and assumption map for the photo-first food discovery prototype." />
+<meta name="description" content="Morsel process document: v3.2 wireflow and assumption map for the photo-first food discovery prototype." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Morsel — wireflow & assumption map (v3.1)</title>
+<title>Morsel — wireflow & assumption map (v3.2)</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
   html, body { margin: 0; overflow-x: hidden; }
@@ -56,8 +56,8 @@
 <body>
 <div class="bar">
   <a href="../morsel.html">← back to case study</a>
-  <a href="../morsel.html">live prototype (parent project) →</a>
-  <a href="testing-plan.html">testing plan →</a>
+  <a href="../morsel-proto/index.html">live prototype →</a>
+  <a href="testing-plan.html">research plan →</a>
   <a href="ds-addendum.html">ds addendum →</a>
   <div class="grow"></div>
   <div class="zoomctl">
@@ -71,12 +71,11 @@
 <div class="stage" id="stage">
 <div class="frame">
   <div class="titleblock">
-    <h1>Morsel — structure &amp; assumptions · v3.1</h1>
-    <p>The v3 prototype mapped as a wireflow. <b>Green</b> = implemented change (v2 = critique round, v3 = logic/edge-state round, v3.1 = audit round).
-    <b>Amber</b> = still an assumption — target of the two-round usability plan (<a href="testing-plan.html">Testing Plan</a>). Dashed nodes are sheets/overlays; dashed wires are secondary or recovery paths.</p>
+    <h1>Morsel — structure &amp; assumptions · v3.2</h1>
+    <p>The prototype mapped as a wireflow around one journey: choose an area → browse or search → narrow by budget and distance → open a dish → save it or find where to get it → come back without losing your place. <b>Green</b> = implemented (v3.2 = the review round; earlier rounds noted where they still stand). <b>Amber</b> = an assumption the <a href="testing-plan.html">research plan</a> targets. Dashed nodes are sheets and states; dashed wires are secondary or recovery paths.</p>
   </div>
   <div class="legend">
-    <span class="tag green">implemented (v2/v3/v3.1)</span>
+    <span class="tag green">implemented</span>
     <span class="tag amber">assumption — test it</span>
     <span><span class="dash"></span> recovery / secondary</span>
   </div>
@@ -88,8 +87,8 @@
       </marker>
     </defs>
     <line x1="145" y1="228" x2="145" y2="268" marker-end="url(#arr)"></line>
-    <line x1="145" y1="404" x2="145" y2="440" marker-end="url(#arr)"></line>
-    <path d="M260,510 H295 V330 H326" marker-end="url(#arr)"></path>
+    <path d="M260,330 H326" marker-end="url(#arr)"></path>
+    <path class="dashed" d="M145,404 V440" marker-end="url(#arr)"></path>
     <line x1="580" y1="310" x2="956" y2="310" marker-end="url(#arr)"></line>
     <path d="M580,278 H610 V125 H646" marker-end="url(#arr)"></path>
     <path d="M580,294 H625 V255 H646" marker-end="url(#arr)"></path>
@@ -102,114 +101,115 @@
     <line x1="410" y1="412" x2="410" y2="666" marker-end="url(#arr)"></line>
     <path d="M500,412 V640 H770 V666" marker-end="url(#arr)"></path>
     <line x1="892" y1="720" x2="956" y2="720" marker-end="url(#arr)"></line>
-    <path class="dashed" d="M326,745 H150 V410" marker-end="url(#arr)"></path>
+    <path class="dashed" d="M326,745 H150 V574" marker-end="url(#arr)"></path>
     <path class="dashed" d="M770,170 H730 V240 H700" marker-end="url(#arr)"></path>
     <path class="dashed" d="M455,412 V560 H646 V596" marker-end="url(#arr)"></path>
     <path class="dashed" d="M1410,292 V246" marker-end="url(#arr)"></path>
+    <path class="dashed" d="M956,340 H930 V200 H890" marker-end="url(#arr)"></path>
+    <path class="dashed" d="M1210,520 H1250 V246 H1286" marker-end="url(#arr)"></path>
   </svg>
 
-  <span class="wire-label" style="left:158px; top:414px;">done — or skip</span>
-  <span class="wire-label" style="left:896px; top:316px;">tap photo</span>
+  <span class="wire-label" style="left:158px; top:414px;">tune taste (from Profile)</span>
+  <span class="wire-label" style="left:896px; top:316px;">open a card</span>
   <span class="wire-label" style="left:418px; top:480px;">tab bar</span>
-  <span class="wire-label" style="left:200px; top:580px;">recalibrate / edit diet</span>
-  <span class="wire-label" style="left:1218px; top:248px;">order</span>
+  <span class="wire-label" style="left:200px; top:580px;">edit dietary settings</span>
+  <span class="wire-label" style="left:1218px; top:248px;">next step</span>
   <span class="wire-label" style="left:1218px; top:365px;">heart</span>
-  <span class="wire-label" style="left:700px; top:200px;">no coverage</span>
-  <span class="wire-label" style="left:520px; top:566px;">nothing matches</span>
-  <span class="wire-label" style="left:1418px; top:262px;">app fails to open</span>
+  <span class="wire-label" style="left:700px; top:200px;">not covered</span>
+  <span class="wire-label" style="left:520px; top:566px;">nothing fits</span>
+  <span class="wire-label" style="left:1418px; top:262px;">link fails</span>
+  <span class="wire-label" style="left:896px; top:206px;">Back restores query · scroll · focus</span>
+  <span class="wire-label" style="left:1218px; top:500px;">menu (never a dish)</span>
 
   <div class="node" style="left:30px; top:120px; width:230px; height:106px;">
-    <div class="kicker">Onboarding 0</div>
+    <div class="kicker">Entry 0</div>
     <h2>Welcome</h2>
-    <p>Collage · location rationale · enable OR continue without</p>
-    <div class="tags"><span class="tag green">v3: permission rationale + denied path</span></div>
+    <p>"Find a dish, then check it" · names the demo area · one button</p>
+    <div class="tags"><span class="tag green">v3.2: no device-location theater; nothing requested</span></div>
   </div>
   <div class="node" style="left:30px; top:270px; width:230px; height:132px;">
-    <div class="kicker">Onboarding 1</div>
-    <h2>Taste calibration</h2>
-    <p>Tap ≥4 unlabeled dish photos · live "Sensing:" inference</p>
+    <div class="kicker">Entry 1</div>
+    <h2>Dietary settings</h2>
+    <p>Lifestyle filters · allergies exclude listed conflicts and set unknowns apart · skippable, always in Profile</p>
     <div class="tags">
-      <span class="tag green">v2: skippable</span>
-      <span class="tag green">v3: ranking connected — moderate, deterministic boost; never filters</span>
+      <span class="tag green">v2: tiers split</span>
+      <span class="tag green">v3.2: optional before food; unknown state promised here</span>
     </div>
   </div>
-  <div class="node" style="left:30px; top:444px; width:230px; height:130px;">
-    <div class="kicker">Onboarding 2</div>
-    <h2>Diet &amp; safety</h2>
-    <p>Lifestyle filters (veg/vegan/pesc) · allergies exclude from discovery</p>
-    <div class="tags"><span class="tag green">v2: 3-tier split</span><span class="tag green">v3: honest promise — saved dishes kept + warned</span></div>
+  <div class="node overlay" style="left:30px; top:444px; width:230px; height:130px;">
+    <div class="kicker">From Profile</div>
+    <h2>Tune your taste</h2>
+    <p>Tap dish photos · cuisines get a moderate ranking boost · never a filter</p>
+    <div class="tags"><span class="tag green">v3.2: moved out of the entry gate</span><span class="tag amber">is the boost worth the taps?</span></div>
   </div>
 
   <div class="node" style="left:330px; top:250px; width:250px; height:162px;">
     <div class="kicker">Hub</div>
     <h2>Feed</h2>
-    <p>Editorial hero · Near you / Trending · masonry grid, photos only</p>
+    <p>Featured demo pick · labeled cards (name · place · price · miles) · constraint bar · unknowns listed apart</p>
     <div class="tags">
-      <span class="tag amber">photo-only grid: enough info scent?</span>
-      <span class="tag green">v3: taste boost + loading / offline / location-off states</span>
-      <span class="tag green">v3.1: "For you" + demo-distance label when location off</span>
+      <span class="tag green">v3.2: cards carry decision info; Trending removed; sort explained</span>
+      <span class="tag amber">do labeled cards let people compare without opening?</span>
     </div>
   </div>
 
   <div class="node overlay" style="left:650px; top:80px; width:240px; height:100px;">
     <div class="kicker">Sheet</div>
-    <h2>Location</h2>
-    <p>Type any city/hood · covered vs "no coverage yet" labels</p>
-    <div class="tags"><span class="tag green">v3: denied + manual + no-coverage paths</span></div>
+    <h2>Area</h2>
+    <p>Demo area by default · type a city or neighborhood · "not covered" is labeled in the list</p>
+    <div class="tags"><span class="tag green">v3.2: no null-city state; demo area explicit</span></div>
   </div>
   <div class="node overlay" style="left:560px; top:210px; width:140px; height:96px;">
     <div class="kicker">State</div>
-    <h2 style="font-size:13px;">No coverage</h2>
-    <p style="font-size:10.5px;">Honest empty city — never DC dishes mislabeled</p>
-    <div class="tags"><span class="tag green">v3</span></div>
+    <h2 style="font-size:13px;">Not covered</h2>
+    <p style="font-size:10.5px;">Honest empty city — never DC dishes mislabeled; no fake sign-up</p>
+    <div class="tags"><span class="tag green">v3 · v3.2 copy</span></div>
   </div>
   <div class="node overlay" style="left:650px; top:330px; width:240px; height:112px;">
     <div class="kicker">Screen</div>
     <h2>Search</h2>
-    <p>Craving-first · labeled results · related threads · recovery</p>
+    <p>Inherits area + filters · query in app state · same cards · three empty states, three recoveries</p>
     <div class="tags">
-      <span class="tag green">v3.1: diet-aware zero state — names the excluding rules</span>
+      <span class="tag green">v3.2: shared constraints; Back restores context</span>
       <span class="tag amber">query model vs real vocabulary</span>
     </div>
   </div>
   <div class="node overlay" style="left:646px; top:596px; width:244px; height:118px;">
     <div class="kicker">State</div>
-    <h2 style="font-size:13px;">Zero-result recovery</h2>
-    <p style="font-size:10.5px;">Names each active limit · separate actions per tier — "clear browsing filters" never touches allergies</p>
-    <div class="tags"><span class="tag green">v3</span></div>
+    <h2 style="font-size:13px;">Nothing fits / excluded by</h2>
+    <p style="font-size:10.5px;">Names the rule that emptied it — catalog, browsing filter, or dietary — one recovery per tier; "clear filters" never touches allergies; nothing widened silently</p>
+    <div class="tags"><span class="tag green">v3 · v3.2</span></div>
   </div>
 
   <div class="node" style="left:960px; top:250px; width:250px; height:162px;">
     <div class="kicker">Screen</div>
     <h2>Dish detail</h2>
-    <p>Photo hero · % ordered again within 90 days · quotes · Save / Directions / Order</p>
+    <p>Photo · name · place · edited menu description · facts: price + date, miles, menu status, ingredients · one next step</p>
     <div class="tags">
-      <span class="tag green">v2: verified + "how we know"</span>
-      <span class="tag green">v3: cold-start "no score yet" · sold-out · allergy warning on direct open</span>
-      <span class="tag green">v3.1: illustrative-data labels on counts + quotes</span>
+      <span class="tag green">v3.2: facts above the action; score, quotes, diner counts removed</span>
+      <span class="tag green">v3.2: three states — match · listed conflict · unknown</span>
     </div>
   </div>
   <div class="node" style="left:960px; top:460px; width:250px; height:104px;">
     <div class="kicker">Screen</div>
     <h2>Restaurant</h2>
-    <p>Stats · "Shot here" grid (allergy chips) · closed = no ordering</p>
-    <div class="tags"><span class="tag green">v2: closed state</span><span class="tag green">v3: warn chips</span></div>
+    <p>Count · price range · miles · "View restaurant menu" · dishes shown for context, flagged</p>
+    <div class="tags"><span class="tag green">v3.2: button opens the menu, never picks a dish; no hours claim</span></div>
   </div>
 
   <div class="node overlay" style="left:1290px; top:120px; width:240px; height:126px;">
     <div class="kicker">Sheet</div>
-    <h2>Order handoff</h2>
-    <p>Carriers w/ ETA + fee · pickup "skip the fees"</p>
+    <h2>Next step</h2>
+    <p>Destination named from the model: dish page · restaurant menu · phone · with the date last checked</p>
     <div class="tags">
-      <span class="tag green">v3: handoff failure + retry + pickup fallback</span>
-      <span class="tag green">v3.1: allergy re-warn + acknowledgement gates every option</span>
-      <span class="tag exit">exits app →</span>
+      <span class="tag green">v3.2: replaces the order sheet; no carriers, fees, ETAs or gate</span>
+      <span class="tag exit">demo endpoint: "no order was placed"</span>
     </div>
   </div>
   <div class="node overlay" style="left:1290px; top:340px; width:240px; height:82px;">
     <div class="kicker">Toast</div>
     <h2>Saved (instant)</h2>
-    <p>Auto-save + optional "Add to collection"</p>
+    <p>Save + optional "Add to collection" · timestamped</p>
   </div>
   <div class="node overlay" style="left:1290px; top:450px; width:240px; height:90px;">
     <div class="kicker">Sheet</div>
@@ -220,32 +220,32 @@
   <div class="node" style="left:330px; top:670px; width:250px; height:122px;">
     <div class="kicker">Tab</div>
     <h2>Profile</h2>
-    <p>Taste card · dietary tiers · settings rows</p>
-    <div class="tags"><span class="tag green">v3.1: location row mirrors live state — never stale</span></div>
+    <p>Dietary settings with source and unknown count · tune taste · area · about this demo</p>
+    <div class="tags"><span class="tag green">v3.2: invented account, linked apps and alerts removed</span></div>
   </div>
   <div class="node" style="left:650px; top:670px; width:240px; height:118px;">
     <div class="kicker">Tab</div>
     <h2>Saved</h2>
-    <p>Collections rail · all saves · Recent / Nearest</p>
-    <div class="tags"><span class="tag green">v3: conflict chips, never auto-delete</span><span class="tag green">v3.1: Nearest disabled without location</span></div>
+    <p>Collections rail · all saves · Recent by real time / Nearest · each card labeled: conflict · unknown · off menu</p>
+    <div class="tags"><span class="tag green">v3: never auto-deleted</span><span class="tag green">v3.2: savedAt with honest legacy order</span></div>
   </div>
   <div class="node" style="left:960px; top:670px; width:240px; height:96px;">
     <div class="kicker">Screen</div>
     <h2>Collection</h2>
-    <p>Named shelf → dish detail · empty state</p>
-    <div class="tags"><span class="tag green">v3: warn chips</span></div>
+    <p>Named shelf → dish detail · same state labels · empty state</p>
+    <div class="tags"><span class="tag green">v3.2: same card, same classifier</span></div>
   </div>
 
   <div class="node" style="left:1290px; top:600px; width:240px; height:190px;">
-    <div class="kicker">Still assumptions — test round 1</div>
-    <p style="margin-top:6px;">· Photo-only grid gives enough info scent<br />
-    · "A stroll / Short hop" filter labels<br />
-    · "% ordered again within 90 days" comprehension<br />
-    · Trust of momentum-based Trending<br />
-    · Taste calibration ≥4 taps feels worth it<br />
-    · Allergy model matches user expectations<br />
-    · Order-primary action hierarchy</p>
-    <div class="tags"><span class="tag amber"><a href="testing-plan.html" style="color:inherit;">validation plan → Testing Plan.html</a></span></div>
+    <div class="kicker">Still assumptions — research plan</div>
+    <p style="margin-top:6px;">· The repeated-check problem is real for anyone<br />
+    · Labeled cards let people compare without opening<br />
+    · "No ingredient information" reads as "check", not "fine"<br />
+    · The next-step sheet is understood as a handoff, not an order<br />
+    · Saves get retrieved later at all<br />
+    · Menu-only allergen data is useful enough to keep<br />
+    · A taste boost is worth its taps</p>
+    <div class="tags"><span class="tag amber"><a href="testing-plan.html" style="color:inherit;">research plan → testing-plan.html</a></span></div>
   </div>
 </div>
 </div>
