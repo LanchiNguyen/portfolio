@@ -170,7 +170,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
             </div>
           )}
           <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: -14, marginBottom: 24 }}>
-            {dest.kind === "none" ? `${dish.rest} has no online menu we can link to.` : `Menu preview: ${dest.host} (demo).`}
+            {dest.kind === "none" ? `${dish.rest} has no online menu we can link to.` : `Restaurant link: ${dest.host} (demo).`}
           </div>
 
           {strip.length > 0 &&

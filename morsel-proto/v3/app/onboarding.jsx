@@ -92,7 +92,7 @@ function ObTaste({ picked, setPicked, onDone, onBack }) {
     <div className="m-screen m-fade" style={{ background: "var(--paper)" }}>
       <div style={{ padding: "64px 24px 4px", display: "flex", flexDirection: "column", gap: 14 }}>
         <div className="m-title">Tap what looks<br />good to you.</div>
-        <div className="m-second" style={{ color: "var(--ink-2)" }}>Pick a few dishes you like. Similar cuisines will appear higher in your feed.</div>
+        <div className="m-second" style={{ color: "var(--ink-2)" }}>Pick a few dishes you like. Similar cuisines appear higher in your feed; no dishes are hidden.</div>
       </div>
       <div className="m-scroll" style={{ padding: "14px 24px 150px" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
@@ -128,7 +128,7 @@ function ObTaste({ picked, setPicked, onDone, onBack }) {
         <div style={{ display: "flex", gap: 10 }}>
           <button className="m-btn m-btn-quiet" style={{ flex: "none", width: 52, padding: 0 }} aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
           <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={onDone}>
-            {picked.length ? "Done" : "Skip"}
+            {"Done"}
           </button>
         </div>
       </div>

@@ -88,7 +88,7 @@ const MORSEL = [
       await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); await p.waitForTimeout(900);
       await p.evaluate(() => window.__click('Open menu \\(demo\\)')); } },
 
-  { key: 'v32-saved-states', expect: /All kept and labeled/i,
+  { key: 'v32-saved-states', expect: /stay in your saves/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setSavedIds(['d11', 'd14', 'd08', 'd01', 'd19']);
       window.morselDebug.setSavedAt({ d11: 1758000000000, d14: 1758100000000, d19: 1758200000000 });
       window.morselDebug.setScreen('saved'); window.morselDebug.setTab('saved'); }, PREFS_NUTS); } },

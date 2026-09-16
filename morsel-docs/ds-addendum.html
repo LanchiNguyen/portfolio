@@ -147,7 +147,7 @@
     <h2>Dietary notes: listed conflict · unknown <span class="v">v3.2</span></h2>
     <div class="demo" style="align-items:stretch;">
       <span class="cap">Dish page, direct open with a nut allergy set</span>
-      <div class="banner"><div class="x">!</div><div><div class="t">The menu lists nuts, which you asked to avoid</div><div class="s">Contact the restaurant about ingredients and preparation. Look at other dishes, or ask the restaurant what can change.</div></div></div>
+      <div class="banner"><div class="x">!</div><div><div class="t">The menu lists nuts, which you asked to avoid</div><div class="s">Choose another dish, or contact the restaurant about ingredients and preparation.</div></div></div>
       <span class="cap">No ingredient information</span>
       <div class="banner unknown"><div class="x">?</div><div><div class="t">We don't have ingredient information for this dish</div><div class="s">It isn't counted as a match for your allergy settings. Check with the restaurant before deciding.</div></div></div>
     </div>
@@ -162,13 +162,13 @@
     <h2>Next-step sheet <span class="v">v3.2</span></h2>
     <div class="demo" style="align-items:stretch;">
       <span class="cap">Destination kinds: menu · dish page · none</span>
-      <div class="sheet"><div class="h">View the restaurant menu</div><div class="d"><b>Opens elderandash.example</b><br />Lands on the restaurant's menu, not on this dish; you'll find it there. Price and availability may have changed since Sep 2026.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Open menu (demo)</span><span class="btn q" style="flex:1;">Not now</span></div></div>
+      <div class="sheet"><div class="h">View the restaurant menu</div><div class="d"><b>Opens elderandash.example</b><br />This would open the full restaurant menu. Find the dish there and confirm its current price and availability. Sample menu date: Sep 2026.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Open menu (demo)</span><span class="btn q" style="flex:1;">Not now</span></div></div>
       <div class="sheet"><div class="h">Check with Hollis</div><div class="d"><b>No online menu to link to</b><br />Call (202) 555-0140, or visit in Logan Circle. Morsel can't confirm price or availability for this restaurant.</div></div>
       <span class="cap">Demo endpoint</span>
       <div class="sheet"><div class="d"><b>Demo complete</b><br />In a live version this would open elderandash.example's menu. No website was opened, call made or order placed.</div></div>
     </div>
     <div class="notes">
-      Replaces the order sheet. The label and body depend on the available destination: a dish-level page, a restaurant menu, or a phone number. The sheet keeps the dish and restaurant visible, names the destination, says what it lands on and when the link was last checked (stale links say so), and ends the demo at an explicit "no order was placed". A simulated failure keeps the dish and offers a retry.
+      Replaces the order sheet. The label and body depend on the available destination: a dish-level page, a restaurant menu, or a phone number. The sheet keeps the dish and restaurant visible, names the destination, says whether it lands on the dish or the full menu, carries a labeled sample date (stale links say so), and ends the demo at an explicit "no order was placed". A simulated failure keeps the dish and offers a retry.
       <span class="copy">Never promise a cart, a fee, an ETA or that the dish is in stock. "Opens", "lands on", "may have changed since" are the verbs.</span>
       <span class="a11y">A named <code>role="dialog"</code> that moves focus in, traps Tab, closes on Escape and returns focus to its opener. The endpoint is <code>role="status"</code>.</span>
     </div>

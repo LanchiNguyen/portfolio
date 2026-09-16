@@ -302,7 +302,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
             /* zero-result recovery — names the cause, never clears allergies with "clear filters" */
             <div style={{ margin: "10px 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "24px 20px" }}>
               <div className="m-second" style={{ fontWeight: 800, marginBottom: 6 }}>No dish fits every setting right now</div>
-              <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 14 }}>Try a different price range or distance.</div>
+              <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 14 }}>Review your settings to see what is limiting the results.</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {fCount > 0 && (
                   <button className="m-btn m-btn-primary" style={{ minHeight: 46 }} onClick={onClearFilters}>Clear browsing filters</button>

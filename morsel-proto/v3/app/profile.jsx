@@ -68,7 +68,7 @@ function ProfileScreen({ prefs, saved, collections, loc, onTuneTaste, onEditDiet
               ))}
             </div>
           ) : (
-            <div className="m-caption" style={{ color: "var(--ink-3)" }}>No favorites chosen yet.</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)" }}>No taste picks yet.</div>
           )}
           <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 12 }}>
             {tasteTags.length ? `Based on the ${picked.length} dish${picked.length === 1 ? "" : "es"} you chose.` : "Choose a few dishes to personalize your feed."}

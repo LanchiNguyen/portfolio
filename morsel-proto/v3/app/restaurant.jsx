@@ -50,7 +50,7 @@ function RestaurantScreen({ restName, onBack, onOpen, prefs, saved, onToggleSave
             {nextStepLabel(restName)}
           </button>
           <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 22, textAlign: "center" }}>
-            {dest.kind === "none" ? "No online menu to link to; call or visit." : `Menu preview: ${dest.host} (demo).`}
+            {dest.kind === "none" ? "No online menu to link to; call or visit." : `Restaurant link: ${dest.host} (demo).`}
           </div>
 
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 4 }}>

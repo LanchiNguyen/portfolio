@@ -83,8 +83,11 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
                 <div className="m-second" style={{ fontWeight: 700 }}>Opens {dest.host}</div>
                 <div className="m-caption" style={{ color: "var(--ink-2)" }}>
                   {dest.kind === "dish"
-                    ? "This would open the dish page. Sample menu date: " + dest.checked + "."
-                    : "This would open the full restaurant menu. Sample menu date: " + dest.checked + "."}
+                    ? "This would open the dish page. Confirm its current price and availability there."
+                    : dish
+                      ? "This would open the full restaurant menu. Find the dish there and confirm its current price and availability."
+                      : "This would open the full restaurant menu. Confirm current prices and availability there."}
+                  {" Sample menu date: " + dest.checked + "."}
                 </div>
                 {stale && <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 6 }}><span style={{ fontWeight: 800 }}>Link last checked {dest.checked}.</span> It may have moved.</div>}
                 {dish && dish.listed === false && <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 6 }}>This dish is no longer listed as of {checked}. The menu may show what replaced it.</div>}
@@ -96,7 +99,7 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
                 <div aria-hidden="true" style={{ color: "var(--accent)", flex: "none", fontWeight: 900, fontSize: 13, width: 20, height: 20, borderRadius: 99, border: "2px solid var(--accent)", display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
                 <div style={{ flex: 1 }}>
                   <div className="m-caption" style={{ fontWeight: 800, color: "var(--accent)" }}>Couldn't open {dest.kind === "none" ? "the call" : dest.host}</div>
-                  <div className="m-caption" style={{ color: "var(--ink-2)" }}>Simulated connection error. Try again or return to the dish.</div>
+                  <div className="m-caption" style={{ color: "var(--ink-2)" }}>Simulated connection error. Try again or close this sheet.</div>
                 </div>
               </div>
             )}
