@@ -44,7 +44,7 @@ function LocationSheet({ loc, onChange, onClose }) {
         {!stage2 ? (
           <React.Fragment>
             <div className="m-heading" style={{ marginBottom: 4, flex: "none" }}>Where are you eating?</div>
-            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12, flex: "none" }}>This demo includes Washington, DC only.</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12, flex: "none" }}>Morsel currently covers Washington, DC only.</div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--sunken)", borderRadius: 99, padding: "0 16px", minHeight: 48, flex: "none", marginBottom: 6 }}>
               <div style={{ color: "var(--ink-3)", flex: "none" }}><MIcon name="search" size={16} /></div>
               <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="City or neighborhood" aria-label="City or neighborhood"
@@ -60,8 +60,8 @@ function LocationSheet({ loc, onChange, onClose }) {
                     <MIcon name="pin" size={17} />
                   </div>
                   <div style={{ flex: 1, textAlign: "left" }}>
-                    <div className="m-second" style={{ fontWeight: 700 }}>Demo area · {demoArea.hood}, Washington DC</div>
-                    <div className="m-caption" style={{ color: "var(--ink-3)" }}>Demo distances are measured from Shaw.</div>
+                    <div className="m-second" style={{ fontWeight: 700 }}>{demoArea.hood}, Washington DC</div>
+                    <div className="m-caption" style={{ color: "var(--ink-3)" }}>Distances are measured from here.</div>
                   </div>
                   {onDemo && <div style={{ color: "var(--accent)", flex: "none" }}><MIcon name="check" size={18} /></div>}
                 </button>
@@ -78,7 +78,7 @@ function LocationSheet({ loc, onChange, onClose }) {
                   <div style={{ flex: 1, textAlign: "left" }}>
                     <div className="m-second" style={{ fontWeight: 700 }}>{m.hood || m.city}</div>
                     <div className="m-caption" style={{ color: "var(--ink-3)" }}>
-                      {m.hood ? m.city : "city"}{covered.includes(m.city) ? "" : " · not covered in this demo"}
+                      {m.hood ? m.city : "city"}{covered.includes(m.city) ? "" : " · not covered yet"}
                     </div>
                   </div>
                 </button>

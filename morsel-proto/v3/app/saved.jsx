@@ -116,7 +116,7 @@ function SavedScreen({ saved, savedAt, collections, onOpen, onOpenCol, onCreateC
         </div>
         {savedDishes.length > 1 && (
           <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 10px" }}>
-            {sort === "nearest" ? "By distance from Shaw (demo)." : untimed ? `Newest first. ${untimed} older save${untimed === 1 ? " has" : "s have"} no date and appear${untimed === 1 ? "s" : ""} at the end.` : "Newest first."}
+            {sort === "nearest" ? "By distance from Shaw." : untimed ? `Newest first. ${untimed} older save${untimed === 1 ? " has" : "s have"} no date and appear${untimed === 1 ? "s" : ""} at the end.` : "Newest first."}
           </div>
         )}
         <SavedStateNote items={savedDishes} prefs={prefs} />

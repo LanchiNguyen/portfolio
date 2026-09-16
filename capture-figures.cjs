@@ -55,7 +55,7 @@ const MORSEL = [
   { key: 'v32-search-unknown', expect: /no ingredient information/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setFilters({ price: [], maxMi: 99 }); window.morselDebug.setQuery('tasting'); window.morselDebug.setScreen('search'); }, PREFS_NUTS); } },
 
-  { key: 'v32-detail-top', expect: /Sample menu price/i,
+  { key: 'v32-detail-top', expect: /Tax, tip and extras/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); }, PREFS_NONE); } },
 
   { key: 'v32-detail-conflict', expect: /which you asked to avoid/i,
@@ -67,26 +67,26 @@ const MORSEL = [
   { key: 'v32-detail-unlisted', expect: /No longer on the menu/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d19'); }, PREFS_NONE); } },
 
-  { key: 'v32-textscale-140', expect: /Sample menu price/i,
+  { key: 'v32-textscale-140', expect: /Tax, tip and extras/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d08'); window.morselDebug.setTweak('textScale', 140); }, PREFS_NONE); } },
 
-  { key: 'v32-next-step', expect: /Opens elderandash/i,
+  { key: 'v32-next-step', expect: /Check current prices and availability/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d01'); }, PREFS_NONE);
       await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); } },
 
-  { key: 'v32-next-step-done', expect: /Demo complete/i,
+  { key: 'v32-next-step-done', expect: /End of prototype/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d01'); }, PREFS_NONE);
       await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); await p.waitForTimeout(900);
-      await p.evaluate(() => window.__click('Open menu \\(demo\\)')); } },
+      await p.evaluate(() => window.__click('Continue to menu')); } },
 
-  { key: 'v32-next-step-none', expect: /No online menu/i,
+  { key: 'v32-next-step-none', expect: /has no online menu/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.openDish('d22'); }, PREFS_NONE);
       await p.waitForTimeout(1200); await p.evaluate(() => window.__click('Check with restaurant')); } },
 
   { key: 'v32-handoff-failure', expect: /Couldn.t open/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setTweak('sim', 'handoff'); window.morselDebug.openDish('d01'); }, PREFS_NONE);
       await p.waitForTimeout(1200); await p.evaluate(() => window.__click('View restaurant menu')); await p.waitForTimeout(900);
-      await p.evaluate(() => window.__click('Open menu \\(demo\\)')); } },
+      await p.evaluate(() => window.__click('Continue to menu')); } },
 
   { key: 'v32-saved-states', expect: /stay in your saves/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setSavedIds(['d11', 'd14', 'd08', 'd01', 'd19']);
@@ -96,7 +96,7 @@ const MORSEL = [
   { key: 'v32-restaurant', expect: /View restaurant menu/i,
     drive: async p => { await p.evaluate(prefs => { window.morselDebug.setPrefs(prefs); window.morselDebug.setRestName('Dum & Dust'); window.morselDebug.setScreen('restaurant'); }, PREFS_NUTS); } },
 
-  { key: 'v32-no-coverage', expect: /isn.t.*in this demo/i,
+  { key: 'v32-no-coverage', expect: /isn.t.*covered yet/i,
     drive: async p => { await p.evaluate(pr => { window.morselDebug.setPrefs(pr); window.morselDebug.setScreen('feed');
       window.morselDebug.setLoc({ city: 'Boise, ID', hood: null }); }, PREFS_NONE); } },
 

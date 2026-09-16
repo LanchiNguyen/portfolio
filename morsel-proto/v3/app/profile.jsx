@@ -2,14 +2,13 @@
 // No invented account, no linked apps, no notification schedule: only rows that
 // do something in this prototype.
 function ProfileScreen({ prefs, saved, collections, loc, onTuneTaste, onEditDiet, onOpenSaved, onOpenLocation }) {
-  const { dishes, demoArea, checked, allergens: tracked } = window.MorselData;
+  const { dishes, demoArea } = window.MorselData;
   const picked = (prefs && prefs.picked) || [];
   const tasteTags = [...new Set(picked.map((id) => { const d = dishes.find((x) => x.id === id); return d && d.tag; }).filter(Boolean))];
   const lifestyle = (prefs && prefs.lifestyle) || null;
   const allergies = (prefs && prefs.allergies) || [];
   const unknownCount = dishes.filter((d) => d.allergens === null || d.allergens === undefined).length;
-  const locLabel = loc && loc.city ? (loc.hood ? loc.hood + ", " + loc.city.split(",")[0] : loc.city) : demoArea.hood + ", DC (demo)";
-  const [info, setInfo] = React.useState(false);
+  const locLabel = loc && loc.city ? (loc.hood ? loc.hood + ", " + loc.city.split(",")[0] : loc.city) : demoArea.hood + ", DC";
 
   const Row = ({ icon, label, value, onClick }) => (
     <button onClick={onClick} style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "14px 2px", borderBottom: "1px solid var(--line)", minHeight: 52 }}>
@@ -52,7 +51,7 @@ function ProfileScreen({ prefs, saved, collections, loc, onTuneTaste, onEditDiet
             )}
           </div>
           <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 12 }}>
-            {unknownCount} dishes have no ingredient information. The sample menus do not cover preparation or cross-contact. Always confirm with the restaurant.
+            {unknownCount} dishes have no ingredient information. Ingredient lists do not cover preparation or cross-contact. Always confirm with the restaurant.
           </div>
         </div>
 
@@ -78,31 +77,8 @@ function ProfileScreen({ prefs, saved, collections, loc, onTuneTaste, onEditDiet
         <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 4 }}>Settings</div>
         <Row icon="pin" label="Area" value={locLabel} onClick={onOpenLocation} />
         <Row icon="heart" label="Saved" value={saved.size + " dish" + (saved.size === 1 ? "" : "es")} onClick={onOpenSaved} />
-        <Row icon="info" label="About this demo" value="Illustrative data" onClick={() => setInfo(true)} />
       </div>
 
-      {info && (
-        <div style={{ position: "absolute", inset: 0, zIndex: 60, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-          <button aria-label="Close" onClick={() => setInfo(false)} style={{ position: "absolute", inset: 0, background: "rgba(15,9,4,.45)", cursor: "pointer" }}></button>
-          <div className="m-rise" role="dialog" aria-label="About this demo" style={{ position: "relative", background: "var(--surface)", borderRadius: "calc(var(--r) + 4px) calc(var(--r) + 4px) 0 0", padding: "10px 20px 28px", boxShadow: "var(--shadow-float)" }}>
-            <div style={{ width: 36, height: 4, borderRadius: 99, background: "var(--line)", margin: "0 auto 14px" }}></div>
-            <div className="m-heading" style={{ marginBottom: 6 }}>About this demo</div>
-            <div className="m-second" style={{ color: "var(--ink-2)", marginBottom: 14 }}>Morsel is a working design concept with fictional restaurants and sample menus.</div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 2, marginBottom: 14 }}>
-              {[
-                `${dishes.length} illustrative dishes across ${[...new Set(dishes.map((d) => d.rest))].length} fictional restaurants in ${demoArea.hood}, Washington DC`,
-                `Prices, ingredients, links and dates are sample data; ${unknownCount} dishes have missing ingredient details`,
-                `Allergen tracking covers ${tracked.join(", ").toLowerCase()} only, from menu listings — not preparation`,
-                "Menu and call buttons are simulated. No orders are placed",
-                "Saves and settings stay in this browser only"
-              ].map((it) => (
-                <div key={it} className="m-second" style={{ fontWeight: 600, padding: "10px 0", borderBottom: "1px solid var(--line)" }}>{it}</div>
-              ))}
-            </div>
-            <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={() => setInfo(false)}>Done</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

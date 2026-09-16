@@ -15,9 +15,8 @@ function u(id, w) {
   return "../images/morsel-photos/" + id + ".webp";
 }
 
-// Every fixture below is illustrative. "Checked" is the fixture date the catalog
-// pretends its menu information was last confirmed — shown, never hidden.
-const MORSEL_CATALOG_CHECKED = "Sep 2026";
+// Every fixture below is illustrative. The prototype carries no "last checked"
+// dates: it never verified a restaurant, so it does not imply that it did.
 
 const MORSEL_DISHES = [
   { id: "d01", veg: "veg", allergens: ["gluten","dairy"], img: "1565299624946-b28f40a0ae38", h: 1.25, name: "Margherita, Blistered", rest: "Elder & Ash", hood: "Shaw", price: 19, mi: 0.4, tag: "Pizza",
@@ -108,22 +107,21 @@ const MORSEL_COLLECTIONS = [
 //   menu   a restaurant menu page (dish-level landing not available)
 //   dish   a dish-level page on the restaurant's site
 //   none   no online destination we can point to; the restaurant is contact-only
-// `checked` is the fixture date the link was last confirmed. Buttercream Union is
-// deliberately stale so the "last checked" caveat has something real to say.
+// No hostnames: the prototype never opens a site, so it never names one.
 const MORSEL_DESTINATIONS = {
-  "Elder & Ash":       { kind: "menu", host: "elderandash.example", checked: "Sep 2026" },
-  "Paper Lantern":     { kind: "menu", host: "paperlantern.example", checked: "Sep 2026" },
-  "Greenline":         { kind: "dish", host: "greenline.example", checked: "Sep 2026" },
-  "Quarter Smash":     { kind: "menu", host: "quartersmash.example", checked: "Sep 2026" },
-  "Buttercream Union": { kind: "menu", host: "buttercreamunion.example", checked: "May 2026" },
-  "Tide & Brine":      { kind: "menu", host: "tideandbrine.example", checked: "Sep 2026" },
-  "Early Vote":        { kind: "menu", host: "earlyvote.example", checked: "Sep 2026" },
-  "Sumi":              { kind: "dish", host: "sumidc.example", checked: "Sep 2026" },
-  "Ember Row":         { kind: "menu", host: "emberrow.example", checked: "Sep 2026" },
-  "Dum & Dust":        { kind: "menu", host: "dumanddust.example", checked: "Sep 2026" },
+  "Elder & Ash":       { kind: "menu" },
+  "Paper Lantern":     { kind: "menu" },
+  "Greenline":         { kind: "dish" },
+  "Quarter Smash":     { kind: "menu" },
+  "Buttercream Union": { kind: "menu" },
+  "Tide & Brine":      { kind: "menu" },
+  "Early Vote":        { kind: "menu" },
+  "Sumi":              { kind: "dish" },
+  "Ember Row":         { kind: "menu" },
+  "Dum & Dust":        { kind: "menu" },
   "Hollis":            { kind: "none", phone: "(202) 555-0140" },
-  "Slice Theory":      { kind: "menu", host: "slicetheory.example", checked: "Sep 2026" },
-  "Noodle Object":     { kind: "menu", host: "noodleobject.example", checked: "Sep 2026" }
+  "Slice Theory":      { kind: "menu" },
+  "Noodle Object":     { kind: "menu" }
 };
 
 // Three tiers, three different promises:
@@ -211,5 +209,5 @@ window.MorselData = {
   lifestyles: MORSEL_LIFESTYLES, allergens: MORSEL_ALLERGENS, destinations: MORSEL_DESTINATIONS,
   dietState: morselDietState, partition: morselPartition, applyDietPrefs,
   price: morselPrice, dist: morselDist, destination: morselDestination, nextStepLabel: morselNextStepLabel,
-  covered: MORSEL_COVERED, demoArea: MORSEL_DEMO_AREA, checked: MORSEL_CATALOG_CHECKED, affinity: morselAffinity
+  covered: MORSEL_COVERED, demoArea: MORSEL_DEMO_AREA, affinity: morselAffinity
 };

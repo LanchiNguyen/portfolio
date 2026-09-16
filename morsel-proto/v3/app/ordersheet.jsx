@@ -1,12 +1,12 @@
-// Morsel v3.2 — the next-step sheet. It replaced the order sheet.
+// Morsel v3.2 — the restaurant-menu sheet. It replaced the order sheet.
 // Morsel never runs a checkout and never promises a cart, a fee, an ETA or that a
-// dish is in stock. The sheet says where the next step goes (a dish page, a
-// restaurant menu, or a phone number), what may have changed since the link was
-// checked, and — in this demo — ends at a clear "no order was placed" endpoint.
-// The label and the destination come from the catalog's destination model, not
-// from a universal "Order" template.
+// dish is in stock. The sheet names where the next step goes (the restaurant's
+// menu, a dish on it, or a phone number), asks the diner to check current prices
+// and availability there, and in this prototype ends at a neutral end state.
+// Nothing here navigates or places a call; the disclosure that links are
+// simulated lives in the caption beside the prototype, not inside it.
 function NextStepSheet({ dish, rest, onClose, onPing }) {
-  const { u, price, destination, checked, dishes } = window.MorselData;
+  const { u, price, destination, dishes } = window.MorselData;
   const restName = dish ? dish.rest : rest;
   const dest = destination(restName);
   const cover = dish || dishes.find((d) => d.rest === restName);
@@ -34,12 +34,17 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
   }, [onClose]);
 
   const [phase, setPhase] = React.useState("ready"); // ready | failed | done
-  const stale = dest.checked && dest.checked !== checked;
   const go = () => {
     if ((window.MorselSim || {}).handoffFail) { setPhase("failed"); return; }
     setPhase("done");
   };
-  const title = dest.kind === "dish" ? "View this dish on the menu" : dest.kind === "menu" ? "View the restaurant menu" : "Check with " + restName;
+  const title = dest.kind === "dish" ? "Dish on the restaurant menu" : dest.kind === "menu" ? "Restaurant menu" : "Check with " + restName;
+  const body = dest.kind === "dish"
+    ? "Check the dish's current price and availability on the restaurant's menu."
+    : dest.kind === "menu"
+      ? "Check current prices and availability on the restaurant's menu."
+      : `${restName} has no online menu. Call ${dest.phone}${cover ? " or visit in " + cover.hood : ""}.`;
+  const primary = dest.kind === "dish" ? "Continue to dish" : dest.kind === "menu" ? "Continue to menu" : "Call " + restName;
   const p = dish ? price(dish) : null;
 
   return (
@@ -49,68 +54,43 @@ function NextStepSheet({ dish, rest, onClose, onPing }) {
         <div style={{ width: 36, height: 4, borderRadius: 99, background: "var(--line)", margin: "0 auto 14px" }}></div>
 
         {/* identity stays visible through every phase */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
           <div style={{ width: 46, height: 46, borderRadius: 14, overflow: "hidden", flex: "none", background: "var(--sunken)" }}>
             {cover && <img src={u(cover.img, 160)} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div className="m-second" id={titleId} style={{ fontWeight: 800 }}>{title}</div>
+            <div className="m-second" id={titleId} style={{ fontWeight: 800 }}>{phase === "done" ? "End of prototype" : title}</div>
             <div className="m-caption" style={{ color: "var(--ink-2)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-              {dish ? `${dish.name} · ${restName}${p ? " · " + p : ""}` : `${restName} · ${cover ? cover.hood : ""}`}
+              {dish ? `${dish.name} · ${restName}${p ? " · " + p : ""}` : `${restName}${cover ? " · " + cover.hood : ""}`}
             </div>
           </div>
         </div>
 
         {phase === "done" ? (
           <div role="status">
-            <div style={{ background: "var(--sunken)", borderRadius: 14, padding: "14px 14px", marginBottom: 14 }}>
-              <div className="m-second" style={{ fontWeight: 800, marginBottom: 4 }}>Demo complete</div>
-              <div className="m-caption" style={{ color: "var(--ink-2)" }}>
-                In a live version this would {dest.kind === "none" ? "start a call to " + dest.phone : "open " + dest.host + (dest.kind === "dish" ? " at this dish" : "'s menu")}. No website was opened, call made or order placed.
-              </div>
-            </div>
-            <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={onClose}>{dish ? "Back to the dish" : "Back to " + restName}</button>
+            <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={onClose}>Back</button>
           </div>
         ) : (
           <div>
-            {dest.kind === "none" ? (
-              <div style={{ background: "var(--sunken)", borderRadius: 14, padding: "12px 14px", marginBottom: 12 }}>
-                <div className="m-second" style={{ fontWeight: 700 }}>No online menu to link to</div>
-                <div className="m-caption" style={{ color: "var(--ink-2)" }}>{restName} doesn't publish a menu we can point to. Call {dest.phone}, or visit in {cover ? cover.hood : "person"}. Morsel can't confirm price or availability for this restaurant.</div>
-              </div>
-            ) : (
-              <div style={{ background: "var(--sunken)", borderRadius: 14, padding: "12px 14px", marginBottom: 12 }}>
-                <div className="m-second" style={{ fontWeight: 700 }}>Opens {dest.host}</div>
-                <div className="m-caption" style={{ color: "var(--ink-2)" }}>
-                  {dest.kind === "dish"
-                    ? "This would open the dish page. Confirm its current price and availability there."
-                    : dish
-                      ? "This would open the full restaurant menu. Find the dish there and confirm its current price and availability."
-                      : "This would open the full restaurant menu. Confirm current prices and availability there."}
-                  {" Sample menu date: " + dest.checked + "."}
-                </div>
-                {stale && <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 6 }}><span style={{ fontWeight: 800 }}>Link last checked {dest.checked}.</span> It may have moved.</div>}
-                {dish && dish.listed === false && <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 6 }}>This dish is no longer listed as of {checked}. The menu may show what replaced it.</div>}
-              </div>
-            )}
+            <div className="m-second" style={{ color: "var(--ink-2)", marginBottom: 6 }}>{body}</div>
+            {dish && dish.listed === false && <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 6 }}>This dish is no longer listed. The menu may show what replaced it.</div>}
 
             {phase === "failed" && (
-              <div role="alert" style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "rgba(194,73,43,.10)", border: "1.5px solid var(--accent)", borderRadius: 14, padding: "11px 13px", marginBottom: 12 }}>
+              <div role="alert" style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "rgba(194,73,43,.10)", border: "1.5px solid var(--accent)", borderRadius: 14, padding: "11px 13px", margin: "8px 0 4px" }}>
                 <div aria-hidden="true" style={{ color: "var(--accent)", flex: "none", fontWeight: 900, fontSize: 13, width: 20, height: 20, borderRadius: 99, border: "2px solid var(--accent)", display: "flex", alignItems: "center", justifyContent: "center" }}>!</div>
                 <div style={{ flex: 1 }}>
-                  <div className="m-caption" style={{ fontWeight: 800, color: "var(--accent)" }}>Couldn't open {dest.kind === "none" ? "the call" : dest.host}</div>
-                  <div className="m-caption" style={{ color: "var(--ink-2)" }}>Simulated connection error. Try again or close this sheet.</div>
+                  <div className="m-caption" style={{ fontWeight: 800, color: "var(--accent)" }}>{dest.kind === "none" ? "Couldn't start the call" : "Couldn't open the menu"}</div>
+                  <div className="m-caption" style={{ color: "var(--ink-2)" }}>Try again or go back.</div>
                 </div>
               </div>
             )}
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 12 }}>
               <button className="m-btn m-btn-primary" style={{ width: "100%" }} onClick={go}>
-                {phase === "failed" ? "Try again" : dest.kind === "none" ? "Call " + restName + " (demo)" : dest.kind === "dish" ? "Open dish page (demo)" : "Open menu (demo)"}
+                {phase === "failed" ? "Try again" : primary}
               </button>
-              <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={onClose}>Not now</button>
+              <button className="m-btn m-btn-quiet" style={{ width: "100%" }} onClick={onClose}>Back</button>
             </div>
-            <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 10, textAlign: "center" }}>Demo only. Menu links and calls are simulated.</div>
           </div>
         )}
       </div>

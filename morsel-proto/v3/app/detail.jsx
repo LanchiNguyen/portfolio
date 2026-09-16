@@ -27,7 +27,7 @@ function FactRow({ label, value, sub, tone }) {
 }
 
 function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, onOpenRest }) {
-  const { u, dishes, dietState, partition, price, dist, nextStepLabel, destination, checked, demoArea, allergens } = window.MorselData;
+  const { u, dishes, dietState, partition, price, dist, nextStepLabel, destination, demoArea, allergens } = window.MorselData;
   const isSaved = saved.has(dish.id);
   const [toast, setToast] = React.useState(null);
   const [nextOpen, setNextOpen] = React.useState(false);
@@ -101,8 +101,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
           <button className="m-second" style={{ fontWeight: 700, color: "var(--ink)", marginBottom: 10, display: "inline-flex", alignItems: "center", gap: 4, minHeight: 32 }} onClick={() => onOpenRest(dish.rest)} disabled={!otherAtRest}>
             {dish.rest} · {dish.hood}{otherAtRest && <span style={{ display: "inline-flex", transform: "rotate(180deg)", color: "var(--ink-3)" }}><MIcon name="back" size={13} /></span>}
           </button>
-          <div className="m-second" style={{ color: "var(--ink-2)", marginBottom: 4 }}>{dish.desc}</div>
-          <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Sample menu description</div>
+          <div className="m-second" style={{ color: "var(--ink-2)", marginBottom: 12 }}>{dish.desc}</div>
 
           {(() => {
             const aff = window.MorselData.affinity(prefs && prefs.picked);
@@ -117,7 +116,7 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
             <div style={{ display: "flex", gap: 10, alignItems: "flex-start", background: "var(--ink)", color: "var(--paper)", borderRadius: "var(--r)", padding: "12px 14px", marginBottom: 14 }}>
               <div style={{ flex: 1 }}>
                 <div className="m-second" style={{ fontWeight: 800 }}>No longer on the menu</div>
-                <div className="m-caption" style={{ opacity: .8 }}>Not listed as of {checked} in this sample menu. You can still keep it in your saves.</div>
+                <div className="m-caption" style={{ opacity: .8 }}>This dish is no longer listed on the menu. You can still keep it in your saves.</div>
               </div>
             </div>
           )}
@@ -142,9 +141,9 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
           )}
 
           <div style={{ marginBottom: 18 }}>
-            <FactRow label="Price" value={p ? p : "Not listed"} sub={p ? "Sample menu price: " + checked + ". Tax, tip and extras not included." : "Check the restaurant menu for price."} tone={p ? undefined : "var(--ink-2)"} />
-            <FactRow label="Distance" value={dist(dish) + " from " + demoArea.hood} sub="Straight-line distance from the demo area." />
-            <FactRow label="On the menu" value={dish.listed === false ? "Not listed" : "Listed"} sub={"As of " + checked + ". Sample listing; availability is not confirmed."} />
+            <FactRow label="Price" value={p ? p : "Not listed"} sub={p ? "Menu price. Tax, tip and extras not included." : "Check the restaurant menu for price."} tone={p ? undefined : "var(--ink-2)"} />
+            <FactRow label="Distance" value={dist(dish) + " from " + demoArea.hood} sub="Straight-line distance from Shaw." />
+            <FactRow label="On the menu" value={dish.listed === false ? "Not listed" : "Listed"} sub={dish.listed === false ? "No longer on the menu." : "Being listed doesn't mean it's available tonight."} />
             <FactRow label="Ingredients" value={ingredientRow.value} sub={ingredientRow.sub} tone={ingredientRow.tone} />
           </div>
 
@@ -169,9 +168,9 @@ function DetailScreen({ dish, saved, zoom, prefs, onBack, onToggleSave, onOpen, 
               </button>
             </div>
           )}
-          <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: -14, marginBottom: 24 }}>
-            {dest.kind === "none" ? `${dish.rest} has no online menu we can link to.` : `Restaurant link: ${dest.host} (demo).`}
-          </div>
+          {dest.kind === "none" && (
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: -14, marginBottom: 24 }}>{dish.rest} has no online menu to link to.</div>
+          )}
 
           {strip.length > 0 &&
           <div>

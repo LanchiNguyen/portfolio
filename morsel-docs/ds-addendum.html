@@ -94,7 +94,7 @@
     </div>
     <div class="notes">
       Each card shows a photo, dish name, restaurant, neighborhood, menu price and distance. Images use a 4:5 ratio and names can wrap. Missing prices read "Price not listed". The same card is used in the feed, search and saves.
-      <span class="copy">Price is the listed menu price only. Distance is straight-line miles from the demo area, never a walk time.</span>
+      <span class="copy">Price is the listed menu price only. Distance is straight-line miles from Shaw, never a walk time.</span>
       <span class="a11y">The card is one <code>button</code> whose accessible name reads the dish, restaurant, price, distance and any state chip. Save is a sibling control with <code>aria-pressed</code>, never nested. Without a photo the card is still complete.</span>
     </div>
   </div>
@@ -130,15 +130,15 @@
     <div class="demo" style="align-items:stretch;">
       <span class="cap">Dish page, above the primary action</span>
       <div class="facts">
-        <div class="r"><span class="l">Price</span><span class="v">$32<small>Sample menu price: Sep 2026. Tax, tip and extras not included.</small></span></div>
-        <div class="r"><span class="l">Distance</span><span class="v">0.9 mi from Shaw<small>Straight-line distance from the demo area. Not a travel time.</small></span></div>
-        <div class="r"><span class="l">On the menu</span><span class="v">Listed<small>As of Sep 2026. Being on the menu doesn't mean it's available tonight.</small></span></div>
+        <div class="r"><span class="l">Price</span><span class="v">$32<small>Menu price. Tax, tip and extras not included.</small></span></div>
+        <div class="r"><span class="l">Distance</span><span class="v">0.9 mi from Shaw<small>Straight-line distance from Shaw.</small></span></div>
+        <div class="r"><span class="l">On the menu</span><span class="v">Listed<small>Being listed doesn't mean it's available tonight.</small></span></div>
         <div class="r"><span class="l">Ingredients</span><span class="v">Menu lists shellfish<small>Tracked: nuts, gluten, dairy, shellfish. Menu data doesn't cover preparation or shared surfaces.</small></span></div>
       </div>
     </div>
     <div class="notes">
-      Replaces the trust card. Four rows, each with its value, its basis and its date. A missing price says "Not listed" and points at the menu. Missing ingredient information says so and is never treated as "none".
-      <span class="copy">Every value names what it is ("menu price", "straight-line"), when it was checked, and what it does not cover.</span>
+      Replaces the trust card. Four rows, each with its value and its basis. No "last checked" dates: the prototype never verified a restaurant, so it does not imply that it did. A missing price says "Not listed" and points at the menu. Missing ingredient information says so and is never treated as "none".
+      <span class="copy">Every value names what it is ("menu price", "straight-line") and what it does not cover.</span>
       <span class="a11y">Plain text rows; the caveat is in the same node as the value so it is read with the claim, not after it.</span>
     </div>
   </div>
@@ -159,17 +159,17 @@
   </div>
 
   <div class="comp">
-    <h2>Next-step sheet <span class="v">v3.2</span></h2>
+    <h2>Restaurant-menu sheet <span class="v">v3.2</span></h2>
     <div class="demo" style="align-items:stretch;">
-      <span class="cap">Destination kinds: menu · dish page · none</span>
-      <div class="sheet"><div class="h">View the restaurant menu</div><div class="d"><b>Opens elderandash.example</b><br />This would open the full restaurant menu. Find the dish there and confirm its current price and availability. Sample menu date: Sep 2026.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Open menu (demo)</span><span class="btn q" style="flex:1;">Not now</span></div></div>
-      <div class="sheet"><div class="h">Check with Hollis</div><div class="d"><b>No online menu to link to</b><br />Call (202) 555-0140, or visit in Logan Circle. Morsel can't confirm price or availability for this restaurant.</div></div>
-      <span class="cap">Demo endpoint</span>
-      <div class="sheet"><div class="d"><b>Demo complete</b><br />In a live version this would open elderandash.example's menu. No website was opened, call made or order placed.</div></div>
+      <span class="cap">Destination kinds: full menu · dish on the menu · no online menu</span>
+      <div class="sheet"><div class="h">Restaurant menu</div><div class="d">Margherita, Blistered · Elder &amp; Ash · $19<br />Check current prices and availability on the restaurant&rsquo;s menu.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Continue to menu</span><span class="btn q" style="flex:1;">Back</span></div></div>
+      <div class="sheet"><div class="h">Check with Hollis</div><div class="d">Hollis has no online menu. Call (202) 555-0140 or visit in Logan Circle.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Call Hollis</span><span class="btn q" style="flex:1;">Back</span></div></div>
+      <span class="cap">End state (prototype only)</span>
+      <div class="sheet"><div class="h">End of prototype</div><div style="display:flex; gap:6px;"><span class="btn q" style="flex:1;">Back</span></div></div>
     </div>
     <div class="notes">
-      Replaces the order sheet. The label and body depend on the available destination: a dish-level page, a restaurant menu, or a phone number. The sheet keeps the dish and restaurant visible, names the destination, says whether it lands on the dish or the full menu, carries a labeled sample date (stale links say so), and ends the demo at an explicit "no order was placed". A simulated failure keeps the dish and offers a retry.
-      <span class="copy">Never promise a cart, a fee, an ETA or that the dish is in stock. "Opens", "lands on", "may have changed since" are the verbs.</span>
+      Replaces the order sheet. The title and the one useful line depend on the available destination: the full menu, a dish on it, or a phone number. The sheet keeps the dish and restaurant visible and asks the diner to check current prices and availability on the menu. In the prototype the primary action ends at a neutral "End of prototype" state with Back; the disclosure that links are simulated sits in the caption beside the prototype, not inside it. A failure keeps the dish and offers a retry.
+      <span class="copy">Never promise a cart, a fee, an ETA or that the dish is in stock. No hostnames and no dates inside the app.</span>
       <span class="a11y">A named <code>role="dialog"</code> that moves focus in, traps Tab, closes on Escape and returns focus to its opener. The endpoint is <code>role="status"</code>.</span>
     </div>
   </div>
@@ -211,8 +211,8 @@
       <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;"><span class="statuspill">No longer on the menu</span><span class="statechip unlisted">No longer on menu</span></div>
     </div>
     <div class="notes">
-      Replaces "Sold out today · usually back tomorrow" and "Closed now · opens 8 AM", both of which claimed an availability model the catalog lacks. The only status the data supports is whether a dish was on the menu as of the catalog's checked date. Being listed never implies available tonight, and the copy says so.
-      <span class="copy">Pair the status with the date and the consequence: "Not listed as of Sep 2026. Kept here because you can still remember it."</span>
+      Replaces "Sold out today · usually back tomorrow" and "Closed now · opens 8 AM", both of which claimed an availability model the catalog lacks. The only status the data supports is whether a dish is still on the menu. Being listed never implies available tonight, and the copy says so.
+      <span class="copy">Pair the status with the consequence: "This dish is no longer listed on the menu. You can still keep it in your saves."</span>
       <span class="a11y">Ink pill with text; the next-step sheet repeats the status so it is read at the point of commitment.</span>
     </div>
   </div>
@@ -224,7 +224,7 @@
       <div class="obanner"><div style="flex:none; width:8px; height:8px; border-radius:99px; background:var(--ink3);"></div><div style="font-size:12.5px;"><b>You're offline.</b> <span style="color:var(--ink2);">Showing your last loaded feed. Prices and availability may have changed since.</span></div></div>
     </div>
     <div class="notes">
-      The skeleton mirrors the labeled card (photo block plus two text lines) so nothing jumps on arrival. The offline banner warns about staleness rather than hiding content. The location-off banner is gone: the demo area is an explicit state shown in the area chip, not a permission failure.
+      The skeleton mirrors the labeled card (photo block plus two text lines) so nothing jumps on arrival. The offline banner warns about staleness rather than hiding content. The location-off banner is gone: the area chip shows Shaw, DC, not a permission failure.
       <span class="a11y">Loading container is labeled; shimmer stops under <code>prefers-reduced-motion</code>. Banners are <code>role="status"</code>.</span>
     </div>
   </div>

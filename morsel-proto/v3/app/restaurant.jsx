@@ -3,7 +3,7 @@
 // conflicting dish for context, flagged — it is never presented as a recommendation.
 // The restaurant-level next step opens the menu; it never silently picks a dish.
 function RestaurantScreen({ restName, onBack, onOpen, prefs, saved, onToggleSave }) {
-  const { u, dishes, dietState, nextStepLabel, destination, checked, demoArea } = window.MorselData;
+  const { u, dishes, dietState, nextStepLabel, destination, demoArea } = window.MorselData;
   const items = dishes.filter((d) => d.rest === restName);
   const [nextOpen, setNextOpen] = React.useState(false);
   const [toast, setToast] = React.useState(null);
@@ -32,11 +32,11 @@ function RestaurantScreen({ restName, onBack, onOpen, prefs, saved, onToggleSave
         </div>
 
         <div style={{ padding: "16px 22px 0" }}>
-          <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
+          <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
             {[
               { big: String(items.length), small: items.length === 1 ? "dish on Morsel" : "dishes on Morsel" },
               { big: priceRange, small: priced.length < items.length ? "menu prices · some not listed" : "menu prices" },
-              { big: first.mi + " mi", small: "from " + demoArea.hood + " (demo)" }
+              { big: first.mi + " mi", small: "from " + demoArea.hood }
             ].map((s) => (
               <div key={s.small} style={{ flex: 1, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: "var(--r)", padding: "12px 10px", textAlign: "center" }}>
                 <div className="m-heading" style={{ fontSize: 20 }}>{s.big}</div>
@@ -44,14 +44,13 @@ function RestaurantScreen({ restName, onBack, onOpen, prefs, saved, onToggleSave
               </div>
             ))}
           </div>
-          <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 16 }}>Menu information as of {checked}. Illustrative demo catalog.</div>
 
           <button className="m-btn m-btn-primary" style={{ width: "100%", marginBottom: 6 }} onClick={() => setNextOpen(true)}>
             {nextStepLabel(restName)}
           </button>
-          <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 22, textAlign: "center" }}>
-            {dest.kind === "none" ? "No online menu to link to; call or visit." : `Restaurant link: ${dest.host} (demo).`}
-          </div>
+          {dest.kind === "none" ? (
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 22, textAlign: "center" }}>No online menu to link to; call or visit.</div>
+          ) : <div style={{ marginBottom: 22 }}></div>}
 
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 4 }}>
             <div className="m-heading">Dishes on Morsel</div>

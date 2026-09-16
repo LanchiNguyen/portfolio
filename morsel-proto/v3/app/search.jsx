@@ -44,14 +44,14 @@ function SearchScreen({ onBack, onOpen, gridCols, prefs, onEditDiet, filters, on
           {fCount > 0 && <div aria-hidden="true" style={{ position: "absolute", top: -3, right: -3, minWidth: 18, height: 18, borderRadius: 99, background: "var(--accent)", color: "var(--accent-ink)", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>{fCount}</div>}
         </button>
       </div>
-      <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 6px" }}>Near {areaName}{loc && loc.city ? "" : " (demo area)"} · Filters stay on when you clear a search.</div>
+      <div className="m-caption" style={{ color: "var(--ink-3)", padding: "0 16px 6px" }}>Near {areaName} · Filters stay on when you clear a search.</div>
       <ConstraintBar prefs={prefs} filters={filters} onFilters={onFilters} onClearFilters={onClearFilters} onEditDiet={onEditDiet} />
 
       <div className="m-scroll" ref={scrollRef} onScroll={onScroll} style={{ paddingBottom: 40 }}>
         {noCoverage ? (
           <div style={{ margin: "10px 16px", borderRadius: "var(--r)", background: "var(--sunken)", padding: "24px 20px", textAlign: "center" }}>
-            <div className="m-second" style={{ fontWeight: 800, marginBottom: 4 }}>{loc.city.split(",")[0]} isn't in this demo</div>
-            <div className="m-caption" style={{ color: "var(--ink-2)" }}>The sample dishes are in Washington, DC. Choose that area from the feed to browse them.</div>
+            <div className="m-second" style={{ fontWeight: 800, marginBottom: 4 }}>{loc.city.split(",")[0]} isn't covered yet</div>
+            <div className="m-caption" style={{ color: "var(--ink-2)" }}>Morsel currently covers Washington, DC. Choose that area from the feed.</div>
           </div>
         ) : !results ? (
           <div>
@@ -99,7 +99,7 @@ function SearchScreen({ onBack, onOpen, gridCols, prefs, onEditDiet, filters, on
             <div style={{ padding: "10px 16px" }}>
               <div style={{ borderRadius: "var(--r)", background: "var(--sunken)", padding: "26px 24px", textAlign: "center", marginBottom: 18 }}>
                 <div className="m-second" style={{ fontWeight: 700, marginBottom: 4 }}>Nothing for “{q}” in this catalog</div>
-                <div className="m-caption" style={{ color: "var(--ink-2)" }}>We match dish names, restaurants, cuisines and neighborhoods across {dishes.length} demo dishes.</div>
+                <div className="m-caption" style={{ color: "var(--ink-2)" }}>We match dish names, restaurants, cuisines and neighborhoods across {dishes.length} dishes.</div>
               </div>
               <div className="m-micro" style={{ color: "var(--ink-3)", marginBottom: 10 }}>Try one of these</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>

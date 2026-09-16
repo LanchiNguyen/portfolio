@@ -42,7 +42,7 @@ function ObDots({ step }) {
 }
 
 function ObWelcome({ onNext }) {
-  const { u, demoArea, dishes } = window.MorselData;
+  const { u } = window.MorselData;
   // Three-column slow collage behind the headline
   const cols = [
     ["1565299624946-b28f40a0ae38", "1567620905732-2d1ec7ab7445", "1569718212165-3a8278d5f624"],
@@ -69,11 +69,8 @@ function ObWelcome({ onNext }) {
           See what looks good, compare a few dishes, and save your favorites.
         </div>
         <button className="m-btn m-btn-primary m-rise" style={{ marginTop: 8, alignSelf: "stretch", animationDelay: ".12s" }} onClick={onNext}>
-          Explore the DC demo
+          Explore dishes
         </button>
-        <div className="m-caption" style={{ textAlign: "center", color: "rgba(255,247,235,.55)" }}>
-          {dishes.length} sample dishes around {demoArea.hood}, DC. Restaurants and menu details are fictional.
-        </div>
       </div>
     </div>
   );
@@ -174,7 +171,7 @@ function ObDietary({ lifestyle, setLifestyle, allergies, setAllergies, onDone, o
           })}
         </div>
         <div className="m-caption m-fade" style={{ color: "var(--ink-2)", marginTop: 16, background: "var(--sunken)", borderRadius: 14, padding: "10px 14px" }}>
-          This demo includes only these four categories. Ingredient lists do not cover preparation or cross-contact. Always confirm with the restaurant.
+          Ingredient lists cover only these four categories and do not cover preparation or cross-contact. Always confirm with the restaurant.
         </div>
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "28px 24px 30px", display: "flex", flexDirection: "column", gap: 10, background: "linear-gradient(to top, var(--paper) 55%, transparent)" }}>

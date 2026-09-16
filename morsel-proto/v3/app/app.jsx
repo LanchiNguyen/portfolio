@@ -270,7 +270,6 @@ function MorselApp() {
             <option value="none">Normal</option><option value="loading">Feed loading</option><option value="offline">Offline</option><option value="imgfail">Images unavailable</option><option value="handoff">Menu link fails to open</option>
           </select></label>
           <button style={{padding:10}} onClick={()=>{localStorage.removeItem(MORSEL_STATE_KEY);window.location.reload();}}>Reset prototype and replay the entry flow</button>
-          <span>These controls change the demo only. No order is placed.</span>
         </div>
       </details>
       <TweaksPanel>
@@ -343,7 +342,7 @@ function MorselPage() {
           <a href="../morsel-docs/ds-addendum.html" style={{ color: "#B0542F", fontWeight: 600 }}>ds addendum →</a>
           <a href="../morsel.html" style={{ color: "#B0542F", fontWeight: 600 }}>case study →</a>
         </div>
-        <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Prototype: restaurants, prices, menu links, dates and dish descriptions are illustrative seed data, not real listings. No order is ever placed.</div>
+        <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Interactive concept with fictional restaurants and sample menu data. Links and calls are simulated; no orders are placed.</div>
       </div>
     </div>
   );

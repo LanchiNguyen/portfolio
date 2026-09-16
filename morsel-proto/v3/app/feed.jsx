@@ -154,7 +154,7 @@ function FeedHero({ dishes, saved, onOpen, onToggleSave }) {
             <div className="m-veil" style={{ background: "linear-gradient(to top, rgba(12,7,3,.82) 0%, rgba(12,7,3,.30) 34%, rgba(12,7,3,0) 52%, rgba(12,7,3,.22) 86%, rgba(12,7,3,.45) 100%)", opacity: sim.imgfail ? 0 : 1 }}></div>
             <div style={{ position: "absolute", left: 18, right: 74, bottom: 30, textAlign: "left" }}>
               <div style={{ minWidth: 0, color: sim.imgfail ? "var(--ink)" : "#FFF7EB" }}>
-                <div className="m-micro" style={{ color: sim.imgfail ? "var(--ink-3)" : "rgba(255,247,235,.72)", marginBottom: 6 }}>Featured · demo pick</div>
+                <div className="m-micro" style={{ color: sim.imgfail ? "var(--ink-3)" : "rgba(255,247,235,.72)", marginBottom: 6 }}>Featured</div>
                 <div className="m-title" style={{ fontSize: "calc(26px * var(--ts))" }}>{d.name}</div>
                 <div className="m-second" style={{ color: sim.imgfail ? "var(--ink-2)" : "rgba(255,247,235,.85)", marginTop: 4 }}>{d.rest} · {d.hood}</div>
                 <div className="m-second" style={{ color: sim.imgfail ? "var(--ink-2)" : "rgba(255,247,235,.85)", fontWeight: 700 }}>{p ? p + " menu price" : "Price not listed"} · {dist(d)}</div>
@@ -222,7 +222,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
 
   const noCoverage = !!(loc && loc.city && !covered.includes(loc.city));
   const areaName = loc && loc.city ? (loc.hood || loc.city.split(",")[0]) : demoArea.hood;
-  const chipLabel = noCoverage ? areaName + " · not covered" : loc && loc.city ? areaName : areaName + ", DC · demo area";
+  const chipLabel = noCoverage ? areaName + " · not covered" : loc && loc.city ? areaName : areaName + ", DC";
 
   const dietaryActive = prefs && (prefs.lifestyle || (prefs.allergies || []).length > 0);
   const anyConstraint = dietaryActive || fCount > 0;
@@ -256,12 +256,12 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
             <div style={{ width: 64, height: 64, borderRadius: 99, background: "var(--sunken)", color: "var(--ink-2)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 10 }}>
               <MIcon name="pin" size={28} />
             </div>
-            <div className="m-title">{loc.city.split(",")[0]} isn't<br />in this demo.</div>
+            <div className="m-title">{loc.city.split(",")[0]} isn't<br />covered yet.</div>
             <div className="m-second" style={{ color: "var(--ink-2)", maxWidth: 280, marginTop: 6 }}>
-              The sample dishes are in Washington, DC. Choose the demo area to browse them.
+              Morsel currently covers Washington, DC only.
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 22, alignSelf: "stretch" }}>
-              <button className="m-btn m-btn-primary" onClick={onResetLoc}>Explore the DC sample area</button>
+              <button className="m-btn m-btn-primary" onClick={onResetLoc}>Browse Washington, DC</button>
               <button className="m-btn m-btn-quiet" onClick={onLocation}>Choose another area</button>
             </div>
           </div>
@@ -286,7 +286,7 @@ function FeedScreen({ saved, onOpen, onToggleSave, gridCols, onSearch, filters, 
               <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600, whiteSpace: "nowrap" }}>{pool.length} dish{pool.length === 1 ? "" : "es"}</div>
             </div>
             <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: 3 }}>
-              {tasteTags.length ? `Sorted by distance and your picks: ${tasteTags.map((t) => t.toLowerCase()).join(", ")}.` : `Nearest to ${demoArea.hood} first (demo distances).`}
+              {tasteTags.length ? `Sorted by distance and your picks: ${tasteTags.map((t) => t.toLowerCase()).join(", ")}.` : `Nearest to ${demoArea.hood} first.`}
             </div>
           </div>
           {anyConstraint && <ConstraintBar prefs={prefs} filters={filters} onFilters={onFilters} onClearFilters={onClearFilters} onEditDiet={onEditDiet} />}
