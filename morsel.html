@@ -101,7 +101,7 @@
           <h2 class="side" style="margin:0;font-weight:400" data-ed="22">THE PROBLEM<br>I STARTED FROM</h2>
           <div>
             <p class="statement" data-ed="23">A dish can look good in a photo and still be the wrong choice for dinner. Price, distance and ingredients all matter. I wanted to bring those details into browsing, so someone could compare a few options before opening a restaurant menu.</p>
-            <p class="proj-p" style="margin-top:18px" data-ed="24">That is a design premise, not a research finding. The task I designed around is simple: <strong>find a dish, compare it with another, and decide where to eat.</strong> Whether that is useful enough to replace someone&rsquo;s usual search is a question I plan to test.</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="24">The task I designed around is simple: <strong>find a dish, compare it with another, and decide where to eat.</strong></p>
           </div>
         </div>
       </section>
@@ -141,7 +141,7 @@
               </figure>
             </div>
             <p class="proj-p" style="margin-top: 26px" data-ed="35">I chose the labeled card because comparing was the task; the tradeoff is a denser, less immersive feed with fewer photos per screen.</p>
-            <p class="proj-p" style="margin-top: 18px" data-ed="36">The dish page follows the same order: price, distance, menu status and listed ingredients sit above the menu button. Price filters use dollar amounts and distance is a straight-line figure in miles, because those are the facts the catalog can support. Walk times, opening hours and popularity scores are not shown, since nothing in the data backs them.</p>
+            <p class="proj-p" style="margin-top: 18px" data-ed="36">The dish page follows the same order: price, distance, menu status and listed ingredients sit above the menu button. I used dollar amounts for the price filters so the budget is explicit, and labeled distance as straight-line miles from the selected area.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
               <figure><div class="fig-live" data-fig="morsel-v32-detail-top" role="img" aria-label="Dish page: photo, then dish name, restaurant, a one-line menu description, and a facts list of price, distance from Shaw, menu status and listed allergens, followed by one primary next-step button"></div><figcaption data-ed="37">Price and ingredients above the menu button</figcaption></figure>
               <figure><div class="fig-live" data-fig="morsel-v32-filters" role="img" aria-label="Filters sheet: menu price per dish with explicit amounts, distance from Shaw in miles labeled as straight-line, and a note that dietary settings are never cleared here"></div><figcaption data-ed="38">Price ranges and distance in miles</figcaption></figure>
@@ -180,9 +180,9 @@
       <section class="proj-sec" id="honest">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="47">A MENU STEP,<br>NOT AN ORDER BUTTON</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="47">FROM A DISH<br>TO ITS RESTAURANT</h2>
           <div>
-            <p class="proj-p" data-ed="48">Morsel doesn&rsquo;t take orders, so the dish page ends at the restaurant&rsquo;s menu rather than a checkout. The button reads &ldquo;View restaurant menu&rdquo;, &ldquo;View dish on menu&rdquo; or &ldquo;Check with restaurant&rdquo;, depending on what the restaurant offers, and the sheet that follows asks you to check current prices and availability before it continues. The tradeoff is that Morsel&rsquo;s usefulness stops at that handoff; in return it never shows a price, wait time or availability it cannot stand behind.</p>
+            <p class="proj-p" data-ed="48">Morsel doesn&rsquo;t take orders, so the dish page ends at the restaurant&rsquo;s menu rather than a checkout. The button reads &ldquo;View restaurant menu&rdquo;, &ldquo;View dish on menu&rdquo; or &ldquo;Check with restaurant&rdquo;, depending on what the restaurant offers, and the sheet that follows asks you to check current prices and availability before it continues. This keeps the scope focused on finding a meal, but adds a step: someone still needs to confirm the details with the restaurant before ordering.</p>
             <p class="proj-p" style="margin-top: 18px" data-ed="49">The same rule shapes the dietary states. A dish whose menu lists an ingredient you avoid is kept out of recommendations, but stays visible in saves and on restaurant pages with a warning. A dish with no ingredient information is shown as unknown, apart from the matches, and is never counted as a fit. In both cases the dish page points to other dishes and to the restaurant, rather than offering a checkbox to acknowledge the warning and carry on.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
               <figure><div class="fig-live" data-fig="morsel-v32-detail-conflict" role="img" aria-label="Dish page for a dish whose menu lists nuts while a nut allergy is set: a note that the menu lists nuts which you asked to avoid, advice to check ingredients and preparation with the restaurant, and actions to see other dishes at the restaurant or the restaurant's menu"></div><figcaption data-ed="50">A listed ingredient conflict stays visible</figcaption></figure>
