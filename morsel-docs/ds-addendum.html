@@ -55,7 +55,7 @@
 
   <h2>Tab bar</h2>
   <div class="rule"></div>
-  <div class="card"><p><b>Nearby, Menu, Compare.</b> A glass pill over the content on every screen but the dish page. Menu opens the last restaurant, or the picker when none has been chosen. Compare carries a badge with the shortlist count, so no separate bar is needed above the menu.</p></div>
+  <div class="card"><p><b>Nearby, Menu, Compare, each with a visible label.</b> A dark pill over reserved space at the bottom of every screen but the dish page, so content never sits under it. Menu opens the last restaurant, or the picker when none has been chosen. Compare carries a badge with the shortlist count, so no separate bar is needed above the menu.</p></div>
 
   <h2>Menu row</h2>
   <div class="rule"></div>
@@ -90,7 +90,7 @@
   <div class="card">
     <ul>
       <li><b>Count:</b> the Compare tab carries a badge once anything is shortlisted; the toggle's toast says "added &middot; Compare 2 of 3".</li>
-      <li><b>Column:</b> photo or no-photo block, name, restaurant, price, the full description, the ingredients line, Remove. One column per dish, one to three, all equal width. One "Add another from the menu" button below while there is room.</li>
+      <li><b>Column:</b> photo or no-photo block, name, restaurant, price, the full description, the ingredients line, Remove. One column per dish, one to three, all equal width. At text sizes of 130% and above, a three-dish shortlist uses two columns, with the third dish on a second row. One "Add another from the menu" button below while there is room; with nothing shortlisted, the screen says so and offers "Go to the menu".</li>
       <li><b>Never a cart.</b> No totals, no quantities, no next step past the menu. The subtitle is only the count: "2 of 3 dishes".</li>
     </ul>
   </div>
@@ -101,7 +101,7 @@
     <ul>
       <li>Every action is a real button with a visible focus ring; rows, toggles and photo navigation work from the keyboard.</li>
       <li>Back returns focus to the row that opened the dish.</li>
-      <li>Text scales to 140% through one custom property; layouts reflow rather than clip.</li>
+      <li>Text scales to 140% through one custom property; layouts reflow rather than clip, and the compare grid drops from three columns to two.</li>
       <li>Still to do: a screen-reader pass, contrast measurement on glass tags over photos, and touch-target checks on a device.</li>
     </ul>
   </div>
