@@ -1050,3 +1050,12 @@ a.bar-loc:hover { color: var(--gold); }
 .spread.wide { grid-template-columns: minmax(0, 1fr) 500px; }
 @media (max-width: 1080px) { .spread.wide { grid-template-columns: minmax(0, 1fr) 420px; } }
 @media (max-width: 860px) { .spread.wide { grid-template-columns: 1fr; } .spread.wide .spread-fig.pair { max-width: 100%; } }
+
+/* close-ups sit in the prose lane, under the paragraph they support */
+.spread .callout { margin: 20px 0 22px; max-width: 560px; }
+.spread .callout .fig-live { border-radius: 14px; border: 1px solid rgba(74,59,44,0.14); box-shadow: 0 10px 26px rgba(30,18,8,0.10); }
+.spread .callout figcaption { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--meta); margin-top: 10px; line-height: 1.6; }
+.spread .callout figcaption .fk { text-transform: uppercase; letter-spacing: 0.12em; font-size: 10px; color: var(--rose-2); margin-right: 8px; }
+.strip-hint { display: none; margin: 10px var(--px) 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rose-2); }
+.strip3:focus-visible { outline: 2px solid var(--rose-2); outline-offset: 6px; border-radius: 8px; }
+@media (max-width: 720px) { .strip-hint { display: block; } }
