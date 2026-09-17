@@ -1,16 +1,16 @@
-// Morsel — compare: two or three shortlisted dishes side by side. A way to
-// decide, not a cart: nothing here is ordered.
+// Morsel — compare: the shortlisted dishes side by side, one column each.
+// A way to decide, not a cart: nothing here is ordered.
 function CompareScreen({ shortlist, onRemove, onOpen, onBack, onAdd }) {
   const { dish, price, ingredientsLine, compareMax, u, restaurant } = window.MorselData;
   const items = shortlist.map(dish).filter(Boolean);
-  const cols = Math.min(compareMax, Math.max(2, items.length + (items.length < compareMax ? 1 : 0)));
+  const cols = Math.max(1, items.length);
   return (
     <div className="m-screen m-fade">
       <div className="m-topbar" style={{ paddingTop: 54 }}>
         <button className="m-iconbtn" aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
         <div style={{ flex: 1 }}>
           <h1 className="m-heading">Compare</h1>
-          <div className="m-caption" style={{ color: "var(--ink-2)" }}>{items.length} of {compareMax} dishes · a shortlist, not an order</div>
+          <div className="m-caption" style={{ color: "var(--ink-2)" }}>{items.length} of {compareMax} dishes</div>
         </div>
       </div>
       <div className="m-scroll">
@@ -39,14 +39,7 @@ function CompareScreen({ shortlist, onRemove, onOpen, onBack, onAdd }) {
               </div>
             );
           })}
-          {items.length < compareMax && (
-            <button className="m-col-add" onClick={onAdd}>
-              <MIcon name="plus" size={22} />
-              <span className="m-caption" style={{ fontWeight: 700 }}>Add another from the menu</span>
-            </button>
-          )}
         </div>
-        <p className="m-note m-caption">Prices and descriptions are the menu's. Photos show one visit's plating and don't show ingredients or portion size.</p>
         <div className="m-actions">
           <button className="m-btn m-btn-primary" onClick={onAdd}>{items.length < compareMax ? "Add another from the menu" : "Back to the menu"}</button>
         </div>

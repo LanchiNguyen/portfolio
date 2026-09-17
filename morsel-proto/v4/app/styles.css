@@ -301,7 +301,6 @@
 .m-col .m-thumb { width: 100%; height: auto; aspect-ratio: 1; }
 .m-col .m-nophoto { width: 100%; aspect-ratio: 1; }
 .m-col-name { font-weight: 700; font-size: calc(14px * var(--ts)); line-height: 1.25; overflow-wrap: anywhere; }
-.m-col-add { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 180px; border-radius: 16px; border: 1.5px dashed var(--ink-3); color: var(--ink-2); text-align: center; padding: 12px; }
 .m-col .m-btn { min-height: 40px; padding: 0 14px; font-size: calc(13px * var(--ts)); }
 .m-note { margin: 14px 16px 0; padding: 12px 14px; border-radius: 14px; background: var(--sunken); color: var(--ink-2); }
 

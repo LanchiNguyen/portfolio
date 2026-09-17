@@ -23,7 +23,8 @@ function PickerScreen({ onPick, onBack }) {
           {withPhotos.map((r) => {
             const thumbs = dishes.filter((d) => d.rest === r.id && d.photos.length).slice(0, 3);
             return (
-              <button key={r.id} role="listitem" className="m-pick" data-rest-id={r.id} onClick={() => onPick(r.id)} aria-label={r.name + ", " + r.hood + ", " + coverageLabel(r.id)}>
+              <div key={r.id} role="listitem">
+              <button className="m-pick" data-rest-id={r.id} onClick={() => onPick(r.id)} aria-label={r.name + ", " + r.hood + ", " + coverageLabel(r.id)}>
                 <div className="m-pick-strip" aria-hidden="true">{thumbs.map((d) => <img key={d.id} src={u(d.photos[0].img, 300)} alt="" />)}</div>
                 <div className="m-pick-text">
                   <span className="m-row-name">{r.name}</span>
@@ -32,6 +33,7 @@ function PickerScreen({ onPick, onBack }) {
                 </div>
                 <MIcon name="next" size={20} />
               </button>
+              </div>
             );
           })}
           {without.length > 0 && (

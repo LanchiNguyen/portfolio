@@ -1,6 +1,6 @@
 // Morsel — a dish: its photos with their source, then the menu's own words.
-// Photos are one visit's plating. The page says so, next to the ingredients
-// line, because a photo cannot show what is in a dish or how much of it comes.
+// A photo helps picture the food; it does not confirm ingredients or today's
+// presentation. The page says so briefly, next to the ingredients line.
 function PhotoStrip({ dish }) {
   const { u, sourceLabel } = window.MorselData;
   const [i, setI] = React.useState(0);
@@ -62,8 +62,8 @@ function DishScreen({ dishId, shortlist, onToggle, onBack, onCompare, onMenu, ba
           <p className="m-body" style={{ marginTop: 12 }}>{d.desc}</p>
         </div>
         <div className="m-facts">
-          <div className="m-fact"><span className="k">Photos</span><span className="v">{photoLine}<small>Photos show one visit's plating. They don't show ingredients, portion size or how the dish looks today.</small></span></div>
-          <div className="m-fact"><span className="k">Ingredients</span><span className="v">{ingredientsLine(d)}<small>Ingredient lists cover only nuts, gluten, dairy and shellfish, and don't cover preparation or cross-contact. Ask your server.</small></span></div>
+          <div className="m-fact"><span className="k">Photos</span><span className="v">{photoLine}<small>Appearance can vary between visits.</small></span></div>
+          <div className="m-fact"><span className="k">Ingredients</span><span className="v">{ingredientsLine(d)}<small>Covers nuts, gluten, dairy and shellfish only, not preparation or cross-contact. Ask your server.</small></span></div>
         </div>
         <div className="m-actions">
           <button className="m-btn m-btn-primary" aria-pressed={on} disabled={full} onClick={() => onToggle(d.id)}>
