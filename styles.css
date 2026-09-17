@@ -852,12 +852,13 @@ a { color: inherit; text-decoration: none; }
 /* ============================ V2 ADDITIONS ============================ */
 /* TL;DR summary card at the top of every case study */
 .tldr { margin: 26px var(--px) 0; border: 1px solid rgba(74,59,44,0.22); border-radius: 12px; background: var(--card); padding: 22px 26px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px 28px; }
+.tldr.tldr-two { grid-template-columns: 1fr 1fr; }
 .tldr .cell { display: flex; flex-direction: column; gap: 6px; }
 .tldr .cell.wide { grid-column: 1 / -1; }
 .tldr .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--rose-2); text-transform: uppercase; }
 .tldr .v { font-size: 14.5px; line-height: 1.55; color: var(--body-ink); }
 .tldr .v strong { color: var(--ink); }
-@media (max-width: 720px) { .tldr { grid-template-columns: 1fr; padding: 18px; } }
+@media (max-width: 720px) { .tldr, .tldr.tldr-two { grid-template-columns: 1fr; padding: 18px; } }
 
 /* honest status line inside TL;DR / results */
 .status-flag { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sleeve-ink); background: var(--gold); border-radius: 4px; padding: 3px 9px; margin-right: 8px; }

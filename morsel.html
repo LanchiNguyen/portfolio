@@ -58,40 +58,39 @@
       </section>
 
       <!-- TL;DR -->
-      <div class="tldr rv">
+      <div class="tldr tldr-two rv">
         <div class="cell"><span class="k" data-ed="12">The idea</span><span class="v" data-ed="13">Browse by photo, compare a few dishes, and save the ones you want to try.</span></div>
         <div class="cell"><span class="k" data-ed="14">The redesign</span><span class="v" data-ed="15">I added details to the cards, kept search filters in place, and simplified the step from a dish to its restaurant menu.</span></div>
-        <div class="cell"><span class="k" data-ed="16">Status</span><span class="v" data-ed="17"><span class="status-flag">Working prototype &middot; v3.2 &middot; not shipped</span> Fictional restaurants and sample menu data. User testing is planned.</span></div>
       </div>
 
-      <p class="method-note rv" data-ed="18"><strong>About this case:</strong> I revisited the earlier prototype in September 2026. The changes came from reviewing the design and walking through the app, not from user research. Prices, ingredients, links and dates are sample data.</p>
+      <p class="method-note rv" data-ed="16"><strong>About this case:</strong> I revisited the earlier prototype in September 2026. The changes came from reviewing the design and walking through the app, not from user research. Prices, ingredients, links and dates are sample data.</p>
 
       <!-- cover -->
       <div class="cover rv">
         <div class="lit"><div class="lit-in">
-          <img class="shot-img" src="images/morsel/card.webp" alt="Morsel v3.2 cover: the feed with labeled dish cards showing name, restaurant, price and distance; the dish page with price, distance, menu status and ingredient status above one primary action; and the next-step sheet that names the destination and says no order is placed" width="1600" height="900" data-ed="19" />
+          <img class="shot-img" src="images/morsel/card.webp" alt="Morsel v3.2 cover: the feed with labeled dish cards showing name, restaurant, price and distance; the dish page with price, distance, menu status and ingredient status above one primary action; and the next-step sheet that names the destination and says no order is placed" width="1600" height="900" data-ed="17" />
         </div></div>
       </div>
 
       <!-- try the prototype -->
       <section class="proj-sec" id="try" aria-label="Try the Morsel prototype">
         <div class="rule"></div>
-        <div class="sechead"><span class="lead" data-ed="20">TRY THE PROTOTYPE</span><span>V3.2 BUILD &middot; ILLUSTRATIVE DATA</span></div>
-        <p class="method-note" data-ed="21"><strong>Try it:</strong> find something near Shaw for under $15, save another option, then continue to the restaurant menu.</p>
+        <div class="sechead"><span class="lead" data-ed="18">TRY THE PROTOTYPE</span><span>V3.2 BUILD &middot; ILLUSTRATIVE DATA</span></div>
+        <p class="method-note" data-ed="19"><strong>Try it:</strong> find something near Shaw for under $15, save another option, then continue to the restaurant menu.</p>
         <div class="demo-stage rv" data-src="morsel-proto/index.html" data-w="430" data-h="900" data-poster="images/morsel/stage-morsel.webp" data-title="Morsel v3.2 interactive prototype — entry, feed, search, dish detail, saves, and the next-step sheet">
           <div class="demo-head">
             <span class="demo-kicker">MORSEL V3.2 &middot; FULL FLOW</span>
             <a class="demo-open" href="morsel-proto/index.html">OPEN FULL PROTOTYPE &#8599;</a>
           </div>
           <div class="demo-frame">
-            <div class="demo-poster"><img src="images/morsel/stage-morsel.webp" alt="Poster: the Morsel v3.2 prototype welcome screen — 'Find a dish, then check it' over a dish photo grid, with an Explore dishes button" width="430" height="900" data-ed="22" /></div>
+            <div class="demo-poster"><img src="images/morsel/stage-morsel.webp" alt="Poster: the Morsel v3.2 prototype welcome screen — 'Find a dish, then check it' over a dish photo grid, with an Explore dishes button" width="430" height="900" data-ed="20" /></div>
             <button class="demo-load">&#9654;&ensp;TRY THE PROTOTYPE</button>
           </div>
           <div class="demo-foot">
             <span class="demo-note-txt">FICTIONAL RESTAURANTS &middot; SIMULATED LINKS &middot; NO ORDERS PLACED</span>
             <button class="demo-reset">RESET DEMO VIEW</button>
           </div>
-          <p class="demo-note" data-ed="23">Interactive concept with fictional restaurants and sample menu data. Links and calls are simulated; no orders are placed. You can also open the prototype in its own window using the link above.</p>
+          <p class="demo-note" data-ed="21">Interactive concept with fictional restaurants and sample menu data. Links and calls are simulated; no orders are placed. You can also open the prototype in its own window using the link above.</p>
         </div>
       </section>
 
@@ -99,10 +98,10 @@
       <section class="proj-sec" id="hypothesis">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="24">CHOOSING DINNER<br>TOOK TOO MANY TAPS</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="22">CHOOSING DINNER<br>TOOK TOO MANY TAPS</h2>
           <div>
-            <p class="statement" data-ed="25">The first feed gave the food plenty of room, but left out the details needed to choose between dishes. You had to open each one to see its name and price. Switching to search also lost the budget and distance you had already set.</p>
-            <p class="proj-p" style="margin-top:18px" data-ed="26">I focused the revision on a simple task: <strong>find a dish, compare it with another, and decide where to eat.</strong> I wanted to keep the appeal of browsing food photos while making those practical checks easier. Whether this would be useful enough to replace someone&rsquo;s usual search is still an open question.</p>
+            <p class="statement" data-ed="23">The first feed gave the food plenty of room, but left out the details needed to choose between dishes. You had to open each one to see its name and price. Switching to search also lost the budget and distance you had already set.</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="24">I focused the revision on a simple task: <strong>find a dish, compare it with another, and decide where to eat.</strong> I wanted to keep the appeal of browsing food photos while making those practical checks easier. Whether this would be useful enough to replace someone&rsquo;s usual search is still an open question.</p>
           </div>
         </div>
       </section>
@@ -111,24 +110,24 @@
       <section class="proj-sec" id="cards">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="27">COMPARE DISHES<br>WITHOUT OPENING EACH ONE</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="25">COMPARE DISHES<br>WITHOUT OPENING EACH ONE</h2>
           <div>
-            <p class="proj-p" data-ed="28">I added the dish name, restaurant, neighborhood, price and distance below each photo. The same layout appears in search and saves, so you can compare dishes wherever you find them. It takes more space than the old grid, but you no longer need to open a dish just to check its price.</p>
+            <p class="proj-p" data-ed="26">I added the dish name, restaurant, neighborhood, price and distance below each photo. The same layout appears in search and saves, so you can compare dishes wherever you find them. It takes more space than the old grid, but you no longer need to open a dish just to check its price.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="morsel-v31-feed-foryou-shaw" role="img" aria-label="v3.1 feed: a full-bleed photo hero over a masonry grid of unlabeled dish photos; no name, price or distance is visible without opening a dish" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="29"><span class="fk">Before &middot; v3.1</span>Photos without names or prices.</figcaption>
+                <figcaption class="figcap" data-ed="27"><span class="fk">Before &middot; v3.1</span>Photos without names or prices.</figcaption>
               </figure>
               <figure class="figure fig-down">
                 <div class="fig-live shot-img" data-fig="morsel-v32-feed-cards" role="img" aria-label="v3.2 feed: a shorter featured dish, then labeled cards with the dish name, restaurant and neighborhood, menu price and distance, with a count and the sort explained" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="30"><span class="fk">After &middot; v3.2</span>Details below each photo.</figcaption>
+                <figcaption class="figcap" data-ed="28"><span class="fk">After &middot; v3.2</span>Details below each photo.</figcaption>
               </figure>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="31">On the dish page, I moved price, distance and ingredient information above the menu button. I also removed the sample reviews and repeat-order score: there were no real orders behind them. Price filters now show dollar amounts, and distance is shown in miles rather than estimated walk times.</p>
+            <p class="proj-p" style="margin-top: 26px" data-ed="29">On the dish page, I moved price, distance and ingredient information above the menu button. I also removed the sample reviews and repeat-order score: there were no real orders behind them. Price filters now show dollar amounts, and distance is shown in miles rather than estimated walk times.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-v32-detail-top" role="img" aria-label="v3.2 dish page: photo, then dish name, restaurant, a one-line menu description, and a facts list of price, distance from Shaw, menu status and listed allergens, followed by one primary next-step button"></div><figcaption data-ed="32">Price and ingredients above the menu button</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-filters" role="img" aria-label="v3.2 filters sheet: menu price per dish with explicit amounts, distance from Shaw in miles labeled as straight-line, and a note that dietary settings are never cleared here"></div><figcaption data-ed="33">Price ranges and distance in miles</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-imgfail" role="img" aria-label="v3.2 feed with images failing: each card still shows the cuisine, dish name, restaurant, price and distance in place of the photo"></div><figcaption data-ed="34">Dish details stay readable if a photo fails to load</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-detail-top" role="img" aria-label="v3.2 dish page: photo, then dish name, restaurant, a one-line menu description, and a facts list of price, distance from Shaw, menu status and listed allergens, followed by one primary next-step button"></div><figcaption data-ed="30">Price and ingredients above the menu button</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-filters" role="img" aria-label="v3.2 filters sheet: menu price per dish with explicit amounts, distance from Shaw in miles labeled as straight-line, and a note that dietary settings are never cleared here"></div><figcaption data-ed="31">Price ranges and distance in miles</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-imgfail" role="img" aria-label="v3.2 feed with images failing: each card still shows the cuisine, dish name, restaurant, price and distance in place of the photo"></div><figcaption data-ed="32">Dish details stay readable if a photo fails to load</figcaption></figure>
             </div>
           </div>
         </div>
@@ -138,24 +137,24 @@
       <section class="proj-sec" id="context">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="35">PICK UP WHERE<br>YOU LEFT OFF</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="33">PICK UP WHERE<br>YOU LEFT OFF</h2>
           <div>
-            <p class="proj-p" data-ed="36">Opening search used to reset the context from the feed. I changed it to keep the selected area, price range and distance. Returning from a dish now brings back the query and scroll position, with keyboard focus on the card you opened.</p>
+            <p class="proj-p" data-ed="34">Opening search used to reset the context from the feed. I changed it to keep the selected area, price range and distance. Returning from a dish now brings back the query and scroll position, with keyboard focus on the card you opened.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
-                <img class="shot-img" src="images/morsel/v31-search-no-context-2x.webp" alt="v3.1 search opened after setting a price and distance filter on the feed: it shows 'Trending in DC' chips and 'Everything near you' with the full catalog, ignoring both filters" width="804" height="1748" loading="lazy" style="max-width:225px; border-radius:18px" data-ed="37" />
-                <figcaption class="figcap" data-ed="38"><span class="fk">Before &middot; v3.1</span>Search ignored the filters set on the feed.</figcaption>
+                <img class="shot-img" src="images/morsel/v31-search-no-context-2x.webp" alt="v3.1 search opened after setting a price and distance filter on the feed: it shows 'Trending in DC' chips and 'Everything near you' with the full catalog, ignoring both filters" width="804" height="1748" loading="lazy" style="max-width:225px; border-radius:18px" data-ed="35" />
+                <figcaption class="figcap" data-ed="36"><span class="fk">Before &middot; v3.1</span>Search ignored the filters set on the feed.</figcaption>
               </figure>
               <figure class="figure fig-down">
                 <div class="fig-live shot-img" data-fig="morsel-v32-search-context" role="img" aria-label="v3.2 search for 'pizza' with the feed's price and distance filters carried in as chips above the results, a note that filters stay on when a search is cleared, and labeled result cards" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="39"><span class="fk">After &middot; v3.2</span>The same filters stay active in search.</figcaption>
+                <figcaption class="figcap" data-ed="37"><span class="fk">After &middot; v3.2</span>The same filters stay active in search.</figcaption>
               </figure>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="40">When there are no results, the app explains why: the dish is missing from the catalog, outside the browsing filters, or excluded by dietary settings. You can change the relevant setting without starting over. Clearing price and distance filters keeps dietary settings in place.</p>
+            <p class="proj-p" style="margin-top: 26px" data-ed="38">When there are no results, the app explains why: the dish is missing from the catalog, outside the browsing filters, or excluded by dietary settings. You can change the relevant setting without starting over. Clearing price and distance filters keeps dietary settings in place.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-v32-search-excluded-filters" role="img" aria-label="v3.2 search for 'steak' with a price and distance filter on: the empty state says one steak dish exists but the browsing filters removed it, and offers to clear those filters only"></div><figcaption data-ed="41">A result excluded by price or distance</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-zero-result" role="img" aria-label="v3.2 feed with no dish fitting every setting: the active lifestyle, allergy and filter chips remain visible with one recovery action per tier, and a note that allergy settings are never cleared by these buttons"></div><figcaption data-ed="42">Change browsing filters separately from dietary settings</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-no-coverage" role="img" aria-label="v3.2 feed after choosing Boise: 'Boise isn't covered yet', a note that Morsel currently covers Washington DC only, and buttons to browse Washington DC or choose another area"></div><figcaption data-ed="43">An area outside the demo</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-search-excluded-filters" role="img" aria-label="v3.2 search for 'steak' with a price and distance filter on: the empty state says one steak dish exists but the browsing filters removed it, and offers to clear those filters only"></div><figcaption data-ed="39">A result excluded by price or distance</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-zero-result" role="img" aria-label="v3.2 feed with no dish fitting every setting: the active lifestyle, allergy and filter chips remain visible with one recovery action per tier, and a note that allergy settings are never cleared by these buttons"></div><figcaption data-ed="40">Change browsing filters separately from dietary settings</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-no-coverage" role="img" aria-label="v3.2 feed after choosing Boise: 'Boise isn't covered yet', a note that Morsel currently covers Washington DC only, and buttons to browse Washington DC or choose another area"></div><figcaption data-ed="41">An area outside the demo</figcaption></figure>
             </div>
           </div>
         </div>
@@ -165,29 +164,29 @@
       <section class="proj-sec" id="honest">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="44">RETHINKING<br>THE ORDER BUTTON</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="42">RETHINKING<br>THE ORDER BUTTON</h2>
           <div>
-            <p class="method-note" data-ed="45"><strong>Retrospective design review.</strong> This section revisits the earlier order flow and sample score. These changes have not been tested with participants.</p>
-            <p class="proj-p" data-ed="46">The old order screen let someone acknowledge an allergy warning and continue. That checkbox did not resolve the ingredient conflict, so I removed it. The revised screen points to other dishes and the restaurant menu. I also removed the repeat-order percentage because Morsel has no connection to actual order records.</p>
+            <p class="method-note" data-ed="43"><strong>Retrospective design review.</strong> This section revisits the earlier order flow and sample score. These changes have not been tested with participants.</p>
+            <p class="proj-p" data-ed="44">The old order screen let someone acknowledge an allergy warning and continue. That checkbox did not resolve the ingredient conflict, so I removed it. The revised screen points to other dishes and the restaurant menu. I also removed the repeat-order percentage because Morsel has no connection to actual order records.</p>
             <div class="fig-duo phones" style="margin-top: 22px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="morsel-v31-order-allergy-locked" role="img" aria-label="v3.1 order sheet: 'Contains nuts — an allergy you flagged. Ordering stays locked until you confirm below.' Delivery providers with fees and ETAs are shown locked behind an unchecked acknowledgement" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="47"><span class="fk">Before &middot; v3.1</span>Checking the box unlocked the simulated ordering options.</figcaption>
+                <figcaption class="figcap" data-ed="45"><span class="fk">Before &middot; v3.1</span>Checking the box unlocked the simulated ordering options.</figcaption>
               </figure>
               <figure class="figure fig-down">
                 <div class="fig-live shot-img" data-fig="morsel-v32-detail-conflict" role="img" aria-label="v3.2 dish page opened directly for a dish whose menu lists nuts while a nut allergy is set: a note that the menu lists nuts which you asked to avoid, that to check ingredients and preparation with the restaurant, and primary actions to see other dishes at the restaurant or the restaurant's menu; there is no order or unlock control" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="48"><span class="fk">After &middot; v3.2</span>The conflict stays visible, with links to other dishes and the restaurant.</figcaption>
+                <figcaption class="figcap" data-ed="46"><span class="fk">After &middot; v3.2</span>The conflict stays visible, with links to other dishes and the restaurant.</figcaption>
               </figure>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="49">Missing ingredient information now has its own state. With an allergy setting active, those dishes appear separately from matches. Dishes with a listed conflict are excluded from recommendations, but remain visible in saves and restaurant menus with a warning. The same checks apply throughout the app.</p>
-            <p class="proj-p" style="margin-top: 18px" data-ed="50">I replaced &ldquo;Order&rdquo; with labels such as &ldquo;View restaurant menu&rdquo; and &ldquo;Check with restaurant.&rdquo; The next screen asks you to check current prices and availability on the restaurant&rsquo;s menu, then continues. In this prototype that is where the flow ends.</p>
+            <p class="proj-p" style="margin-top: 26px" data-ed="47">Missing ingredient information now has its own state. With an allergy setting active, those dishes appear separately from matches. Dishes with a listed conflict are excluded from recommendations, but remain visible in saves and restaurant menus with a warning. The same checks apply throughout the app.</p>
+            <p class="proj-p" style="margin-top: 18px" data-ed="48">I replaced &ldquo;Order&rdquo; with labels such as &ldquo;View restaurant menu&rdquo; and &ldquo;Check with restaurant.&rdquo; The next screen asks you to check current prices and availability on the restaurant&rsquo;s menu, then continues. In this prototype that is where the flow ends.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-v32-detail-unknown" role="img" aria-label="v3.2 dish page for a tasting plate with a nut allergy set: 'We don't have ingredient information for this dish. We can't confirm whether it fits your allergy settings. Check with the restaurant before deciding.' The primary action reads Check with restaurant"></div><figcaption data-ed="51">A dish with missing ingredient information</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-search-unknown" role="img" aria-label="v3.2 search for 'tasting' with a nut allergy set: no matches; a note that one dish has no ingredient information and is listed below, not counted as a match; the dish appears under an 'Ingredient information unavailable' heading with a question-mark chip"></div><figcaption data-ed="52">Missing information shown separately from matches</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-next-step" role="img" aria-label="v3.2 next-step sheet for a pizza: 'View the restaurant menu', the dish and price, a line asking to check current prices and availability on the restaurant's menu, and buttons Continue to menu and Back"></div><figcaption data-ed="53">The restaurant menu step</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-next-step-none" role="img" aria-label="v3.2 next-step sheet for a restaurant with no online menu: 'Check with Hollis', a line that the restaurant has no online menu with a phone number and neighborhood, and buttons Call Hollis and Back"></div><figcaption data-ed="54">Contact details when no menu is available</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-next-step-done" role="img" aria-label="v3.2 end state: the sheet header reads 'End of prototype' above the dish and restaurant, with a single Back button"></div><figcaption data-ed="55">End of the prototype</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v31-trust-method" role="img" aria-label="v3.1 dish page: a percentage ring reading 'ordered again within 90 days' with an illustrative diner count and the expanded method text; removed in v3.2"></div><figcaption data-ed="56">Earlier version: the sample score I removed</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-detail-unknown" role="img" aria-label="v3.2 dish page for a tasting plate with a nut allergy set: 'We don't have ingredient information for this dish. We can't confirm whether it fits your allergy settings. Check with the restaurant before deciding.' The primary action reads Check with restaurant"></div><figcaption data-ed="49">A dish with missing ingredient information</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-search-unknown" role="img" aria-label="v3.2 search for 'tasting' with a nut allergy set: no matches; a note that one dish has no ingredient information and is listed below, not counted as a match; the dish appears under an 'Ingredient information unavailable' heading with a question-mark chip"></div><figcaption data-ed="50">Missing information shown separately from matches</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-next-step" role="img" aria-label="v3.2 next-step sheet for a pizza: 'View the restaurant menu', the dish and price, a line asking to check current prices and availability on the restaurant's menu, and buttons Continue to menu and Back"></div><figcaption data-ed="51">The restaurant menu step</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-next-step-none" role="img" aria-label="v3.2 next-step sheet for a restaurant with no online menu: 'Check with Hollis', a line that the restaurant has no online menu with a phone number and neighborhood, and buttons Call Hollis and Back"></div><figcaption data-ed="52">Contact details when no menu is available</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-next-step-done" role="img" aria-label="v3.2 end state: the sheet header reads 'End of prototype' above the dish and restaurant, with a single Back button"></div><figcaption data-ed="53">End of the prototype</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v31-trust-method" role="img" aria-label="v3.1 dish page: a percentage ring reading 'ordered again within 90 days' with an illustrative diner count and the expanded method text; removed in v3.2"></div><figcaption data-ed="54">Earlier version: the sample score I removed</figcaption></figure>
             </div>
           </div>
         </div>
@@ -197,14 +196,14 @@
       <section class="proj-sec" id="memory">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="57">KEEP WHAT<br>YOU SAVED</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="55">KEEP WHAT<br>YOU SAVED</h2>
           <div>
-            <p class="proj-p" data-ed="58">Changing a dietary setting should not make a saved dish disappear. Saved cards now show ingredient conflicts, missing information and dishes removed from the menu. I also fixed &ldquo;Recent&rdquo; to use the date a dish was saved. Older saves stay available, with a note when their date is missing.</p>
+            <p class="proj-p" data-ed="56">Changing a dietary setting should not make a saved dish disappear. Saved cards now show ingredient conflicts, missing information and dishes removed from the menu. I also fixed &ldquo;Recent&rdquo; to use the date a dish was saved. Older saves stay available, with a note when their date is missing.</p>
             <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-v32-saved-states" role="img" aria-label="v3.2 saved screen: collections rail, a Recent/Nearest sort with a note on how untimed saves are ordered, a line counting saves that list an allergen, have no ingredient information, or are off the menu, and cards carrying those chips"></div><figcaption data-ed="59">Saved dishes with their current status</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-detail-unlisted" role="img" aria-label="v3.2 dish page for a saved dish that is no longer listed: a dark 'No longer on the menu' note, kept because the diner saved it"></div><figcaption data-ed="60">A saved dish removed from the menu</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-restaurant" role="img" aria-label="v3.2 restaurant page: dish count, menu price range and distance from the demo area, one View restaurant menu button, and the restaurant's dishes with conflict chips shown for context and a note that they are not recommended"></div><figcaption data-ed="61">The restaurant page opens its menu</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-v32-handoff-failure" role="img" aria-label="v3.2 restaurant-menu sheet after a failure to open the menu: the dish and restaurant stay visible, 'Couldn't open the menu' is shown, and Try again and Back remain"></div><figcaption data-ed="62">Retry a failed menu link without leaving the dish</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-saved-states" role="img" aria-label="v3.2 saved screen: collections rail, a Recent/Nearest sort with a note on how untimed saves are ordered, a line counting saves that list an allergen, have no ingredient information, or are off the menu, and cards carrying those chips"></div><figcaption data-ed="57">Saved dishes with their current status</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-detail-unlisted" role="img" aria-label="v3.2 dish page for a saved dish that is no longer listed: a dark 'No longer on the menu' note, kept because the diner saved it"></div><figcaption data-ed="58">A saved dish removed from the menu</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-restaurant" role="img" aria-label="v3.2 restaurant page: dish count, menu price range and distance from the demo area, one View restaurant menu button, and the restaurant's dishes with conflict chips shown for context and a note that they are not recommended"></div><figcaption data-ed="59">The restaurant page opens its menu</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-handoff-failure" role="img" aria-label="v3.2 restaurant-menu sheet after a failure to open the menu: the dish and restaurant stay visible, 'Couldn't open the menu' is shown, and Try again and Back remain"></div><figcaption data-ed="60">Retry a failed menu link without leaving the dish</figcaption></figure>
             </div>
           </div>
         </div>
@@ -214,11 +213,11 @@
       <section class="proj-sec" id="accessibility">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="63">KEYBOARD AND<br>READABILITY CHECKS</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="61">KEYBOARD AND<br>READABILITY CHECKS</h2>
           <div>
-            <p class="proj-p" data-ed="64">I added descriptive names to dish cards and kept Save as a separate button. The menu dialog supports Tab and Escape, and returns focus to its opener when closed. Status labels use text and symbols as well as color. The enlarged-text example below checks the layout; a full screen-reader, contrast and touch review is still needed.</p>
+            <p class="proj-p" data-ed="62">I added descriptive names to dish cards and kept Save as a separate button. The menu dialog supports Tab and Escape, and returns focus to its opener when closed. Status labels use text and symbols as well as color. The enlarged-text example below checks the layout; a full screen-reader, contrast and touch review is still needed.</p>
             <div class="phone-grid pg-solo" style="margin-top: 18px; max-width: 245px">
-              <figure><div class="fig-live" data-fig="morsel-v32-textscale-140" role="img" aria-label="The v3.2 dish page rendered at 140 percent text scale: the facts list and buttons reflow without truncation"></div><figcaption data-ed="65">Dish detail at 140% text size</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-v32-textscale-140" role="img" aria-label="The v3.2 dish page rendered at 140 percent text scale: the facts list and buttons reflow without truncation"></div><figcaption data-ed="63">Dish detail at 140% text size</figcaption></figure>
             </div>
           </div>
         </div>
@@ -228,19 +227,19 @@
       <section class="proj-sec" id="evaluation">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="66">WHAT I FOUND<br>DURING REVIEW</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="64">WHAT I FOUND<br>DURING REVIEW</h2>
           <div>
-            <p class="method-note" data-ed="67"><strong>Design review &middot; September 2026.</strong> These issues came from inspecting the source and walking through the prototype.</p>
+            <p class="method-note" data-ed="65"><strong>Design review &middot; September 2026.</strong> These issues came from inspecting the source and walking through the prototype.</p>
             <ul class="feat-list">
-              <li data-ed="68"><strong>Search lost filters and the query.</strong> Both now stay in place when opening a dish and returning to results.</li>
-              <li data-ed="69"><strong>Missing ingredient data looked like no conflict.</strong> I added a separate unknown state and two sample dishes to check it.</li>
-              <li data-ed="70"><strong>Related dishes ignored dietary settings.</strong> They now use the same checks as the feed.</li>
-              <li data-ed="71"><strong>The restaurant button selected the first dish automatically.</strong> It now opens the restaurant menu.</li>
-              <li data-ed="72"><strong>&ldquo;Recent&rdquo; followed catalog order.</strong> New saves now sort by the time they were saved.</li>
-              <li data-ed="73"><strong>Hours, delivery estimates and scores were invented.</strong> I removed those displays and the claims attached to them.</li>
-              <li data-ed="74"><strong>A missing city could break the feed.</strong> The prototype now starts in Shaw, DC.</li>
+              <li data-ed="66"><strong>Search lost filters and the query.</strong> Both now stay in place when opening a dish and returning to results.</li>
+              <li data-ed="67"><strong>Missing ingredient data looked like no conflict.</strong> I added a separate unknown state and two sample dishes to check it.</li>
+              <li data-ed="68"><strong>Related dishes ignored dietary settings.</strong> They now use the same checks as the feed.</li>
+              <li data-ed="69"><strong>The restaurant button selected the first dish automatically.</strong> It now opens the restaurant menu.</li>
+              <li data-ed="70"><strong>&ldquo;Recent&rdquo; followed catalog order.</strong> New saves now sort by the time they were saved.</li>
+              <li data-ed="71"><strong>Hours, delivery estimates and scores were invented.</strong> I removed those displays and the claims attached to them.</li>
+              <li data-ed="72"><strong>A missing city could break the feed.</strong> The prototype now starts in Shaw, DC.</li>
             </ul>
-            <p class="proj-p" style="margin-top:18px" data-ed="75">The review checked that these interactions work. It did not establish whether people choose food more easily, understand the ingredient notices, or would use Morsel instead of their usual apps.</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="73">The review checked that these interactions work. It did not establish whether people choose food more easily, understand the ingredient notices, or would use Morsel instead of their usual apps.</p>
           </div>
         </div>
       </section>
@@ -249,21 +248,21 @@
       <section class="proj-sec" id="appendix">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="76">DESIGN NOTES<br>AND TEST PLAN</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="74">DESIGN NOTES<br>AND TEST PLAN</h2>
           <div>
-            <p class="proj-p" data-ed="77">These documents explain the current flow, alternatives and component rules. They were written retrospectively and include a plan for future research. Earlier designs are labeled for comparison.</p>
+            <p class="proj-p" data-ed="75">These documents explain the current flow, alternatives and component rules. They were written retrospectively and include a plan for future research. Earlier designs are labeled for comparison.</p>
             <figure class="figure" style="margin-top: 18px">
               <div class="fig-live shot-img" data-fig="morsel-doc-wireflow" role="img" aria-label="The Morsel v3.2 wireflow: entry, feed, search, dish detail, restaurant, next-step sheet and saves, with green tags for implemented changes and amber tags for assumptions still to test"></div>
-              <figcaption class="figcap" data-ed="78"><span class="fk">App flow and open questions</span><a class="doc-link" href="morsel-docs/wireflow.html">View the flow &rarr;</a></figcaption>
+              <figcaption class="figcap" data-ed="76"><span class="fk">App flow and open questions</span><a class="doc-link" href="morsel-docs/wireflow.html">View the flow &rarr;</a></figcaption>
             </figure>
             <div class="fig-duo" style="margin-top: 24px">
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="morsel-doc-explorations-preview" role="img" aria-label="Preview of the structural explorations document: alternatives for feed density, entry order, evidence, and the next-step action, each with tradeoffs, the option chosen in v3.2, and what the review changed"></div>
-                <figcaption class="figcap" data-ed="79"><span class="fk">Design alternatives</span><a class="doc-link" href="morsel-docs/explorations.html">View the alternatives &rarr;</a></figcaption>
+                <figcaption class="figcap" data-ed="77"><span class="fk">Design alternatives</span><a class="doc-link" href="morsel-docs/explorations.html">View the alternatives &rarr;</a></figcaption>
               </figure>
               <figure class="figure">
                 <div class="fig-live shot-img" data-fig="morsel-doc-ds-preview" role="img" aria-label="Preview of the design-system addendum: component specifications for the labeled card, state chips, the constraint bar, the next-step sheet and the unknown-ingredient states, with usage rules and accessibility notes"></div>
-                <figcaption class="figcap" data-ed="80"><span class="fk">Component notes</span><a class="doc-link" href="morsel-docs/ds-addendum.html">View the notes &rarr;</a></figcaption>
+                <figcaption class="figcap" data-ed="78"><span class="fk">Component notes</span><a class="doc-link" href="morsel-docs/ds-addendum.html">View the notes &rarr;</a></figcaption>
               </figure>
             </div>
           </div>
@@ -274,19 +273,19 @@
       <section class="proj-sec" id="testing">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="81">WHAT I WANT<br>TO LEARN NEXT</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="79">WHAT I WANT<br>TO LEARN NEXT</h2>
           <div>
-            <p class="proj-p" data-ed="82">I would start by asking five or six people how they chose a recent meal, including what they checked and which apps they used. Then I would try the prototype with tasks like these:</p>
+            <p class="proj-p" data-ed="80">I would start by asking five or six people how they chose a recent meal, including what they checked and which apps they used. Then I would try the prototype with tasks like these:</p>
             <ul class="feat-list">
-              <li data-ed="83">&ldquo;You want dinner soon near the demo area. Pick something you would consider, keeping the menu price within $20.&rdquo;</li>
-              <li data-ed="84">&ldquo;You&rsquo;re in the mood for noodles. Find an option, look at another, then go back.&rdquo;</li>
-              <li data-ed="85">&ldquo;You can&rsquo;t decide yet. Keep two options somewhere you can find later.&rdquo;</li>
-              <li data-ed="86">&ldquo;Now you&rsquo;re ready to get one of them. Show me what you would do next.&rdquo;</li>
+              <li data-ed="81">&ldquo;You want dinner soon near the demo area. Pick something you would consider, keeping the menu price within $20.&rdquo;</li>
+              <li data-ed="82">&ldquo;You&rsquo;re in the mood for noodles. Find an option, look at another, then go back.&rdquo;</li>
+              <li data-ed="83">&ldquo;You can&rsquo;t decide yet. Keep two options somewhere you can find later.&rdquo;</li>
+              <li data-ed="84">&ldquo;Now you&rsquo;re ready to get one of them. Show me what you would do next.&rdquo;</li>
             </ul>
-            <p class="proj-p" style="margin-top:18px" data-ed="87">I would also ask people who manage food allergies what they understand from the ingredient notices and what they would still check with a restaurant. Missing information must not read as confirmation that a dish is suitable.</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="85">I would also ask people who manage food allergies what they understand from the ingredient notices and what they would still check with a restaurant. Missing information must not read as confirmation that a dish is suitable.</p>
             <figure class="figure" style="margin-top: 22px">
               <div class="fig-live shot-img" data-fig="morsel-doc-testing-preview" role="img" aria-label="Preview of the research plan: a problem-relevance round of conversations about a recent meal decision, a usability round with neutral tasks, and a separate comprehension round on the dietary states, with an empty evidence record"></div>
-              <figcaption class="figcap" data-ed="88"><span class="fk">Planned research</span><a class="doc-link" href="morsel-docs/testing-plan.html">View the test plan &rarr;</a></figcaption>
+              <figcaption class="figcap" data-ed="86"><span class="fk">Planned research</span><a class="doc-link" href="morsel-docs/testing-plan.html">View the test plan &rarr;</a></figcaption>
             </figure>
           </div>
         </div>
@@ -295,9 +294,9 @@
       <!-- reflection -->
       <section class="results rv">
         <div class="bloom"></div>
-        <span class="k" data-ed="89">LOOKING BACK</span>
+        <span class="k" data-ed="87">LOOKING BACK</span>
         <div class="results-grid">
-          <p class="big" data-ed="90">The photos drew me into the first version, but the details needed more attention. This revision makes it easier to compare what is on screen. The next step is to find out whether that helps someone choose a meal.</p>
+          <p class="big" data-ed="88">The photos drew me into the first version, but the details needed more attention. This revision makes it easier to compare what is on screen. The next step is to find out whether that helps someone choose a meal.</p>
           <div class="ledger">
             <div><span>Focus</span><b>Comparing dishes and finding a restaurant menu</b></div>
             <div><span>Completed</span><b>Design review and prototype revision</b></div>
@@ -308,7 +307,7 @@
 
       <!-- next project -->
       <a class="next-proj" href="tenet.html">
-        <span><span class="k" data-ed="91">NEXT PROJECT &mdash; &#8470; 02</span><span class="t" data-ed="92">Tenet &mdash; rules at order-send</span></span>
+        <span><span class="k" data-ed="89">NEXT PROJECT &mdash; &#8470; 02</span><span class="t" data-ed="90">Tenet &mdash; rules at order-send</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>
