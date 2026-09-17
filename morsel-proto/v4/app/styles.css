@@ -245,7 +245,7 @@
 .m-rest-row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 16px; border-radius: 18px; background: var(--surface); border: 1.5px solid var(--line); text-align: left; }
 .m-rest-row:active { transform: scale(0.985); }
 .m-rest-row .m-rest-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.m-tag { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 5px 10px; font-size: calc(11.5px * var(--ts)); font-weight: 800; white-space: nowrap; background: var(--sunken); color: var(--ink-2); }
+.m-tag { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 5px 10px; font-size: calc(11.5px * var(--ts)); font-weight: 800; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; background: var(--sunken); color: var(--ink-2); }
 .m-tag[data-tone="on"] { background: var(--ink); color: var(--paper); }
 .m-tag[data-tone="photo"] { background: var(--glass); color: var(--glass-text); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 
@@ -304,3 +304,24 @@
 .m-col-add { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 180px; border-radius: 16px; border: 1.5px dashed var(--ink-3); color: var(--ink-2); text-align: center; padding: 12px; }
 .m-col .m-btn { min-height: 40px; padding: 0 14px; font-size: calc(13px * var(--ts)); }
 .m-note { margin: 14px 16px 0; padding: 12px 14px; border-radius: 14px; background: var(--sunken); color: var(--ink-2); }
+
+/* ---- home: restaurant cards and the picker ---- */
+.m-rail { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 4px; scrollbar-width: none; scroll-snap-type: x proximity; }
+.m-rail::-webkit-scrollbar { display: none; }
+.m-rail > div { flex: none; scroll-snap-align: start; }
+.m-restcard { display: flex; flex-direction: column; width: 200px; border-radius: 18px; overflow: hidden; background: var(--surface); border: 1.5px solid var(--line); text-align: left; }
+.m-restcard:active { transform: scale(0.985); }
+.m-restcard[disabled] { opacity: 0.6; pointer-events: none; }
+.m-restcard-strip { display: flex; gap: 2px; height: 92px; background: var(--sunken); }
+.m-restcard-strip img { flex: 1; min-width: 0; height: 100%; object-fit: cover; }
+.m-restcard-text { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px 12px; min-width: 0; }
+.m-pick-list { display: flex; flex-direction: column; gap: 10px; padding: 12px 16px 0; }
+.m-pick { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px 12px 10px 10px; border-radius: 18px; background: var(--surface); border: 1.5px solid var(--line); text-align: left; }
+.m-pick:active { transform: scale(0.985); }
+.m-pick-strip { display: flex; gap: 2px; width: 108px; height: 72px; border-radius: 12px; overflow: hidden; background: var(--sunken); flex: none; }
+.m-pick-strip img { flex: 1; min-width: 0; height: 100%; object-fit: cover; }
+.m-pick-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.m-pick-none { padding: 10px 14px; background: transparent; }
+.m-tab-badge { position: absolute; top: 4px; right: 4px; min-width: 18px; height: 18px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+.m-tab { position: relative; }
+.m-tab-label { position: absolute; bottom: 3px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }

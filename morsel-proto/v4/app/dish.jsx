@@ -35,9 +35,10 @@ function PhotoStrip({ dish }) {
   );
 }
 
-function DishScreen({ dishId, shortlist, onToggle, onBack, onCompare }) {
-  const { dish, price, ingredientsLine, sections, compareMax, sourceLabel } = window.MorselData;
+function DishScreen({ dishId, shortlist, onToggle, onBack, onCompare, onMenu, backLabel, fromMenu }) {
+  const { dish, price, ingredientsLine, sections, compareMax, sourceLabel, restaurant, dist } = window.MorselData;
   const d = dish(dishId);
+  const r = restaurant(d.rest);
   const section = sections.find((s) => s.id === d.section);
   const on = shortlist.includes(d.id);
   const full = !on && shortlist.length >= compareMax;
@@ -51,12 +52,13 @@ function DishScreen({ dishId, shortlist, onToggle, onBack, onCompare }) {
       <div className="m-scroll">
         <div style={{ position: "relative" }}>
           <PhotoStrip dish={d} />
-          <button className="m-glass m-glass-icon" style={{ position: "absolute", left: 12, top: 56 }} aria-label="Back to menu" onClick={onBack}><MIcon name="back" size={20} /></button>
+          <button className="m-glass m-glass-icon" style={{ position: "absolute", left: 12, top: 56 }} aria-label={backLabel} onClick={onBack}><MIcon name="back" size={20} /></button>
         </div>
         <div style={{ padding: "18px 16px 0" }}>
-          <div className="m-micro" style={{ color: "var(--accent)" }}>{section ? section.name : ""}</div>
+          <div className="m-micro" style={{ color: "var(--accent)" }}>{r.name}{section ? " · " + section.name : ""}</div>
           <h1 className="m-title" style={{ marginTop: 6 }}>{d.name}</h1>
           <div className="m-heading" style={{ marginTop: 6 }}>{price(d)}</div>
+          <div className="m-caption" style={{ color: "var(--ink-2)", marginTop: 4 }}>{r.hood} · {dist(d.rest)}</div>
           <p className="m-body" style={{ marginTop: 12 }}>{d.desc}</p>
         </div>
         <div className="m-facts">
@@ -68,8 +70,9 @@ function DishScreen({ dishId, shortlist, onToggle, onBack, onCompare }) {
             <MIcon name={on ? "check" : "plus"} size={20} />{on ? "In compare · remove" : "Add to compare"}
           </button>
           {full && <p className="m-caption" style={{ color: "var(--ink-2)", textAlign: "center" }}>Compare holds {compareMax} dishes. Remove one to add this.</p>}
+          {!fromMenu && <button className="m-btn m-btn-quiet" onClick={onMenu}>{r.menu === "full" ? "View the full menu" : "View " + r.name + "'s dishes"}</button>}
           {shortlist.length > 0 && <button className="m-btn m-btn-quiet" onClick={onCompare}>Compare {shortlist.length} {shortlist.length === 1 ? "dish" : "dishes"}</button>}
-          <button className="m-btn m-btn-quiet" onClick={onBack}>Back to menu</button>
+          <button className="m-btn m-btn-quiet" onClick={onBack}>{backLabel}</button>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ const root = path.join(__dirname, 'morsel-proto');
 const output = path.join(__dirname, '_site/morsel-proto');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const scripts = [...html.matchAll(/<script type="text\/babel" src="([^"]+)"><\/script>/g)].map(m => m[1]);
-if (scripts.length !== 8) throw new Error('Morsel script inventory changed; review the bundle order.');
+if (scripts.length !== 9) throw new Error('Morsel script inventory changed; review the bundle order.');
 const source = ['v4/app/data.js', ...scripts].map(file => fs.readFileSync(path.join(root, file), 'utf8')).join('\n;\n');
 const bundle = Babel.transform(source, {filename:'morsel-app.jsx', sourceType:'script', presets:['react'], comments:false, compact:true, minified:true}).code;
 fs.writeFileSync(path.join(output, 'app.bundle.js'), bundle);

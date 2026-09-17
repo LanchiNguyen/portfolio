@@ -1,60 +1,56 @@
-// Morsel — restaurant entry: pick the place you're at. No location request;
-// the list is short and filters as you type.
-function EntryScreen({ onPick }) {
-  const { restaurants, coverage } = window.MorselData;
+// Morsel — "I'm at a restaurant": pick the place from photo cards. No location
+// request; the list filters as you type. Places without photos stay listed,
+// smaller and plainly labeled, so nobody navigates into an empty menu.
+function PickerScreen({ onPick, onBack }) {
+  const { restaurants, u, dishes, coverageLabel } = window.MorselData;
   const [q, setQ] = React.useState("");
-  const list = restaurants.filter((r) => (r.name + " " + r.hood + " " + r.kind).toLowerCase().includes(q.trim().toLowerCase()));
+  const match = (r) => (r.name + " " + r.hood + " " + r.kind).toLowerCase().includes(q.trim().toLowerCase());
+  const withPhotos = restaurants.filter((r) => r.menu !== "none" && match(r)).sort((a, b) => a.mi - b.mi);
+  const without = restaurants.filter((r) => r.menu === "none" && match(r)).sort((a, b) => a.mi - b.mi);
   return (
     <div className="m-screen m-fade">
-      <div style={{ padding: "58px 20px 0" }}>
-        <div className="m-micro" style={{ color: "var(--accent)" }}>Morsel</div>
-        <h1 className="m-title" style={{ marginTop: 8 }}>Which restaurant are you at?</h1>
-        <p className="m-second" style={{ color: "var(--ink-2)", marginTop: 8 }}>Pick the place to see its menu with photos of the dishes.</p>
+      <div className="m-topbar" style={{ paddingTop: 54 }}>
+        <button className="m-iconbtn" aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
+        <h1 className="m-heading" style={{ flex: 1 }}>Which restaurant are you at?</h1>
       </div>
-      <label className="m-field" style={{ marginTop: 16 }}>
+      <label className="m-field" style={{ marginTop: 6 }}>
         <MIcon name="search" size={20} />
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Restaurant name or neighborhood" aria-label="Find a restaurant" size={8} />
+        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Name or neighborhood" aria-label="Find a restaurant" size={8} />
         {q && <button className="m-caption" style={{ fontWeight: 700, color: "var(--ink-2)", padding: "6px 2px" }} onClick={() => setQ("")}>Clear</button>}
       </label>
       <div className="m-scroll">
-        <div className="m-rest-list" role="list">
-          {list.map((r) => {
-            const c = r.visual ? coverage(r.id) : null;
+        <div className="m-pick-list" role="list">
+          {withPhotos.map((r) => {
+            const thumbs = dishes.filter((d) => d.rest === r.id && d.photos.length).slice(0, 3);
             return (
-              <button key={r.id} role="listitem" className="m-rest-row" data-rest-id={r.id} onClick={() => onPick(r.id)}>
-                <div className="m-rest-text">
-                  <span className="m-body" style={{ fontWeight: 700 }}>{r.name}</span>
+              <button key={r.id} role="listitem" className="m-pick" data-rest-id={r.id} onClick={() => onPick(r.id)} aria-label={r.name + ", " + r.hood + ", " + coverageLabel(r.id)}>
+                <div className="m-pick-strip" aria-hidden="true">{thumbs.map((d) => <img key={d.id} src={u(d.photos[0].img, 300)} alt="" />)}</div>
+                <div className="m-pick-text">
+                  <span className="m-row-name">{r.name}</span>
                   <span className="m-caption" style={{ color: "var(--ink-2)" }}>{r.hood} · {r.kind}</span>
-                  <span className="m-caption" style={{ color: c ? "var(--ink)" : "var(--ink-3)", fontWeight: 600, marginTop: 2 }}>
-                    {c ? c.photographed + " of " + c.total + " dishes photographed" : "No menu photos yet"}
-                  </span>
+                  <span className="m-tag" data-tone={r.menu === "full" ? "on" : undefined} style={{ alignSelf: "flex-start", marginTop: 4 }}>{coverageLabel(r.id)}</span>
                 </div>
                 <MIcon name="next" size={20} />
               </button>
             );
           })}
-          {!list.length && <p className="m-second" style={{ color: "var(--ink-2)", padding: "12px 4px" }}>No restaurant matches “{q.trim()}”.</p>}
+          {without.length > 0 && (
+            <div className="m-caption" style={{ color: "var(--ink-3)", padding: "10px 4px 0", fontWeight: 700 }}>No menu photos yet</div>
+          )}
+          {without.map((r) => {
+            const label = r.name + ", " + r.hood + ". No menu photos yet.";
+            return (
+              <div key={r.id} role="listitem" className="m-pick m-pick-none" aria-label={label}>
+                <div className="m-pick-text">
+                  <span className="m-second" style={{ fontWeight: 700, color: "var(--ink-2)" }}>{r.name}</span>
+                  <span className="m-caption" style={{ color: "var(--ink-3)" }}>{r.hood} · {r.kind}</span>
+                </div>
+              </div>
+            );
+          })}
+          {!withPhotos.length && !without.length && <p className="m-second" style={{ color: "var(--ink-2)", padding: "12px 4px" }}>No restaurant matches “{q.trim()}”.</p>}
         </div>
-      </div>
-    </div>
-  );
-}
-
-// A restaurant the prototype has no menu for. Honest, and a way back.
-function NoMenuScreen({ restId, onBack }) {
-  const { restaurant } = window.MorselData;
-  const r = restaurant(restId) || { name: "This restaurant", hood: "" };
-  return (
-    <div className="m-screen m-fade">
-      <div className="m-topbar" style={{ paddingTop: 54 }}>
-        <button className="m-iconbtn" aria-label="Back to restaurants" onClick={onBack}><MIcon name="back" /></button>
-      </div>
-      <div style={{ padding: "16px 20px" }}>
-        <h1 className="m-heading">No menu photos for {r.name} yet.</h1>
-        <p className="m-second" style={{ color: "var(--ink-2)", marginTop: 10 }}>This prototype has one restaurant's menu with photos. {r.name} would appear here once its menu and photos were added.</p>
-        <div className="m-actions" style={{ padding: "22px 0 0" }}>
-          <button className="m-btn m-btn-primary" onClick={onBack}>Choose another restaurant</button>
-        </div>
+        <div style={{ height: 110 }} />
       </div>
     </div>
   );

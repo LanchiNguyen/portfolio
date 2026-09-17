@@ -49,9 +49,13 @@
   <h1 style="margin-top:16px;">Component notes</h1>
   <p class="sub" style="margin-top:12px;">The pieces the visual menu is built from, with the rules each one carries. Palette, type and spacing continue from the earlier exploration: cream paper, terracotta accent, Lora for display, Hanken Grotesk for UI, a 4pt grid.</p>
 
-  <h2>Restaurant row</h2>
+  <h2>Restaurant card</h2>
   <div class="rule"></div>
-  <div class="card"><p><b>Name, neighborhood and kind, then coverage:</b> "8 of 12 dishes photographed" or "No menu photos yet". The whole row is one button. Coverage is a count, never a percentage, so a small menu does not look better covered than it is.</p></div>
+  <div class="card"><p><b>A strip of up to three dish photos, then name, neighborhood and distance, then a coverage tag:</b> "8 of 12 photographed", "4 photographed &middot; partial menu" or "No photos yet". The whole card is one button; a card with no photos is not tappable and says why. Coverage is a count, never a percentage, so a small menu does not look better covered than it is. On Home the cards sit in a horizontal rail; in the picker they stack as rows with the same strip.</p></div>
+
+  <h2>Tab bar</h2>
+  <div class="rule"></div>
+  <div class="card"><p><b>Nearby, Menu, Compare.</b> A glass pill over the content on every screen but the dish page. Menu opens the last restaurant, or the picker when none has been chosen. Compare carries a badge with the shortlist count, so no separate bar is needed above the menu.</p></div>
 
   <h2>Menu row</h2>
   <div class="rule"></div>
@@ -85,8 +89,8 @@
   <div class="rule"></div>
   <div class="card">
     <ul>
-      <li><b>Compare bar:</b> floats above the menu once anything is shortlisted. Count out of three, the dish names, one button.</li>
-      <li><b>Column:</b> photo or no-photo block, name, price, the full description, the ingredients line, Remove. Two or three columns; a dashed "Add another" column while there is room.</li>
+      <li><b>Count:</b> the Compare tab carries a badge once anything is shortlisted; the toggle's toast says "added &middot; Compare 2 of 3".</li>
+      <li><b>Column:</b> photo or no-photo block, name, restaurant, price, the full description, the ingredients line, Remove. Two or three columns; a dashed "Add another" column while there is room.</li>
       <li><b>Never a cart.</b> No totals, no quantities, no next step past the menu. The subtitle says so: a shortlist, not an order.</li>
     </ul>
   </div>

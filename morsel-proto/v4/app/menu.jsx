@@ -49,7 +49,7 @@ function PhotoCard({ dish, onOpen }) {
   );
 }
 
-function MenuScreen({ restId, view, setView, shortlist, onToggle, onOpen, onCompare, onBack, sim }) {
+function MenuScreen({ restId, view, setView, shortlist, onToggle, onOpen, onBack }) {
   const { restaurant, menu, coverage, compareMax, dish } = window.MorselData;
   const r = restaurant(restId);
   const sections = menu(restId);
@@ -62,7 +62,7 @@ function MenuScreen({ restId, view, setView, shortlist, onToggle, onOpen, onComp
     const before = shortlist.includes(id);
     const res = onToggle(id);
     const d = dish(id);
-    const msg = !res.ok ? "Compare holds " + compareMax + " dishes. Remove one first." : before ? d.name + " removed from compare" : d.name + " added to compare";
+    const msg = !res.ok ? "Compare holds " + compareMax + " dishes. Remove one first." : before ? d.name + " removed from compare" : d.name + " added · Compare " + res.list.length + " of " + compareMax;
     setToast(msg); clearTimeout(toastTimer.current); toastTimer.current = setTimeout(() => setToast(""), 2200);
   };
   const jump = (sid) => {
@@ -71,31 +71,37 @@ function MenuScreen({ restId, view, setView, shortlist, onToggle, onOpen, onComp
   };
   const photographed = sections.flatMap((s) => s.dishes).filter((d) => d.photos.length);
   const missing = cov.total - cov.photographed;
+  const partial = r.menu === "partial";
 
   return (
     <div className="m-screen m-fade">
       <div className="m-topbar" style={{ paddingTop: 54 }}>
-        <button className="m-iconbtn" aria-label="Back to restaurants" onClick={onBack}><MIcon name="back" /></button>
+        <button className="m-iconbtn" aria-label="Back" onClick={onBack}><MIcon name="back" /></button>
         <div style={{ flex: 1, minWidth: 0 }}>
           <h1 className="m-heading" style={{ overflowWrap: "anywhere" }}>{r.name}</h1>
-          <div className="m-caption" style={{ color: "var(--ink-2)" }}>{r.hood} · {cov.photographed} of {cov.total} dishes have photos</div>
+          <div className="m-caption" style={{ color: "var(--ink-2)" }}>{r.hood} · {r.mi} mi · {partial ? cov.photographed + (cov.photographed === 1 ? " dish" : " dishes") + " with photos" : cov.photographed + " of " + cov.total + " dishes have photos"}</div>
         </div>
-        <div className="m-seg" role="group" aria-label="Menu view">
-          <button aria-pressed={view === "menu"} onClick={() => setView("menu")}>Menu</button>
-          <button aria-pressed={view === "photos"} onClick={() => setView("photos")}>Photos</button>
-        </div>
+        {!partial && (
+          <div className="m-seg" role="group" aria-label="Menu view">
+            <button aria-pressed={view === "menu"} onClick={() => setView("menu")}>Menu</button>
+            <button aria-pressed={view === "photos"} onClick={() => setView("photos")}>Photos</button>
+          </div>
+        )}
       </div>
-      {view === "menu" && (
+      {partial && (
+        <div className="m-note m-caption" style={{ marginTop: 8 }}>Partial menu: only the dishes with photos. The rest of {r.name}&rsquo;s menu isn&rsquo;t in Morsel yet.</div>
+      )}
+      {view === "menu" && !partial && (
         <div className="m-jump" role="navigation" aria-label="Menu sections">
           {sections.map((s) => <button key={s.id} className="m-chip" onClick={() => jump(s.id)}>{s.name}</button>)}
         </div>
       )}
       <div className="m-scroll" ref={scrollRef} onScroll={onScroll}>
-        {view === "menu" ? sections.map((s) => (
+        {(view === "menu" || partial) ? sections.map((s) => (
           <section key={s.id} data-section={s.id} aria-label={s.name}>
             <div className="m-section">
               <h2>{s.name}</h2>
-              <div className="m-caption" style={{ color: "var(--ink-3)" }}>{s.dishes.filter((d) => d.photos.length).length} of {s.dishes.length} with photos</div>
+              {!partial && <div className="m-caption" style={{ color: "var(--ink-3)" }}>{s.dishes.filter((d) => d.photos.length).length} of {s.dishes.length} with photos</div>}
             </div>
             <div className="m-rows">
               {s.dishes.map((d) => <DishRow key={d.id} dish={d} shortlist={shortlist} onOpen={onOpen} onToggle={toggle} full={full} />)}
@@ -114,18 +120,9 @@ function MenuScreen({ restId, view, setView, shortlist, onToggle, onOpen, onComp
         )}
         <div style={{ height: 120 }} />
       </div>
-      <div aria-live="polite" className="m-caption" style={{ position: "absolute", left: 16, right: 16, bottom: 92, textAlign: "center", pointerEvents: "none" }}>
+      <div aria-live="polite" className="m-caption" style={{ position: "absolute", left: 16, right: 16, bottom: 96, textAlign: "center", pointerEvents: "none", zIndex: 35 }}>
         {toast && <span className="m-tag" data-tone="on" style={{ whiteSpace: "normal", padding: "8px 14px" }}>{toast}</span>}
       </div>
-      {shortlist.length > 0 && (
-        <div className="m-comparebar">
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div className="m-caption" style={{ fontWeight: 700 }}>{shortlist.length} of {compareMax} to compare</div>
-            <div className="m-caption" style={{ color: "rgba(255,255,255,0.7)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{shortlist.map((id) => dish(id).name).join(" · ")}</div>
-          </div>
-          <button className="m-btn m-btn-primary" onClick={onCompare}>Compare</button>
-        </div>
-      )}
     </div>
   );
 }

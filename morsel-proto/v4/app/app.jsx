@@ -1,9 +1,10 @@
-// Morsel — app shell for the visual-menu prototype.
-//   screen      entry | menu | dish | compare | nomenu
-//   restId      the restaurant the diner picked
+// Morsel — app shell.
+//   screen      home | picker | menu | dish | compare
+//   restId      the restaurant whose menu is open (or was last open)
 //   shortlist   up to three dish ids to compare; a decision aid, never a cart
-//   view        menu | photos, within the restaurant
+//   view        menu | photos, within a full menu
 //   returnTo    which screen opened the dish, so Back lands where it came from
+//   menuFrom    which screen opened the menu: home or picker
 const MORSEL_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "textScale": 100
 }/*EDITMODE-END*/;
@@ -13,7 +14,7 @@ document.addEventListener("animationend", (e) => {
 });
 
 const MORSEL_STATE_KEY = "morsel4_state";
-const MORSEL_SCREENS = ["entry", "menu", "dish", "compare", "nomenu"];
+const MORSEL_SCREENS = ["home", "picker", "menu", "dish", "compare"];
 
 // Load saved state defensively: anything malformed falls back to a fresh start.
 function loadMorselState() {
@@ -22,21 +23,23 @@ function loadMorselState() {
   if (typeof raw !== "object" || raw === null) raw = {};
   const { restaurant, dish, compareMax } = window.MorselData;
   const s = {};
-  s.restId = typeof raw.restId === "string" && restaurant(raw.restId) ? raw.restId : null;
+  const r = typeof raw.restId === "string" ? restaurant(raw.restId) : null;
+  s.restId = r && r.menu !== "none" ? r.id : null;
   s.dishId = typeof raw.dishId === "string" && dish(raw.dishId) ? raw.dishId : null;
   s.shortlist = Array.isArray(raw.shortlist) ? raw.shortlist.filter((id, i, a) => typeof id === "string" && dish(id) && a.indexOf(id) === i).slice(0, compareMax) : [];
   s.view = raw.view === "photos" ? "photos" : "menu";
-  s.screen = MORSEL_SCREENS.includes(raw.screen) ? raw.screen : "entry";
-  if ((s.screen === "menu" || s.screen === "compare" || s.screen === "nomenu") && !s.restId) s.screen = "entry";
-  if (s.screen === "dish" && !(s.restId && s.dishId)) s.screen = s.restId ? "menu" : "entry";
-  s.returnTo = raw.returnTo === "compare" ? "compare" : "menu";
+  s.screen = MORSEL_SCREENS.includes(raw.screen) ? raw.screen : "home";
+  if (s.screen === "menu" && !s.restId) s.screen = "home";
+  if (s.screen === "dish" && !s.dishId) s.screen = s.restId ? "menu" : "home";
+  s.returnTo = ["home", "menu", "compare", "picker"].includes(raw.returnTo) ? raw.returnTo : "menu";
+  s.menuFrom = raw.menuFrom === "picker" ? "picker" : "home";
   return s;
 }
 
 function MorselApp() {
   const [t, setTweak] = useTweaks(MORSEL_TWEAK_DEFAULTS);
   const init = React.useMemo(loadMorselState, []);
-  const { restaurant, shortlistToggle, shortlistRemove } = window.MorselData;
+  const { restaurant, dish, shortlistToggle, shortlistRemove } = window.MorselData;
   const [screen, setScreen] = React.useState(init.screen);
   const [restId, setRestId] = React.useState(init.restId);
   const [dishId, setDishId] = React.useState(init.dishId);
@@ -47,21 +50,22 @@ function MorselApp() {
   const setShortlist = (next) => { const v = typeof next === "function" ? next(shortlistRef.current) : next; shortlistRef.current = v; setShortlistState(v); };
   const [view, setView] = React.useState(init.view);
   const [returnTo, setReturnTo] = React.useState(init.returnTo);
+  const [menuFrom, setMenuFrom] = React.useState(init.menuFrom);
   const appRef = React.useRef(null);
   const lastOpened = React.useRef(null);
 
   React.useEffect(() => {
-    localStorage.setItem(MORSEL_STATE_KEY, JSON.stringify({ v: 4, screen, restId, dishId, shortlist, view, returnTo }));
-  }, [screen, restId, dishId, shortlist, view, returnTo]);
+    localStorage.setItem(MORSEL_STATE_KEY, JSON.stringify({ v: 4, screen, restId, dishId, shortlist, view, returnTo, menuFrom }));
+  }, [screen, restId, dishId, shortlist, view, returnTo, menuFrom]);
 
   // capture/debug hook — lets tooling drive the prototype deterministically
   React.useEffect(() => {
-    window.morselDebug = { setScreen, setRestId, setDishId, setShortlist, setView, setReturnTo, setTweak,
-      pick: (id) => pick(id),
-      openDish: (id, from) => { setDishId(id); setReturnTo(from || "menu"); setScreen("dish"); } };
+    window.morselDebug = { setScreen, setRestId, setDishId, setShortlist, setView, setReturnTo, setMenuFrom, setTweak,
+      pick: (id, from) => openMenu(id, from || "picker"),
+      openDish: (id, from) => { const d = dish(id); if (d) setRestId(d.rest); setDishId(id); setReturnTo(from || "menu"); setScreen("dish"); } };
   });
 
-  // Back from a dish: return focus to the row that opened it, once the list is mounted
+  // Back from a dish: return focus to the card or row that opened it, once the list is mounted
   React.useEffect(() => {
     if (screen === "dish" || !lastOpened.current) return;
     const id = lastOpened.current;
@@ -74,10 +78,12 @@ function MorselApp() {
     return () => cancelAnimationFrame(raf);
   }, [screen]);
 
-  const pick = (id) => {
+  const openMenu = (id, from) => {
     const r = restaurant(id);
+    if (!r || r.menu === "none") return;
     setRestId(id);
-    setScreen(r && r.visual ? "menu" : "nomenu");
+    setMenuFrom(from);
+    setScreen("menu");
   };
   const toggle = (id) => {
     const res = shortlistToggle(shortlistRef.current, id);
@@ -86,28 +92,53 @@ function MorselApp() {
   };
   const openDish = (id, from) => {
     lastOpened.current = id;
+    const d = dish(id);
+    if (d) setRestId(d.rest);
     setDishId(id);
     setReturnTo(from);
     setScreen("dish");
   };
-  const back = () => setScreen(returnTo === "compare" && shortlist.length ? "compare" : "menu");
+  const backFromDish = () => {
+    if (returnTo === "compare" && shortlist.length) return setScreen("compare");
+    if (returnTo === "home") return setScreen("home");
+    setScreen("menu");
+  };
+  const backLabel = returnTo === "compare" && shortlist.length ? "Back to compare" : returnTo === "home" ? "Back to nearby" : "Back to menu";
+  // Tab bar: Nearby, Menu (the last restaurant, or the picker), Compare
+  const goTab = (tab) => {
+    if (tab === "home") setScreen("home");
+    else if (tab === "menu") { if (restId) setScreen("menu"); else setScreen("picker"); }
+    else setScreen("compare");
+  };
+  const tab = screen === "home" ? "home" : screen === "compare" ? "compare" : (screen === "menu" || screen === "picker") ? "menu" : null;
+  const showTabs = screen !== "dish";
 
   return (
     <div className="morsel-app-shell" style={{ display: "flex", flexDirection: "column", alignItems: "center" }} ref={appRef}>
       <IOSDevice>
         <div className="morsel-app" style={{ "--ts": t.textScale / 100 }}>
-          {screen === "entry" && <EntryScreen onPick={pick} />}
-          {screen === "nomenu" && <NoMenuScreen restId={restId} onBack={() => setScreen("entry")} />}
+          {screen === "home" && <HomeScreen onPicker={() => setScreen("picker")} onRestaurant={(id) => openMenu(id, "home")} onOpen={(id) => openDish(id, "home")} />}
+          {screen === "picker" && <PickerScreen onPick={(id) => openMenu(id, "picker")} onBack={() => setScreen("home")} />}
           {screen === "menu" && restId && (
             <MenuScreen restId={restId} view={view} setView={setView} shortlist={shortlist} onToggle={toggle}
-              onOpen={(id) => openDish(id, "menu")} onCompare={() => setScreen("compare")} onBack={() => setScreen("entry")} />
+              onOpen={(id) => openDish(id, "menu")} onBack={() => setScreen(menuFrom === "picker" ? "picker" : "home")} />
           )}
           {screen === "dish" && dishId && (
-            <DishScreen dishId={dishId} shortlist={shortlist} onToggle={toggle} onBack={back} onCompare={() => setScreen("compare")} />
+            <DishScreen dishId={dishId} shortlist={shortlist} onToggle={toggle} onBack={backFromDish} backLabel={backLabel} fromMenu={returnTo === "menu"}
+              onMenu={() => openMenu(dish(dishId).rest, "home")} onCompare={() => { setReturnTo("compare"); setScreen("compare"); }} />
           )}
           {screen === "compare" && (
             <CompareScreen shortlist={shortlist} onRemove={(id) => setShortlist((l) => shortlistRemove(l, id))}
-              onOpen={(id) => openDish(id, "compare")} onBack={() => setScreen("menu")} />
+              onOpen={(id) => openDish(id, "compare")} onBack={() => setScreen(restId ? "menu" : "home")} onAdd={() => setScreen(restId ? "menu" : "home")} />
+          )}
+          {showTabs && (
+            <div className="m-tabbar" role="tablist" aria-label="Morsel">
+              <button className="m-tab" role="tab" data-active={tab === "home"} aria-selected={tab === "home"} aria-label="Nearby" onClick={() => goTab("home")}><MIcon name="grid" size={21} /></button>
+              <button className="m-tab" role="tab" data-active={tab === "menu"} aria-selected={tab === "menu"} aria-label={restId ? restaurant(restId).name + " menu" : "Menu"} onClick={() => goTab("menu")}><MIcon name="menu" size={21} /></button>
+              <button className="m-tab" role="tab" data-active={tab === "compare"} aria-selected={tab === "compare"} aria-label={"Compare, " + shortlist.length + " of 3"} onClick={() => goTab("compare")}>
+                <MIcon name="compare" size={21} />{shortlist.length > 0 && <span className="m-tab-badge" aria-hidden="true">{shortlist.length}</span>}
+              </button>
+            </div>
           )}
         </div>
       </IOSDevice>
@@ -153,7 +184,7 @@ function MorselPage() {
           <a href="../morsel-docs/explorations.html" style={{ color: "#B0542F", fontWeight: 600 }}>alternatives →</a>
           <a href="../morsel.html" style={{ color: "#B0542F", fontWeight: 600 }}>case study →</a>
         </div>
-        <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Interactive concept with a fictional restaurant and sample menu data. All photos, including those labeled as diner photos, are illustrative fixtures; nothing is ordered.</div>
+        <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Interactive concept with fictional restaurants and sample menu data. All photos, including those labeled as diner photos, are illustrative fixtures; nothing is ordered.</div>
       </div>
     </div>
   );

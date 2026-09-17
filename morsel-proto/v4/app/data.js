@@ -2,7 +2,8 @@
 //
 // One restaurant is modeled in full: Elder & Ash, a fictional all-day
 // neighborhood restaurant in Shaw. Its menu is a fixed list of sections and
-// dishes in menu order. Photos are attached per dish, each with a source:
+// dishes in menu order. Nine more restaurants carry only the dishes that have a
+// photo, so the nearby feed has something to show and each leads to a menu. Photos are attached per dish, each with a source:
 //   restaurant  a photo the restaurant supplied for its own menu
 //   diner       a photo a diner attached to the dish
 // Both sources are illustrative fixtures in this prototype. Nothing was
@@ -18,13 +19,28 @@ function u(id, w) {
   return "../images/morsel-photos/" + id + ".webp";
 }
 
+// Restaurants near the fixed demo area (Shaw, DC). One has its full menu in
+// Morsel; the others have only the dishes that carry a photo, shown as a
+// partial menu. Two have no photos at all and stay visible as such.
+//   menu   "full"    every section and dish, photographed or not
+//          "partial" only photographed dishes; the rest of the menu is not in Morsel
+//          "none"    nothing yet
+//   mi     straight-line miles from Shaw, a number so sorting never parses labels
 const MORSEL_RESTAURANTS = [
-  { id: "elder-ash", name: "Elder & Ash", hood: "Shaw", kind: "All-day neighborhood restaurant", visual: true },
-  { id: "paper-lantern", name: "Paper Lantern", hood: "H Street NE", kind: "Ramen", visual: false },
-  { id: "sumi", name: "Sumi", hood: "Dupont Circle", kind: "Sushi", visual: false },
-  { id: "dum-dust", name: "Dum & Dust", hood: "Adams Morgan", kind: "Indian", visual: false },
-  { id: "hollis", name: "Hollis", hood: "Logan Circle", kind: "Tasting menu", visual: false }
+  { id: "elder-ash", name: "Elder & Ash", hood: "Shaw", kind: "All-day neighborhood restaurant", menu: "full", mi: 0.4 },
+  { id: "hollis", name: "Hollis", hood: "Logan Circle", kind: "Tasting menu", menu: "partial", mi: 0.7 },
+  { id: "noodle-object", name: "Noodle Object", hood: "Chinatown", kind: "Noodles", menu: "partial", mi: 0.7 },
+  { id: "ember-row", name: "Ember Row", hood: "U Street", kind: "Grill", menu: "partial", mi: 0.6 },
+  { id: "early-vote", name: "Early Vote", hood: "Capitol Hill", kind: "Brunch", menu: "partial", mi: 0.9 },
+  { id: "sumi", name: "Sumi", hood: "Dupont Circle", kind: "Sushi", menu: "partial", mi: 0.9 },
+  { id: "dum-dust", name: "Dum & Dust", hood: "Adams Morgan", kind: "Indian", menu: "partial", mi: 1.0 },
+  { id: "paper-lantern", name: "Paper Lantern", hood: "H Street NE", kind: "Ramen", menu: "partial", mi: 1.2 },
+  { id: "greenline", name: "Greenline", hood: "Navy Yard", kind: "Bowls and salads", menu: "partial", mi: 1.4 },
+  { id: "tide-brine", name: "Tide & Brine", hood: "The Wharf", kind: "Seafood", menu: "partial", mi: 1.6 },
+  { id: "quarter-smash", name: "Quarter Smash", hood: "Penn Quarter", kind: "Burgers", menu: "none", mi: 0.8 },
+  { id: "slice-theory", name: "Slice Theory", hood: "Adams Morgan", kind: "Pizza", menu: "none", mi: 1.0 }
 ];
+const MORSEL_AREA = { city: "Washington, DC", hood: "Shaw" };
 
 const MORSEL_SECTIONS = [
   { id: "starters", name: "Starters" },
@@ -79,7 +95,67 @@ const MORSEL_DISHES = [
     photos: [{ img: "1565958011703-44f9829ba187", source: "restaurant" }] },
   { id: "m12", rest: "elder-ash", section: "desserts", name: "Olive Oil Cake", price: 8, allergens: ["gluten"],
     desc: "Olive oil cake with orange zest and a spoon of creme fraiche.",
-    photos: [] }
+    photos: [] },
+
+  // Partial menus: only the dishes that carry a photo. Each photo is used once
+  // across the whole catalog so no picture stands for two dishes.
+  { id: "p01", rest: "hollis", section: "photos", name: "Tasting Plate IV", price: 38, allergens: null,
+    desc: "A four-part plate that changes nightly. The menu does not list ingredients.",
+    photos: [{ img: "1414235077428-338989a2e8c0", source: "restaurant" }] },
+  { id: "p02", rest: "noodle-object", section: "photos", name: "Wok-Fired Garlic Noodles", price: 16, allergens: ["gluten"],
+    desc: "Egg noodles tossed with garlic, scallion and soy in a hot wok.",
+    photos: [{ img: "1585032226651-759b368d7246", source: "diner" }] },
+  { id: "p03", rest: "ember-row", section: "photos", name: "Smoked Ribs, Half Rack", price: 26, allergens: [],
+    desc: "Half a rack of smoked pork ribs with pickles, tomato and house sauce.",
+    photos: [{ img: "1544025162-d76694265947", source: "restaurant" }] },
+  { id: "p04", rest: "ember-row", section: "photos", name: "Steak Salad", price: 22, allergens: ["nuts"],
+    desc: "Sliced grilled steak over greens with cashews, red onion and chili.",
+    photos: [{ img: "1504674900247-0877df9cc836", source: "diner" }] },
+  { id: "p05", rest: "early-vote", section: "photos", name: "Brown Butter Stack", price: 13, allergens: ["gluten", "dairy"],
+    desc: "Three buttermilk pancakes with brown butter, banana and warm maple syrup.",
+    photos: [{ img: "1567620905732-2d1ec7ab7445", source: "restaurant" }] },
+  { id: "p06", rest: "early-vote", section: "photos", name: "Brioche French Toast", price: 14, allergens: ["gluten", "dairy"],
+    desc: "Thick-cut brioche in custard with banana, blueberries and syrup.",
+    photos: [{ img: "1484723091739-30a097e8f929", source: "diner" }] },
+  { id: "p07", rest: "early-vote", section: "photos", name: "Avocado Toast, Soft Egg", price: 12, allergens: ["gluten"],
+    desc: "Sourdough, avocado, a soft egg, olive oil and flaky salt.",
+    photos: [{ img: "1482049016688-2d3e1b311543", source: "restaurant" }] },
+  { id: "p08", rest: "early-vote", section: "photos", name: "Farm Egg Toast", price: 11, allergens: ["gluten"],
+    desc: "A fried egg on toast with avocado and chili flakes.",
+    photos: [{ img: "1525351484163-7529414344d8", source: "diner" }] },
+  { id: "p09", rest: "sumi", section: "photos", name: "Chef's Omakase Rolls", price: 32, allergens: ["shellfish"],
+    desc: "Eight pieces chosen by the chef that day. The selection changes; the menu lists shellfish.",
+    photos: [{ img: "1579871494447-9811cf80d66c", source: "restaurant" }] },
+  { id: "p10", rest: "sumi", section: "photos", name: "Rainbow Roll Flight", price: 26, allergens: ["gluten"],
+    desc: "Three maki rolls with tuna, salmon and avocado; soy and tempura crunch on one.",
+    photos: [{ img: "1553621042-f6e147245754", source: "diner" }] },
+  { id: "p11", rest: "dum-dust", section: "photos", name: "Lamb Biryani, Sealed", price: 21, allergens: ["dairy", "nuts"],
+    desc: "Lamb and basmati rice cooked under a pastry seal, finished with fried onion, cashews and yogurt.",
+    photos: [{ img: "1589302168068-964664d93dc0", source: "restaurant" }] },
+  { id: "p12", rest: "dum-dust", section: "photos", name: "Paneer Tikka Masala", price: 18, allergens: ["dairy", "nuts"],
+    desc: "Tandoor-charred paneer in a tomato and cashew cream sauce.",
+    photos: [{ img: "1585937421612-70a008356fbe", source: "diner" }] },
+  { id: "p13", rest: "dum-dust", section: "photos", name: "Butter Chicken, Naan", price: 19, allergens: ["dairy", "gluten"],
+    desc: "Chicken in a buttered tomato sauce with fresh naan.",
+    photos: [{ img: "1565557623262-b51c2513a641", source: "restaurant" }] },
+  { id: "p14", rest: "dum-dust", section: "photos", name: "Lamb Curry", price: 20, allergens: ["dairy"],
+    desc: "Slow-cooked lamb in a red chili and tomato gravy.",
+    photos: [{ img: "1455619452474-d2be8b1e70cd", source: "diner" }] },
+  { id: "p15", rest: "paper-lantern", section: "photos", name: "Shoyu Ramen No. 4", price: 17, allergens: ["gluten"],
+    desc: "Soy-based chicken and pork broth, thin wheat noodles, soft egg, nori and scallion.",
+    photos: [{ img: "1569718212165-3a8278d5f624", source: "restaurant" }] },
+  { id: "p16", rest: "greenline", section: "photos", name: "Harvest Bowl, Chicken", price: 15, allergens: [],
+    desc: "Grilled chicken, egg, avocado, cucumber and rice with a sesame dressing.",
+    photos: [{ img: "1546069901-ba9599a7e63c", source: "restaurant" }] },
+  { id: "p17", rest: "greenline", section: "photos", name: "Market Bowl", price: 14, allergens: ["nuts"],
+    desc: "Chickpeas, roasted vegetables, avocado, cabbage and seeds with a tahini dressing.",
+    photos: [{ img: "1512621776951-a57141f2eefd", source: "diner" }] },
+  { id: "p18", rest: "greenline", section: "photos", name: "Market Salad", price: 12, allergens: [],
+    desc: "Greens, tomato, avocado and seeds with a lemon vinaigrette.",
+    photos: [{ img: "1543339308-43e59d6b73a6", source: "restaurant" }] },
+  { id: "p19", rest: "tide-brine", section: "photos", name: "Cedar Salmon, Dill Oil", price: 27, allergens: [],
+    desc: "Cedar-plank salmon with dill oil, cucumber and greens.",
+    photos: [{ img: "1467003909585-2f8a72700288", source: "restaurant" }] }
 ];
 
 const MORSEL_ALLERGENS = ["Nuts", "Gluten", "Dairy", "Shellfish"];
@@ -92,14 +168,35 @@ function morselRestaurant(id) {
 function morselDish(id) {
   return MORSEL_DISHES.find((d) => d.id === id) || null;
 }
-// Sections with their dishes, in menu order, photographed or not.
+// Sections with their dishes, in menu order, photographed or not. A partial
+// menu is one section of photographed dishes; it never claims to be the menu.
 function morselMenu(restId) {
   const dishes = MORSEL_DISHES.filter((d) => d.rest === restId);
+  const r = morselRestaurant(restId);
+  if (r && r.menu === "partial") return dishes.length ? [{ id: "photos", name: "Dishes with photos", dishes }] : [];
   return MORSEL_SECTIONS.map((s) => ({ ...s, dishes: dishes.filter((d) => d.section === s.id) })).filter((s) => s.dishes.length);
 }
 function morselCoverage(restId) {
   const dishes = MORSEL_DISHES.filter((d) => d.rest === restId);
   return { total: dishes.length, photographed: dishes.filter((d) => d.photos.length > 0).length };
+}
+// The one-line coverage a restaurant card carries. Short enough for a card tag;
+// the menu header spells it out in full.
+function morselCoverageLabel(restId) {
+  const r = morselRestaurant(restId);
+  const c = morselCoverage(restId);
+  if (!r || r.menu === "none" || !c.photographed) return "No photos yet";
+  if (r.menu === "full") return c.photographed + " of " + c.total + " photographed";
+  return c.photographed + " photographed · partial menu";
+}
+// Photographed dishes near the area, nearest restaurant first, menu order within one.
+function morselNearby() {
+  const order = MORSEL_RESTAURANTS.slice().sort((a, b) => a.mi - b.mi).map((r) => r.id);
+  return MORSEL_DISHES.filter((d) => d.photos.length).slice().sort((a, b) => order.indexOf(a.rest) - order.indexOf(b.rest));
+}
+function morselDist(restId) {
+  const r = morselRestaurant(restId);
+  return r ? r.mi + " mi" : "";
 }
 function morselPrice(d) {
   return "$" + d.price;
@@ -139,8 +236,9 @@ function morselShortlistToggle(list, id) {
 
 window.MorselData = {
   u, restaurants: MORSEL_RESTAURANTS, sections: MORSEL_SECTIONS, dishes: MORSEL_DISHES, allergens: MORSEL_ALLERGENS,
-  compareMax: MORSEL_COMPARE_MAX,
-  restaurant: morselRestaurant, dish: morselDish, menu: morselMenu, coverage: morselCoverage,
+  compareMax: MORSEL_COMPARE_MAX, area: MORSEL_AREA,
+  restaurant: morselRestaurant, dish: morselDish, menu: morselMenu, coverage: morselCoverage, coverageLabel: morselCoverageLabel,
+  nearby: morselNearby, dist: morselDist,
   price: morselPrice, sourceLabel: morselSourceLabel, photoNote: morselPhotoNote, ingredientsLine: morselIngredientsLine,
   shortlistAdd: morselShortlistAdd, shortlistRemove: morselShortlistRemove, shortlistToggle: morselShortlistToggle
 };

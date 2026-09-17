@@ -50,19 +50,20 @@
   <p class="sub" style="margin-top:12px;">One journey: you are at a restaurant with the menu in front of you. Pick the place, read its menu with photos where they exist, look closer at a dish, compare two or three, decide. <span class="tag built">built</span> marks what the prototype does. <span class="tag test">to test</span> marks an assumption the <a href="testing-plan.html">validation plan</a> is written to check.</p>
 
   <div class="flow">
-    <div class="node"><h3>Restaurant picker <span class="tag built">built</span></h3><p>"Which restaurant are you at?" A short list with a text filter. No location request. The row says how many dishes have photos, or that none do yet.</p><span class="arrow">&rarr; Menu, or "No menu photos yet"</span></div>
-    <div class="node"><h3>No menu photos yet <span class="tag built">built</span></h3><p>An honest state for a restaurant the prototype has no menu for. One way back.</p><span class="arrow">&rarr; Restaurant picker</span></div>
-    <div class="node"><h3>Menu <span class="tag built">built</span></h3><p>The restaurant's sections in its order. Each row: thumbnail or "No photo yet", name, description, price, an add-to-compare toggle. Section jump chips. A coverage line: 8 of 12 dishes have photos.</p><span class="arrow">&rarr; Dish · Photos view · Compare bar</span></div>
+    <div class="node"><h3>Home: Nearby <span class="tag built">built</span></h3><p>Restaurant cards with a photo strip and a coverage tag, then a grid of photographed dishes near the fixed area, nearest first. "I'm at a restaurant" sits at the top, one tap away.</p><span class="arrow">&rarr; Picker · Menu · Dish</span></div>
+    <div class="node"><h3>Restaurant picker <span class="tag built">built</span></h3><p>"Which restaurant are you at?" Photo cards with a coverage tag, filtered as you type. No location request. Places without photos are listed below, plainly labeled and not tappable.</p><span class="arrow">&rarr; Menu</span></div>
+    <div class="node"><h3>Menu <span class="tag built">built</span></h3><p>The restaurant's sections in its order. Each row: thumbnail or "No photo yet", name, description, price, an add-to-compare toggle. Section jump chips and a coverage line for a full menu; a "partial menu" note for a restaurant that only has its photographed dishes.</p><span class="arrow">&rarr; Dish · Photos view</span></div>
     <div class="node"><h3>Photos view <span class="tag built">built</span></h3><p>Only photographed dishes, as a grid, with the count of dishes it leaves out and a link back to the full menu.</p><span class="arrow">&rarr; Dish · Menu</span></div>
-    <div class="node"><h3>Dish <span class="tag built">built</span></h3><p>Photos one at a time with a source label on each (Restaurant photo, Diner photo) and a counter. Then the menu's description, price, an ingredients line and a note that photos show one visit's plating, not ingredients or portion size.</p><span class="arrow">&rarr; Add to compare · Compare · Back</span></div>
-    <div class="node"><h3>Compare <span class="tag built">built</span></h3><p>Two or three dishes side by side: photo or "No photo yet", name, price, description, ingredients line, remove. An "add another" column while there is room. A shortlist, not an order.</p><span class="arrow">&rarr; Dish · Menu</span></div>
+    <div class="node"><h3>Dish <span class="tag built">built</span></h3><p>Photos one at a time with a source label on each (Restaurant photo, Diner photo) and a counter. Then the menu's description, price, an ingredients line and a note that photos show one visit's plating, not ingredients or portion size.</p><span class="arrow">&rarr; Add to compare · View the full menu · Back</span></div>
+    <div class="node"><h3>Compare <span class="tag built">built</span></h3><p>Two or three dishes side by side, from one restaurant or several: photo or "No photo yet", name, restaurant, price, description, ingredients line, remove. An "add another" column while there is room. Reached from the tab bar, which carries the count. A shortlist, not an order.</p><span class="arrow">&rarr; Dish · Menu</span></div>
   </div>
 
   <h2>Back and memory</h2>
   <div class="rule"></div>
   <div class="card">
     <ul>
-      <li><b>Back from a dish</b> returns to the screen that opened it, the menu at the same scroll position, with keyboard focus on the row that was opened.</li>
+      <li><b>Back from a dish</b> returns to the screen that opened it, Home or the menu, at the same scroll position, with keyboard focus on the card or row that was opened.</li>
+      <li><b>The tab bar</b> (Nearby, Menu, Compare) is on every screen but the dish page. Menu opens the last restaurant, or the picker if there is none.</li>
       <li><b>The shortlist, the chosen restaurant and the current screen</b> survive a reload. Corrupt or stale saved state falls back to the restaurant picker.</li>
       <li><b>Text size</b> up to 140% reflows every screen without truncation; a full screen-reader, contrast and touch review is still to do.</li>
     </ul>
@@ -73,6 +74,7 @@
   <table>
     <tr><th>Assumption</th><th>Where it lives</th><th>What would change if it fails</th></tr>
     <tr><td>People at a table want to see the dishes on the menu in front of them <span class="tag test">to test</span></td><td>The whole direction. It comes from my own frustration, not from research.</td><td>The product premise.</td></tr>
+    <tr><td>Browsing nearby photos is how people find a place, and it should lead into the menu rather than stand alone</td><td>Home</td><td>Whether Home is a feed or just the picker.</td></tr>
     <tr><td>Menu order with visible gaps beats a photos-first order</td><td>Menu; "No photo yet" rows</td><td>The default view, and how the Photos view is framed.</td></tr>
     <tr><td>"No photo yet" reads as missing information, not as "not available"</td><td>Menu rows, dish page</td><td>The placeholder wording.</td></tr>
     <tr><td>A source label changes how much a photo is trusted, and diner photos are still wanted</td><td>Dish photo strip, thumbnails</td><td>Whether diner photos are shown by default.</td></tr>

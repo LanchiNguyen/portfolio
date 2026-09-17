@@ -47,7 +47,7 @@
 <div class="page">
   <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
   <h1 style="margin-top:16px;">Design alternatives</h1>
-  <p class="sub" style="margin-top:12px;">Five questions the visual menu had to answer, the options I weighed for each, and what the prototype does. Choices came from design exploration and prototype review; the questions marked to test are open.</p>
+  <p class="sub" style="margin-top:12px;">Six questions the visual menu had to answer, the options I weighed for each, and what the prototype does. Choices came from design exploration and prototype review; the questions marked to test are open.</p>
 
   <h2>A &middot; What order does the menu take?</h2>
   <div class="rule"></div>
@@ -59,37 +59,45 @@
   </div>
   <p class="note"><b>To test:</b> whether the gaps bother people, and whether anyone reads "No photo yet" as "not available tonight".</p>
 
-  <h2>B &middot; How do you get to the restaurant?</h2>
+  <h2>B &middot; How does the menu meet the rest of the app?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>B1 &middot; Location request</h3><p>Guess the restaurant from where the phone is. A permission prompt before any value, and wrong in a dense block.</p></div>
-    <div class="card"><h3>B2 &middot; Scan the menu</h3><p>Point the camera at the paper menu and match it. Interesting; out of scope for a design prototype with no backend.</p></div>
-    <div class="card"><h3>B3 &middot; Pick from a short list <span class="tag chosen">chosen</span></h3><p>A list with a text filter, and each row says whether photos exist. Lightweight, honest about coverage, no permission.</p></div>
+    <div class="card"><h3>B1 &middot; The menu is the whole app</h3><p>Open to a restaurant picker. Focused, but the first screens are text before any food appears, and there is nothing to do away from a table.</p></div>
+    <div class="card"><h3>B2 &middot; Two separate apps in one</h3><p>A nearby feed and a menu mode with no link between them. Each makes sense; neither helps the other.</p></div>
+    <div class="card"><h3>B3 &middot; The feed leads into the menu <span class="tag chosen">chosen</span></h3><p>Home is photos of dishes nearby with restaurant cards, and "I'm at a restaurant" one tap from the top. Every dish card opens its dish page, and from there the restaurant's menu. The feed is trimmed: no filters or dietary tiers, so it cannot bury the at-the-table task.</p></div>
   </div>
 
-  <h2>C &middot; Where did the photo come from?</h2>
+  <h2>C &middot; How do you get to the restaurant?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>C1 &middot; No label</h3><p>Cleanest. Leaves the diner to guess whether a glossy photo is the kitchen's or a plate someone was served.</p></div>
-    <div class="card"><h3>C2 &middot; Label diner photos only</h3><p>Marks the "unofficial" ones. Implies restaurant photos are the truth, which they are not either.</p></div>
-    <div class="card"><h3>C3 &middot; A label on every photo <span class="tag chosen">chosen</span></h3><p>"Restaurant photo" or "Diner photo" on each, a short form on thumbnails, and a count when there are several. More to read; nothing to guess.</p></div>
+    <div class="card"><h3>C1 &middot; Location request</h3><p>Guess the restaurant from where the phone is. A permission prompt before any value, and wrong in a dense block.</p></div>
+    <div class="card"><h3>C2 &middot; Scan the menu</h3><p>Point the camera at the paper menu and match it. Interesting; out of scope for a design prototype with no backend.</p></div>
+    <div class="card"><h3>C3 &middot; Pick from photo cards <span class="tag chosen">chosen</span></h3><p>Restaurant cards with a three-photo strip and a coverage tag, filtered as you type. Lightweight, honest about coverage, no permission, and food on screen before anything is chosen.</p></div>
+  </div>
+
+  <h2>D &middot; Where did the photo come from?</h2>
+  <div class="rule"></div>
+  <div class="grid">
+    <div class="card"><h3>D1 &middot; No label</h3><p>Cleanest. Leaves the diner to guess whether a glossy photo is the kitchen's or a plate someone was served.</p></div>
+    <div class="card"><h3>D2 &middot; Label diner photos only</h3><p>Marks the "unofficial" ones. Implies restaurant photos are the truth, which they are not either.</p></div>
+    <div class="card"><h3>D3 &middot; A label on every photo <span class="tag chosen">chosen</span></h3><p>"Restaurant photo" or "Diner photo" on each, a short form on thumbnails, and a count when there are several. More to read; nothing to guess.</p></div>
   </div>
   <p class="note"><b>To test:</b> which source people trust for what, and whether they want diner photos first. In this prototype both sources are fixtures; no one contributed anything.</p>
 
-  <h2>D &middot; How do you choose between dishes?</h2>
+  <h2>E &middot; How do you choose between dishes?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>D1 &middot; Save for later</h3><p>The earlier concept's answer. Right for browsing across days; wrong at a table where the decision is now.</p></div>
-    <div class="card"><h3>D2 &middot; A cart</h3><p>Familiar, and a lie: Morsel does not order. It would also push toward adding, not deciding.</p></div>
-    <div class="card"><h3>D3 &middot; Compare two or three <span class="tag chosen">chosen</span></h3><p>A shortlist of up to three, shown side by side with price, description, ingredients and whatever photo exists. Remove, add another, back to the menu. Fits a phone width.</p></div>
+    <div class="card"><h3>E1 &middot; Save for later</h3><p>The earlier concept's answer. Right for browsing across days; wrong at a table where the decision is now.</p></div>
+    <div class="card"><h3>E2 &middot; A cart</h3><p>Familiar, and a lie: Morsel does not order. It would also push toward adding, not deciding.</p></div>
+    <div class="card"><h3>E3 &middot; Compare two or three <span class="tag chosen">chosen</span></h3><p>A shortlist of up to three, shown side by side with price, description, ingredients and whatever photo exists. Remove, add another, back to the menu. Fits a phone width.</p></div>
   </div>
 
-  <h2>E &middot; What stands in for a missing photo?</h2>
+  <h2>F &middot; What stands in for a missing photo?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>E1 &middot; A generic image</h3><p>A stock photo of "pasta" beside a specific dish. Reads as the dish; it is not.</p></div>
-    <div class="card"><h3>E2 &middot; Nothing</h3><p>Text-only rows. The dish loses visual weight and looks less important than its neighbors.</p></div>
-    <div class="card"><h3>E3 &middot; A placeholder that says so <span class="tag chosen">chosen</span></h3><p>The same footprint as a photo, a camera-off mark and "No photo yet". The dish stays fully usable: open it, compare it.</p></div>
+    <div class="card"><h3>F1 &middot; A generic image</h3><p>A stock photo of "pasta" beside a specific dish. Reads as the dish; it is not.</p></div>
+    <div class="card"><h3>F2 &middot; Nothing</h3><p>Text-only rows. The dish loses visual weight and looks less important than its neighbors.</p></div>
+    <div class="card"><h3>F3 &middot; A placeholder that says so <span class="tag chosen">chosen</span></h3><p>The same footprint as a photo, a camera-off mark and "No photo yet". The dish stays fully usable: open it, compare it.</p></div>
   </div>
 
   <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>

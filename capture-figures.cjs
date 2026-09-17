@@ -32,27 +32,30 @@ const setInput = (v) => `(() => { const i = document.querySelector('.morsel-app 
 const KEEP_MORSEL = ['morsel-v32-feed-cards'];
 
 const atMenu = (extra) => `(() => { window.morselDebug.setShortlist(${JSON.stringify(extra && extra.shortlist || [])}); window.morselDebug.setView(${JSON.stringify(extra && extra.view || 'menu')}); window.morselDebug.pick('elder-ash'); })()`;
-const atDish = (id, extra) => `(() => { window.morselDebug.setRestId('elder-ash'); window.morselDebug.setShortlist(${JSON.stringify(extra && extra.shortlist || [])}); window.morselDebug.openDish(${JSON.stringify(id)}); })()`;
+const atDish = (id, extra) => `(() => { window.morselDebug.setShortlist(${JSON.stringify(extra && extra.shortlist || [])}); window.morselDebug.openDish(${JSON.stringify(id)}, ${JSON.stringify(extra && extra.from || 'menu')}); })()`;
 
 const MORSEL = [
-  { key: 'vm-entry', expect: /Which restaurant are you at/i,
-    drive: async p => { await p.evaluate(() => window.morselDebug.setScreen('entry')); } },
+  { key: 'vm-home', expect: /I.m at a restaurant/i,
+    drive: async p => { await p.evaluate(() => { window.morselDebug.setShortlist([]); window.morselDebug.setScreen('home'); }); } },
 
-  { key: 'vm-entry-filter', expect: /8 of 12 dishes photographed/i,
-    drive: async p => { await p.evaluate(() => window.morselDebug.setScreen('entry')); await p.waitForTimeout(500); await p.evaluate(setInput('sh')); } },
+  { key: 'vm-picker', expect: /Which restaurant are you at/i,
+    drive: async p => { await p.evaluate(() => { window.morselDebug.setShortlist([]); window.morselDebug.setScreen('picker'); }); } },
 
-  { key: 'vm-nomenu', expect: /No menu photos for Sumi yet/i,
-    drive: async p => { await p.evaluate(() => window.morselDebug.pick('sumi')); } },
+  { key: 'vm-picker-filter', expect: /8 of 12 photographed/i,
+    drive: async p => { await p.evaluate(() => window.morselDebug.setScreen('picker')); await p.waitForTimeout(500); await p.evaluate(setInput('sh')); } },
 
   { key: 'vm-menu', expect: /8 of 12 dishes have photos/i,
     drive: async p => { await p.evaluate(atMenu()); } },
 
-  { key: 'vm-menu-shortlist', expect: /2 of 3 to compare/i,
+  { key: 'vm-menu-shortlist', expect: /8 of 12 dishes have photos/i,
     drive: async p => { await p.evaluate(atMenu({ shortlist: ['m06', 'm03'] })); } },
 
   { key: 'vm-menu-mains', expect: /Half Roast Chicken/i,
     drive: async p => { await p.evaluate(atMenu({ shortlist: ['m06'] })); await p.waitForTimeout(700);
       await p.evaluate(() => { const s = document.querySelector('.morsel-app .m-scroll'); const el = s.querySelector('[data-section="mains"]'); s.scrollTop = el.offsetTop - 8; }); } },
+
+  { key: 'vm-menu-partial', expect: /Partial menu/i,
+    drive: async p => { await p.evaluate(() => { window.morselDebug.setShortlist([]); window.morselDebug.pick('dum-dust', 'home'); }); } },
 
   { key: 'vm-photos-view', expect: /only in the menu view/i,
     drive: async p => { await p.evaluate(atMenu({ view: 'photos' })); } },
@@ -70,11 +73,15 @@ const MORSEL = [
     drive: async p => { await p.evaluate(atDish('m09', { shortlist: ['m06', 'm07'] })); await p.waitForTimeout(900);
       await p.evaluate(() => { document.querySelector('.morsel-app .m-scroll').scrollTop = 330; }); } },
 
+  { key: 'vm-dish-from-home', expect: /View Dum & Dust.s dishes/i,
+    drive: async p => { await p.evaluate(atDish('p11', { from: 'home' })); await p.waitForTimeout(900);
+      await p.evaluate(() => { document.querySelector('.morsel-app .m-scroll').scrollTop = 300; }); } },
+
   { key: 'vm-compare-3', expect: /3 of 3 dishes/i,
     drive: async p => { await p.evaluate(() => { window.morselDebug.setRestId('elder-ash'); window.morselDebug.setShortlist(['m06', 'm07', 'm05']); window.morselDebug.setScreen('compare'); }); } },
 
   { key: 'vm-compare-2', expect: /Add another from the menu/i,
-    drive: async p => { await p.evaluate(() => { window.morselDebug.setRestId('elder-ash'); window.morselDebug.setShortlist(['m03', 'm04']); window.morselDebug.setScreen('compare'); }); } },
+    drive: async p => { await p.evaluate(() => { window.morselDebug.setRestId('elder-ash'); window.morselDebug.setShortlist(['m03', 'p09']); window.morselDebug.setScreen('compare'); }); } },
 
   { key: 'vm-menu-140', expect: /8 of 12 dishes have photos/i,
     drive: async p => { await p.evaluate(atMenu()); await p.evaluate(() => window.morselDebug.setTweak('textScale', 140)); } }

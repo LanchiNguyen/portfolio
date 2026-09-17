@@ -13,6 +13,8 @@ const MIcon = ({ name, size = 22, filled = false }) => {
     cameraoff: <g {...k}><path d="M4 8.5h3.2l1.6-2.5h6.4l1.6 2.5H20v10H4z" /><path d="M5 5l14 14" /></g>,
     pin: <g {...k}><path d="M12 21s-6.5-5.4-6.5-10.3C5.5 7 8.4 4 12 4s6.5 3 6.5 6.7C18.5 15.6 12 21 12 21z" /><circle cx="12" cy="10.5" r="2.3" /></g>,
     compare: <g {...k}><rect x="4" y="5" width="6.5" height="14" rx="1.5" /><rect x="13.5" y="5" width="6.5" height="14" rx="1.5" /></g>,
+    grid: <g {...k}><rect x="4" y="4" width="7" height="9" rx="1.5" /><rect x="13" y="4" width="7" height="5" rx="1.5" /><rect x="13" y="11" width="7" height="9" rx="1.5" /><rect x="4" y="15" width="7" height="5" rx="1.5" /></g>,
+    menu: <g {...k}><path d="M5 7h14M5 12h14M5 17h9" /></g>,
     info: <g {...k}><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5M12 8v.5" /></g>
   };
   return <svg viewBox="0 0 24 24" style={s} aria-hidden="true">{paths[name] || null}</svg>;
