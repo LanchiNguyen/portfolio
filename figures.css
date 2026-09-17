@@ -344,6 +344,9 @@
 .morsel-app[data-ts="large"] .m-compare-grid[data-n="3"] { grid-template-columns: 1fr 1fr !important; }
 .morsel-app[data-ts="large"] .m-col .m-tag { font-size: 11px; }
 
+/* the dish page has no tab bar; its last button still clears the home indicator */
+.morsel-app[data-tabs="false"] .m-actions { padding-bottom: 46px; }
+
 
     .tfig .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
       border:1px solid color-mix(in srgb,currentColor 50%,transparent);

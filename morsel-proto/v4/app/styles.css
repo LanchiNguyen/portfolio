@@ -333,3 +333,6 @@
 /* compare: three columns only while the text fits them; at large text, two then one */
 .morsel-app[data-ts="large"] .m-compare-grid[data-n="3"] { grid-template-columns: 1fr 1fr !important; }
 .morsel-app[data-ts="large"] .m-col .m-tag { font-size: 11px; }
+
+/* the dish page has no tab bar; its last button still clears the home indicator */
+.morsel-app[data-tabs="false"] .m-actions { padding-bottom: 46px; }
