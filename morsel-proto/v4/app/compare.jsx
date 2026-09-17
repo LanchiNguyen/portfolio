@@ -14,8 +14,8 @@ function CompareScreen({ shortlist, onRemove, onOpen, onBack, onAdd }) {
         </div>
       </div>
       <div className="m-scroll">
-        {!items.length && <p className="m-second m-note">Nothing to compare yet. Add dishes from a menu or a dish page.</p>}
-        <div className="m-compare-grid" style={{ gridTemplateColumns: "repeat(" + cols + ", minmax(0, 1fr))" }}>
+        {!items.length && <p className="m-second m-note">Nothing to compare yet. Add up to {compareMax} dishes from a menu or a dish page, and they will sit side by side here.</p>}
+        <div className="m-compare-grid" data-n={items.length} style={{ gridTemplateColumns: "repeat(" + cols + ", minmax(0, 1fr))" }}>
           {items.map((d) => {
             const p = d.photos[0];
             return (
@@ -41,9 +41,9 @@ function CompareScreen({ shortlist, onRemove, onOpen, onBack, onAdd }) {
           })}
         </div>
         <div className="m-actions">
-          <button className="m-btn m-btn-primary" onClick={onAdd}>{items.length < compareMax ? "Add another from the menu" : "Back to the menu"}</button>
+          <button className="m-btn m-btn-primary" onClick={onAdd}>{!items.length ? "Go to the menu" : items.length < compareMax ? "Add another from the menu" : "Back to the menu"}</button>
         </div>
-        <div style={{ height: 90 }} />
+
       </div>
     </div>
   );

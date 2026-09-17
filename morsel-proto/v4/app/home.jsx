@@ -72,7 +72,6 @@ function HomeScreen({ onPicker, onRestaurant, onOpen }) {
         <div className="m-photo-grid">
           {feed.map((d) => <NearbyDishCard key={d.id} dish={d} onOpen={onOpen} />)}
         </div>
-        <div style={{ height: 110 }} />
       </div>
     </div>
   );

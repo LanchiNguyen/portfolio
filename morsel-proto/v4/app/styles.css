@@ -321,6 +321,15 @@
 .m-pick-strip img { flex: 1; min-width: 0; height: 100%; object-fit: cover; }
 .m-pick-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .m-pick-none { padding: 10px 14px; background: transparent; }
-.m-tab-badge { position: absolute; top: 4px; right: 4px; min-width: 18px; height: 18px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
-.m-tab { position: relative; }
-.m-tab-label { position: absolute; bottom: 3px; font-size: 9px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* ---- tab bar: labeled, on a surface dark enough for the inactive tabs to read ---- */
+.morsel-app .m-tabbar { background: rgba(28, 18, 10, 0.86); border-color: rgba(255,255,255,0.12); padding: 5px; gap: 2px; }
+.morsel-app .m-tab { position: relative; width: auto; min-width: 84px; height: 50px; padding: 0 12px; flex-direction: column; gap: 3px; color: rgba(255, 249, 240, 0.92); }
+.morsel-app .m-tab[data-active="true"] { background: rgba(255, 249, 240, 0.96); color: #26190E; }
+.m-tab-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
+.m-tab-badge { position: absolute; top: 3px; right: 8px; min-width: 17px; height: 17px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 10.5px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+/* the tab bar floats over reserved space, never over content */
+.morsel-app[data-tabs="true"] .m-screen { padding-bottom: 92px; }
+/* compare: three columns only while the text fits them; at large text, two then one */
+.morsel-app[data-ts="large"] .m-compare-grid[data-n="3"] { grid-template-columns: 1fr 1fr !important; }
+.morsel-app[data-ts="large"] .m-col .m-tag { font-size: 11px; }

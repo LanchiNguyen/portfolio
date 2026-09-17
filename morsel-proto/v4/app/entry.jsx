@@ -52,7 +52,6 @@ function PickerScreen({ onPick, onBack }) {
           })}
           {!withPhotos.length && !without.length && <p className="m-second" style={{ color: "var(--ink-2)", padding: "12px 4px" }}>No restaurant matches “{q.trim()}”.</p>}
         </div>
-        <div style={{ height: 110 }} />
       </div>
     </div>
   );

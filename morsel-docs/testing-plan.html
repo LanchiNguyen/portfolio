@@ -47,7 +47,7 @@
 <div class="page">
   <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
   <h1 style="margin-top:16px;">Validation plan</h1>
-  <p class="sub" style="margin-top:12px;">Three rounds, in order, none of them run yet. Round A asks whether the frustration behind Morsel is shared before anyone reacts to screens. Round B puts the prototype on a table. Round C looks only at photos and trust. Every finding would be recorded in the evidence table at the end, which is empty.</p>
+  <p class="sub" style="margin-top:12px;">Three rounds, in order, none of them run yet. Round A asks whether the frustration behind Morsel is shared before anyone reacts to screens. Round B puts the prototype on a table. Round C looks only at photos and trust. The sessions and the decision rules for each are at the end.</p>
 
   <h2>Round A &middot; Reading a menu, wanting to see the dish</h2>
   <div class="rule"></div>
@@ -89,14 +89,29 @@
     <p><b>Looking for:</b> whether the source label changes trust, whether photos are read as proof of portion or ingredients, and whether the note is read at all.</p>
   </div>
 
-  <h2>Evidence record</h2>
+  <h2>Proposed sessions</h2>
   <div class="rule"></div>
   <table>
-    <tr><th>Round</th><th>Finding</th><th>Count</th><th>What changes</th><th>Status</th></tr>
-    <tr><td colspan="5" style="text-align:center; color: var(--ink3);">Empty. Nothing has been run.</td></tr>
+    <tr><th>Session</th><th>Who</th><th>Format</th><th>What it decides</th></tr>
+    <tr><td>A1&ndash;A6</td><td>Six people who eat out at least monthly, mixed familiarity with food apps</td><td>30-minute conversation, no screens</td><td>Whether looking for dish photos at the table is common enough to build for, and what people use instead today.</td></tr>
+    <tr><td>B1&ndash;B8</td><td>Eight people, two of them from Round A; a printed Elder &amp; Ash menu on the table</td><td>40 minutes, think-aloud on the prototype</td><td>Whether the menu order with gaps is understood, whether "No photo yet" is read correctly, whether compare is used and how, and whether the source label is noticed unprompted.</td></tr>
+    <tr><td>C1&ndash;C6</td><td>Six people, including two who manage a food allergy</td><td>15 minutes, photo pairs only</td><td>Which source people want first, whether a photo is read as proof of portion or ingredients, and whether the appearance note is read.</td></tr>
   </table>
 
-  <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>
+  <h2>Decision rules, set before running</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <ul>
+      <li><b>Direction.</b> If fewer than three of six people in Round A describe looking for dish photos at a table, the premise is weak and the next round does not run as planned.</li>
+      <li><b>Menu order.</b> If two or more Round B participants read "No photo yet" as "not available" or "sold out", the placeholder wording changes before anything else.</li>
+      <li><b>Compare.</b> If most participants decide between two dishes without opening Compare, it becomes a secondary action rather than a tab.</li>
+      <li><b>Source labels.</b> If the label is noticed unprompted by fewer than half, it moves from the photo corner to the line beside the dish name.</li>
+      <li><b>Photo caveat.</b> If Round C participants still read a photo as proof of ingredients after seeing the note, the note moves above the description and gains an example.</li>
+    </ul>
+    <p style="margin-top:10px;">Each finding would be recorded with a count and the screen it changes. None of these sessions has been run.</p>
+  </div>
+
+  <p class="note">Supporting notes from the design and prototype review. Restaurants, menus and photos are fictional sample data.</p>
 </div>
 </body>
 </html>

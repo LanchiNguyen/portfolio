@@ -118,7 +118,6 @@ function MenuScreen({ restId, view, setView, shortlist, onToggle, onOpen, onBack
             </div>
           </div>
         )}
-        <div style={{ height: 120 }} />
       </div>
       <div aria-live="polite" className="m-caption" style={{ position: "absolute", left: 16, right: 16, bottom: 96, textAlign: "center", pointerEvents: "none", zIndex: 35 }}>
         {toast && <span className="m-tag" data-tone="on" style={{ whiteSpace: "normal", padding: "8px 14px" }}>{toast}</span>}

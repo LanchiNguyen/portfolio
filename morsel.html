@@ -45,85 +45,78 @@
         <div class="proj-hero-grid">
           <div class="rv">
             <h1 data-ed="0">Morsel &mdash; see the dish <em>before you order</em></h1>
-            <p class="proj-lede" data-ed="1">Photos of dishes near you, the menu of the restaurant you&rsquo;re sitting in with a photo beside each dish, and a small compare to help you decide.</p>
+            <p class="proj-lede" data-ed="1">A restaurant&rsquo;s menu with a photo beside each dish, for the moment you&rsquo;re at the table deciding what to order.</p>
           </div>
           <div class="meta-rail rv" style="--d:120ms">
             <div><span class="k" data-ed="2">ROLE</span><span class="v" data-ed="3">Product design, interaction design, prototyping</span></div>
-            <div><span class="k" data-ed="4">SCOPE</span><span class="v" data-ed="5">Independent product concept &middot; 0&rarr;1 mobile app</span></div>
-            <div><span class="k" data-ed="6">STATUS</span><span class="v" data-ed="7">Interactive prototype</span></div>
+            <div><span class="k" data-ed="4">SCOPE</span><span class="v" data-ed="5">Independent concept &middot; 0&rarr;1 &middot; iOS</span></div>
+            <div><span class="k" data-ed="6">STATUS</span><span class="v" data-ed="7">Interactive prototype, not yet tested</span></div>
             <div><span class="k" data-ed="8">TIMEFRAME</span><span class="v" data-ed="9">December 2025&ndash;present</span></div>
-            <div><span class="k" data-ed="10">TOOLS</span><span class="v" data-ed="11">HTML/CSS/JavaScript &middot; Claude Design and Fable</span></div>
           </div>
         </div>
       </section>
 
-      <!-- TL;DR -->
-      <div class="tldr tldr-two rv">
-        <div class="cell"><span class="k" data-ed="12">The frustration</span><span class="v" data-ed="13">Reading a menu at the table, I want to see the dishes. The photos exist somewhere, just never next to the menu.</span></div>
-        <div class="cell"><span class="k" data-ed="14">The design</span><span class="v" data-ed="15">Browse photos of dishes nearby, or say you&rsquo;re at a restaurant and read its menu with photos and where each came from, then compare two or three dishes before you order.</span></div>
+      <!-- opening strip: the product, from the working UI -->
+      <div class="strip3 rv">
+        <figure><div class="fig-live" data-fig="morsel-vm-home" role="img" aria-label="Home: Near Shaw, an I'm at a restaurant button, restaurant cards with a three-photo strip and a coverage tag, and a grid of dish photos with name, restaurant, price and distance; a tab bar with Nearby, Menu and Compare"></div><figcaption data-ed="10">Nearby: photos of dishes around you, and one tap to the restaurant you&rsquo;re at.</figcaption></figure>
+        <figure><div class="fig-live" data-fig="morsel-vm-menu" role="img" aria-label="The Elder & Ash menu: a coverage line reading 8 of 12 dishes have photos, section chips, and rows with a photo or a No photo yet block beside each dish's name, description and price"></div><figcaption data-ed="11">The menu, in the restaurant&rsquo;s order, with a photo or a &ldquo;No photo yet&rdquo; block beside each dish.</figcaption></figure>
+        <figure><div class="fig-live" data-fig="morsel-vm-dish-diner" role="img" aria-label="Elder Burger page showing its second photo, labeled Diner photo with a 2 of 3 counter, then the name, price, description and facts"></div><figcaption data-ed="12">A dish, its photos, and where each photo came from.</figcaption></figure>
       </div>
-
-      <p class="method-note rv" data-ed="16"><strong>About this case:</strong> the direction came from my own experience, and the decisions below from design exploration and prototype review. None of it has been tested with participants yet.</p>
-
-      <!-- cover -->
-      <div class="cover rv">
-        <div class="lit"><div class="lit-in">
-          <img class="shot-img" src="images/morsel/card.webp" alt="Morsel cover: 'See the dish before you order' beside three phone screens. Home with an I'm at a restaurant button, restaurant cards and a grid of dish photos near Shaw; the Elder & Ash menu with a photo or a No photo yet block beside each dish; and the Elder Burger page with a restaurant photo labeled as such and a photo counter" width="1600" height="900" data-ed="17" />
-        </div></div>
-      </div>
+      <p class="method-note rv" data-ed="13"><strong>A design exploration.</strong> The direction comes from my own experience at restaurant tables; the decisions below come from design work and prototype review, and none of it has been tested with participants yet.</p>
 
       <!-- try the prototype -->
       <section class="proj-sec" id="try" aria-label="Try the Morsel prototype">
         <div class="rule"></div>
-        <div class="sechead"><span class="lead" data-ed="18">TRY THE PROTOTYPE</span><span>INTERACTIVE PROTOTYPE &middot; SAMPLE DATA</span></div>
-        <p class="method-note" data-ed="19"><strong>Try it:</strong> tap &ldquo;I&rsquo;m at a restaurant&rdquo;, pick Elder &amp; Ash, find a main for under $25, look at its photos, then compare it with one more before deciding.</p>
+        <div class="sechead"><span class="lead" data-ed="14">TRY THE PROTOTYPE</span><span>INTERACTIVE &middot; SAMPLE DATA</span></div>
+        <p class="method-note" data-ed="15"><strong>Try it:</strong> tap &ldquo;I&rsquo;m at a restaurant&rdquo;, pick Elder &amp; Ash, find a main for under $25, look at its photos, then compare it with one more.</p>
         <div class="demo-stage rv" data-src="morsel-proto/index.html" data-w="430" data-h="900" data-poster="images/morsel/stage-morsel.webp" data-title="Morsel interactive prototype — nearby photos, restaurant picker, menu, dish photos and compare">
           <div class="demo-head">
             <span class="demo-kicker">MORSEL &middot; FULL FLOW</span>
             <a class="demo-open" href="morsel-proto/index.html">OPEN FULL PROTOTYPE &#8599;</a>
           </div>
           <div class="demo-frame">
-            <div class="demo-poster"><img src="images/morsel/stage-morsel.webp" alt="Poster: Morsel Home — Near Shaw, an I'm at a restaurant button, restaurant cards with photo strips, and a grid of dish photos" width="430" height="900" data-ed="20" /></div>
+            <div class="demo-poster"><img src="images/morsel/stage-morsel.webp" alt="Poster: Morsel Home — Near Shaw, an I'm at a restaurant button, restaurant cards with photo strips, and a grid of dish photos" width="430" height="900" data-ed="16" /></div>
             <button class="demo-load">&#9654;&ensp;TRY THE PROTOTYPE</button>
           </div>
           <div class="demo-foot">
-            <span class="demo-note-txt">FICTIONAL RESTAURANT &middot; SAMPLE PHOTOS &middot; NOTHING IS ORDERED</span>
+            <span class="demo-note-txt">FICTIONAL RESTAURANTS &middot; SAMPLE PHOTOS &middot; NOTHING IS ORDERED</span>
             <button class="demo-reset">RESET DEMO VIEW</button>
           </div>
-          <p class="demo-note" data-ed="21">Interactive concept with a fictional restaurant and sample menu data. All photos, including those labeled as diner photos, are illustrative fixtures; nothing is ordered. You can also open the prototype in its own window using the link above.</p>
+          <p class="demo-note" data-ed="17">Interactive concept with fictional restaurants and sample menu data. All photos, including those labeled as diner photos, are illustrative fixtures; nothing is ordered. You can also open the prototype in its own window using the link above.</p>
         </div>
       </section>
 
-      <!-- where it started -->
+      <!-- where this started -->
       <section class="proj-sec" id="hypothesis">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="22">WHERE THIS<br>STARTED</h2>
-          <div>
-            <p class="statement" data-ed="23">Sitting at a restaurant reading a menu, I want to see the dishes. A name and a line of description only go so far, so I end up searching the restaurant and scrolling other people&rsquo;s photos, hoping one of them is the dish I&rsquo;m reading about.</p>
-            <p class="proj-p" style="margin-top:18px" data-ed="24">Morsel began in December 2025 as a way to browse photos of dishes near you and then check price and distance. It only partly answered the frustration, because the moment I want a photo is at the table, with the menu in hand. During our current review I redirected the concept around that moment. The hypothesis is that if the restaurant&rsquo;s menu is shown in its own order with a photo beside each dish where one exists, people can choose with fewer surprises. That is a design hypothesis, not a finding.</p>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="18">WHERE THIS<br>STARTED</h2>
+          <div class="spread">
+            <div>
+              <p class="statement" data-ed="19">Sitting at a restaurant with the menu in my hands, I want to see the dishes. A name and a line of description only go so far, so I end up searching the restaurant and scrolling strangers&rsquo; photos, hoping one is the dish I&rsquo;m reading about.</p>
+              <p class="proj-p" style="margin-top:18px" data-ed="20">Morsel began in December 2025 as a way to browse photos of dishes near you. It was pleasant to use and it missed the moment: the photos I wanted were for the menu in front of me, not for a dish two neighborhoods away. So I redirected the concept around the table. The hypothesis is that a menu shown in its own order, with a photo beside each dish where one exists, lets people choose with fewer surprises. That is a hypothesis, not a finding.</p>
+              <p class="proj-p" data-ed="21">I designed the flows, the screens, the sample menus and the copy, and built the prototype so each decision could be checked against something that works rather than a mockup.</p>
+            </div>
+            <div class="spread-fig small">
+              <figure><div class="fig-live" data-fig="morsel-v32-feed-cards" role="img" aria-label="Earlier exploration: a feed of dishes near Shaw from many restaurants, sorted by distance, each card with name, restaurant, price and distance"></div><figcaption data-ed="22"><span class="fk">Earlier exploration</span>A feed of nearby dishes, before the menu became the center.</figcaption></figure>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- how it works -->
+      <!-- how it fits together -->
       <section class="proj-sec" id="flow">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="25">HOW IT<br>WORKS</h2>
-          <div>
-            <p class="proj-p" data-ed="26">I designed and built Morsel independently: the concept, the flows, the interface, the sample restaurants and the code. Two moments meet in it. Deciding where to go is served by photos of dishes nearby; deciding what to order is served by the menu in front of you. The feed exists to lead into a menu, and the menu is where the decision happens.</p>
-            <ul class="feat-list">
-              <li data-ed="27"><strong>Nearby.</strong> Home shows restaurant cards and photos of dishes near you, nearest first. Every card leads into a restaurant&rsquo;s menu.</li>
-              <li data-ed="28"><strong>I&rsquo;m at a restaurant.</strong> One tap from Home opens the picker: restaurant cards with a photo strip and a coverage count, filtered as you type. No location request.</li>
-              <li data-ed="29"><strong>Read the menu.</strong> Sections in the restaurant&rsquo;s order. Every dish shows its name, description and price, with a photo or a &ldquo;No photo yet&rdquo; block beside it. Elder &amp; Ash is modeled in full, twelve dishes with photos for eight; nine other places carry only their photographed dishes and say so.</li>
-              <li data-ed="30"><strong>Look closer.</strong> The dish page shows each photo with its source, then the menu&rsquo;s words and the listed ingredients. A photo helps you picture the food; it doesn&rsquo;t confirm ingredients or today&rsquo;s presentation.</li>
-              <li data-ed="31"><strong>Compare and decide.</strong> Shortlist up to three dishes and see them side by side. The Compare tab keeps count. It is a way to decide, not a cart.</li>
-            </ul>
-            <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-vm-home" role="img" aria-label="Home: Near Shaw, a full-width I'm at a restaurant button, a rail of restaurant cards each with three dish photos and a coverage tag, and a grid of dish photos with name, restaurant, price and distance; a tab bar with Nearby, Menu and Compare"></div><figcaption data-ed="32">Home: photos near you, and the way in</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-picker" role="img" aria-label="Which restaurant are you at? A search field, then restaurant cards with a three-photo strip, name, neighborhood and a coverage tag, and below them a short No photos yet list"></div><figcaption data-ed="33">Pick the place from photo cards</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-menu-partial" role="img" aria-label="Dum & Dust: a note that this is a partial menu with only the dishes that have photos, then four dishes with photos, descriptions and prices"></div><figcaption data-ed="34">A partial menu says so</figcaption></figure>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="23">HOW IT FITS<br>TOGETHER</h2>
+          <div class="spread wide">
+            <div>
+              <p class="proj-p" data-ed="24">Two moments meet in the app. Deciding where to go is served by Nearby: restaurant cards and photos of dishes around you, nearest first. Deciding what to order is served by the menu. Nearby exists to lead into a menu, and &ldquo;I&rsquo;m at a restaurant&rdquo; stays one tap from the top, so the at-the-table task is never buried under browsing.</p>
+              <p class="proj-p" data-ed="25">The picker shows restaurants as photo cards with a coverage count and asks for no location. One restaurant, Elder &amp; Ash, is modeled in full: twelve dishes, photos for eight. Nine others carry only their photographed dishes and say so, which is how most restaurants would look early on.</p>
+            </div>
+            <div class="spread-fig pair">
+              <figure><div class="fig-live" data-fig="morsel-vm-picker" role="img" aria-label="Which restaurant are you at? A search field, then restaurant cards with a three-photo strip, name, neighborhood and a coverage tag, and below them a short No photos yet list"></div><figcaption data-ed="26">The picker: photo cards, a coverage count, no location request.</figcaption></figure>
+              <figure><div class="fig-live" data-fig="morsel-vm-menu-partial" role="img" aria-label="Dum & Dust: a note that this is a partial menu with only the dishes that have photos, then four dishes with photos, descriptions and prices"></div><figcaption data-ed="27">A partial menu says what it is.</figcaption></figure>
             </div>
           </div>
         </div>
@@ -133,25 +126,15 @@
       <section class="proj-sec" id="cards">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="35">THE MENU&rsquo;S ORDER,<br>GAPS INCLUDED</h2>
-          <div>
-            <p class="proj-p" data-ed="36">The menu keeps the restaurant&rsquo;s sections and order. A dish without a photo keeps its place, with a block the same size as a photo that says &ldquo;No photo yet&rdquo;, its description and its price. It can be opened and compared like any other. A coverage line at the top says how much of the menu has photos.</p>
-            <div class="fig-duo phones" style="margin-top: 22px">
-              <figure class="figure">
-                <div class="fig-live shot-img" data-fig="morsel-v32-feed-cards" role="img" aria-label="Earlier exploration: a feed of dishes near Shaw from many restaurants, sorted by distance, each card with name, restaurant, price and distance" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="37"><span class="fk">Earlier exploration</span>A feed of nearby dishes was the whole product.</figcaption>
-              </figure>
-              <figure class="figure fig-down">
-                <div class="fig-live shot-img" data-fig="morsel-vm-menu" role="img" aria-label="Current direction: the Elder & Ash menu with a coverage line, section chips for Starters, Wood-fired pizza, Mains and Desserts, and rows with a photo or a No photo yet block beside each dish's name, description and price" style="max-width:225px; border-radius:18px"></div>
-                <figcaption class="figcap" data-ed="38"><span class="fk">Current direction</span>The restaurant&rsquo;s menu is the core; the feed leads into it.</figcaption>
-              </figure>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="28">THE MENU&rsquo;S ORDER,<br>GAPS INCLUDED</h2>
+          <div class="spread">
+            <div>
+              <p class="proj-p" data-ed="29">The menu keeps the restaurant&rsquo;s sections and order. A dish without a photo keeps its place, with a block the same size as a photo that reads &ldquo;No photo yet&rdquo; beside its description and price, and it can be opened and compared like any other. A coverage line at the top says how much of the menu has photos.</p>
+              <p class="proj-p" data-ed="30">Sorting photographed dishes first would make a prettier screen and a misleading menu, so that view exists only as a secondary Photos grid, which states how many dishes it leaves out. The tradeoff is an uneven page: the placeholder blocks break the rhythm of the photos. I chose that over a menu that quietly hides a third of itself.</p>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="39">I made the menu the core because that is where the frustration happens, and kept a trimmed feed as Home because browsing photos is how you find a place; the tradeoff is that Morsel is only useful at a restaurant it covers, so every card and the picker say how much of each menu is there.</p>
-            <p class="proj-p" style="margin-top: 18px" data-ed="40">Sorting photographed dishes first would have made a prettier screen and a misleading menu. Instead there is a secondary Photos view, a grid of only the photographed dishes, which says how many it leaves out and links back to the full menu.</p>
-            <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-vm-menu-mains" role="img" aria-label="The Mains section of the menu: Elder Burger with a 3 photos tag and a checked compare toggle, Hanger Steak and Penne Pomodoro with thumbnails, Prawn Linguine with a Diner tag, and Half Roast Chicken with a No photo yet block; the Compare tab carries a count of 1"></div><figcaption data-ed="41">Unphotographed dishes keep their place</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-photos-view" role="img" aria-label="Photos view: a note that photos of 8 dishes are shown and 4 dishes with no photo are only in the menu view, with a link to show the full menu, above a two-column grid of dish photos with source tags, names and prices"></div><figcaption data-ed="42">The Photos view says what it leaves out</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-dish-from-home" role="img" aria-label="Lamb Biryani at Dum & Dust opened from Home: the restaurant photo, name, price, description and facts, then buttons Add to compare, View Dum & Dust's dishes, and Back to nearby"></div><figcaption data-ed="43">From a nearby dish into its restaurant</figcaption></figure>
+            <div class="spread-fig">
+              <figure><div class="fig-live" data-fig="morsel-vm-menu-mains" role="img" aria-label="The Mains section of the menu: Elder Burger with a 3 photos tag and a checked compare toggle, Hanger Steak and Penne Pomodoro with thumbnails, Prawn Linguine with a Diner tag, and Half Roast Chicken with a No photo yet block; the Compare tab carries a count of 1"></div><figcaption data-ed="31">Mains: four dishes with photos and one without, in the menu&rsquo;s order.</figcaption></figure>
+              <figure class="callout"><div class="fig-live" data-fig="morsel-vm-menu-mains" data-crop="8,632,386,154" role="img" aria-label="Close-up of the Half Roast Chicken row: a dashed No photo yet block beside the name, description, price and a compare toggle"></div><figcaption data-ed="32"><span class="fk">Close-up</span>The placeholder holds a photo&rsquo;s space; the dish stays fully usable.</figcaption></figure>
             </div>
           </div>
         </div>
@@ -161,18 +144,17 @@
       <section class="proj-sec" id="context">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="44">SAY WHERE EACH<br>PHOTO CAME FROM</h2>
-          <div>
-            <p class="proj-p" data-ed="45">A restaurant&rsquo;s own photo and a diner&rsquo;s photo of the same dish tell you different things, so every photo carries its source: &ldquo;Restaurant photo&rdquo; or &ldquo;Diner photo&rdquo;. A dish with several photos shows them one at a time with a counter, and a dish with none says so instead of borrowing a generic image.</p>
-            <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-vm-dish-photos" role="img" aria-label="Elder Burger page: a large restaurant photo labeled Restaurant photo with a 1 of 3 counter, then the section label Mains, the name, $17, the description and the facts"></div><figcaption data-ed="46">A restaurant photo, labeled</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-dish-diner" role="img" aria-label="The same Elder Burger page on its second photo, labeled Diner photo, with the counter reading 2 of 3 and previous and next buttons"></div><figcaption data-ed="47">A diner photo of the same dish</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-dish-nophoto" role="img" aria-label="Margherita page with a large No photo yet block in place of a photo, then the name, $18, the description, a Photos fact saying neither the restaurant nor a diner has added one, and the ingredients line"></div><figcaption data-ed="48">No photo, no substitute</figcaption></figure>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="33">WHERE EACH PHOTO<br>CAME FROM</h2>
+          <div class="spread">
+            <div>
+              <p class="proj-p" data-ed="34">A restaurant&rsquo;s own photo and a diner&rsquo;s photo of the same dish tell you different things, so every photo carries its source: &ldquo;Restaurant photo&rdquo; or &ldquo;Diner photo&rdquo;. A dish with several photos shows them one at a time with a counter. A dish with none says so rather than borrowing a generic image.</p>
+              <p class="proj-p" data-ed="35">The labels add words to every photo, and the two kinds can disagree about how a dish looks. I kept both visible because a diner&rsquo;s photo is a different kind of evidence from a styled shot, and I kept the labels because a word is cheaper than a guess. In this prototype both are sample fixtures: nobody has contributed anything, and the labels show the provenance the product would carry.</p>
+              <p class="proj-p" data-ed="36">Below the photos, the page states what a photo doesn&rsquo;t confirm: appearance can vary between visits, and the ingredients line repeats only what the menu lists, naming the four categories it covers.</p>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="49">The labels add words to every photo, and a diner&rsquo;s plate may look nothing like the kitchen&rsquo;s shot; I kept both because the diner&rsquo;s plate is what you will be served. In this prototype both kinds are sample fixtures: nobody has contributed anything, and the labels show the provenance the product would carry.</p>
-            <p class="proj-p" style="margin-top: 18px" data-ed="50">Below the photos, the dish page keeps a photo in its place: it helps you picture the food, but it doesn&rsquo;t confirm ingredients or how the dish is presented today, so the Photos line says appearance can vary between visits. The ingredients line repeats what the menu lists, names the four categories it covers, and says plainly when the menu lists nothing.</p>
-            <div class="phone-grid pg-solo" style="margin-top: 18px; max-width: 245px">
-              <figure><div class="fig-live" data-fig="morsel-vm-dish-facts" role="img" aria-label="Prawn Linguine page scrolled to its facts: Photos, 'Diner photo', with the note that appearance can vary between visits; Ingredients, 'The menu lists gluten, shellfish', with a note on what the list covers; then Add to compare, Compare 2 dishes and Back to menu buttons"></div><figcaption data-ed="51">What a photo does and doesn&rsquo;t confirm</figcaption></figure>
+            <div class="spread-fig">
+              <figure><div class="fig-live" data-fig="morsel-vm-dish-nophoto" role="img" aria-label="Margherita page with a large No photo yet block in place of a photo, then the name, price, description, a Photos fact saying neither the restaurant nor a diner has added one, and the ingredients line"></div><figcaption data-ed="37">No photo, no substitute: the description, price and facts carry the dish.</figcaption></figure>
+              <figure class="callout"><div class="fig-live" data-fig="morsel-vm-dish-diner" data-crop="0,196,402,124" role="img" aria-label="Close-up of the photo strip foot: a Diner photo label on the left and a 2 of 3 counter with dots on the right"></div><figcaption data-ed="38"><span class="fk">Close-up</span>The source label and counter on every photo.</figcaption></figure>
+              <figure class="callout"><div class="fig-live" data-fig="morsel-vm-dish-facts" data-crop="0,464,402,204" role="img" aria-label="Close-up of the facts: Photos, Diner photo, appearance can vary between visits; Ingredients, the menu lists gluten, shellfish, covering nuts, gluten, dairy and shellfish only, not preparation or cross-contact"></div><figcaption data-ed="39"><span class="fk">Close-up</span>What a photo does and doesn&rsquo;t confirm, in two lines.</figcaption></figure>
             </div>
           </div>
         </div>
@@ -182,40 +164,43 @@
       <section class="proj-sec" id="honest">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="52">COMPARE,<br>NOT A CART</h2>
-          <div>
-            <p class="proj-p" data-ed="53">At a table the decision is now, between a few dishes. Any row or dish page can add a dish to a shortlist of up to three, and the Compare tab keeps count. The compare screen puts them side by side, one column each, with price, description, listed ingredients and whatever photo exists, with Remove on each and one button to add another from the menu. Ordering happens with your server.</p>
-            <div class="phone-grid" style="margin-top: 18px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))">
-              <figure><div class="fig-live" data-fig="morsel-vm-menu-shortlist" role="img" aria-label="The menu with two dishes shortlisted: checked compare toggles on their rows and a 2 badge on the Compare tab"></div><figcaption data-ed="54">A shortlist grows from the menu</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-compare-3" role="img" aria-label="Compare screen with three columns: Elder Burger with a 3 photos tag and $17, Hanger Steak with a restaurant photo and $28, and Margherita with a No photo yet block and $18; each column has the description, its ingredients line and a Remove button; the subtitle reads 3 of 3 dishes"></div><figcaption data-ed="55">Three dishes side by side, one without a photo</figcaption></figure>
-              <figure><div class="fig-live" data-fig="morsel-vm-compare-2" role="img" aria-label="Compare screen with two equal columns, a pizza from Elder & Ash and Chef's Omakase Rolls from Sumi, and an Add another from the menu button below"></div><figcaption data-ed="56">Two dishes, from two restaurants</figcaption></figure>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="40">COMPARE,<br>NOT A CART</h2>
+          <div class="spread">
+            <div>
+              <p class="proj-p" data-ed="41">At a table the decision is now, between a few dishes. Any row or dish page adds a dish to a shortlist of up to three, and the Compare tab keeps count. The compare screen puts the shortlist side by side with price, description, listed ingredients and whatever photo exists, with one button back to the menu. Ordering happens with your server.</p>
+              <p class="proj-p" data-ed="42">Three columns fit a phone at the default text size; at larger sizes they reflow to two and then one, which I prefer to three unreadable ones. A cart would have been familiar, but Morsel doesn&rsquo;t place orders, and a cart nudges toward adding rather than choosing between.</p>
             </div>
-            <p class="proj-p" style="margin-top: 26px" data-ed="57">Three is the most that fits a phone width without the descriptions becoming unreadable; the tradeoff is that someone weighing four options has to drop one first. I chose a shortlist over a cart because a cart would push toward adding, and Morsel does not take orders.</p>
+            <div class="spread-fig">
+              <figure><div class="fig-live" data-fig="morsel-vm-compare-3" role="img" aria-label="Compare screen with three columns: Elder Burger with a 3 photos tag and $17, Hanger Steak with a restaurant photo and $28, and Margherita with a No photo yet block and $18; each column has the description, its ingredients line and a Remove button; the subtitle reads 3 of 3 dishes"></div><figcaption data-ed="43">Three dishes side by side, one of them without a photo.</figcaption></figure>
+              <figure class="callout"><div class="fig-live" data-fig="morsel-vm-menu-shortlist" data-crop="8,376,386,142" role="img" aria-label="Close-up of a menu row with its compare toggle checked"></div><figcaption data-ed="44"><span class="fk">Close-up</span>The shortlist grows from the menu with one toggle per row.</figcaption></figure>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- accessibility -->
+      <!-- readability -->
       <section class="proj-sec" id="accessibility">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="58">KEYBOARD AND<br>READABILITY CHECKS</h2>
-          <div>
-            <p class="proj-p" data-ed="59">Every card, row, toggle, tab and photo control is a real button with a visible focus ring, and the compare toggle is separate from the row so opening and shortlisting stay distinct actions. Back returns focus to the row that opened the dish, at the same scroll position. A row&rsquo;s accessible name includes &ldquo;No photo yet&rdquo; where a sighted person sees the block. The enlarged-text example checks the layout; a full screen-reader, contrast and touch review is still to do.</p>
-            <div class="phone-grid pg-solo" style="margin-top: 18px; max-width: 245px">
-              <figure><div class="fig-live" data-fig="morsel-vm-menu-140" role="img" aria-label="The menu rendered at 140 percent text scale: the header, section chips and rows reflow without truncation"></div><figcaption data-ed="60">The menu at 140% text size</figcaption></figure>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="45">READABILITY AND<br>WHAT&rsquo;S LEFT</h2>
+          <div class="spread">
+            <div>
+              <p class="proj-p" data-ed="46">Every card, row, toggle, tab and photo control is a real button with a visible focus ring. Back returns focus to the row or card that opened the dish, at the same scroll position. The tab bar carries labels and sits on a surface dark enough to read. Text scales to 140% and the layouts reflow rather than clip. A screen-reader pass, contrast measurement over photos and touch checks on a device are still to do.</p>
+            </div>
+            <div class="spread-fig small">
+              <figure><div class="fig-live" data-fig="morsel-vm-menu-140" role="img" aria-label="The menu rendered at 140 percent text scale: the header, section chips and rows reflow without truncation"></div><figcaption data-ed="47">The menu at 140% text size.</figcaption></figure>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- what the prototype shows -->
+      <!-- beyond the prototype -->
       <section class="proj-sec" id="evaluation">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="61">WHAT THE<br>PROTOTYPE SHOWS</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="48">FROM A PROTOTYPE<br>TO A PRODUCT</h2>
           <div>
-            <p class="proj-p" data-ed="62">The prototype connects the whole flow: browsing nearby photos, picking a restaurant, reading a full or partial menu, opening any dish with or without photos, moving through a dish&rsquo;s photos with their sources, and shortlisting and comparing up to three, with the shortlist and your place kept across screens and reloads. It shows how the design behaves when a photo is missing, when a photo came from a diner, when a menu is only partly in Morsel, and when the menu lists no ingredients. Whether any of this helps someone decide at a table is a question for the planned testing, not something the prototype can answer on its own.</p>
+            <p class="proj-p" data-ed="49">The prototype covers one full menu because that is the honest size of the idea so far. Being useful depends on coverage, and I would start small: a pilot with a handful of restaurants that agree to a complete menu, each photo matched to a specific dish rather than to the restaurant, and coverage shown as counts the way the cards do now. Menus change and dishes run out; keeping a photo menu current is an operating dependency I haven&rsquo;t resolved. The app can say when a menu was last checked, but it can&rsquo;t promise tonight&rsquo;s availability. None of this exists yet. It is the next set of questions, not a plan with partners.</p>
           </div>
         </div>
       </section>
@@ -224,9 +209,9 @@
       <section class="proj-sec" id="testing">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="63">WHAT I WANT<br>TO LEARN NEXT</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="50">WHAT I WANT<br>TO LEARN NEXT</h2>
           <div>
-            <p class="proj-p" data-ed="64">I would start by asking five or six people about the last time they sat with a menu and weren&rsquo;t sure what to order: whether they looked for photos, where, and what a photo settled for them. Then I would put the prototype on a table beside a printed menu and watch people pick a main within a budget, decide between two, and tell me what a dish with no photo is and where a photo came from. A separate short round would look at trust: which source people want first, and whether they read a photo as proof of portion or ingredients. The tasks and measures are in the <a href="morsel-docs/testing-plan.html">validation plan</a>.</p>
+            <p class="proj-p" data-ed="51">First, whether the frustration is shared: five or six conversations about the last time someone sat with a menu unsure what to order, and whether they looked for photos. Then the prototype on a table beside a printed menu, watching people pick a main within a budget, decide between two, and say what a dish with no photo is and where a photo came from. Last, a short round on trust: which source people want first, and whether a photo is read as proof of portion or ingredients. The sessions and the decision rules for each are in the <a href="morsel-docs/testing-plan.html">validation plan</a>.</p>
           </div>
         </div>
       </section>
@@ -234,9 +219,9 @@
       <!-- reflection -->
       <section class="results rv">
         <div class="bloom"></div>
-        <span class="k" data-ed="65">LOOKING BACK</span>
+        <span class="k" data-ed="52">LOOKING BACK</span>
         <div class="results-grid">
-          <p class="big" data-ed="66">I started by building the browsing I enjoyed, and it took a review to admit the frustration was somewhere else: at the table, with a menu. The design now puts a photo, or an honest gap, beside every dish on that menu. The next step is to find out whether it helps anyone order.</p>
+          <p class="big" data-ed="53">I started by building the browsing I enjoyed. It took a review to admit the frustration was at the table, with a menu, and to put a photo, or an honest gap, beside every dish on it. Whether that helps anyone order is the next thing to find out.</p>
           <div class="ledger">
             <div><span>Started</span><b>Initial concept &middot; December 2025</b></div>
             <div><span>Now</span><b>Interactive prototype of the visual menu</b></div>
@@ -249,14 +234,14 @@
       <section class="proj-sec" id="notes">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <h2 class="side" style="margin:0;font-weight:400" data-ed="67">SUPPORTING<br>NOTES</h2>
+          <h2 class="side" style="margin:0;font-weight:400" data-ed="54">SUPPORTING<br>NOTES</h2>
           <div>
-            <p class="proj-p" data-ed="68">Supporting notes assembled from the design and prototype review, for anyone who wants more detail.</p>
+            <p class="proj-p" data-ed="55">Notes from the design and prototype review, for anyone who wants more detail.</p>
             <ul class="feat-list">
-              <li data-ed="69"><a class="doc-link" style="margin-top:0" href="morsel-docs/wireflow.html">Flow and assumptions &rarr;</a></li>
-              <li data-ed="70"><a class="doc-link" style="margin-top:0" href="morsel-docs/explorations.html">Design alternatives &rarr;</a></li>
-              <li data-ed="71"><a class="doc-link" style="margin-top:0" href="morsel-docs/ds-addendum.html">Component notes &rarr;</a></li>
-              <li data-ed="72"><a class="doc-link" style="margin-top:0" href="morsel-docs/testing-plan.html">Validation plan &rarr;</a></li>
+              <li data-ed="56"><a class="doc-link" style="margin-top:0" href="morsel-docs/wireflow.html">Flow and assumptions &rarr;</a></li>
+              <li data-ed="57"><a class="doc-link" style="margin-top:0" href="morsel-docs/explorations.html">Design alternatives &rarr;</a></li>
+              <li data-ed="58"><a class="doc-link" style="margin-top:0" href="morsel-docs/ds-addendum.html">Component notes &rarr;</a></li>
+              <li data-ed="59"><a class="doc-link" style="margin-top:0" href="morsel-docs/testing-plan.html">Validation plan &rarr;</a></li>
             </ul>
           </div>
         </div>
@@ -264,7 +249,7 @@
 
       <!-- next project -->
       <a class="next-proj" href="tenet.html">
-        <span><span class="k" data-ed="73">NEXT PROJECT &mdash; &#8470; 02</span><span class="t" data-ed="74">Tenet &mdash; rules at order-send</span></span>
+        <span><span class="k" data-ed="60">NEXT PROJECT &mdash; &#8470; 02</span><span class="t" data-ed="61">Tenet &mdash; rules at order-send</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>

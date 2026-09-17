@@ -114,9 +114,9 @@ function MorselApp() {
   const showTabs = screen !== "dish";
 
   return (
-    <div className="morsel-app-shell" style={{ display: "flex", flexDirection: "column", alignItems: "center" }} ref={appRef}>
+    <div className="morsel-app-shell" style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 402 }} ref={appRef}>
       <IOSDevice>
-        <div className="morsel-app" style={{ "--ts": t.textScale / 100 }}>
+        <div className="morsel-app" style={{ "--ts": t.textScale / 100 }} data-ts={t.textScale >= 130 ? "large" : "normal"} data-tabs={showTabs ? "true" : "false"}>
           {screen === "home" && <HomeScreen onPicker={() => setScreen("picker")} onRestaurant={(id) => openMenu(id, "home")} onOpen={(id) => openDish(id, "home")} />}
           {screen === "picker" && <PickerScreen onPick={(id) => openMenu(id, "picker")} onBack={() => setScreen("home")} />}
           {screen === "menu" && restId && (
@@ -133,10 +133,10 @@ function MorselApp() {
           )}
           {showTabs && (
             <div className="m-tabbar" role="tablist" aria-label="Morsel">
-              <button className="m-tab" role="tab" data-active={tab === "home"} aria-selected={tab === "home"} aria-label="Nearby" onClick={() => goTab("home")}><MIcon name="grid" size={21} /></button>
-              <button className="m-tab" role="tab" data-active={tab === "menu"} aria-selected={tab === "menu"} aria-label={restId ? restaurant(restId).name + " menu" : "Menu"} onClick={() => goTab("menu")}><MIcon name="menu" size={21} /></button>
+              <button className="m-tab" role="tab" data-active={tab === "home"} aria-selected={tab === "home"} onClick={() => goTab("home")}><MIcon name="grid" size={20} /><span className="m-tab-label">Nearby</span></button>
+              <button className="m-tab" role="tab" data-active={tab === "menu"} aria-selected={tab === "menu"} aria-label={restId ? "Menu, " + restaurant(restId).name : "Menu"} onClick={() => goTab("menu")}><MIcon name="menu" size={20} /><span className="m-tab-label">Menu</span></button>
               <button className="m-tab" role="tab" data-active={tab === "compare"} aria-selected={tab === "compare"} aria-label={"Compare, " + shortlist.length + " of 3"} onClick={() => goTab("compare")}>
-                <MIcon name="compare" size={21} />{shortlist.length > 0 && <span className="m-tab-badge" aria-hidden="true">{shortlist.length}</span>}
+                <MIcon name="compare" size={20} /><span className="m-tab-label">Compare</span>{shortlist.length > 0 && <span className="m-tab-badge" aria-hidden="true">{shortlist.length}</span>}
               </button>
             </div>
           )}
@@ -171,8 +171,8 @@ function MorselPage() {
   }, []);
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, padding: "16px 0" }}>
-      <div style={{ width: 402 * scale, height: 874 * scale + 150 }}>
-        <div style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}>
+      <div style={{ width: 402 * scale, height: 874 * scale + 150, overflow: "visible" }}>
+        <div style={{ width: 402, transform: `scale(${scale})`, transformOrigin: "top left" }}>
           <MorselApp />
         </div>
       </div>

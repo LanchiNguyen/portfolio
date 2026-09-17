@@ -47,14 +47,14 @@
 <div class="page">
   <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
   <h1 style="margin-top:16px;">Design alternatives</h1>
-  <p class="sub" style="margin-top:12px;">Six questions the visual menu had to answer, the options I weighed for each, and what the prototype does. Choices came from design exploration and prototype review; the questions marked to test are open.</p>
+  <p class="sub" style="margin-top:12px;">Six questions the visual menu had to answer, the options I weighed for each, and what the prototype does. Choices came from design exploration and prototype review; each has a cost, noted alongside.</p>
 
   <h2>A &middot; What order does the menu take?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>A1 &middot; Photos first</h3><p>Photographed dishes at the top, the rest below. Prettiest screen; misrepresents the menu and buries a third of it.</p></div>
-    <div class="card"><h3>A2 &middot; Photographed dishes only</h3><p>Hide what has no photo. Simple, and wrong: a diner reading the paper menu would find dishes the app does not have.</p></div>
-    <div class="card"><h3>A3 &middot; Menu order, gaps shown <span class="tag chosen">chosen</span></h3><p>Every dish in the restaurant's order. An unphotographed dish keeps its place with a "No photo yet" block the same size as a photo. Less even to look at; trustworthy.</p></div>
+    <div class="card"><h3>A1 &middot; Photos first</h3><p>Photographed dishes at the top, the rest below. The most attractive screen; it reorders the menu and pushes a third of it below the fold.</p></div>
+    <div class="card"><h3>A2 &middot; Photographed dishes only</h3><p>Hide what has no photo. Simple to build, but a diner holding the paper menu would find dishes the app does not have.</p></div>
+    <div class="card"><h3>A3 &middot; Menu order, gaps shown <span class="tag chosen">chosen</span></h3><p>Every dish in the restaurant's order. An unphotographed dish keeps its place with a "No photo yet" block the same size as a photo. Less even to look at; the menu stays complete.</p></div>
     <div class="card"><h3>A4 &middot; Menu order, plus a Photos view</h3><p>A3 with a secondary grid of photographed dishes that says how many it leaves out. Added: browsing by photo is the pleasure, the menu is the task.</p></div>
   </div>
   <p class="note"><b>To test:</b> whether the gaps bother people, and whether anyone reads "No photo yet" as "not available tonight".</p>
@@ -78,29 +78,29 @@
   <h2>D &middot; Where did the photo come from?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>D1 &middot; No label</h3><p>Cleanest. Leaves the diner to guess whether a glossy photo is the kitchen's or a plate someone was served.</p></div>
-    <div class="card"><h3>D2 &middot; Label diner photos only</h3><p>Marks the "unofficial" ones. Implies restaurant photos are the truth, which they are not either.</p></div>
-    <div class="card"><h3>D3 &middot; A label on every photo <span class="tag chosen">chosen</span></h3><p>"Restaurant photo" or "Diner photo" on each, a short form on thumbnails, and a count when there are several. More to read; nothing to guess.</p></div>
+    <div class="card"><h3>D1 &middot; No label</h3><p>Cleanest. The diner has to guess whether a photo is the kitchen's or a plate someone was served.</p></div>
+    <div class="card"><h3>D2 &middot; Label diner photos only</h3><p>Marks the "unofficial" ones. Reads as if restaurant photos are the reference; they are styled shots with their own gap from the plate.</p></div>
+    <div class="card"><h3>D3 &middot; A label on every photo <span class="tag chosen">chosen</span></h3><p>"Restaurant photo" or "Diner photo" on each, a short form on thumbnails, and a count when there are several. More to read on every photo; no guessing about source.</p></div>
   </div>
   <p class="note"><b>To test:</b> which source people trust for what, and whether they want diner photos first. In this prototype both sources are fixtures; no one contributed anything.</p>
 
   <h2>E &middot; How do you choose between dishes?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>E1 &middot; Save for later</h3><p>The earlier concept's answer. Right for browsing across days; wrong at a table where the decision is now.</p></div>
-    <div class="card"><h3>E2 &middot; A cart</h3><p>Familiar, and a lie: Morsel does not order. It would also push toward adding, not deciding.</p></div>
+    <div class="card"><h3>E1 &middot; Save for later</h3><p>The earlier concept's answer. Suits browsing across days; at a table the decision is now, and a saved list is somewhere else.</p></div>
+    <div class="card"><h3>E2 &middot; A cart</h3><p>Familiar, but Morsel does not place orders, so a cart would end nowhere. It also nudges toward adding rather than choosing between.</p></div>
     <div class="card"><h3>E3 &middot; Compare two or three <span class="tag chosen">chosen</span></h3><p>A shortlist of up to three, shown side by side with price, description, ingredients and whatever photo exists. Remove, add another, back to the menu. Fits a phone width.</p></div>
   </div>
 
   <h2>F &middot; What stands in for a missing photo?</h2>
   <div class="rule"></div>
   <div class="grid">
-    <div class="card"><h3>F1 &middot; A generic image</h3><p>A stock photo of "pasta" beside a specific dish. Reads as the dish; it is not.</p></div>
-    <div class="card"><h3>F2 &middot; Nothing</h3><p>Text-only rows. The dish loses visual weight and looks less important than its neighbors.</p></div>
+    <div class="card"><h3>F1 &middot; A generic image</h3><p>A stock photo of "pasta" beside a specific dish. It fills the gap and is easily read as the dish itself.</p></div>
+    <div class="card"><h3>F2 &middot; Nothing</h3><p>Text-only rows. The dish keeps its place but loses visual weight next to photographed neighbors.</p></div>
     <div class="card"><h3>F3 &middot; A placeholder that says so <span class="tag chosen">chosen</span></h3><p>The same footprint as a photo, a camera-off mark and "No photo yet". The dish stays fully usable: open it, compare it.</p></div>
   </div>
 
-  <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>
+  <p class="note">Supporting notes from the design and prototype review. Restaurants, menus and photos are fictional sample data.</p>
 </div>
 </body>
 </html>
