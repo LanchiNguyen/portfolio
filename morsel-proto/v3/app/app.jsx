@@ -335,8 +335,8 @@ function MorselPage() {
       </div>
       <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 13, color: "#8A7A66", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
         <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap", justifyContent: "center", padding: "0 16px" }}>
-          <span style={{ fontWeight: 700, color: "#5C4B38" }}>Morsel v3.2</span>
-          <span>current iteration</span>
+          <span style={{ fontWeight: 700, color: "#5C4B38" }}>Morsel</span>
+          <span>Interactive prototype</span>
           <a href="../morsel-docs/wireflow.html" style={{ color: "#B0542F", fontWeight: 600 }}>wireflow →</a>
           <a href="../morsel-docs/explorations.html" style={{ color: "#B0542F", fontWeight: 600 }}>explorations →</a>
           <a href="../morsel-docs/ds-addendum.html" style={{ color: "#B0542F", fontWeight: 600 }}>ds addendum →</a>
