@@ -140,6 +140,8 @@ window.__FIGS = ${JSON.stringify(figs)};
     inner.innerHTML = f.h;
     inner.querySelectorAll('[data-mp]').forEach(function (n) { n.src = photoSrc(n.getAttribute('data-mp')); });
     box.appendChild(inner);
+    /* a figure captured mid-scroll carries the offset; restore it once laid out */
+    inner.querySelectorAll('[data-scrolltop]').forEach(function (n) { n.scrollTop = +n.getAttribute('data-scrolltop'); });
     box.setAttribute('data-ready', '1');
     fit(box);
   }

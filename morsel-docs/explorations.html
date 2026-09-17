@@ -2,256 +2,97 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="../favicon.png" />
-<meta name="description" content="Morsel process document: structural explorations for the photo-first feed, with what the design review changed." />
+<meta name="description" content="Morsel process document: the alternatives considered for the visual menu, with tradeoffs and what was chosen." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Morsel — structural explorations</title>
+<title>Morsel — design alternatives</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; }
+  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; --green:#3D5A2E; --green-soft:#DCE8D4; --amber:#7A5A12; --amber-soft:#F3E4B8; }
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", sans-serif; -webkit-font-smoothing: antialiased; }
-  .page { max-width: 1060px; margin: 0 auto; padding: 56px 32px 96px; }
-  h1 { font-family: "Lora", serif; font-weight: 600; font-size: 44px; line-height: 1.05; }
-  h2 { font-family: "Lora", serif; font-weight: 600; font-size: 27px; margin: 70px 0 6px; }
-  h2 .k { color: var(--accent); margin-right: 10px; }
-  .sub { color: var(--ink2); font-size: 15px; line-height: 1.55; max-width: 720px; }
-  .rule { height: 1px; background: var(--line); margin: 18px 0 24px; }
-  .micro { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--ink3); }
-  .opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(228px, 1fr)); gap: 14px; }
-  .opt { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-  .opt h3 { font-size: 15px; font-weight: 800; }
-  .opt .shipped { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; background: #DCE8D4; color: #3D5A2E; border-radius: 99px; padding: 3px 8px; margin-left: 6px; vertical-align: 2px; }
-  .opt .was { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; background: var(--sunken); color: var(--ink2); border-radius: 99px; padding: 3px 8px; margin-left: 6px; vertical-align: 2px; }
-  .opt ul { padding-left: 16px; font-size: 12.5px; line-height: 1.5; color: var(--ink2); }
-  .opt ul b { color: var(--ink); }
-  .mock { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 8px; }
-  .mrow { display: flex; gap: 6px; }
-  .mcol { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-  .ph { position: relative; border-radius: 9px; overflow: hidden; background: var(--sunken); }
-  .ph img { width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0; }
-  .ph .veil { position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,7,3,.6), rgba(12,7,3,0) 55%); }
-  .ph .lab { position: absolute; left: 6px; bottom: 5px; color: #FFF7EB; font-size: 9px; font-weight: 700; }
-  .ph .chip { position: absolute; left: 5px; bottom: 5px; background: rgba(28,18,10,.5); color: #FFF9F0; font-size: 8.5px; font-weight: 700; border-radius: 99px; padding: 2px 6px; backdrop-filter: blur(4px); }
-  .under { font-size: 9.5px; font-weight: 700; padding: 1px 2px 3px; line-height: 1.3; }
-  .under span { color: var(--ink3); font-weight: 600; display: block; }
-  .rec { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 16px; padding: 16px 18px; margin-top: 16px; }
-  .rec .badge { flex: none; background: var(--accent); color: #FFF6EC; font-size: 10px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; border-radius: 99px; padding: 4px 10px; margin-top: 1px; }
-  .rec p { font-size: 13.5px; line-height: 1.55; color: var(--ink2); }
-  .rec b { color: var(--ink); }
-  .flow { display: flex; flex-direction: column; gap: 5px; }
-  .step { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; }
-  .step .n { flex: none; width: 20px; height: 20px; border-radius: 99px; background: var(--sunken); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: var(--ink2); }
-  .step .n.safe { background: var(--accent); color: #FFF6EC; }
-  .step .n.skip { background: transparent; border: 1.5px dashed var(--ink3); }
-  .step small { color: var(--ink3); font-weight: 600; }
-  .statcard { display: flex; align-items: center; gap: 10px; background: var(--sunken); border-radius: 14px; padding: 10px 12px; }
-  .ring { flex: none; width: 30px; height: 30px; border-radius: 99px; border: 3.5px solid var(--line); border-top-color: var(--accent); border-right-color: var(--accent); transform: rotate(45deg); }
-  .statcard .t { font-size: 12.5px; font-weight: 800; }
-  .statcard .s { font-size: 10.5px; color: var(--ink2); }
-  .facts { display: flex; flex-direction: column; }
-  .facts .r { display: flex; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--line); font-size: 11px; }
-  .facts .r .l { width: 58px; flex: none; color: var(--ink3); }
-  .facts .r .v { font-weight: 800; }
-  .facts .r .v small { display: block; font-weight: 500; color: var(--ink2); font-size: 10px; }
-  .btnrow { display: flex; gap: 6px; }
-  .b { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 34px; border-radius: 99px; font-size: 11px; font-weight: 800; }
-  .b.p { background: var(--accent); color: #FFF6EC; }
-  .b.q { background: var(--sunken); }
-  .b.icon { flex: none; width: 34px; }
-  .b.dis { opacity: .4; }
-  .cap { font-size: 10px; color: var(--ink3); margin-top: 4px; text-align: center; }
+  .page { max-width: 880px; margin: 0 auto; padding: 56px 32px 96px; }
+  h1 { font-family: "Lora", serif; font-weight: 600; font-size: 42px; line-height: 1.05; }
+  h2 { font-family: "Lora", serif; font-weight: 600; font-size: 25px; margin: 56px 0 6px; }
+  h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+  p { line-height: 1.55; }
+  .sub { color: var(--ink2); font-size: 15px; line-height: 1.55; max-width: 640px; }
+  .rule { height: 1px; background: var(--line); margin: 16px 0 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); padding: 8px 10px 8px 0; border-bottom: 1.5px solid var(--line); }
+  td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; color: var(--ink2); }
+  td:first-child { font-weight: 800; color: var(--ink); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin-top: 14px; }
+  .card p, .card li { font-size: 13.5px; line-height: 1.55; color: var(--ink2); }
+  .card ul, .card ol { padding-left: 18px; }
+  .card b, td b { color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 14px; }
+  .grid .card { margin-top: 0; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 3px 8px; background: var(--sunken); color: var(--ink2); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+  .tag.built { background: var(--green-soft); color: var(--green); }
+  .tag.test { background: var(--amber-soft); color: var(--amber); }
+  .tag.chosen { background: var(--green-soft); color: var(--green); }
+  .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 18px; }
+  .node { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+  .node h3 { font-size: 15px; }
+  .node p { font-size: 13px; color: var(--ink2); margin-top: 4px; }
+  .node .arrow { display: block; font-size: 12px; color: var(--ink3); margin-top: 8px; }
+  .note { background: var(--sunken); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink2); margin-top: 14px; line-height: 1.5; }
   a { color: var(--accent); font-weight: 700; text-decoration: none; }
-  table.meta { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; }
-  table.meta td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink2); }
-  table.meta td:first-child { font-weight: 800; color: var(--ink); width: 150px; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 640px) { .page { padding: 40px 18px 72px; } h1 { font-size: 32px; } table { display: block; overflow-x: auto; } }
 </style>
 </head>
 <body>
 <div class="page">
-  <a href="../morsel.html">← back to case study</a> · <a href="../morsel-proto/index.html">live prototype →</a>
-  <h1 style="margin-top:16px;">Structural explorations</h1>
-  <p class="sub" style="margin-top:12px;">A retrospective comparison of four design decisions. Each section shows the earlier approach, the current choice and a question for future testing. All menu content is sample data.</p>
+  <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
+  <h1 style="margin-top:16px;">Design alternatives</h1>
+  <p class="sub" style="margin-top:12px;">Five questions the visual menu had to answer, the options I weighed for each, and what the prototype does. Choices came from design exploration and prototype review; the questions marked to test are open.</p>
 
-  <!-- ============ A ============ -->
-  <h2><span class="k">A</span>Feed information density</h2>
-  <p class="sub">The original feed showed photos without labels. Comparing names and prices meant opening each dish.</p>
+  <h2>A &middot; What order does the menu take?</h2>
   <div class="rule"></div>
-  <div class="opts">
-    <div class="opt">
-      <h3>A1 · Photo-only <span class="was">earlier choice</span></h3>
-      <div class="mock"><div class="mrow">
-        <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1565299624946-b28f40a0ae38.webp" alt="" /></div><div class="ph" style="aspect-ratio:1.05;"><img src="../images/morsel-photos/1546069901-ba9599a7e63c.webp" alt="" /></div></div>
-        <div class="mcol"><div class="ph" style="aspect-ratio:1.1;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" /></div><div class="ph" style="aspect-ratio:.85;"><img src="../images/morsel-photos/1568901346375-23c9450c58cd.webp" alt="" /></div></div>
-      </div></div>
-      <ul>
-        <li><b>Scan:</b> few visual elements; scanning speed untested</li>
-        <li><b>Decisions:</b> name, price and distance need a tap each</li>
-        <li><b>A11y:</b> weakest; image-only targets</li>
-        <li><b>Review:</b> two dishes cannot be compared without opening both</li>
-      </ul>
-    </div>
-    <div class="opt">
-      <h3>A2 · Minimal overlay</h3>
-      <div class="mock"><div class="mrow">
-        <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1565299624946-b28f40a0ae38.webp" alt="" /><div class="chip">$19</div></div><div class="ph" style="aspect-ratio:1.05;"><img src="../images/morsel-photos/1546069901-ba9599a7e63c.webp" alt="" /><div class="chip">$15 · 1.4 mi</div></div></div>
-        <div class="mcol"><div class="ph" style="aspect-ratio:1.1;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" /><div class="chip">$17</div></div><div class="ph" style="aspect-ratio:.85;"><img src="../images/morsel-photos/1568901346375-23c9450c58cd.webp" alt="" /><div class="chip">$14 · 0.8 mi</div></div></div>
-      </div></div>
-      <ul>
-        <li><b>Scan:</b> small labels over the photos; scanning speed untested</li>
-        <li><b>Decisions:</b> price in-feed, but no name; long names clip in a glass pill</li>
-        <li><b>A11y:</b> text on photos needs contrast testing</li>
-      </ul>
-    </div>
-    <div class="opt">
-      <h3>A3 · Text beneath <span class="shipped">current choice</span></h3>
-      <div class="mock"><div class="mrow">
-        <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1565299624946-b28f40a0ae38.webp" alt="" /></div><div class="under">Margherita, Blistered<span>Elder &amp; Ash · Shaw</span><span><b>$19</b> · 0.4 mi</span></div></div>
-        <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" /></div><div class="under">Shoyu Ramen No. 4<span>Paper Lantern · H Street</span><span><b>$17</b> · 1.2 mi</span></div></div>
-      </div></div>
-      <ul>
-        <li><b>Scan:</b> more information to read; scanning speed untested</li>
-        <li><b>Decisions:</b> complete; names wrap instead of clipping</li>
-        <li><b>A11y:</b> descriptive button names; a separate Save control</li>
-        <li><b>Without a photo:</b> the card still works</li>
-      </ul>
-    </div>
-    <div class="opt">
-      <h3>A4 · Reveal on hold</h3>
-      <div class="mock"><div class="mrow">
-        <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1565299624946-b28f40a0ae38.webp" alt="" /></div></div>
-        <div class="mcol"><div class="ph" style="aspect-ratio:.8;"><img src="../images/morsel-photos/1569718212165-3a8278d5f624.webp" alt="" style="filter:brightness(.45);" /><div class="veil"></div><div class="lab" style="bottom:auto;top:50%;left:0;right:0;text-align:center;transform:translateY(-50%);">Shoyu Ramen<br />$17 · 1.2 mi</div></div></div>
-      </div></div>
-      <ul>
-        <li><b>Scan:</b> clean until invoked</li>
-        <li><b>Decisions:</b> gated behind an undiscoverable gesture</li>
-        <li><b>A11y:</b> requires an alternative to long-press and a visible cue</li>
-      </ul>
-    </div>
+  <div class="grid">
+    <div class="card"><h3>A1 &middot; Photos first</h3><p>Photographed dishes at the top, the rest below. Prettiest screen; misrepresents the menu and buries a third of it.</p></div>
+    <div class="card"><h3>A2 &middot; Photographed dishes only</h3><p>Hide what has no photo. Simple, and wrong: a diner reading the paper menu would find dishes the app does not have.</p></div>
+    <div class="card"><h3>A3 &middot; Menu order, gaps shown <span class="tag chosen">chosen</span></h3><p>Every dish in the restaurant's order. An unphotographed dish keeps its place with a "No photo yet" block the same size as a photo. Less even to look at; trustworthy.</p></div>
+    <div class="card"><h3>A4 &middot; Menu order, plus a Photos view</h3><p>A3 with a secondary grid of photographed dishes that says how many it leaves out. Added: browsing by photo is the pleasure, the menu is the task.</p></div>
   </div>
-  <div class="rec"><span class="badge">Design review</span><p><b>A3 in every grid.</b> I added text below the photos so names, prices and distances stay visible. The larger cards show fewer dishes at once; the featured image still gives the food room. <b>To test:</b> can people compare options without opening each one?</p></div>
+  <p class="note"><b>To test:</b> whether the gaps bother people, and whether anyone reads "No photo yet" as "not available tonight".</p>
 
-  <!-- ============ B ============ -->
-  <h2><span class="k">B</span>Entry model</h2>
-  <p class="sub">What stands between a first-time visitor and food, and where do dietary settings go?</p>
+  <h2>B &middot; How do you get to the restaurant?</h2>
   <div class="rule"></div>
-  <div class="opts">
-    <div class="opt">
-      <h3>B1 · Calibrate first, skippable <span class="was">earlier choice</span></h3>
-      <div class="mock"><div class="flow">
-        <div class="step"><span class="n">1</span> Welcome + location rationale</div>
-        <div class="step"><span class="n">2</span> Taste taps (≥4) <small>— or skip</small></div>
-        <div class="step"><span class="n safe">3</span> Lifestyle + allergies</div>
-        <div class="step"><span class="n">→</span> Feed</div>
-      </div></div>
-      <ul>
-        <li>Two screens before food; skip mitigates</li>
-        <li>Asked for a device location it could not use</li>
-        <li>Taste taps looked mandatory even when they weren't</li>
-      </ul>
-    </div>
-    <div class="opt">
-      <h3>B2 · Browse first</h3>
-      <div class="mock"><div class="flow">
-        <div class="step"><span class="n">1</span> Welcome → straight to feed</div>
-        <div class="step"><span class="n">2</span> Taste inferred silently from saves and opens</div>
-        <div class="step"><span class="n safe">!</span> Allergies asked at first save <small>— late</small></div>
-      </div></div>
-      <ul>
-        <li>Zero friction</li>
-        <li>Inference is opaque; hard to trust or correct</li>
-        <li>An allergic diner browses with no way to say so until later</li>
-      </ul>
-    </div>
-    <div class="opt">
-      <h3>B3 · Area, then optional dietary step <span class="shipped">current choice</span></h3>
-      <div class="mock"><div class="flow">
-        <div class="step"><span class="n">1</span> Welcome names the demo area <small>— nothing requested</small></div>
-        <div class="step"><span class="n safe">2</span> Dietary settings <small>— skip, always in Profile</small></div>
-        <div class="step"><span class="n">→</span> Feed</div>
-        <div class="step"><span class="n skip"></span> Taste lives in Profile: "Tune"</div>
-      </div></div>
-      <ul>
-        <li>Dietary settings offered before food, not forced</li>
-        <li>Nothing pretends to know the device location</li>
-        <li>Taste is a boost you can add, not a gate</li>
-      </ul>
-    </div>
+  <div class="grid">
+    <div class="card"><h3>B1 &middot; Location request</h3><p>Guess the restaurant from where the phone is. A permission prompt before any value, and wrong in a dense block.</p></div>
+    <div class="card"><h3>B2 &middot; Scan the menu</h3><p>Point the camera at the paper menu and match it. Interesting; out of scope for a design prototype with no backend.</p></div>
+    <div class="card"><h3>B3 &middot; Pick from a short list <span class="tag chosen">chosen</span></h3><p>A list with a text filter, and each row says whether photos exist. Lightweight, honest about coverage, no permission.</p></div>
   </div>
-  <div class="rec"><span class="badge">Design review</span><p><b>B3.</b> Dietary settings are offered before browsing and can be skipped. Taste preferences moved to Profile, where they can be added later. The welcome screen names the demo area instead of asking for device location. <b>To test:</b> can people start browsing and find these settings when they need them?</p></div>
 
-  <!-- ============ C ============ -->
-  <h2><span class="k">C</span>Evidence on the dish page</h2>
-  <p class="sub">The earlier exploration asked how a repeat-order percentage should present to be believed. The review asked a prior question: can the prototype produce that number at all?</p>
+  <h2>C &middot; Where did the photo come from?</h2>
   <div class="rule"></div>
-  <div class="opts">
-    <div class="opt">
-      <h3>C1 · Percentage alone</h3>
-      <div class="mock"><div class="statcard"><div class="ring"></div><div><div class="t">94% ordered again within 90 days</div></div></div></div>
-      <ul><li>Unanchored: 94% of what?</li><li>Reads like marketing</li></ul>
-    </div>
-    <div class="opt">
-      <h3>C2 · % + sample + method <span class="was">earlier choice</span></h3>
-      <div class="mock"><div class="statcard"><div class="ring"></div><div><div class="t">94% ordered again within 90 days</div><div class="s">131 verified diners · <span style="color:var(--accent);font-weight:800;">how we know</span></div></div></div></div>
-      <ul><li>Clearer wording, but still no real order data</li><li>Needs order attribution, consent, a follow-up window and item identity across menu changes; none exist</li></ul>
-    </div>
-    <div class="opt">
-      <h3>C4 · Cold start <span class="was">earlier choice</span></h3>
-      <div class="mock"><div class="statcard" style="border:1.5px dashed var(--ink3); background:transparent;"><div style="flex:none;width:30px;height:30px;border-radius:99px;border:2px dashed var(--ink3);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:var(--ink2);">NEW</div><div><div class="t">New — no score yet</div><div class="s">too few repeat orders</div></div></div></div>
-      <ul><li>Admitting "not enough data" was right</li><li>There was no order data for any of the dishes</li></ul>
-    </div>
-    <div class="opt">
-      <h3>C5 · Facts with their basis <span class="shipped">current choice</span></h3>
-      <div class="mock"><div class="facts">
-        <div class="r"><span class="l">Price</span><span class="v">$32<small>Tax, tip and extras not included</small></span></div>
-        <div class="r"><span class="l">Distance</span><span class="v">0.9 mi from Shaw<small>Straight-line, not a travel time</small></span></div>
-        <div class="r"><span class="l">On the menu</span><span class="v">Listed<small>Not a promise it is available tonight</small></span></div>
-        <div class="r"><span class="l">Ingredients</span><span class="v">Menu lists shellfish<small>Not preparation or shared surfaces</small></span></div>
-      </div></div>
-      <ul><li>Price, distance, menu status and listed ingredients, each with what it does not cover</li><li>The repeat-order percentage is removed; no dates imply a verification that never happened</li><li>The description is a one-line menu description, not a review</li></ul>
-    </div>
+  <div class="grid">
+    <div class="card"><h3>C1 &middot; No label</h3><p>Cleanest. Leaves the diner to guess whether a glossy photo is the kitchen's or a plate someone was served.</p></div>
+    <div class="card"><h3>C2 &middot; Label diner photos only</h3><p>Marks the "unofficial" ones. Implies restaurant photos are the truth, which they are not either.</p></div>
+    <div class="card"><h3>C3 &middot; A label on every photo <span class="tag chosen">chosen</span></h3><p>"Restaurant photo" or "Diner photo" on each, a short form on thumbnails, and a count when there are several. More to read; nothing to guess.</p></div>
   </div>
-  <div class="rec"><span class="badge">Design review</span><p><b>C5.</b> I removed the repeat-order score because the prototype has no order records. The detail page now shows price, distance, menu status and listed ingredients, each with what it does not cover. <b>To test:</b> do people understand the limits of that information and know what to check with the restaurant?</p></div>
+  <p class="note"><b>To test:</b> which source people trust for what, and whether they want diner photos first. In this prototype both sources are fixtures; no one contributed anything.</p>
 
-  <!-- ============ D ============ -->
-  <h2><span class="k">D</span>The action</h2>
-  <p class="sub">Dish detail ends in one primary action. What is it, and what does it promise?</p>
+  <h2>D &middot; How do you choose between dishes?</h2>
   <div class="rule"></div>
-  <div class="opts">
-    <div class="opt">
-      <h3>D1 · Order primary <span class="was">earlier choice</span></h3>
-      <div class="mock"><div class="btnrow"><div class="b q icon">♥</div><div class="b q">Directions</div><div class="b p">Order</div></div><div class="cap">then: carriers · fees · ETAs · pickup "ready in ~14 min"</div></div>
-      <ul><li>Matched "decide with your eyes → act now"</li><li>Promised fees, ETAs and pickup timing the prototype invented</li><li>Directions were a toast; three actions competed</li></ul>
-    </div>
-    <div class="opt">
-      <h3>D2 · Directions primary</h3>
-      <div class="mock"><div class="btnrow"><div class="b q icon">♥</div><div class="b p">Directions</div><div class="b q">Order</div></div></div>
-      <ul><li>Honors walking there</li><li>Still two exits competing; still a simulated map</li></ul>
-    </div>
-    <div class="opt">
-      <h3>D3 · Context-dependent</h3>
-      <div class="mock" style="display:flex;flex-direction:column;gap:6px;">
-        <div class="btnrow"><div class="b q icon">♥</div><div class="b q">Directions</div><div class="b p">Order</div></div>
-        <div class="btnrow"><div class="b q icon">♥</div><div class="b p">Directions</div><div class="b q dis">Opens 8 AM</div></div>
-      </div>
-      <ul><li>One primary action based on availability</li><li>Depended on hours and carrier data the catalog does not have</li></ul>
-    </div>
-    <div class="opt">
-      <h3>D4 · Next step, named for its destination <span class="shipped">current choice</span></h3>
-      <div class="mock" style="display:flex;flex-direction:column;gap:6px;">
-        <div class="btnrow"><div class="b q icon">♥</div><div class="b p">View restaurant menu</div></div>
-        <div class="btnrow"><div class="b q icon">♥</div><div class="b p">View dish on menu</div></div>
-        <div class="btnrow"><div class="b q icon">♥</div><div class="b p">Check with restaurant</div></div>
-        <div class="cap">then: "Check current prices and availability on the restaurant's menu" · Continue · end of prototype</div>
-      </div>
-      <ul><li>Label chosen from the destination model per restaurant</li><li>The sheet asks the diner to check current prices and availability on the menu</li><li>A listed conflict offers other dishes and the restaurant menu</li></ul>
-    </div>
+  <div class="grid">
+    <div class="card"><h3>D1 &middot; Save for later</h3><p>The earlier concept's answer. Right for browsing across days; wrong at a table where the decision is now.</p></div>
+    <div class="card"><h3>D2 &middot; A cart</h3><p>Familiar, and a lie: Morsel does not order. It would also push toward adding, not deciding.</p></div>
+    <div class="card"><h3>D3 &middot; Compare two or three <span class="tag chosen">chosen</span></h3><p>A shortlist of up to three, shown side by side with price, description, ingredients and whatever photo exists. Remove, add another, back to the menu. Fits a phone width.</p></div>
   </div>
-  <div class="rec"><span class="badge">Design review</span><p><b>D4.</b> The button describes the destination: a dish page, restaurant menu or contact details. In the prototype the flow ends at a neutral end state; the note that links are simulated sits outside the app. <b>To test:</b> can people predict what the button will do before they press it?</p></div>
 
-  <table class="meta">
-    <tr><td>Method note</td><td>All comparisons are rendered in the Toast visual system so differences are structural, not cosmetic. "Design review" marks a change made from a design review of the earlier exploration in September 2026, not from participant evidence. Recommendations stay provisional until the <a href="testing-plan.html">research plan</a> runs.</td></tr>
-  </table>
+  <h2>E &middot; What stands in for a missing photo?</h2>
+  <div class="rule"></div>
+  <div class="grid">
+    <div class="card"><h3>E1 &middot; A generic image</h3><p>A stock photo of "pasta" beside a specific dish. Reads as the dish; it is not.</p></div>
+    <div class="card"><h3>E2 &middot; Nothing</h3><p>Text-only rows. The dish loses visual weight and looks less important than its neighbors.</p></div>
+    <div class="card"><h3>E3 &middot; A placeholder that says so <span class="tag chosen">chosen</span></h3><p>The same footprint as a photo, a camera-off mark and "No photo yet". The dish stays fully usable: open it, compare it.</p></div>
+  </div>
+
+  <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>
 </div>
 </body>
 </html>

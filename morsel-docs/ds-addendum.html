@@ -2,262 +2,107 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="../favicon.png" />
-<meta name="description" content="Morsel process document: design-system addendum for the current prototype — cards, state chips, constraint bar, facts list, next-step sheet." />
+<meta name="description" content="Morsel process document: component notes for the visual menu: rows, source tags, photo strip, facts, compare." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Morsel — design system addendum</title>
+<title>Morsel — component notes</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; --accent-ink:#FFF6EC; }
+  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; --green:#3D5A2E; --green-soft:#DCE8D4; --amber:#7A5A12; --amber-soft:#F3E4B8; }
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", sans-serif; -webkit-font-smoothing: antialiased; }
-  .page { max-width: 920px; margin: 0 auto; padding: 56px 32px 96px; }
+  .page { max-width: 880px; margin: 0 auto; padding: 56px 32px 96px; }
   h1 { font-family: "Lora", serif; font-weight: 600; font-size: 42px; line-height: 1.05; }
+  h2 { font-family: "Lora", serif; font-weight: 600; font-size: 25px; margin: 56px 0 6px; }
+  h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+  p { line-height: 1.55; }
   .sub { color: var(--ink2); font-size: 15px; line-height: 1.55; max-width: 640px; }
-  .comp { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; margin-top: 18px; display: grid; grid-template-columns: 300px 1fr; gap: 22px; }
-  .comp h2 { font-family: "Lora", serif; font-weight: 600; font-size: 20px; margin-bottom: 12px; grid-column: 1 / -1; }
-  .comp h2 .v { font-size: 11px; font-weight: 800; font-family: "Hanken Grotesk"; letter-spacing: .06em; color: #3D5A2E; background: #DCE8D4; border-radius: 99px; padding: 3px 9px; margin-left: 8px; vertical-align: 3px; }
-  .comp h2 .v.gone { color: var(--ink2); background: var(--sunken); }
-  .demo { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
-  .demo .cap { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
-  .notes { font-size: 13px; line-height: 1.55; color: var(--ink2); }
-  .notes b { color: var(--ink); }
-  .notes .a11y { display: block; margin-top: 10px; padding: 9px 12px; background: var(--sunken); border-radius: 10px; font-size: 12.5px; }
-  .notes .a11y::before { content: "Accessibility — "; font-weight: 800; color: var(--ink); }
-  .notes .copy { display: block; margin-top: 8px; font-size: 12.5px; }
-  .notes .copy::before { content: "Content — "; font-weight: 800; color: var(--ink); }
-  /* live component styles (mirrors app/styles.css) */
-  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); padding: 9px 16px; font-size: 14px; font-weight: 600; min-height: 40px; }
-  .chip.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .chip.al-on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 700; }
-  .statechip { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 5px 10px; font-size: 11.5px; font-weight: 800; white-space: nowrap; }
-  .statechip.conflict { background: var(--accent); color: var(--accent-ink); }
-  .statechip.unknown { background: var(--surface); color: var(--ink); border: 1.5px solid var(--ink3); }
-  .statechip.unlisted { background: var(--ink); color: var(--paper); }
-  .card { width: 150px; }
-  .card .ph { position: relative; aspect-ratio: 4/5; border-radius: 12px; overflow: hidden; background: var(--sunken); }
-  .card .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .card .t { padding: 7px 2px 0; }
-  .card .name { font-size: 13px; font-weight: 700; line-height: 1.25; }
-  .card .sub2 { font-size: 11px; color: var(--ink2); }
-  .card .price { font-size: 11px; font-weight: 800; }
-  .card .price span { color: var(--ink3); font-weight: 500; }
-  .card .save { position: absolute; top: 6px; right: 6px; width: 30px; height: 30px; border-radius: 99px; background: rgba(28,18,10,.34); color: #FFF9F0; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-  .nophoto { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 10px; color: var(--ink2); }
-  .nophoto .m { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink3); }
-  .banner { display: flex; gap: 10px; align-items: flex-start; background: rgba(194,73,43,.10); border: 1.5px solid var(--accent); border-radius: 16px; padding: 12px 14px; }
-  .banner.unknown { background: var(--sunken); border: 1.5px dashed var(--ink3); }
-  .banner .x { color: var(--accent); flex: none; font-weight: 900; font-size: 13px; width: 20px; height: 20px; border-radius: 99px; border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; }
-  .banner.unknown .x { color: var(--ink2); border-color: var(--ink3); }
-  .banner .t { font-size: 13.5px; font-weight: 800; color: var(--accent); }
-  .banner.unknown .t { color: var(--ink); }
-  .banner .s { font-size: 12px; color: var(--ink2); line-height: 1.45; }
-  .facts { width: 100%; }
-  .facts .r { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 12px; }
-  .facts .r .l { width: 66px; flex: none; color: var(--ink3); }
-  .facts .r .v { font-weight: 800; }
-  .facts .r .v small { display: block; font-weight: 500; color: var(--ink2); font-size: 11px; line-height: 1.4; }
-  .constraints { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-  .constraint { border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink2); }
-  .constraint.warn { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-  .statuspill { display: inline-flex; border-radius: 99px; background: var(--ink); color: var(--paper); padding: 6px 12px; font-size: 12px; font-weight: 700; }
-  .skel { border-radius: 12px; background: linear-gradient(100deg, var(--sunken) 40%, rgba(255,255,255,.5) 50%, var(--sunken) 60%); background-size: 200% 100%; animation: sh 1.4s linear infinite; }
-  @keyframes sh { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-  @media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
-  .obanner { display: flex; gap: 10px; align-items: center; background: var(--sunken); border: 1px solid var(--line); border-radius: 14px; padding: 10px 13px; width: 100%; }
-  .sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px; width: 100%; display: flex; flex-direction: column; gap: 8px; }
-  .sheet .h { font-size: 13px; font-weight: 800; }
-  .sheet .d { background: var(--sunken); border-radius: 10px; padding: 9px 10px; font-size: 11.5px; color: var(--ink2); line-height: 1.45; }
-  .sheet .d b { color: var(--ink); }
-  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 99px; min-height: 40px; padding: 0 18px; font-weight: 700; font-size: 13px; }
-  .btn.p { background: var(--accent); color: var(--accent-ink); }
-  .btn.q { background: var(--sunken); }
-  .btn.dis { opacity: .35; }
+  .rule { height: 1px; background: var(--line); margin: 16px 0 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); padding: 8px 10px 8px 0; border-bottom: 1.5px solid var(--line); }
+  td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; color: var(--ink2); }
+  td:first-child { font-weight: 800; color: var(--ink); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin-top: 14px; }
+  .card p, .card li { font-size: 13.5px; line-height: 1.55; color: var(--ink2); }
+  .card ul, .card ol { padding-left: 18px; }
+  .card b, td b { color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 14px; }
+  .grid .card { margin-top: 0; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 3px 8px; background: var(--sunken); color: var(--ink2); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+  .tag.built { background: var(--green-soft); color: var(--green); }
+  .tag.test { background: var(--amber-soft); color: var(--amber); }
+  .tag.chosen { background: var(--green-soft); color: var(--green); }
+  .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 18px; }
+  .node { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+  .node h3 { font-size: 15px; }
+  .node p { font-size: 13px; color: var(--ink2); margin-top: 4px; }
+  .node .arrow { display: block; font-size: 12px; color: var(--ink3); margin-top: 8px; }
+  .note { background: var(--sunken); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink2); margin-top: 14px; line-height: 1.5; }
   a { color: var(--accent); font-weight: 700; text-decoration: none; }
-  @media (max-width: 720px) { .comp { grid-template-columns: 1fr; } }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 640px) { .page { padding: 40px 18px 72px; } h1 { font-size: 32px; } table { display: block; overflow-x: auto; } }
 </style>
 </head>
 <body>
 <div class="page">
-  <a href="../morsel.html">← back to case study</a> · <a href="../morsel-proto/index.html">live prototype →</a>
-  <h1 style="margin-top:16px;">Design system addendum</h1>
-  <p class="sub" style="margin-top:12px;">Component notes from the design review of the prototype. The palette, typography and spacing remain from the earlier version. Replaced components are listed at the end for reference.</p>
+  <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
+  <h1 style="margin-top:16px;">Component notes</h1>
+  <p class="sub" style="margin-top:12px;">The pieces the visual menu is built from, with the rules each one carries. Palette, type and spacing continue from the earlier exploration: cream paper, terracotta accent, Lora for display, Hanken Grotesk for UI, a 4pt grid.</p>
 
-  <div class="comp">
-    <h2>Labeled card <span class="v">current</span></h2>
-    <div class="demo">
-      <span class="cap">Every grid: feed · search · saves · collections · restaurant</span>
-      <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <div class="card"><div class="ph"><img src="../images/morsel-photos/1565299624946-b28f40a0ae38.webp" alt="" /><span class="save">♥</span></div><div class="t"><div class="name">Margherita, Blistered</div><div class="sub2">Elder &amp; Ash · Shaw</div><div class="price">$19 <span>· 0.4 mi</span></div></div></div>
-        <div class="card"><div class="ph"><div class="nophoto"><span class="m">Sushi</span>photo unavailable</div><span class="save">♡</span></div><div class="t"><div class="name">Chef's Omakase Rolls</div><div class="sub2">Sumi · Dupont Circle</div><div class="price">$32 <span>· 0.9 mi</span></div></div></div>
-      </div>
-    </div>
-    <div class="notes">
-      Each card shows a photo, dish name, restaurant, neighborhood, menu price and distance. Images use a 4:5 ratio and names can wrap. Missing prices read "Price not listed". The same card is used in the feed, search and saves.
-      <span class="copy">Price is the listed menu price only. Distance is straight-line miles from Shaw, never a walk time.</span>
-      <span class="a11y">The card is one <code>button</code> whose accessible name reads the dish, restaurant, price, distance and any state chip. Save is a sibling control with <code>aria-pressed</code>, never nested. Without a photo the card is still complete.</span>
-    </div>
+  <h2>Restaurant row</h2>
+  <div class="rule"></div>
+  <div class="card"><p><b>Name, neighborhood and kind, then coverage:</b> "8 of 12 dishes photographed" or "No menu photos yet". The whole row is one button. Coverage is a count, never a percentage, so a small menu does not look better covered than it is.</p></div>
+
+  <h2>Menu row</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <ul>
+      <li><b>Thumbnail 104&times;104</b> with a short source tag: "Restaurant", "Diner", or "3 photos". Or the <b>no-photo block</b> at the same size: dashed border, camera-off mark, "No photo yet".</li>
+      <li><b>Name, description (up to three lines), price.</b> The description is the menu's own line, never a review.</li>
+      <li><b>Compare toggle</b> at the top right, a separate button so the row itself stays a single open action. <code>aria-pressed</code> reflects the shortlist; when the shortlist is full the toggle stays enabled and explains.</li>
+      <li>The row's accessible name reads name, price and the photo note, so a screen reader hears "No photo yet" where a sighted person sees the block.</li>
+    </ul>
   </div>
 
-  <div class="comp">
-    <h2>State chip <span class="v">current</span></h2>
-    <div class="demo">
-      <span class="cap">Three states, one vocabulary</span>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;"><span class="statechip conflict">! Lists nuts</span><span class="statechip unknown">? Ingredients unknown</span><span class="statechip unlisted">No longer on menu</span></div>
-    </div>
-    <div class="notes">
-      Marks a dish on a memory or context surface (saves, collections, restaurant menu) whose state needs attention: the menu lists an allergen the diner avoids; no ingredient information exists; the dish has left the menu. Recommendation surfaces never show the conflict chip, because conflicts are excluded upstream by the shared classifier. Top-left, kept clear of the save control.
-      <span class="copy">Use specific labels: "Lists nuts", "Ingredients unknown", "No longer on menu". Never "unsafe", never "safe".</span>
-      <span class="a11y">"!" for conflict, "?" for unknown, solid ink for unlisted: each state carries a glyph or treatment as well as a color. The chip text is part of the card's accessible name.</span>
-    </div>
+  <h2>Source tag</h2>
+  <div class="rule"></div>
+  <div class="card"><p><b>Two forms.</b> Long on the photo itself: "Restaurant photo", "Diner photo". Short on thumbnails: "Restaurant", "Diner". With several photos the tag becomes a count and the dish page shows each source in turn. The tag is glass over the photo, never a color alone: the word carries the meaning.</p></div>
+
+  <h2>Photo strip</h2>
+  <div class="rule"></div>
+  <div class="card"><p><b>One photo at a time, 320pt tall,</b> with previous and next buttons as glass pills, a dot indicator and "2 of 3". Swipe also moves. The source label sits bottom left on every frame. The Back button floats over the top left, the same as on a dish without photos, where a 220pt no-photo block takes the photo's place.</p></div>
+
+  <h2>Facts</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <ul>
+      <li><b>Photos:</b> what exists and where from, then the caveat: photos show one visit's plating and don't show ingredients, portion size or how the dish looks today.</li>
+      <li><b>Ingredients:</b> "The menu lists gluten, shellfish." or "Ingredients aren't listed on the menu." Missing information stays visibly missing, and the tracked set is named so a short list is not read as a complete one.</li>
+    </ul>
   </div>
 
-  <div class="comp">
-    <h2>Constraint bar <span class="v">current</span></h2>
-    <div class="demo">
-      <span class="cap">Feed and search, whenever a setting changes what is shown</span>
-      <div class="constraints"><span class="constraint">Vegetarian</span><span class="constraint warn">! No nuts</span><span class="constraint">Under $15 · $15–24</span><span class="constraint">within 1 mi</span><span style="color:var(--accent); font-weight:800; font-size:12px;">Clear filters</span></div>
-    </div>
-    <div class="notes">
-      The active constraints, in the order they apply: lifestyle, allergies, price, distance. Each chip opens its own editor; browsing chips open the filter sheet, dietary chips open dietary settings. "Clear filters" clears browsing chips only. The same bar appears in search to show which filters are active.
-      <span class="copy">Allergy chips use the accent and the "!" glyph; nothing else on the bar does.</span>
-      <span class="a11y">Chips are buttons named "Browsing filter: within 1 mi. Edit" and so on. The bar is a labeled group.</span>
-    </div>
+  <h2>Compare</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <ul>
+      <li><b>Compare bar:</b> floats above the menu once anything is shortlisted. Count out of three, the dish names, one button.</li>
+      <li><b>Column:</b> photo or no-photo block, name, price, the full description, the ingredients line, Remove. Two or three columns; a dashed "Add another" column while there is room.</li>
+      <li><b>Never a cart.</b> No totals, no quantities, no next step past the menu. The subtitle says so: a shortlist, not an order.</li>
+    </ul>
   </div>
 
-  <div class="comp">
-    <h2>Facts list <span class="v">current</span></h2>
-    <div class="demo" style="align-items:stretch;">
-      <span class="cap">Dish page, above the primary action</span>
-      <div class="facts">
-        <div class="r"><span class="l">Price</span><span class="v">$32<small>Menu price. Tax, tip and extras not included.</small></span></div>
-        <div class="r"><span class="l">Distance</span><span class="v">0.9 mi from Shaw<small>Straight-line distance from Shaw.</small></span></div>
-        <div class="r"><span class="l">On the menu</span><span class="v">Listed<small>Being listed doesn't mean it's available tonight.</small></span></div>
-        <div class="r"><span class="l">Ingredients</span><span class="v">Menu lists shellfish<small>Tracked: nuts, gluten, dairy, shellfish. Menu data doesn't cover preparation or shared surfaces.</small></span></div>
-      </div>
-    </div>
-    <div class="notes">
-      Replaces the trust card. Four rows, each with its value and its basis. No "last checked" dates: the prototype never verified a restaurant, so it does not imply that it did. A missing price says "Not listed" and points at the menu. Missing ingredient information says so and is never treated as "none".
-      <span class="copy">Every value names what it is ("menu price", "straight-line") and what it does not cover.</span>
-      <span class="a11y">Plain text rows; the caveat is in the same node as the value so it is read with the claim, not after it.</span>
-    </div>
+  <h2>Accessibility notes</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <ul>
+      <li>Every action is a real button with a visible focus ring; rows, toggles and photo navigation work from the keyboard.</li>
+      <li>Back returns focus to the row that opened the dish.</li>
+      <li>Text scales to 140% through one custom property; layouts reflow rather than clip.</li>
+      <li>Still to do: a screen-reader pass, contrast measurement on glass tags over photos, and touch-target checks on a device.</li>
+    </ul>
   </div>
 
-  <div class="comp">
-    <h2>Dietary notes: listed conflict · unknown <span class="v">current</span></h2>
-    <div class="demo" style="align-items:stretch;">
-      <span class="cap">Dish page, direct open with a nut allergy set</span>
-      <div class="banner"><div class="x">!</div><div><div class="t">The menu lists nuts, which you asked to avoid</div><div class="s">Choose another dish, or contact the restaurant about ingredients and preparation.</div></div></div>
-      <span class="cap">No ingredient information</span>
-      <div class="banner unknown"><div class="x">?</div><div><div class="t">We don't have ingredient information for this dish</div><div class="s">It isn't counted as a match for your allergy settings. Check with the restaurant before deciding.</div></div></div>
-    </div>
-    <div class="notes">
-      The conflict note replaces the acknowledgement gate. It sits above the facts and the action. Below it the primary action changes: "See other dishes at [restaurant]" and a quiet "See the restaurant's menu"; there is no order control and nothing to unlock. The unknown note keeps the ordinary next step but precedes it.
-      <span class="copy">Three beats for a conflict: what the menu lists → that you asked to avoid it → where to go instead. Never "confirm to continue".</span>
-      <span class="a11y"><code>role="note"</code>, not alert: the page opened with it. Border, glyph and text; never color-only.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Restaurant-menu sheet <span class="v">current</span></h2>
-    <div class="demo" style="align-items:stretch;">
-      <span class="cap">Destination kinds: full menu · dish on the menu · no online menu</span>
-      <div class="sheet"><div class="h">Restaurant menu</div><div class="d">Margherita, Blistered · Elder &amp; Ash · $19<br />Check current prices and availability on the restaurant&rsquo;s menu.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Continue to menu</span><span class="btn q" style="flex:1;">Back</span></div></div>
-      <div class="sheet"><div class="h">Check with Hollis</div><div class="d">Hollis has no online menu. Call (202) 555-0140 or visit in Logan Circle.</div><div style="display:flex; gap:6px;"><span class="btn p" style="flex:1;">Call Hollis</span><span class="btn q" style="flex:1;">Back</span></div></div>
-      <span class="cap">End state (prototype only)</span>
-      <div class="sheet"><div class="h">End of prototype</div><div style="display:flex; gap:6px;"><span class="btn q" style="flex:1;">Back</span></div></div>
-    </div>
-    <div class="notes">
-      Replaces the order sheet. The title and the one useful line depend on the available destination: the full menu, a dish on it, or a phone number. The sheet keeps the dish and restaurant visible and asks the diner to check current prices and availability on the menu. In the prototype the primary action ends at a neutral "End of prototype" state with Back; the disclosure that links are simulated sits in the caption beside the prototype, not inside it. A failure keeps the dish and offers a retry.
-      <span class="copy">Never promise a cart, a fee, an ETA or that the dish is in stock. No hostnames and no dates inside the app.</span>
-      <span class="a11y">A named <code>role="dialog"</code> that moves focus in, traps Tab, closes on Escape and returns focus to its opener. The endpoint is <code>role="status"</code>.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Empty results, by cause <span class="v">current</span></h2>
-    <div class="demo" style="align-items:stretch;">
-      <div style="background:var(--sunken); border-radius:14px; padding:14px; width:100%;">
-        <div style="font-size:13.5px; font-weight:800; margin-bottom:6px;">1 “steak” dish exists, but your settings exclude it</div>
-        <div style="font-size:11.5px; color:var(--ink2); margin-bottom:8px;">1 removed by your browsing filters (Under $15, within 0.5 mi).</div>
-        <span class="btn p" style="min-height:36px; font-size:12.5px; width:100%;">Clear browsing filters</span>
-        <div style="font-size:11.5px; color:var(--ink2); margin-top:10px;"><b style="color:var(--accent);">!</b> 1 lists nuts, which you asked to avoid. Allergy settings are never cleared from here.</div>
-      </div>
-    </div>
-    <div class="notes">
-      Three causes, three answers: nothing in the catalog; removed by a browsing filter; removed by a dietary setting. Each cause names its count and offers only its own recovery. Unknown-ingredient matches are listed below the note, not counted. Nothing is widened silently.
-      <span class="copy">"Exists, but your settings exclude it" is the headline whenever the catalog has the dish. Only lifestyle and browsing filters get a one-tap recovery.</span>
-      <span class="a11y">The allergy line carries the "!" glyph; recoveries are full-width buttons.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Lifestyle and allergy selection chips <span class="v">current</span></h2>
-    <div class="demo">
-      <span class="cap">Default / selected</span>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;"><span class="chip">Vegetarian</span><span class="chip on">✓ Vegan</span><span class="chip">Nuts</span><span class="chip al-on">✓ Nuts</span></div>
-    </div>
-    <div class="notes">
-      Lifestyle is single-select in ink; allergies are multi-select in the accent, because they are a different tier and must look like it. The step is optional at entry and always in Profile.
-      <span class="copy">Describe the behavior: "dishes whose menu lists one of these leave your feed and search; dishes with no ingredient information are listed separately and never counted as a match; saved dishes stay visible, labeled." Never "removed everywhere", never "safe".</span>
-      <span class="a11y">Real buttons with <code>aria-pressed</code>; selection is fill + check glyph, not color alone. Min target 44pt.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Menu status <span class="v">current</span></h2>
-    <div class="demo">
-      <span class="cap">Off the menu (saved dish)</span>
-      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;"><span class="statuspill">No longer on the menu</span><span class="statechip unlisted">No longer on menu</span></div>
-    </div>
-    <div class="notes">
-      Replaces "Sold out today · usually back tomorrow" and "Closed now · opens 8 AM", both of which claimed an availability model the catalog lacks. The only status the data supports is whether a dish is still on the menu. Being listed never implies available tonight, and the copy says so.
-      <span class="copy">Pair the status with the consequence: "This dish is no longer listed on the menu. You can still keep it in your saves."</span>
-      <span class="a11y">Ink pill with text; the next-step sheet repeats the status so it is read at the point of commitment.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Loading skeleton · offline banner <span class="v">current</span></h2>
-    <div class="demo" style="align-items:stretch;">
-      <div style="display:flex; gap:8px;"><div><div class="skel" style="width:120px; aspect-ratio:.8;"></div><div class="skel" style="height:10px; margin-top:6px; width:80px;"></div></div><div><div class="skel" style="width:120px; aspect-ratio:.8;"></div><div class="skel" style="height:10px; margin-top:6px; width:60px;"></div></div></div>
-      <div class="obanner"><div style="flex:none; width:8px; height:8px; border-radius:99px; background:var(--ink3);"></div><div style="font-size:12.5px;"><b>You're offline.</b> <span style="color:var(--ink2);">Showing your last loaded feed. Prices and availability may have changed since.</span></div></div>
-    </div>
-    <div class="notes">
-      The skeleton mirrors the labeled card (photo block plus two text lines) so nothing jumps on arrival. The offline banner warns about staleness rather than hiding content. The location-off banner is gone: the area chip shows Shaw, DC, not a permission failure.
-      <span class="a11y">Loading container is labeled; shimmer stops under <code>prefers-reduced-motion</code>. Banners are <code>role="status"</code>.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Non-color indicators — summary <span class="v">current</span></h2>
-    <div class="demo">
-      <div style="display:flex; gap:8px; flex-wrap:wrap;"><span class="chip on">✓ selected</span><span class="statechip conflict">! conflict</span><span class="statechip unknown">? unknown</span><span class="statechip unlisted">off menu</span></div>
-    </div>
-    <div class="notes">
-      Every state carries a glyph or treatment alongside its color: selection = check, conflict = "!", unknown = "?" with a dashed or outlined treatment, off the menu = solid ink. This is the floor for any new component.
-      <span class="a11y">Terracotta-on-cream passes 4.5:1 for text ≥13px; the unknown chip's outline passes 3:1 against the photo veil.</span>
-    </div>
-  </div>
-
-  <div class="comp">
-    <h2>Retired components <span class="v gone">what replaced them</span></h2>
-    <div class="demo" style="align-items:stretch;">
-      <span class="cap">Gone, and why</span>
-      <div style="font-size:12px; color:var(--ink2); line-height:1.6;">
-        <b style="color:var(--ink);">Trust &amp; methodology disclosure</b> → Facts list. No order records supported the score.<br />
-        <b style="color:var(--ink);">Order-sheet allergy acknowledgement</b> → Dietary notes. Acknowledging a warning did not resolve the ingredient conflict.<br />
-        <b style="color:var(--ink);">Carrier rows with fees and ETAs; pickup timing</b> → Next-step sheet. Invented operational data.<br />
-        <b style="color:var(--ink);">Search-result glass label</b> → Labeled card. One card for every surface.<br />
-        <b style="color:var(--ink);">Availability status (closed · sold out)</b> → Menu status. No hours model exists.<br />
-        <b style="color:var(--ink);">Allergen warn chip</b> → State chip. Three states, not one.<br />
-        <b style="color:var(--ink);">Prototype-data label on scores</b> → Source and date on every fact. Nothing evidence-shaped remains to label.
-      </div>
-    </div>
-    <div class="notes">
-      Each retirement came from the September 2026 design review, not from participant evidence. The earlier components were reasonable answers to the wrong question ("how should this number present?") when the right one was "can the prototype know this at all?".
-    </div>
-  </div>
+  <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>
 </div>
 </body>
 </html>

@@ -2,161 +2,101 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="../favicon.png" />
-<meta name="description" content="Morsel process document: research plan in three rounds (proposed; not yet run)." />
+<meta name="description" content="Morsel process document: a proposed validation plan for the visual menu. Not yet run." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Morsel — proposed research plan</title>
+<title>Morsel — validation plan</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; }
+  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; --green:#3D5A2E; --green-soft:#DCE8D4; --amber:#7A5A12; --amber-soft:#F3E4B8; }
   * { box-sizing: border-box; margin: 0; }
   body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", sans-serif; -webkit-font-smoothing: antialiased; }
   .page { max-width: 880px; margin: 0 auto; padding: 56px 32px 96px; }
   h1 { font-family: "Lora", serif; font-weight: 600; font-size: 42px; line-height: 1.05; }
   h2 { font-family: "Lora", serif; font-weight: 600; font-size: 25px; margin: 56px 0 6px; }
+  h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+  p { line-height: 1.55; }
   .sub { color: var(--ink2); font-size: 15px; line-height: 1.55; max-width: 640px; }
   .rule { height: 1px; background: var(--line); margin: 16px 0 20px; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
   th { text-align: left; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); padding: 8px 10px 8px 0; border-bottom: 1.5px solid var(--line); }
   td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; color: var(--ink2); }
-  td:first-child { font-weight: 800; color: var(--ink); white-space: nowrap; }
+  td:first-child { font-weight: 800; color: var(--ink); }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin-top: 14px; }
-  .card h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
   .card p, .card li { font-size: 13.5px; line-height: 1.55; color: var(--ink2); }
   .card ul, .card ol { padding-left: 18px; }
-  .card b { color: var(--ink); }
-  .q { font-style: italic; }
-  .tag { display: inline-block; font-size: 10px; font-weight: 800; border-radius: 99px; padding: 2px 8px; background: var(--sunken); color: var(--ink2); margin-left: 6px; vertical-align: 1px; white-space: nowrap; }
-  .sev { display: inline-block; width: 10px; height: 10px; border-radius: 99px; margin-right: 6px; vertical-align: -1px; }
+  .card b, td b { color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 14px; }
+  .grid .card { margin-top: 0; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 3px 8px; background: var(--sunken); color: var(--ink2); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+  .tag.built { background: var(--green-soft); color: var(--green); }
+  .tag.test { background: var(--amber-soft); color: var(--amber); }
+  .tag.chosen { background: var(--green-soft); color: var(--green); }
+  .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 18px; }
+  .node { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+  .node h3 { font-size: 15px; }
+  .node p { font-size: 13px; color: var(--ink2); margin-top: 4px; }
+  .node .arrow { display: block; font-size: 12px; color: var(--ink3); margin-top: 8px; }
+  .note { background: var(--sunken); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink2); margin-top: 14px; line-height: 1.5; }
   a { color: var(--accent); font-weight: 700; text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .note { background: var(--sunken); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink2); margin-top: 14px; }
-  pre { background: var(--sunken); border-radius: 12px; padding: 14px 16px; font-size: 12.5px; line-height: 1.6; color: var(--ink2); white-space: pre-wrap; margin-top: 12px; }
-  /* wide protocol tables scroll inside their own box on narrow screens */
-  @media (max-width: 640px) {
-    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  }
+  @media (max-width: 640px) { .page { padding: 40px 18px 72px; } h1 { font-size: 32px; } table { display: block; overflow-x: auto; } }
 </style>
 </head>
 <body>
 <div class="page">
-  <a href="../morsel.html">← back to case study</a> · <a href="../morsel-proto/index.html">live prototype →</a> · <a href="wireflow.html">wireflow →</a>
-  <h1 style="margin-top:16px;">Research plan</h1>
-  <p class="sub" style="margin-top:12px;">Three rounds, in order. Round A asks whether the problem is real before anyone reacts to screens. Round B tests the current flow with neutral tasks on the <a href="wireflow.html">wireflow</a>. Round C is a separate, smaller comprehension round on the three dietary states, with people who manage food allergies. <b>None of the rounds has been run</b>; every findings table is intentionally empty. Participant counts are planning ranges for qualitative work, not statistical claims.</p>
+  <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
+  <h1 style="margin-top:16px;">Validation plan</h1>
+  <p class="sub" style="margin-top:12px;">Three rounds, in order, none of them run yet. Round A asks whether the frustration behind Morsel is shared before anyone reacts to screens. Round B puts the prototype on a table. Round C looks only at photos and trust. Every finding would be recorded in the evidence table at the end, which is empty.</p>
 
-  <h2>Round A — recent behavior and problem relevance</h2>
+  <h2>Round A &middot; Reading a menu, wanting to see the dish</h2>
   <div class="rule"></div>
   <div class="card">
-    <h3>5–6 conversations, 30–40 minutes each</h3>
+    <h3>5&ndash;6 conversations, 30 minutes each</h3>
     <ul>
-      <li>Recruit by <b>behavior</b>, not by an invented persona: people who recently chose an unfamiliar casual meal in a city they know, including some who started from a photo or a saved post and some who went straight to a maps or delivery app. Include one person who tried an alternative food app and stopped.</li>
-      <li>Friends can pilot the script; they should not be the only evidence.</li>
-      <li>No screens are shown. Ask about the last relevant decision, using a non-sensitive saved post or search if they are comfortable. Do not collect unrelated messages, precise home locations, or medical details. Consent for recording; notes are enough if they prefer.</li>
-      <li>Do not introduce allergies as the assumed problem. Ask broadly about constraints and follow what they mention.</li>
+      <li>Tell me about the last time you sat down with a menu and weren't sure what to order. What did you do?</li>
+      <li>Did you look for photos? Where? What did you find, and was it the dish you were reading about?</li>
+      <li>When you did see a photo, what did it settle for you, and what did it not?</li>
+      <li>How did you decide in the end?</li>
     </ul>
+    <p><b>Looking for:</b> whether people look for dish photos at the table at all, what they use instead, and what a photo is expected to answer. If nobody looks, the direction changes before any usability work.</p>
   </div>
+
+  <h2>Round B &middot; The prototype at a table</h2>
+  <div class="rule"></div>
   <div class="card">
-    <h3>Prompts</h3>
+    <h3>6&ndash;8 sessions with a printed Elder &amp; Ash menu beside the phone</h3>
+    <p>Neutral tasks; the facilitator never names a screen or a feature.</p>
     <ol>
-      <li class="q">"Tell me about the last time you wanted something to eat but didn't know where to get it."</li>
-      <li class="q">"What happened first? What did you open next?"</li>
-      <li class="q">"What were you trying to check at each step?"</li>
-      <li class="q">"Was there a dish or place you considered and then ruled out? Why?"</li>
-      <li class="q">"How did you know you had enough information to decide?"</li>
-      <li class="q">"Did you save anything? Have you gone back to it?"</li>
-      <li class="q">"When has your usual method worked well?"</li>
-      <li class="q">"What would make trying another app not worth the effort?"</li>
+      <li>"You're at this restaurant. Find it and open its menu."</li>
+      <li>"You want a main for under $25. Pick one you would order."</li>
+      <li>"You're torn between two. Decide, and tell me what settled it."</li>
+      <li>"What do you make of this one?" (a dish with no photo)</li>
+      <li>"Where did that photo come from?" (a dish with three photos)</li>
     </ol>
+    <p><b>Measures:</b> task completion without prompting; whether the section chips or scrolling are used; whether compare is used at all and with how many dishes; what people say a "No photo yet" dish is; whether the source label is noticed unprompted.</p>
   </div>
-  <div class="note"><b>Gate.</b> Continue with "choose a dish soon" if several independent examples show a similar unresolved step between an appealing dish and a usable choice. Reframe toward save-and-retrieve if remembering is the stronger problem. Pause the direction if the main problem is fees, group coordination, reservations, or menu accuracy this scope cannot address. A preference for attractive screens is not demand evidence.</div>
 
-  <h2>Round B — information architecture and usability</h2>
+  <h2>Round C &middot; Photos and trust</h2>
   <div class="rule"></div>
   <div class="card">
-    <h3>5–6 moderated sessions, 35–45 minutes each</h3>
+    <h3>Short sessions, 15 minutes, separate from Round B</h3>
     <ul>
-      <li>Likely users from Round A's profile, fresh where possible. Their own phone if they have one.</li>
-      <li>Open with a neutral statement: the catalog is simulated, the restaurants are fictional, and nothing can be ordered. Then let them choose their path; think aloud; never name the intended button.</li>
-      <li>Record for each task: completed unaided / completed with help / not completed; the actual obstacle; the information used. Task time is diagnostic only.</li>
+      <li>Show the same dish with a restaurant photo, then a diner photo. Which would you rather see first? Why?</li>
+      <li>Ask what a photo tells you about portion size and ingredients. Then show the photo note and ask again.</li>
+      <li>Ask what they would still check with the server.</li>
     </ul>
+    <p><b>Looking for:</b> whether the source label changes trust, whether photos are read as proof of portion or ingredients, and whether the note is read at all.</p>
   </div>
-  <table style="margin-top:16px;">
-    <tr><th style="width:34px;">#</th><th>Task (read aloud)</th><th>What to observe</th><th>Design decision it informs</th></tr>
-    <tr><td>1</td><td>"You want dinner soon near the demo area. Pick something you would consider, keeping the menu price within $20."<span class="tag">feed</span></td><td>What they notice, how they narrow, whether they compare without opening every card</td><td>Card content and information order</td></tr>
-    <tr><td>2</td><td>"You're in the mood for noodles. Find an option you would consider, then look at another and go back."<span class="tag">search</span></td><td>Query and constraint retention, comparison, backtracking</td><td>Search and navigation state</td></tr>
-    <tr><td>3</td><td>"You can't decide yet. Keep two options somewhere you can find them later."<span class="tag">save</span></td><td>Discovery of Save; whether collections help or interrupt</td><td>Save interaction and saved-card content</td></tr>
-    <tr><td>4</td><td>"Now you're ready to get one of them. Show me what you would do next."<span class="tag">next step</span></td><td>Expected destination; menu versus checkout; whether they believe an order happened</td><td>Next-step sheet and handoff copy</td></tr>
-    <tr><td>5</td><td>"This one isn't available in this scenario. What would you do?"<span class="tag">off the menu</span></td><td>Context retention and recovery without starting over</td><td>Unavailable-item handling</td></tr>
-    <tr><td>6</td><td>"You want to look at another area."<span class="tag">area</span></td><td>Understanding of demo coverage; no belief that the app is broken</td><td>Area and not-covered state</td></tr>
-  </table>
-  <div class="note">Follow-ups, always non-leading: "What did you expect to happen?" · "What would you do next?" · "You hesitated there — what were you weighing?" Never: "Did you like…", "Wasn't that easy?" With a fictional catalog this round tests comprehension and interaction. It cannot show that someone would buy a dish, trust the catalog, or stop using another app.</div>
-  <div class="note"><b>Gate.</b> Any belief that an order was placed, that a device location was detected, or that missing ingredient information means the dish is fine is a critical comprehension issue. Fix repeated decision barriers before polishing secondary screens.</div>
-
-  <h2>Round C — dietary information comprehension</h2>
-  <div class="rule"></div>
-  <div class="card">
-    <h3>3–4 sessions with people who manage a food allergy, plus a domain reviewer if one is available</h3>
-    <ul>
-      <li>Test how the information is understood. Do not ask anyone to order or eat based on the prototype.</li>
-      <li>Fixtures: a listed conflict, a dish with no ingredient information, a saved conflict, a related-dish route, and a restaurant page showing flagged dishes for context.</li>
-      <li>Collect the initial interpretation before explaining anything; then clarify the prototype's limits.</li>
-      <li>If no domain reviewer is available, keep the limitation and do not present the feature as validated.</li>
-    </ul>
-  </div>
-  <table style="margin-top:16px;">
-    <tr><th style="width:34px;">#</th><th>Prompt</th><th>What to observe</th></tr>
-    <tr><td>C1</td><td class="q">"What does this information tell you? What does it leave unanswered?"</td><td>Whether "menu lists" is read as an ingredient claim only, not a preparation claim</td></tr>
-    <tr><td>C2</td><td class="q">"Why do you think this item is or isn't in these results?"</td><td>Whether the listed-apart section is understood as "unknown", not "fine" or "bad"</td></tr>
-    <tr><td>C3</td><td class="q">"What would you need to check before making a decision?"</td><td>Whether "check with the restaurant" is a plan or a shrug</td></tr>
-    <tr><td>C4</td><td class="q">"What do you expect this next step to do?"</td><td>Whether the handoff is read as leaving the app, not as ordering</td></tr>
-  </table>
-  <div class="note"><b>Gate.</b> If the information repeatedly reads as a guarantee, reduce the feature's claim and scope. More disclaimers are not the answer. The wording under test: Morsel excludes dishes whose menu lists an avoided ingredient, sets aside dishes with no ingredient information, and never calls anything safe.</div>
 
   <h2>Evidence record</h2>
   <div class="rule"></div>
-  <p class="sub">One record per observation, source inspection, or design-review finding. Keep observation, interpretation and decision in separate fields. To be filled in after research.</p>
-<pre>Record ID:
-Date and prototype version:
-Source type: participant session / source inspection / design review
-Participant code, if applicable:
-Task or context:
-Observed action or exact quote:
-Interpretation:
-Alternative explanation:
-Decision and reason:
-Artifact or commit changed:
-Follow-up check:
-Permission to publish this material:</pre>
-  <div class="card" style="margin-top:16px;">
-    <h3>Severity scale</h3>
-    <ul style="list-style:none; padding-left:0;">
-      <li><span class="sev" style="background:#C2492B;"></span><b>S1 — trust or comprehension breach:</b> the diner believes an order was placed, a location was detected, or missing information means the dish is fine. Fix before anything else.</li>
-      <li><span class="sev" style="background:#C97C1B;"></span><b>S2 — task blocker:</b> cannot complete a core task (compare, save, hand off) without moderator help.</li>
-      <li><span class="sev" style="background:#B89A4F;"></span><b>S3 — friction:</b> completes with detours, misclicks, or visible hesitation.</li>
-      <li><span class="sev" style="background:#8C9A6B;"></span><b>S4 — polish:</b> cosmetic or preference-level.</li>
-    </ul>
-  </div>
-
-  <h2>Findings → iteration matrix</h2>
-  <div class="rule"></div>
-  <table style="margin-top:12px;">
-    <tr><th>Finding (evidence)</th><th>Sessions</th><th>Severity</th><th>Hypothesis</th><th>Design response</th><th>Status</th></tr>
-    <tr><td colspan="6" style="color:var(--ink3); font-weight:600;">Fill after sessions — one row per distinct finding, merged across participants. Report counts with context ("three of five missed the price"), never small-sample percentages.</td></tr>
+  <table>
+    <tr><th>Round</th><th>Finding</th><th>Count</th><th>What changes</th><th>Status</th></tr>
+    <tr><td colspan="5" style="text-align:center; color: var(--ink3);">Empty. Nothing has been run.</td></tr>
   </table>
 
-  <h2>Before / after template</h2>
-  <div class="rule"></div>
-  <div class="card">
-    <p>For each S1–S2 finding that changes the design, produce one pair for the case study:</p>
-    <ol>
-      <li><b>Before:</b> the current state and the one-line finding, with the count.</li>
-      <li><b>After:</b> the revised state, what changed, and why it addresses the evidence.</li>
-      <li><b>Verdict line:</b> the re-test criterion.</li>
-    </ol>
-    <p style="margin-top:8px;">Identical crop and zoom for both frames so the change reads instantly. Retrospective design-review pairs (earlier exploration → refined design) stay labeled as review, not as findings.</p>
-  </div>
-
-  <div class="note"><b>No sessions have been run.</b> The case currently documents a design review. This research would help assess whether the changes are useful to people choosing a meal.</div>
+  <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>
 </div>
 </body>
 </html>

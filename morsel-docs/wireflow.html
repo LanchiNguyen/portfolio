@@ -2,275 +2,85 @@
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="../favicon.png" />
-<meta name="description" content="Morsel process document: wireflow and assumption map for the photo-first food discovery prototype." />
+<meta name="description" content="Morsel process document: the visual-menu flow, screen by screen, with the assumptions still to test." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Morsel — wireflow & assumption map</title>
+<title>Morsel — flow and assumptions</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  html, body { margin: 0; overflow-x: hidden; }
-  body { font-family: "Hanken Grotesk", sans-serif; background: #EDE6D8; }
-  .bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 14px 24px; font-size: 13px; color: #5C4B38; }
-  .bar .grow { flex: 1; }
-  .bar a { color: #B0542F; font-weight: 700; text-decoration: none; }
-  .bar a:hover { text-decoration: underline; }
-  .zoomctl { display: flex; align-items: center; gap: 6px; }
-  .zoomctl button { font: inherit; font-weight: 700; color: #5C4B38; background: #FFFCF5; border: 1px solid rgba(38,25,14,.18); border-radius: 99px; padding: 6px 14px; cursor: pointer; }
-  .zoomctl button[data-on="true"] { background: #26190E; color: #F7F1E6; border-color: #26190E; }
-  .zoomctl .pct { font-weight: 700; min-width: 42px; text-align: center; color: rgba(38,25,14,.55); }
-  .viewport { width: 100%; overflow: auto; padding-bottom: 40px; }
-  .fitbox { margin: 0 auto; }
-  .stage { width: 1580px; height: 880px; transform-origin: top left; }
-  .frame {
-    position: relative; width: 1580px; height: 880px;
-    background: #F7F1E6; border-radius: 18px; overflow: hidden;
-    box-shadow: 0 2px 8px rgba(38,25,14,.08), 0 18px 50px rgba(38,25,14,.14);
-    color: #26190E;
-  }
-  .node {
-    position: absolute; background: #FFFCF5; border: 1.5px solid rgba(38,25,14,.18);
-    border-radius: 12px; padding: 10px 12px; box-sizing: border-box;
-  }
-  .node h2 { margin: 0 0 4px; font-family: "Lora", serif; font-weight: 600; font-size: 15px; }
-  .node p { margin: 0 0 6px; font-size: 11.5px; line-height: 1.4; color: rgba(38,25,14,.62); }
-  .node .kicker { font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(38,25,14,.4); margin-bottom: 2px; }
-  .overlay { border-style: dashed; background: #FBF6EC; }
-  .tags { display: flex; flex-wrap: wrap; gap: 4px; }
-  .tag { font-size: 10px; font-weight: 700; border-radius: 99px; padding: 3px 8px; line-height: 1.2; }
-  .tag.green { background: #DCE8D4; color: #3D5A2E; }
-  .tag.amber { background: #F3E2C0; color: #7A5A16; }
-  .tag.exit { background: #EFE6D6; color: rgba(38,25,14,.55); }
-  svg.wires { position: absolute; inset: 0; pointer-events: none; }
-  svg.wires path, svg.wires line { fill: none; stroke: #A08D77; stroke-width: 2; }
-  svg.wires .dashed { stroke-dasharray: 6 5; }
-  .wire-label { position: absolute; font-size: 10px; font-weight: 700; color: #8A7A66; background: #F7F1E6; padding: 1px 5px; border-radius: 6px; z-index: 5; }
-  .titleblock { position: absolute; left: 28px; top: 22px; width: 600px; }
-  .titleblock h1 { margin: 0; font-family: "Lora", serif; font-weight: 600; font-size: 26px; }
-  .titleblock p { margin: 6px 0 0; font-size: 12.5px; line-height: 1.5; color: rgba(38,25,14,.62); }
-  .legend { position: absolute; right: 28px; top: 26px; display: flex; gap: 14px; align-items: center; font-size: 11.5px; color: rgba(38,25,14,.7); }
-  .legend .tag { font-size: 10px; }
-  .legend .dash { width: 26px; height: 0; border-top: 2px dashed #A08D77; display: inline-block; }
-  a { color: #B0542F; }
+  :root { --paper:#F7F1E6; --surface:#FFFCF5; --sunken:#EFE6D6; --ink:#26190E; --ink2:rgba(38,25,14,.62); --ink3:rgba(38,25,14,.4); --line:rgba(38,25,14,.12); --accent:#C2492B; --green:#3D5A2E; --green-soft:#DCE8D4; --amber:#7A5A12; --amber-soft:#F3E4B8; }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: "Hanken Grotesk", sans-serif; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 880px; margin: 0 auto; padding: 56px 32px 96px; }
+  h1 { font-family: "Lora", serif; font-weight: 600; font-size: 42px; line-height: 1.05; }
+  h2 { font-family: "Lora", serif; font-weight: 600; font-size: 25px; margin: 56px 0 6px; }
+  h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+  p { line-height: 1.55; }
+  .sub { color: var(--ink2); font-size: 15px; line-height: 1.55; max-width: 640px; }
+  .rule { height: 1px; background: var(--line); margin: 16px 0 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-size: 10.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--ink3); padding: 8px 10px 8px 0; border-bottom: 1.5px solid var(--line); }
+  td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.45; color: var(--ink2); }
+  td:first-child { font-weight: 800; color: var(--ink); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; margin-top: 14px; }
+  .card p, .card li { font-size: 13.5px; line-height: 1.55; color: var(--ink2); }
+  .card ul, .card ol { padding-left: 18px; }
+  .card b, td b { color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 14px; }
+  .grid .card { margin-top: 0; }
+  .tag { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 3px 8px; background: var(--sunken); color: var(--ink2); margin-left: 6px; vertical-align: 2px; white-space: nowrap; }
+  .tag.built { background: var(--green-soft); color: var(--green); }
+  .tag.test { background: var(--amber-soft); color: var(--amber); }
+  .tag.chosen { background: var(--green-soft); color: var(--green); }
+  .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 18px; }
+  .node { background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+  .node h3 { font-size: 15px; }
+  .node p { font-size: 13px; color: var(--ink2); margin-top: 4px; }
+  .node .arrow { display: block; font-size: 12px; color: var(--ink3); margin-top: 8px; }
+  .note { background: var(--sunken); border-radius: 12px; padding: 10px 14px; font-size: 12.5px; color: var(--ink2); margin-top: 14px; line-height: 1.5; }
+  a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 640px) { .page { padding: 40px 18px 72px; } h1 { font-size: 32px; } table { display: block; overflow-x: auto; } }
 </style>
 </head>
 <body>
-<div class="bar">
-  <a href="../morsel.html">← back to case study</a>
-  <a href="../morsel-proto/index.html">live prototype →</a>
-  <a href="testing-plan.html">research plan →</a>
-  <a href="ds-addendum.html">ds addendum →</a>
-  <div class="grow"></div>
-  <div class="zoomctl">
-    <button id="zfit" data-on="true">Fit to screen</button>
-    <button id="z100">100%</button>
-    <span class="pct" id="zpct">100%</span>
+<div class="page">
+  <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
+  <h1 style="margin-top:16px;">Flow and assumptions</h1>
+  <p class="sub" style="margin-top:12px;">One journey: you are at a restaurant with the menu in front of you. Pick the place, read its menu with photos where they exist, look closer at a dish, compare two or three, decide. <span class="tag built">built</span> marks what the prototype does. <span class="tag test">to test</span> marks an assumption the <a href="testing-plan.html">validation plan</a> is written to check.</p>
+
+  <div class="flow">
+    <div class="node"><h3>Restaurant picker <span class="tag built">built</span></h3><p>"Which restaurant are you at?" A short list with a text filter. No location request. The row says how many dishes have photos, or that none do yet.</p><span class="arrow">&rarr; Menu, or "No menu photos yet"</span></div>
+    <div class="node"><h3>No menu photos yet <span class="tag built">built</span></h3><p>An honest state for a restaurant the prototype has no menu for. One way back.</p><span class="arrow">&rarr; Restaurant picker</span></div>
+    <div class="node"><h3>Menu <span class="tag built">built</span></h3><p>The restaurant's sections in its order. Each row: thumbnail or "No photo yet", name, description, price, an add-to-compare toggle. Section jump chips. A coverage line: 8 of 12 dishes have photos.</p><span class="arrow">&rarr; Dish · Photos view · Compare bar</span></div>
+    <div class="node"><h3>Photos view <span class="tag built">built</span></h3><p>Only photographed dishes, as a grid, with the count of dishes it leaves out and a link back to the full menu.</p><span class="arrow">&rarr; Dish · Menu</span></div>
+    <div class="node"><h3>Dish <span class="tag built">built</span></h3><p>Photos one at a time with a source label on each (Restaurant photo, Diner photo) and a counter. Then the menu's description, price, an ingredients line and a note that photos show one visit's plating, not ingredients or portion size.</p><span class="arrow">&rarr; Add to compare · Compare · Back</span></div>
+    <div class="node"><h3>Compare <span class="tag built">built</span></h3><p>Two or three dishes side by side: photo or "No photo yet", name, price, description, ingredients line, remove. An "add another" column while there is room. A shortlist, not an order.</p><span class="arrow">&rarr; Dish · Menu</span></div>
   </div>
+
+  <h2>Back and memory</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <ul>
+      <li><b>Back from a dish</b> returns to the screen that opened it, the menu at the same scroll position, with keyboard focus on the row that was opened.</li>
+      <li><b>The shortlist, the chosen restaurant and the current screen</b> survive a reload. Corrupt or stale saved state falls back to the restaurant picker.</li>
+      <li><b>Text size</b> up to 140% reflows every screen without truncation; a full screen-reader, contrast and touch review is still to do.</li>
+    </ul>
+  </div>
+
+  <h2>Assumptions to test</h2>
+  <div class="rule"></div>
+  <table>
+    <tr><th>Assumption</th><th>Where it lives</th><th>What would change if it fails</th></tr>
+    <tr><td>People at a table want to see the dishes on the menu in front of them <span class="tag test">to test</span></td><td>The whole direction. It comes from my own frustration, not from research.</td><td>The product premise.</td></tr>
+    <tr><td>Menu order with visible gaps beats a photos-first order</td><td>Menu; "No photo yet" rows</td><td>The default view, and how the Photos view is framed.</td></tr>
+    <tr><td>"No photo yet" reads as missing information, not as "not available"</td><td>Menu rows, dish page</td><td>The placeholder wording.</td></tr>
+    <tr><td>A source label changes how much a photo is trusted, and diner photos are still wanted</td><td>Dish photo strip, thumbnails</td><td>Whether diner photos are shown by default.</td></tr>
+    <tr><td>Two or three dishes are enough to decide between</td><td>Compare limit</td><td>The shortlist size, or whether compare is needed at all.</td></tr>
+    <tr><td>People do not read a photo as proof of ingredients or portion</td><td>The photo note on the dish page</td><td>How prominent the note is.</td></tr>
+  </table>
+
+  <p class="note">Supporting notes assembled from the design and prototype review. The restaurant, its menu and every photo, including those labeled as diner photos, are fictional sample data. Nothing here has been tested with participants.</p>
 </div>
-<div class="viewport">
-<div class="fitbox" id="fitbox">
-<div class="stage" id="stage">
-<div class="frame">
-  <div class="titleblock">
-    <h1>Morsel — structure &amp; assumptions</h1>
-    <p>The prototype mapped as a wireflow around one journey: choose an area → browse or search → narrow by budget and distance → open a dish → save it or find where to get it → come back without losing your place. <b>Green</b> = implemented in the current prototype. <b>Amber</b> = an assumption the <a href="testing-plan.html">research plan</a> targets. Dashed nodes are sheets and states; dashed wires are secondary or recovery paths.</p>
-  </div>
-  <div class="legend">
-    <span class="tag green">implemented</span>
-    <span class="tag amber">assumption — test it</span>
-    <span><span class="dash"></span> recovery / secondary</span>
-  </div>
-
-  <svg class="wires" viewBox="0 0 1580 880">
-    <defs>
-      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-        <path d="M0,0 L10,5 L0,10 z" fill="#A08D77"></path>
-      </marker>
-    </defs>
-    <line x1="145" y1="228" x2="145" y2="268" marker-end="url(#arr)"></line>
-    <path d="M260,330 H326" marker-end="url(#arr)"></path>
-    <path class="dashed" d="M145,404 V440" marker-end="url(#arr)"></path>
-    <line x1="580" y1="310" x2="956" y2="310" marker-end="url(#arr)"></line>
-    <path d="M580,278 H610 V125 H646" marker-end="url(#arr)"></path>
-    <path d="M580,294 H625 V255 H646" marker-end="url(#arr)"></path>
-    <path d="M580,362 H620 V395 H646" marker-end="url(#arr)"></path>
-    <path d="M890,395 H930 V340 H956" marker-end="url(#arr)"></path>
-    <line x1="1085" y1="402" x2="1085" y2="456" marker-end="url(#arr)"></line>
-    <path d="M1210,300 H1250 V240 H1286" marker-end="url(#arr)"></path>
-    <path d="M1210,360 H1255 V380 H1286" marker-end="url(#arr)"></path>
-    <line x1="1410" y1="422" x2="1410" y2="446" marker-end="url(#arr)"></line>
-    <line x1="410" y1="412" x2="410" y2="666" marker-end="url(#arr)"></line>
-    <path d="M500,412 V640 H770 V666" marker-end="url(#arr)"></path>
-    <line x1="892" y1="720" x2="956" y2="720" marker-end="url(#arr)"></line>
-    <path class="dashed" d="M326,745 H150 V574" marker-end="url(#arr)"></path>
-    <path class="dashed" d="M770,170 H730 V240 H700" marker-end="url(#arr)"></path>
-    <path class="dashed" d="M455,412 V560 H646 V596" marker-end="url(#arr)"></path>
-    <path class="dashed" d="M1410,292 V246" marker-end="url(#arr)"></path>
-    <path class="dashed" d="M956,340 H930 V200 H890" marker-end="url(#arr)"></path>
-    <path class="dashed" d="M1210,520 H1250 V246 H1286" marker-end="url(#arr)"></path>
-  </svg>
-
-  <span class="wire-label" style="left:158px; top:414px;">tune taste (from Profile)</span>
-  <span class="wire-label" style="left:896px; top:316px;">open a card</span>
-  <span class="wire-label" style="left:418px; top:480px;">tab bar</span>
-  <span class="wire-label" style="left:200px; top:580px;">edit dietary settings</span>
-  <span class="wire-label" style="left:1218px; top:248px;">next step</span>
-  <span class="wire-label" style="left:1218px; top:365px;">heart</span>
-  <span class="wire-label" style="left:700px; top:200px;">not covered</span>
-  <span class="wire-label" style="left:520px; top:566px;">nothing fits</span>
-  <span class="wire-label" style="left:1418px; top:262px;">link fails</span>
-  <span class="wire-label" style="left:896px; top:206px;">Back restores query · scroll · focus</span>
-  <span class="wire-label" style="left:1218px; top:500px;">menu (never a dish)</span>
-
-  <div class="node" style="left:30px; top:120px; width:230px; height:106px;">
-    <div class="kicker">Entry 0</div>
-    <h2>Welcome</h2>
-    <p>"Find a dish, then check it" · one button: Explore dishes</p>
-    <div class="tags"><span class="tag green">Current: no location request; disclosures live outside the app</span></div>
-  </div>
-  <div class="node" style="left:30px; top:270px; width:230px; height:132px;">
-    <div class="kicker">Entry 1</div>
-    <h2>Dietary settings</h2>
-    <p>Lifestyle filters · allergies exclude listed conflicts and set unknowns apart · skippable, always in Profile</p>
-    <div class="tags">
-      <span class="tag green">Earlier: tiers split</span>
-      <span class="tag green">Current: optional setup; missing information explained</span>
-    </div>
-  </div>
-  <div class="node overlay" style="left:30px; top:444px; width:230px; height:130px;">
-    <div class="kicker">From Profile</div>
-    <h2>Tune your taste</h2>
-    <p>Tap dish photos · cuisines get a moderate ranking boost · never a filter</p>
-    <div class="tags"><span class="tag green">Current: moved out of the entry gate</span><span class="tag amber">is the boost worth the taps?</span></div>
-  </div>
-
-  <div class="node" style="left:330px; top:250px; width:250px; height:162px;">
-    <div class="kicker">Hub</div>
-    <h2>Feed</h2>
-    <p>Featured dish · labeled cards (name · place · price · miles) · constraint bar · unknowns listed apart</p>
-    <div class="tags">
-      <span class="tag green">Current: cards carry decision info; Trending removed; sort explained</span>
-      <span class="tag amber">do labeled cards let people compare without opening?</span>
-    </div>
-  </div>
-
-  <div class="node overlay" style="left:650px; top:80px; width:240px; height:100px;">
-    <div class="kicker">Sheet</div>
-    <h2>Area</h2>
-    <p>Shaw by default · type a city or neighborhood · "not covered yet" is labeled in the list</p>
-    <div class="tags"><span class="tag green">Current: no null-city state; Shaw is the default</span></div>
-  </div>
-  <div class="node overlay" style="left:560px; top:210px; width:140px; height:96px;">
-    <div class="kicker">State</div>
-    <h2 style="font-size:13px;">Not covered</h2>
-    <p style="font-size:10.5px;">Unsupported area: explains the demo coverage</p>
-    <div class="tags"><span class="tag green">Current copy</span></div>
-  </div>
-  <div class="node overlay" style="left:650px; top:330px; width:240px; height:112px;">
-    <div class="kicker">Screen</div>
-    <h2>Search</h2>
-    <p>Inherits area + filters · query in app state · same cards · three empty states, three recoveries</p>
-    <div class="tags">
-      <span class="tag green">Current: shared constraints; Back restores context</span>
-      <span class="tag amber">query model vs real vocabulary</span>
-    </div>
-  </div>
-  <div class="node overlay" style="left:646px; top:596px; width:244px; height:118px;">
-    <div class="kicker">State</div>
-    <h2 style="font-size:13px;">Nothing fits / excluded by</h2>
-    <p style="font-size:10.5px;">Explains whether the catalog, browsing filters or dietary settings excluded results. Clearing browsing filters keeps allergy settings.</p>
-    <div class="tags"><span class="tag green">Current</span></div>
-  </div>
-
-  <div class="node" style="left:960px; top:250px; width:250px; height:162px;">
-    <div class="kicker">Screen</div>
-    <h2>Dish detail</h2>
-    <p>Photo · name · place · edited menu description · facts: price + date, miles, menu status, ingredients · one next step</p>
-    <div class="tags">
-      <span class="tag green">Current: facts above the action; score, quotes, diner counts removed</span>
-      <span class="tag green">Current: three states — match · listed conflict · unknown</span>
-    </div>
-  </div>
-  <div class="node" style="left:960px; top:460px; width:250px; height:104px;">
-    <div class="kicker">Screen</div>
-    <h2>Restaurant</h2>
-    <p>Count · price range · miles · "View restaurant menu" · dishes shown for context, flagged</p>
-    <div class="tags"><span class="tag green">Current: button opens the menu, never picks a dish; no hours claim</span></div>
-  </div>
-
-  <div class="node overlay" style="left:1290px; top:120px; width:240px; height:126px;">
-    <div class="kicker">Sheet</div>
-    <h2>Restaurant menu</h2>
-    <p>Title from the destination model: full menu · dish on the menu · phone · "check current prices and availability"</p>
-    <div class="tags">
-      <span class="tag green">Current: replaces the order sheet; no carriers, fees, ETAs or gate</span>
-      <span class="tag exit">ends at "End of prototype"</span>
-    </div>
-  </div>
-  <div class="node overlay" style="left:1290px; top:340px; width:240px; height:82px;">
-    <div class="kicker">Toast</div>
-    <h2>Saved (instant)</h2>
-    <p>Save + optional "Add to collection" · timestamped</p>
-  </div>
-  <div class="node overlay" style="left:1290px; top:450px; width:240px; height:90px;">
-    <div class="kicker">Sheet</div>
-    <h2>Add to collection</h2>
-    <p>File into shelves · create inline · name required</p>
-  </div>
-
-  <div class="node" style="left:330px; top:670px; width:250px; height:122px;">
-    <div class="kicker">Tab</div>
-    <h2>Profile</h2>
-    <p>Dietary settings with unknown count · taste picks · area · saved</p>
-    <div class="tags"><span class="tag green">Current: invented account, linked apps and alerts removed</span></div>
-  </div>
-  <div class="node" style="left:650px; top:670px; width:240px; height:118px;">
-    <div class="kicker">Tab</div>
-    <h2>Saved</h2>
-    <p>Collections rail · all saves · Recent by real time / Nearest · each card labeled: conflict · unknown · off menu</p>
-    <div class="tags"><span class="tag green">Current: never auto-deleted</span><span class="tag green">Current: saved dates; older saves retained</span></div>
-  </div>
-  <div class="node" style="left:960px; top:670px; width:240px; height:96px;">
-    <div class="kicker">Screen</div>
-    <h2>Collection</h2>
-    <p>Named shelf → dish detail · same state labels · empty state</p>
-    <div class="tags"><span class="tag green">Current: same card, same classifier</span></div>
-  </div>
-
-  <div class="node" style="left:1290px; top:600px; width:240px; height:190px;">
-    <div class="kicker">Still assumptions — research plan</div>
-    <p style="margin-top:6px;">· The repeated-check problem is real for anyone<br />
-    · Labeled cards let people compare without opening<br />
-    · "No ingredient information" reads as "check", not "fine"<br />
-    · The next-step sheet is understood as a handoff, not an order<br />
-    · Saves get retrieved later at all<br />
-    · Menu-only allergen data is useful enough to keep<br />
-    · A taste boost is worth its taps</p>
-    <div class="tags"><span class="tag amber"><a href="testing-plan.html" style="color:inherit;">research plan → testing-plan.html</a></span></div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-<script>
-(function () {
-  var stage = document.getElementById("stage"), fitbox = document.getElementById("fitbox");
-  var bFit = document.getElementById("zfit"), b100 = document.getElementById("z100"), pct = document.getElementById("zpct");
-  var mode = "fit";
-  function apply() {
-    var avail = document.documentElement.clientWidth - 48;
-    var s = mode === "fit" ? Math.min(1, avail / 1580) : 1;
-    stage.style.transform = "scale(" + s + ")";
-    fitbox.style.width = Math.min(1580, 1580 * s) + "px";
-    fitbox.style.height = (880 * s) + "px";
-    pct.textContent = Math.round(s * 100) + "%";
-    bFit.dataset.on = mode === "fit";
-    b100.dataset.on = mode === "full";
-  }
-  bFit.addEventListener("click", function () { mode = "fit"; apply(); });
-  b100.addEventListener("click", function () { mode = "full"; apply(); });
-  window.addEventListener("resize", apply);
-  apply();
-})();
-</script>
 </body>
 </html>

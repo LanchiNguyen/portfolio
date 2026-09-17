@@ -1,12 +1,5 @@
-/* Behavioral checks for the Morsel v3.2 prototype that do not need a browser.
- *
- * The JSX is compiled with the same vendored Babel the production build uses and
- * evaluated in a sandbox with a stub DOM, so the checks run against the real
- * data model, the real classifier, the real filter semantics and the real
- * saved-state migration — not against a copy of the prose.
- *
- *   node --test tests/morsel.test.cjs
- */
+// Morsel visual-menu prototype: data contract, menu order, shortlist rules and
+// state loading, run in a Node vm sandbox without a browser.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -14,127 +7,116 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const ROOT = path.join(__dirname, '..');
-const P = path.join(ROOT, 'morsel-proto');
-const Babel = require(path.join(P, 'vendor', 'babel.min.js'));
-
-const html = fs.readFileSync(path.join(P, 'index.html'), 'utf8');
-const order = [...html.matchAll(/<script type="text\/babel" src="([^"]+)"><\/script>/g)].map((m) => m[1]);
-const source = ['v3/app/data.js', ...order].map((f) => fs.readFileSync(path.join(P, f), 'utf8')).join('\n;\n');
-const code = Babel.transform(source, { filename: 'morsel-app.jsx', sourceType: 'script', presets: ['react'] }).code;
-
-// Boot the whole prototype bundle in a sandbox. Nothing renders: React is a proxy
-// that returns inert functions, so only module-level definitions and the state
-// loader run. `storage` seeds localStorage so migrations can be exercised.
-function boot(storage) {
-  const store = new Map(Object.entries(storage || {}).map(([k, v]) => [k, typeof v === 'string' ? v : JSON.stringify(v)]));
-  const noop = () => {};
-  const inert = new Proxy(function () {}, { get: () => inert, apply: () => null });
-  const ctx = {
-    console, setTimeout, clearTimeout, Date, Math, JSON, Object, Array, Set, Map, Number, String, RegExp, Error, Proxy, Promise,
-    localStorage: { getItem: (k) => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, String(v)), removeItem: (k) => store.delete(k) },
-    document: { addEventListener: noop, removeEventListener: noop, getElementById: () => ({}), querySelector: () => null, querySelectorAll: () => [] },
-    React: inert, ReactDOM: { createRoot: () => ({ render: noop }) },
-    matchMedia: () => ({ matches: false }), requestAnimationFrame: noop, cancelAnimationFrame: noop,
-    addEventListener: noop, removeEventListener: noop, postMessage: noop, location: { search: '', hash: '' }, navigator: { userAgent: 'test' }
-  };
-  ctx.window = ctx; ctx.self = ctx; ctx.globalThis = ctx; ctx.parent = ctx; ctx.top = ctx;
-  vm.createContext(ctx);
-  vm.runInContext(code, ctx, { filename: 'morsel-bundle.js' });
-  return ctx;
-}
-
-// Values cross the sandbox boundary with foreign prototypes; compare their JSON shape.
+const APP = path.join(ROOT, 'morsel-proto/v4/app');
 const plain = (v) => JSON.parse(JSON.stringify(v));
 
-const app = boot();
-const D = app.MorselData;
-const NUTS = { picked: [], lifestyle: null, allergies: ['Nuts'] };
+function bootData() {
+  const window = {};
+  const ctx = vm.createContext({ window });
+  vm.runInContext(fs.readFileSync(path.join(APP, 'data.js'), 'utf8'), ctx, { filename: 'data.js' });
+  return window.MorselData;
+}
 
-test('production script inventory is the fifteen files the compiler expects', () => {
-  assert.equal(order.length, 15);
+// Boot app.jsx far enough to reach loadMorselState: React is an inert proxy,
+// the DOM and storage are stubs, and the JSX is compiled with the vendored Babel.
+function bootApp(storageValue) {
+  const Babel = require(path.join(ROOT, 'morsel-proto/vendor/babel.min.js'));
+  const src = fs.readFileSync(path.join(APP, 'app.jsx'), 'utf8');
+  const code = Babel.transform(src, { presets: ['react'] }).code;
+  const inert = new Proxy(function () {}, { get: () => inert, apply: () => inert });
+  const window = {};
+  const ctx = vm.createContext({
+    window, React: inert, ReactDOM: inert, useTweaks: inert, IOSDevice: inert, TweaksPanel: inert, TweakSection: inert, TweakSlider: inert, TweakButton: inert,
+    EntryScreen: inert, NoMenuScreen: inert, MenuScreen: inert, DishScreen: inert, CompareScreen: inert,
+    document: { addEventListener() {}, getElementById() { return {}; } },
+    localStorage: { getItem: () => storageValue, setItem() {}, removeItem() {} },
+    requestAnimationFrame() {}, cancelAnimationFrame() {}
+  });
+  vm.runInContext(fs.readFileSync(path.join(APP, 'data.js'), 'utf8'), ctx, { filename: 'data.js' });
+  vm.runInContext(code + '\nwindow.__load = loadMorselState;', ctx, { filename: 'app.jsx' });
+  return plain(window.__load());
+}
+
+test('one restaurant is modeled in full: four sections, twelve dishes, 8 of 12 photographed', () => {
+  const D = bootData();
+  const visual = D.restaurants.filter((r) => r.visual);
+  assert.equal(visual.length, 1);
+  assert.equal(visual[0].id, 'elder-ash');
+  const menu = D.menu('elder-ash');
+  assert.deepEqual(plain(menu.map((s) => s.name)), ['Starters', 'Wood-fired pizza', 'Mains', 'Desserts']);
+  assert.equal(menu.reduce((n, s) => n + s.dishes.length, 0), 12);
+  assert.deepEqual(plain(D.coverage('elder-ash')), { total: 12, photographed: 8 });
+  for (const r of D.restaurants.filter((r) => !r.visual)) assert.equal(D.menu(r.id).length, 0, r.id + ' has no menu');
 });
 
-test('every dish honours the v3.2 field contract', () => {
+test('menu order is the restaurant\'s order; dishes without photos keep their place', () => {
+  const D = bootData();
+  const menu = D.menu('elder-ash');
+  const ids = menu.flatMap((s) => s.dishes.map((d) => d.id));
+  assert.deepEqual(plain(ids), plain(D.dishes.map((d) => d.id)), 'sections preserve catalog order');
+  const nophoto = menu.flatMap((s) => s.dishes.map((d, i) => ({ id: d.id, i, n: d.photos.length, section: s.id }))).filter((x) => x.n === 0);
+  assert.deepEqual(plain(nophoto.map((x) => x.id)), ['m02', 'm05', 'm10', 'm12']);
+  assert.deepEqual(plain(nophoto.map((x) => x.i)), [1, 2, 4, 1], 'unphotographed dishes sit inside sections, not at the end');
+});
+
+test('every dish carries a description and a numeric price; every photo has a real file and a known source', () => {
+  const D = bootData();
+  const files = new Set(fs.readdirSync(path.join(ROOT, 'images/morsel-photos')));
   for (const d of D.dishes) {
-    assert.ok(d.price === null || (typeof d.price === 'number' && d.price > 0), d.id + ' price');
-    assert.ok(typeof d.mi === 'number' && d.mi > 0, d.id + ' miles');
-    assert.ok(d.allergens === null || Array.isArray(d.allergens), d.id + ' allergens');
-    assert.ok(typeof d.desc === 'string' && d.desc.length > 10, d.id + ' description');
-    assert.ok(!('pct' in d) && !('reviews' in d) && !('walk' in d), d.id + ' carries no score, quotes or walk time');
-    assert.ok(D.destinations[d.rest], d.rest + ' has a destination model');
+    assert.ok(d.name && d.desc.length > 10, d.id + ' description');
+    assert.equal(typeof d.price, 'number', d.id + ' price');
+    assert.equal(D.price(d), '$' + d.price);
+    assert.ok(Array.isArray(d.photos), d.id + ' photos array');
+    for (const p of d.photos) {
+      assert.ok(['restaurant', 'diner'].includes(p.source), d.id + ' photo source');
+      assert.ok(files.has(p.img + '.webp'), d.id + ' photo file ' + p.img);
+    }
   }
-  assert.ok(D.dishes.some((d) => d.allergens === null), 'an unknown-ingredient fixture exists');
-  assert.ok(D.dishes.some((d) => d.price === null), 'an unpriced fixture exists');
-  assert.ok(D.dishes.some((d) => d.listed === false), 'an off-the-menu fixture exists');
 });
 
-test('the classifier separates match, conflict, unknown and lifestyle', () => {
-  const byId = (id) => D.dishes.find((d) => d.id === id);
-  assert.equal(D.dietState(byId('d11'), NUTS).state, 'conflict');
-  assert.deepEqual(plain(D.dietState(byId('d11'), NUTS).conflicts), ['Nuts']);
-  assert.equal(D.dietState(byId('d14'), NUTS).state, 'unknown', 'a null allergen list is unknown, not a match');
-  assert.equal(D.dietState(byId('d09'), NUTS).state, 'match', 'an empty allergen list is a match');
-  assert.equal(D.dietState(byId('d14'), null).state, 'match', 'no settings means nothing to conflict with');
-  assert.equal(D.dietState(byId('d14'), { allergies: [] }).state, 'match', 'unknown only matters when an allergy is set');
-  assert.equal(D.dietState(byId('d09'), { lifestyle: 'Vegan', allergies: [] }).state, 'lifestyle');
+test('source labels and photo notes: one label per source, counts when there are several', () => {
+  const D = bootData();
+  assert.equal(D.sourceLabel('restaurant'), 'Restaurant photo');
+  assert.equal(D.sourceLabel('diner'), 'Diner photo');
+  const burger = D.dish('m06');
+  assert.equal(burger.photos.length, 3);
+  assert.deepEqual(plain(burger.photos.map((p) => p.source)), ['restaurant', 'diner', 'diner']);
+  assert.equal(D.photoNote(burger), '3 photos · 2 from diners');
+  assert.equal(D.photoNote(D.dish('m08')), 'Diner photo');
+  assert.equal(D.photoNote(D.dish('m01')), 'Restaurant photo');
+  assert.equal(D.photoNote(D.dish('m05')), 'No photo yet');
 });
 
-test('recommendation surfaces never see a conflict, and unknowns are not counted as matches', () => {
-  const part = D.partition(D.dishes, NUTS);
-  assert.equal(part.conflict.length, 4);
-  assert.equal(part.unknown.length, 2);
-  assert.equal(part.match.length, D.dishes.length - 6);
-  assert.ok(!part.match.some((d) => (d.allergens || []).includes('nuts')));
-  assert.ok(!part.match.some((d) => d.allergens === null));
-  assert.deepEqual(plain(D.applyDietPrefs(D.dishes, NUTS).map((d) => d.id)), plain(part.match.map((d) => d.id)));
+test('ingredient lines keep missing information visibly missing', () => {
+  const D = bootData();
+  assert.equal(D.ingredientsLine(D.dish('m10')), "Ingredients aren't listed on the menu.");
+  assert.equal(D.ingredientsLine(D.dish('m07')), 'The menu lists none of nuts, gluten, dairy or shellfish.');
+  assert.equal(D.ingredientsLine(D.dish('m09')), 'The menu lists gluten, shellfish.');
 });
 
-test('browsing filters use numeric price and miles, and set unpriced dishes aside', () => {
-  const f = { price: [1], maxMi: 99 };
-  const out = app.applyMorselFilters(D.dishes, f);
-  assert.ok(out.every((d) => d.price < 15));
-  assert.ok(!out.some((d) => d.price === null), 'an unpriced dish cannot be confirmed inside a budget');
-  assert.equal(app.morselUnpriced(D.dishes, f).length, 1);
-  assert.equal(app.morselUnpriced(D.dishes, { price: [], maxMi: 99 }).length, 0, 'nothing is set aside without a price filter');
-  assert.ok(app.applyMorselFilters(D.dishes, { price: [], maxMi: 99 }).some((d) => d.price === null), 'unpriced dishes show when no budget is set');
-  assert.ok(app.applyMorselFilters(D.dishes, { price: [], maxMi: 0.5 }).every((d) => d.mi <= 0.5));
-  assert.deepEqual(plain(app.morselFilterChips({ price: [2, 1], maxMi: 1 }).map((c) => c.t)), ['Under $15 · $15–24', 'within 1 mi']);
-  assert.equal(app.morselFilterCount(app.MORSEL_FILTER_DEFAULTS), 0);
+test('shortlist holds at most three dishes and never a dish that does not exist', () => {
+  const D = bootData();
+  assert.equal(D.compareMax, 3);
+  let r = D.shortlistAdd([], 'm06'); assert.deepEqual(plain(r), { list: ['m06'], ok: true, reason: 'added' });
+  r = D.shortlistAdd(r.list, 'm06'); assert.equal(r.reason, 'already'); assert.deepEqual(plain(r.list), ['m06']);
+  r = D.shortlistAdd(r.list, 'm07'); r = D.shortlistAdd(r.list, 'm05');
+  assert.deepEqual(plain(r.list), ['m06', 'm07', 'm05']);
+  const full = D.shortlistAdd(r.list, 'm01');
+  assert.equal(full.ok, false); assert.equal(full.reason, 'full'); assert.deepEqual(plain(full.list), ['m06', 'm07', 'm05']);
+  const bogus = D.shortlistAdd([], 'nope'); assert.equal(bogus.ok, false); assert.equal(bogus.reason, 'unknown');
+  const t = D.shortlistToggle(r.list, 'm07'); assert.equal(t.reason, 'removed'); assert.deepEqual(plain(t.list), ['m06', 'm05']);
+  assert.deepEqual(plain(D.shortlistRemove(['m06'], 'm06')), []);
 });
 
-test('the next-step label is chosen from the destination, never from a template', () => {
-  assert.equal(D.nextStepLabel('Sumi'), 'View dish on menu');
-  assert.equal(D.nextStepLabel('Elder & Ash'), 'View restaurant menu');
-  assert.equal(D.nextStepLabel('Hollis'), 'Check with restaurant');
-  assert.equal(D.destination('Nowhere').kind, 'none');
-  assert.equal(D.price({ price: null }), null);
-  assert.equal(D.price({ price: 19 }), '$19');
-});
-
-test('v3.1 saved state migrates without dropping a save', () => {
-  const legacy = {
-    screen: 'saved', tab: 'saved',
-    saved: ['d01', 'd11', 'not-a-dish'],
-    collections: [{ id: 'c1', name: 'Date night', dishes: ['d14', 'd22'] }],
-    prefs: { picked: ['d08'], lifestyle: null, allergies: ['Nuts'], locDenied: true },
-    filters: { price: ['$'], maxMi: 0.2, openNow: true },
-    loc: { city: null, hood: null }, locDenied: true
-  };
-  const s = plain(boot({ morsel3_state: legacy }).loadMorselState());
-  assert.deepEqual(s.filters, { price: [], maxMi: 0.2 }, 'string buckets and openNow are dropped, distance kept');
-  assert.equal(s.loc, null, 'a location with no city becomes the demo area');
-  assert.deepEqual(s.prefs, { picked: ['d08'], lifestyle: null, allergies: ['Nuts'] });
-  assert.deepEqual(s.saved, ['d01', 'd11', 'not-a-dish'], 'unknown ids are filtered later by the app, not lost here');
-  assert.deepEqual(s.savedAt, {}, 'legacy saves get no invented timestamp');
-  assert.equal(s.query, '');
-});
-
-test('corrupt or missing storage boots to a clean first run', () => {
-  for (const raw of [undefined, 'null', '{', '[]', '"x"', '{"screen":"bogus","filters":"no","saved":"no"}']) {
-    const s = plain(boot(raw === undefined ? {} : { morsel3_state: raw }).loadMorselState());
-    assert.deepEqual(s.filters, { price: [], maxMi: 99 });
-    assert.equal(s.loc, null);
-    assert.equal(s.screen, undefined);
-    assert.ok(s.saved === null || s.saved === undefined || Array.isArray(s.saved));
-  }
+test('saved state loads defensively: corrupt or stale storage starts at the restaurant picker', () => {
+  assert.equal(bootApp('{not json').screen, 'entry');
+  assert.equal(bootApp(null).screen, 'entry');
+  assert.equal(bootApp('42').screen, 'entry');
+  const s = bootApp(JSON.stringify({ screen: 'dish', restId: 'elder-ash', dishId: 'gone', shortlist: ['m06', 'm06', 'zz', 'm07', 'm05', 'm01'], view: 'weird' }));
+  assert.equal(s.screen, 'menu', 'a dish that no longer exists falls back to the menu');
+  assert.deepEqual(s.shortlist, ['m06', 'm07', 'm05'], 'duplicates and unknown ids pruned, capped at three');
+  assert.equal(s.view, 'menu');
+  assert.equal(bootApp(JSON.stringify({ screen: 'menu' })).screen, 'entry', 'menu without a restaurant returns to the picker');
+  assert.equal(bootApp(JSON.stringify({ screen: 'compare', restId: 'elder-ash', shortlist: ['m03'] })).screen, 'compare');
+  assert.equal(bootApp(JSON.stringify({ screen: 'nowhere', restId: 'elder-ash' })).screen, 'entry');
 });
