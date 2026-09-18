@@ -36,7 +36,25 @@ function loadMorselState() {
   return s;
 }
 
-function MorselApp() {
+// Standalone phone viewports render the app at native CSS width, without the
+// device bezel and without scaling. Embedded (iframe) and capture contexts keep
+// the fixed 402px device so the case-study stage and figure pipeline are unchanged.
+function isFrameless() {
+  try { if (window.self !== window.top) return false; } catch (e) { return false; }
+  return window.matchMedia("(max-width: 479px)").matches;
+}
+function useFrameless() {
+  const [f, setF] = React.useState(isFrameless);
+  React.useEffect(() => {
+    const on = () => setF(isFrameless());
+    window.addEventListener("resize", on);
+    return () => window.removeEventListener("resize", on);
+  }, []);
+  React.useEffect(() => { document.documentElement.setAttribute("data-morsel-frame", f ? "none" : "device"); }, [f]);
+  return f;
+}
+
+function MorselApp({ frameless = false }) {
   const [t, setTweak] = useTweaks(MORSEL_TWEAK_DEFAULTS);
   const init = React.useMemo(loadMorselState, []);
   const { restaurant, dish, shortlistToggle, shortlistRemove } = window.MorselData;
@@ -113,9 +131,7 @@ function MorselApp() {
   const tab = screen === "home" ? "home" : screen === "compare" ? "compare" : (screen === "menu" || screen === "picker") ? "menu" : null;
   const showTabs = screen !== "dish";
 
-  return (
-    <div className="morsel-app-shell" style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 402 }} ref={appRef}>
-      <IOSDevice>
+  const app = (
         <div className="morsel-app" style={{ "--ts": t.textScale / 100 }} data-ts={t.textScale >= 130 ? "large" : "normal"} data-tabs={showTabs ? "true" : "false"}>
           {screen === "home" && <HomeScreen onPicker={() => setScreen("picker")} onRestaurant={(id) => openMenu(id, "home")} onOpen={(id) => openDish(id, "home")} />}
           {screen === "picker" && <PickerScreen onPick={(id) => openMenu(id, "picker")} onBack={() => setScreen("home")} />}
@@ -141,8 +157,8 @@ function MorselApp() {
             </div>
           )}
         </div>
-      </IOSDevice>
-
+  );
+  const controls = (
       <details className="m-demo-controls" style={{ fontFamily: "system-ui, sans-serif", fontSize: 13, maxWidth: 402, marginTop: 16, color: "#34291f" }}>
         <summary style={{ cursor: "pointer", padding: 12 }}>Prototype controls</summary>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, padding: 12 }}>
@@ -152,6 +168,19 @@ function MorselApp() {
           <button style={{ padding: 10 }} onClick={() => { localStorage.removeItem(MORSEL_STATE_KEY); window.location.reload(); }}>Reset the prototype</button>
         </div>
       </details>
+  );
+  if (frameless) {
+    return (
+      <div className="morsel-app-shell" data-frame="none" ref={appRef}>
+        {app}
+        {controls}
+      </div>
+    );
+  }
+  return (
+    <div className="morsel-app-shell" data-frame="device" style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 402 }} ref={appRef}>
+      <IOSDevice>{app}</IOSDevice>
+      {controls}
       <TweaksPanel>
         <TweakSection label="Prototype" />
         <TweakSlider label="Text size" value={t.textScale} min={100} max={140} unit="%" onChange={(v) => setTweak("textScale", v)} />
@@ -163,20 +192,15 @@ function MorselApp() {
 
 // ---- page mount: phone centered + scaled to fit viewport ----
 function MorselPage() {
+  const frameless = useFrameless();
   const [scale, setScale] = React.useState(1);
   React.useEffect(() => {
     const fit = () => setScale(Math.max(0.5, Math.min(1, (window.innerWidth - 24) / 402, (window.innerHeight - 70) / 900)));
     fit(); window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
   }, []);
-  return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, padding: "16px 0" }}>
-      <div style={{ width: 402 * scale, height: 874 * scale + 150, overflow: "visible" }}>
-        <div style={{ width: 402, transform: `scale(${scale})`, transformOrigin: "top left" }}>
-          <MorselApp />
-        </div>
-      </div>
-      <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 13, color: "#6F5F4B", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+  const foot = (
+    <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 13, color: "#6F5F4B", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
         <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap", justifyContent: "center", padding: "0 16px" }}>
           <span style={{ fontWeight: 700, color: "#4A3C2C" }}>Morsel</span>
           <span>Interactive prototype</span>
@@ -184,8 +208,25 @@ function MorselPage() {
           <a href="../morsel-docs/explorations.html" style={{ color: "#9C4726", fontWeight: 600 }}>alternatives →</a>
           <a href="../morsel.html" style={{ color: "#9C4726", fontWeight: 600 }}>case study →</a>
         </div>
-        <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Interactive concept with fictional restaurants and sample menu data. All photos, including those labeled as diner photos, are illustrative fixtures; nothing is ordered.</div>
+        <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center", padding: "0 16px" }}>Interactive concept with fictional restaurants and sample menu data. All photos, including those labeled as diner photos, are illustrative fixtures; nothing is ordered.</div>
+    </div>
+  );
+  if (frameless) {
+    return (
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, padding: "0 0 24px" }}>
+        <MorselApp frameless />
+        {foot}
       </div>
+    );
+  }
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, padding: "16px 0" }}>
+      <div style={{ width: 402 * scale, height: 874 * scale + 150, overflow: "visible" }}>
+        <div style={{ width: 402, transform: `scale(${scale})`, transformOrigin: "top left" }}>
+          <MorselApp />
+        </div>
+      </div>
+      {foot}
     </div>
   );
 }

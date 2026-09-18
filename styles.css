@@ -1107,3 +1107,12 @@ a.bar-loc:hover { color: var(--gold); }
 .strip-hint { display: none; margin: 10px var(--px) 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rose-2); }
 .strip3:focus-visible { outline: 2px solid var(--rose-2); outline-offset: 6px; border-radius: 8px; }
 @media (max-width: 720px) { .strip-hint { display: block; } }
+
+/* Shared navigation and actions for the interactive case studies. */
+.case-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; margin-top: 26px; }
+.case-button { display: inline-flex; align-items: center; gap: 34px; border-radius: 7px; padding: 13px 20px; font-size: 15px; font-weight: 600; color: #2e2318; background: #efd9a0; min-height: 48px; }
+.case-button:hover { background: #f8e8bf; }
+.case-secondary { color: #efd9a0; text-decoration: underline; text-underline-offset: 5px; font-size: 14px; line-height: 1.7; }
+.case-nav { display: flex; flex-wrap: wrap; gap: 0 24px; padding: 12px var(--px); border-bottom: 1px solid #cbbdae; background: #efe7d6; }
+.case-nav a { display: inline-flex; align-items: center; min-height: 44px; font: 500 12px var(--mono); color: #5a3238; }
+.case-nav a:hover { text-decoration: underline; text-underline-offset: 5px; }

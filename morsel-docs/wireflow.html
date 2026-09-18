@@ -5,6 +5,7 @@
 <meta name="description" content="Morsel process document: the visual-menu flow, screen by screen, with the assumptions still to test." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="../favicon.png" />
 <title>Morsel — flow and assumptions</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
@@ -41,10 +42,11 @@
   a { color: var(--accent); font-weight: 700; text-decoration: none; }
   a:hover { text-decoration: underline; }
   @media (max-width: 640px) { .page { padding: 40px 18px 72px; } h1 { font-size: 32px; } table { display: block; overflow-x: auto; } }
+  table:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 </style>
 </head>
 <body>
-<div class="page">
+<main class="page">
   <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
   <h1 style="margin-top:16px;">Flow and assumptions</h1>
   <p class="sub" style="margin-top:12px;">One journey: you are at a restaurant with the menu in front of you. Pick the place, read its menu with photos where they exist, look closer at a dish, compare two or three, decide. <span class="tag built">built</span> marks what the prototype does. <span class="tag test">to test</span> marks an assumption the <a href="testing-plan.html">validation plan</a> is written to check.</p>
@@ -71,7 +73,7 @@
 
   <h2>Assumptions to test</h2>
   <div class="rule"></div>
-  <table>
+  <table tabindex="0" aria-label="Scrollable comparison table">
     <tr><th>Assumption</th><th>Where it lives</th><th>What would change if it fails</th></tr>
     <tr><td>People at a table want to see the dishes on the menu in front of them <span class="tag test">to test</span></td><td>The whole direction. It comes from my own frustration, not from research.</td><td>The product premise.</td></tr>
     <tr><td>Browsing nearby photos is how people find a place, and it should lead into the menu rather than stand alone</td><td>Home</td><td>Whether Home is a feed or just the picker.</td></tr>
@@ -83,6 +85,6 @@
   </table>
 
   <p class="note">Supporting notes from the design and prototype review. Restaurants, menus and photos are fictional sample data.</p>
-</div>
+</main>
 </body>
 </html>

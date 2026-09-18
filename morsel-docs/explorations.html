@@ -5,6 +5,7 @@
 <meta name="description" content="Morsel process document: the alternatives considered for the visual menu, with tradeoffs and what was chosen." />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="../favicon.png" />
 <title>Morsel — design alternatives</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Hanken+Grotesk:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
@@ -41,10 +42,11 @@
   a { color: var(--accent); font-weight: 700; text-decoration: none; }
   a:hover { text-decoration: underline; }
   @media (max-width: 640px) { .page { padding: 40px 18px 72px; } h1 { font-size: 32px; } table { display: block; overflow-x: auto; } }
+  table:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 </style>
 </head>
 <body>
-<div class="page">
+<main class="page">
   <a href="../morsel.html">&larr; back to case study</a> &middot; <a href="../morsel-proto/index.html">live prototype &rarr;</a>
   <h1 style="margin-top:16px;">Design alternatives</h1>
   <p class="sub" style="margin-top:12px;">Six questions the visual menu had to answer, the options I weighed for each, and what the prototype does. Choices came from design exploration and prototype review; each has a cost, noted alongside.</p>
@@ -101,6 +103,6 @@
   </div>
 
   <p class="note">Supporting notes from the design and prototype review. Restaurants, menus and photos are fictional sample data.</p>
-</div>
+</main>
 </body>
 </html>

@@ -67,8 +67,9 @@ ids. `tests/morsel.test.cjs` boots `data.js` and `app.jsx` with the vendored Bab
 checks the fixture contract, menu order, photo sources, ingredient lines, the
 three-dish shortlist and defensive state loading without a browser.
 
-`build-artifact.mjs` bundles the whole site into a single self-contained HTML
-file with every asset inlined and no external requests.
+The supported review and publishing path is `build-site.sh`. The older
+`build-artifact.mjs` one-file exporter is retained as historical tooling; it
+requires an external font bundle and is not part of the current release checks.
 
 ## Deploy
 
@@ -85,7 +86,7 @@ Verify before publishing:
 
 ```bash
 node stamp-editable.mjs --check
-node --test tests/tenet-new.test.cjs tests/morsel.test.cjs
+node --test tests/*.test.cjs tests/morsel.test.cjs
 bash build-site.sh
 python3 tests/site-build.test.py
 PREVIEW=1 bash build-site.sh

@@ -47,6 +47,7 @@
           <div class="rv">
             <h1 data-ed="0">Morsel &mdash; see the dish <em>before you order</em></h1>
             <p class="proj-lede" data-ed="1">A visual menu for the moment you&rsquo;re at a restaurant deciding what to order.</p>
+            <div class="case-actions"><a class="case-button" href="#try">Try Morsel <span aria-hidden="true">&darr;</span></a><a class="case-secondary" href="#cards">Explore the design decisions</a></div>
           </div>
           <div class="meta-rail rv" style="--d:120ms">
             <div><span class="k" data-ed="2">ROLE</span><span class="v" data-ed="3">Product design, interaction design, prototyping</span></div>
@@ -57,6 +58,8 @@
           </div>
         </div>
       </section>
+
+      <nav class="case-nav" aria-label="On this page"><a href="#hypothesis">Overview</a><a href="#cards">Decisions</a><a href="#try">Prototype</a><a href="#testing">Validation</a><a href="#notes">Supporting notes</a></nav>
 
       <!-- opening strip: the product, from the working UI -->
       <div class="strip3 rv" role="region" aria-label="Three screens from the prototype" tabindex="0">
@@ -172,7 +175,7 @@
             <div>
               <p class="proj-p" data-ed="44">At a table the decision is now, between a few dishes. Any row or dish page adds a dish to a shortlist of up to three, and the Compare tab keeps count. The compare screen puts the shortlist side by side with price, description, listed ingredients and whatever photo exists, with one button back to the menu. Ordering happens with your server.</p>
               <figure class="callout"><div class="fig-live" data-fig="morsel-vm-menu-shortlist" data-crop="8,582,386,154" role="img" aria-label="Close-up of a menu row with its compare toggle checked"></div><figcaption data-ed="45"><span class="fk">Close-up</span>The shortlist grows from the menu with one toggle per row.</figcaption></figure>
-              <p class="proj-p" data-ed="46">With larger text, a three-dish shortlist uses two columns so names and descriptions have more room. A cart would have been familiar, but Morsel doesn&rsquo;t place orders, and a cart nudges toward adding rather than choosing between.</p>
+              <p class="proj-p" data-ed="46">On a narrow phone or with larger text, a three-dish shortlist uses two columns so names and descriptions have more room. A cart would have been familiar, but Morsel doesn&rsquo;t place orders, and a cart nudges toward adding rather than choosing between.</p>
             </div>
             <div class="spread-fig">
               <figure><div class="fig-live" data-fig="morsel-vm-compare-3" role="img" aria-label="Compare screen with three columns: Elder Burger with a 3 photos tag and $17, Hanger Steak with a restaurant photo and $28, and Margherita with a No photo yet block and $18; each column has the description, its ingredients line and a Remove button; the subtitle reads 3 of 3 dishes"></div><figcaption data-ed="47">Three dishes side by side, one of them without a photo.</figcaption></figure>
@@ -188,7 +191,7 @@
           <h2 class="side" style="margin:0;font-weight:400" data-ed="48">READABILITY AND<br>WHAT&rsquo;S LEFT</h2>
           <div class="spread">
             <div>
-              <p class="proj-p" data-ed="49">Every card, row, toggle, tab and photo control is a real button with a visible focus ring. Back returns focus to the row or card that opened the dish, at the same scroll position. The tab bar carries labels and sits on a surface dark enough to read. Text scales to 140% and the layouts reflow rather than clip. A screen-reader pass, contrast measurement over photos and touch checks on a device are still to do.</p>
+              <p class="proj-p" data-ed="49">Every card, row, toggle, tab and photo control is a real button with a visible focus ring. Back returns focus to the row or card that opened the dish, at the same scroll position. The tab bar carries labels and sits on a surface dark enough to read. Text scales to 140% and the layouts reflow rather than clip. Keyboard paths and photo-label contrast have been checked in browser review. A dedicated screen-reader pass and touch checks on a physical device are still to do.</p>
             </div>
             <div class="spread-fig small">
               <figure><div class="fig-live" data-fig="morsel-vm-menu-140" role="img" aria-label="The menu rendered at 140 percent text scale: the header, section chips and rows reflow without truncation"></div><figcaption data-ed="50">The menu at 140% text size.</figcaption></figure>
