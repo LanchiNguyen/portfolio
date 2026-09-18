@@ -288,14 +288,14 @@ function MorselPage() {
           <MorselApp />
         </div>
       </div>
-      <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 13, color: "#8A7A66", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+      <div style={{ fontFamily: "'Hanken Grotesk', sans-serif", fontSize: 13, color: "#6F5F4B", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
         <div style={{ display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap", justifyContent: "center", padding: "0 16px" }}>
           <span style={{ fontWeight: 700, color: "#5C4B38" }}>Morsel v3</span>
           <span>final iteration</span>
-          <a href="../morsel-docs/wireflow.html" style={{ color: "#B0542F", fontWeight: 600 }}>wireflow →</a>
-          <a href="../morsel-docs/explorations.html" style={{ color: "#B0542F", fontWeight: 600 }}>explorations →</a>
-          <a href="../morsel-docs/ds-addendum.html" style={{ color: "#B0542F", fontWeight: 600 }}>ds addendum →</a>
-          <a href="../morsel.html" style={{ color: "#B0542F", fontWeight: 600 }}>case study →</a>
+          <a href="../morsel-docs/wireflow.html" style={{ color: "#9C4726", fontWeight: 600 }}>wireflow →</a>
+          <a href="../morsel-docs/explorations.html" style={{ color: "#9C4726", fontWeight: 600 }}>explorations →</a>
+          <a href="../morsel-docs/ds-addendum.html" style={{ color: "#9C4726", fontWeight: 600 }}>ds addendum →</a>
+          <a href="../morsel.html" style={{ color: "#9C4726", fontWeight: 600 }}>case study →</a>
         </div>
         <div style={{ fontSize: 12, maxWidth: 560, textAlign: "center" }}>Prototype: all diner counts, scores, save numbers, names, and quotes are illustrative seed data — not real customer evidence.</div>
       </div>
