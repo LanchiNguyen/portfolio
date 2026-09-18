@@ -17,8 +17,9 @@
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="heyperiod-review.css" />
 </head>
 <body>
   <a class="skip-link" href="#case">Skip to case study</a>
@@ -45,7 +46,7 @@
         <a class="backlink" href="index.html#home-work">&larr; WORK / CLIENT</a>
         <div class="proj-hero-grid">
           <div class="rv">
-            <h1 data-ed="0">Hey Period &mdash; making a new kind of blood test feel <em>credible</em></h1>
+            <h1 data-ed="0">Hey Period &mdash; brand and app for a <em>new health test</em></h1>
             <p class="proj-lede" data-ed="1">Hey Period was developing a blood test that uses menstrual blood. Before launch, the team needed a brand, a waitlist site, and a visual system for the app. I designed all three in two months.</p>
           </div>
           <div class="meta-rail rv" style="--d:120ms">
@@ -77,8 +78,8 @@
       <section class="proj-sec">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <span class="side" role="heading" aria-level="2">A NEW SAMPLE,<br>AN OLD TRUST PROBLEM</span>
-          <p class="statement" data-ed="18">The product asked people to trust an unfamiliar sample type with personal health data. It needed to look medically credible without turning menstruation into something cold or clinical.</p>
+          <span class="side" role="heading" aria-level="2">EXPLAIN THE SERVICE,<br>THEN THE NEXT STEP</span>
+          <p class="statement" data-ed="18">The proposed service asked people to collect an unfamiliar sample and share personal health information. The design needed to explain the process clearly and make the next step easy to find, while keeping the tone approachable.</p>
         </div>
       </section>
 
@@ -95,11 +96,11 @@
             </figure>
             <figure class="figure">
               <img class="shot-img" src="images/heyperiod/mobile-insights.webp" alt="Insights screen before and after: plain outlined bubbles become color-coded gradient cards with icons for running, yoga, and sleep" width="1564" height="1432" loading="lazy" data-ed="22" />
-              <figcaption class="figcap" data-ed="23"><span class="fk">Insights</span>Outlined bubbles became color-coded cards with icons, one insight each, readable on a lock-screen-length visit.</figcaption>
+              <figcaption class="figcap" data-ed="23"><span class="fk">Insights</span>One insight per card, with an icon and a category color. The pale gradients and white text need stronger contrast; the 2026 review below addresses that treatment.</figcaption>
             </figure>
             <figure class="figure">
-              <img class="shot-img" src="images/heyperiod/mobile-chat.webp" alt="Virtual assistant before and after: a generic chat with a human avatar becomes an on-brand bot with inline biomarker results and quick replies" width="1564" height="1432" loading="lazy" data-ed="24" />
-              <figcaption class="figcap" data-ed="25"><span class="fk">Assistant</span>The wireframe's human coach "Megan" became an explicitly branded bot; a health product shouldn't pretend a person reads your results. Biomarker cards render inline, and quick-reply chips replace free typing.</figcaption>
+              <img class="shot-img" src="images/heyperiod/mobile-chat.webp" alt="Assistant before and after: the named human coach is replaced by a pink circular avatar; biomarker cards appear in the conversation and the text-entry field remains" width="1564" height="1432" loading="lazy" data-ed="24" />
+              <figcaption class="figcap" data-ed="25"><span class="fk">Assistant</span>I replaced the named human coach with a brand-colored avatar and placed biomarker cards in the conversation. The screen still needs an explicit assistant label; an abstract avatar alone does not explain who is responding.</figcaption>
             </figure>
             <p class="proj-p" style="margin-top:16px" data-ed="26">I restructured the bottom navigation: Home / Discover / Chat / Profile became <strong>Home / Insights / Explore / Account</strong>. "Insights" is the core promise, so it earned a tab; the assistant is a helper, so "Chat" became a floating entry point.</p>
           </div>
@@ -109,17 +110,17 @@
 <section class="proj-sec">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <span class="side" role="heading" aria-level="2">I DID NOT HAVE<br>DIRECT USER ACCESS</span>
+          <span class="side" role="heading" aria-level="2">DESIGNING WITH<br>ASSUMPTIONS</span>
           <div>
-            <p class="proj-p" data-ed="27">This retrospective uses the project boards and a comparison of period-tracking conventions to explain the design. I did not run direct user interviews, and the personas below are assumptions rather than participant findings.</p>
+            <p class="proj-p" data-ed="27">The project boards and period-tracking references helped frame the design. Without direct user access, I used planning personas to explore different needs rather than treating them as research findings.</p>
             <p class="proj-p" style="margin-top:18px" data-ed="28">These project-era reference categories suggest three design questions; they are not a current competitive analysis:</p>
             <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
-              <tr><th>Competitor</th><th>What it owns</th><th>Trust signal</th><th>Implication for Hey Period</th></tr>
+              <tr><th>Competitor</th><th>Reference category</th><th>Visual convention</th><th>Implication for Hey Period</th></tr>
               <tr><td><b>Flo</b></td><td>Period-tracking visual conventions</td><td>Familiar category cues</td><td>Could a familiar palette help explain the proposed service?</td></tr>
               <tr><td><b>Clue</b></td><td>Science-forward tracking</td><td>Clinical tone, citations</td><td>How could the design balance precise explanations with an approachable tone?</td></tr>
               <tr><td><b>Mail-in test kits</b> (Everlywell-type)</td><td>The mail-a-sample behavior</td><td>Medical packaging, results dashboards</td><td>How clearly would the kit explain the unfamiliar sample process and service limits?</td></tr>
             </table></div>
-            <p class="proj-p" style="margin-top:14px" data-ed="29">The two personas below were planning tools, not research findings. They gave the team two different trust thresholds to design for: someone already comfortable with health tracking, and someone using the product for a specific medical need.</p>
+            <p class="proj-p" style="margin-top:14px" data-ed="29">The two planning personas ask different questions of the same service: how it fits an existing tracking routine, and how clearly it explains its limits to someone with a specific health concern.</p>
             <figure class="figure" style="margin-top: 26px">
               <img class="shot-img" src="images/heyperiod/persona-brandy.webp" alt="Assumption persona: Brandy, 21, a college athlete and avid user of wearables who would use Hey Period to optimize athletic performance" width="1395" height="623" loading="lazy" data-ed="30" />
               <figcaption class="figcap" data-ed="31"><span class="fk">Persona A</span>Brandy, 21, tracks everything already; Hey Period has to earn a slot next to her Apple Watch.</figcaption>
@@ -140,16 +141,16 @@
           <div>
             <p class="proj-p" data-ed="34">The main brand decision was how much playfulness the product could carry before the test stopped feeling serious.</p>
             <div class="decisions">
-              <div class="decision"><div class="dt">The pink deliberately echoes Flo.</div><div class="dd">The project uses pink as a recognizable period-care cue, with a broader supporting palette. Whether that cue helps people understand this service remains untested.</div></div>
-              <div class="decision"><div class="dt">Supporting colors are whimsical on purpose.</div><div class="dd">Periwinkle, marigold, mint, and blush do the warmth job. You mail this product your period blood; the packaging has to feel more like a skincare subscription than a lab requisition.</div></div>
+              <div class="decision"><div class="dt">Pink establishes the category.</div><div class="dd">Pink connects the identity to period care. The broader palette and geometric shapes give the brand room beyond that familiar cue.</div></div>
+              <div class="decision"><div class="dt">Supporting colors are whimsical on purpose.</div><div class="dd">Periwinkle, marigold, mint, and blush do the warmth job. The supporting colors carry into packaging and app categories; warmth cannot replace clear collection instructions.</div></div>
               <div class="decision"><div class="dt">Poppins, for both jobs.</div><div class="dd">Geometric enough for UI sizes, round enough for display sizes. One family across brand, web, and app kept a two-month timeline realistic.</div></div>
             </div>
-            <p class="proj-p" style="margin-top:18px" data-ed="35">This retrospective reconstruction compares three possible directions; it is not a record of options documented during the project:</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="35">Looking back, these are the tradeoffs I see in the visual direction. This is a current assessment, not a record of alternatives explored with the team in 2021:</p>
             <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
-              <tr><th>Direction</th><th>What it buys</th><th>Why it lost / won</th></tr>
-              <tr><td><b>Clinical teal</b> (the diagnostics look)</td><td>A clinical visual tone</td><td class="fail">Lost: indistinguishable from telehealth brands; kills the community half of the brief</td></tr>
-              <tr><td><b>Millennial beige</b> (the DTC wellness look)</td><td>Shelf-pretty, safe</td><td class="fail">Risk: reads as skincare and obscures the prelaunch health concept</td></tr>
-              <tr><td><b>Familiar pink + whimsy</b> (chosen)</td><td>Category recognition via the Flo echo, warmth via the supporting palette</td><td class="ok">Chosen: combines familiar category cues with the intended warmth</td></tr>
+              <tr><th>Direction</th><th>What it emphasizes</th><th>Tradeoff in this brief</th></tr>
+              <tr><td><b>Clinical teal</b> (the diagnostics look)</td><td>A clinical visual tone</td><td class="fail">Could emphasize testing, but would need other ways to express the intended warmth</td></tr>
+              <tr><td><b>Millennial beige</b> (the DTC wellness look)</td><td>A quiet, familiar wellness aesthetic</td><td class="fail">Risk: reads as skincare and obscures the prelaunch health concept</td></tr>
+              <tr><td><b>Familiar pink + whimsy</b> (chosen)</td><td>Period-care cues with a broader supporting palette</td><td class="ok">Used in the project; differentiation and clear explanation still need testing</td></tr>
             </table></div>
 
             <figure class="figure" style="margin-top: 26px">
@@ -168,7 +169,7 @@
           <div>
             <p class="proj-p" data-ed="38">The waitlist page had to explain the test before asking for an email. I designed every asset and refined the copy with the Head of Product.</p>
             <div class="decisions">
-              <div class="decision"><div class="dt">The biomarker map is the credibility centerpiece.</div><div class="dd">The mockup groups biomarker labels by topic so the content is easier to scan. A launched service would need clinical review of every test claim and explanation; visual credibility cannot establish medical validity.</div></div>
+              <div class="decision"><div class="dt">The biomarker map organizes the explanation.</div><div class="dd">The mockup groups biomarker labels by topic so the content is easier to scan. A launched service would need clinical review of every test claim and explanation; visual credibility cannot establish medical validity.</div></div>
               <div class="decision"><div class="dt">Goal-based sections instead of feature lists.</div><div class="dd">"Solving your period problems / Optimizing your fertility / Tracking your sexual health", each with a chart card previewing the data. This organizes the intended information around a person's question; the health outcomes shown are not established by this design work.</div></div>
               <div class="decision"><div class="dt">How-it-works in exactly three steps.</div><div class="dd">Choose what to track, receive the kit, learn about your health. The design makes the mail-in step explicit. Whether that explanation earns trust remains a research question.</div></div>
             </div>
@@ -187,20 +188,20 @@
       <section class="proj-sec">
         <div class="rule"></div>
         <div class="proj-row rv">
-          <span class="side" role="heading" aria-level="2">WHAT CARRIED TRUST<br>AND WHAT ADDED WARMTH</span>
+          <span class="side" role="heading" aria-level="2">CLARITY<br>&amp; WARMTH</span>
           <div>
             <p class="proj-p" data-ed="41">I used different parts of the system for different jobs:</p>
             <ul class="feat-list">
-              <li data-ed="42"><strong>Clarity:</strong> readable information hierarchy, a clear explanation of the sample process, and an assistant identified as a bot.</li>
-              <li data-ed="43"><strong>Warmth:</strong> the whimsical palette, blob shapes, skincare-grade packaging, tip-like insight cards</li>
+              <li data-ed="42"><strong>Clarity:</strong> separate information groups, a visible sample process, and a dedicated Insights tab.</li>
+              <li data-ed="43"><strong>Warmth:</strong> the supporting palette, rounded shapes, and illustrated insight cards.</li>
 
             </ul>
-            <p class="proj-p" style="margin-top:18px" data-ed="44">Before launch, I would track:</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="44">Before launch, I would check understanding before measuring conversion:</p>
             <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
-              <tr><th>Metric</th><th>Definition</th><th>How</th><th>Goal (not a result)</th><th>Limitation</th></tr>
-              <tr><td><b>Perceived credibility</b></td><td>% describing the brand as "trustworthy/medical" in a 5-second test</td><td>5-sec exposure, n&asymp;20, open response</td><td>&ge;60% mention trust or health before "cute"</td><td>Perception, not behavior</td></tr>
-              <tr><td><b>Waitlist conversion</b></td><td>Visits &rarr; signups on the marketing site</td><td>Site analytics + form events</td><td>Baseline first; direction over absolute</td><td>Traffic source dominates early numbers</td></tr>
-              <tr><td><b>Kit-return intent</b></td><td>% of signups saying they'd mail a sample this cycle</td><td>One-question follow-up email</td><td>Establish baseline</td><td>Stated intent overstates behavior</td></tr>
+              <tr><th>Question</th><th>How I would check</th><th>What would change</th></tr>
+              <tr><td>Can someone explain the service and its limits?</td><td>Ask them to describe it after reading the page, without supplying medical or trust-related prompts.</td><td>Revise explanations that create unsupported expectations.</td></tr>
+              <tr><td>Are the sample steps and assistant role clear?</td><td>Ask what they would do next and who they think is responding in the chat.</td><td>Change instructions, labels, or navigation where the next step is misunderstood.</td></tr>
+              <tr><td>Does the page support an informed signup?</td><td>After comprehension review, establish a conversion baseline by traffic source.</td><td>Investigate drop-off alongside what people understood; a signup alone does not establish trust.</td></tr>
             </table></div>
           </div>
         </div>
@@ -212,12 +213,27 @@
         <div class="proj-row rv">
           <span class="side" role="heading" aria-level="2">CONSTRAINTS<br>&amp; SELF-CRITIQUE</span>
           <div>
-            <p class="proj-p" data-ed="45">A retrospective quality review highlights two design risks in the delivered mockups. These examples are later analysis, not changes established as part of the original handoff:</p>
+            <p class="proj-p" data-ed="45">Reviewing the original mockups in 2026, I would change two things before putting them in front of users:</p>
             <ul class="feat-list">
-              <li data-ed="46"><strong>Contrast.</strong> The light chip backgrounds need dark labels. The proposed correction below uses the listed color pairs; the original exported screens remain historical artifacts.</li>
+              <li data-ed="46"><strong>Contrast.</strong> Both the category chips and the insight cards use white text on pale backgrounds. Dark text needs to carry through the whole card, including its labels and body copy.</li>
             </ul>
             <figure class="figure"><div class="review-swatches"><span style="background:rgb(140,166,255)">E2</span><span style="background:rgb(247,204,78)">Sleep</span><span style="background:rgb(105,226,183)">Activities</span><span style="background:rgb(253,138,147)">Blood</span></div><figcaption class="figcap" data-ed="47"><span class="fk">2026 presentation review</span>Illustrative correction: dark labels on light category chips. This is a later color treatment, separate from the historical client screens.</figcaption></figure>
-<p class="proj-p" style="margin-top:14px" data-ed="48">Calculated contrast for the four listed background colors, comparing white with dark text. This checks these color pairs, not the full app:</p>
+<figure class="figure">
+              <div class="hp-review" role="img" aria-label="2026 visual revision of Insights: dark labels and body text on light blue, mint and pink cards; an explicitly labeled automated assistant; darker navigation labels. All entries are illustrative, not health analysis.">
+                <div aria-hidden="true">
+                  <div class="hp-wordmark">hey period.</div>
+                  <div class="hp-title">Insights</div>
+                  <p class="hp-intro" data-ed="48">A look at your journal.<br>Example entries &middot; not health analysis</p>
+                  <section class="hp-card"><div class="hp-label">Movement</div><p data-ed="49">You added three activity entries this week.</p><p class="hp-source" data-ed="50">From your journal &middot; example</p></section>
+                  <section class="hp-card"><div class="hp-label">Reflection</div><p data-ed="51">Your latest note is saved with this week&rsquo;s entries.</p><p class="hp-source" data-ed="52">From your journal &middot; example</p></section>
+                  <section class="hp-card"><div class="hp-label">Rest</div><p data-ed="53">Your sleep notes appear together, ready to revisit.</p><p class="hp-source" data-ed="54">From your journal &middot; example</p></section>
+                  <div class="hp-assistant">Automated assistant</div>
+                  <div class="hp-tabs"><span>Home</span><strong>Insights</strong><span>Explore</span><span>Account</span></div>
+                </div>
+              </div>
+              <figcaption class="figcap" data-ed="55"><span class="fk">2026 visual revision &middot; not the client handoff</span>Dark text carries through the card labels, body copy, and navigation. The assistant is named explicitly. Neutral example journal content replaces the original mock health claims so this study can focus on hierarchy and contrast.</figcaption>
+            </figure>
+            <p class="proj-p" style="margin-top:14px" data-ed="56">Calculated contrast for the four listed background colors, comparing white with dark text. This checks these color pairs, not the full app:</p>
             <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
               <tr><th>Chip (sampled color)</th><th>White text</th><th>Dark text (#1A1A1A)</th><th>Fix</th></tr>
               <tr><td>Sleep marigold <b>rgb(247,204,78)</b></td><td class="fail">1.53 — fail</td><td class="ok">11.36 — pass</td><td>flip to dark text</td></tr>
@@ -226,7 +242,7 @@
               <tr><td>E2 periwinkle <b>rgb(140,166,255)</b></td><td class="fail">2.33 — fail</td><td class="ok">7.47 — pass</td><td>flip to dark text</td></tr>
             </table></div>
             <ul class="feat-list" style="margin-top:16px">
-              <li data-ed="49"><strong>Mock data as real content.</strong> The screens measure blood volume in <em>mg</em> in one place and <em>ml</em> in another; mock health data deserves the same QA as shipping copy.</li>
+              <li data-ed="57"><strong>Mock data as real content.</strong> The screens measure blood volume in <em>mg</em> in one place and <em>ml</em> in another; mock health data deserves the same QA as shipping copy.</li>
             </ul>
           </div>
         </div>
@@ -235,9 +251,9 @@
       <!-- status -->
       <section class="results rv">
         <div class="bloom"></div>
-        <span class="k" data-ed="50">WHAT I WOULD DO NEXT</span>
+        <span class="k" data-ed="58">WHAT I WOULD DO NEXT</span>
         <div class="results-grid">
-          <p class="big" data-ed="51">I would test the brand first with people who are skeptical of the sample type. They set the harder trust bar.</p>
+          <p class="big" data-ed="59">I would first check whether people can explain the service, its limits, and the sample steps in their own words. Their misunderstandings would guide the next revision.</p>
           <div class="ledger">
             <div><span>Brand &amp; site</span><b>mine, end to end</b></div>
             <div><span>App UI</span><b>visual system + nav restructure over the team's lo-fi</b></div>
@@ -249,7 +265,7 @@
       <!-- next project -->
       </main>
       <a class="next-proj" href="mug.html">
-        <span><span class="k" data-ed="52">NEXT PROJECT</span><span class="t" data-ed="53">Mug &mdash; rewards for bringing your own cup</span></span>
+        <span><span class="k" data-ed="60">NEXT PROJECT</span><span class="t" data-ed="61">Mug &mdash; rewards for bringing your own cup</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>
