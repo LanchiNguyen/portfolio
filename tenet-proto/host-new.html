@@ -36,7 +36,7 @@
 </sc-if>
 <button type="button" onClick="{{ toggleTenet }}" aria-pressed="{{ tenetDownStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">{{ tenetToggleLabel }}</button>
 <sc-if value="{{ resetVisible }}" hint-placeholder-val="{{ true }}">
-<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — BOTH SURFACES</button>
+<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — ALL SURFACES</button>
 </sc-if>
 </div>
 </div>
@@ -482,7 +482,7 @@ class Component extends DCLogic {
     if (s.sheetFor === 'mon') this.setState({ sheetFor: null, monPhase: 'overridden', dragX: 0, liveMsg: 'Override recorded. You are back at order review — swipe or press Enter to send.' });
     else this.setState({ sheetFor: null, tuePhase: 'overridden', tueQty: s.tueOrig ?? s.tueQty, dragX: 0, liveMsg: 'Override recorded. You are back at order review — swipe or press Enter to send.' });
   }
-  showSent(sent) { this.setState({ sent, dragX: 0 }); setTimeout(() => { if (this._sentEl) this._sentEl.focus(); }, 80); }
+  showSent(sent) { this.setState({ sent, dragX: 0, liveMsg: sent.t + '. Simulated fill. ' + sent.p }); setTimeout(() => { if (this._sentEl) this._sentEl.focus(); }, 80); }
 
   complete() {
     const s = this.state, cap = this.cap(), R = ['This setup was planned before the losses', 'This rule needs review', 'Continue despite my rule'];
@@ -491,7 +491,7 @@ class Component extends DCLogic {
         this.setState({ monPhase: 'stepped', dragX: 0, monNote: null, liveMsg: (s.monQty > cap ? 'Two of your rules stepped in.' : 'Your cooldown stepped in.') + (s.monQty > cap ? ' Nothing was sent. Reduce to ' + cap + ' and wait nine minutes, override both rules, or cancel.' : ' Nothing was sent. Start the cooldown, override, or cancel.') }); }
       else if (s.monPhase === 'review') { const q = Math.min(s.monQty, cap);
         this.addEvent({ day: 'MON', time: '10:02', rule: 'LOSS COOLDOWN', what: 'loss cooldown · waited 9:00 · reviewed & sent' + (s.monQty > cap ? ' at your cap' : ''), size: (s.monQty > cap ? s.monQty + '→' : '') + q + '× 602P', result: 'sent @ $1.36', out: '✓ sent', kind: 'held' });
-        this.showSent({ t: 'Bought ' + q + '× SPY 602P', p: '@ $1.36 · $' + this.fmtN(q * 136) + ' premium · 10:03', g: '◇ waited 9:00 · reviewed the refreshed quote · you confirmed the send' }); }
+        this.showSent({ t: 'Bought ' + q + '× SPY 602P', p: '@ $1.36 · $' + this.fmtN(q * 136) + ' premium · 10:02', g: '◇ waited 9:00 · reviewed the refreshed quote · you confirmed the send' }); }
       else if (s.monPhase === 'overridden') { if (s.monQty === 0) { this.setState({ dragX: 0 }); return; }
         this.addEvent({ day: 'MON', time: '9:54', rule: s.monQty > cap ? 'LOSS COOLDOWN + SIZE CAP' : 'LOSS COOLDOWN', what: 'override · continued to order review · “' + ['planned before the losses', 'rule flagged for review', 'continued despite my rule'][s.reason] + '”', size: s.monQty + '× 602P', result: 'sent @ $1.42 · outcome pending', out: '◇ sent · override', kind: 'over', pending: true, tone: 'warn', reason: R[s.reason] });
         this.showSent({ t: 'Bought ' + s.monQty + '× SPY 602P', p: '@ $1.42 · $' + this.fmtN(s.monQty * 142) + ' premium · 9:54', g: '◇ override + reason recorded — it reads as context, not a confession' }); }
@@ -644,9 +644,9 @@ class Component extends DCLogic {
       sentOn: !!s.sent, sentT: s.sent ? s.sent.t : '', sentP: s.sent ? s.sent.p : '', sentG: s.sent ? s.sent.g : '',
       sentRef: (el) => { this._sentEl = el; },
       resetCurrent: () => this.resetScenario(this.state.scenario),
-      resetDemo: () => this.resetDemo(), resetVisible: !this.bare(),
+      resetDemo: () => this.resetDemo(), resetVisible: true,
       toggleTenet: () => this.setState({ tenetDown: !s.tenetDown, liveMsg: s.tenetDown ? 'Tenet link restored. Pending events will sync.' : 'Simulating a Tenet outage. Rules still run on this device; new events sync later.' }),
-      tenetToggleLabel: s.tenetDown ? 'TENET OUTAGE: ON — TAP TO RESTORE' : 'SIMULATE TENET OUTAGE',
+      tenetToggleLabel: s.tenetDown ? 'SYNC OUTAGE: ON — TAP TO RESTORE' : 'SIMULATE SYNC OUTAGE',
       tenetDownStr: String(s.tenetDown),
       tenetLine: s.tenetDown ? '◆ tenet unreachable — your rules still run on this device · events sync when it returns · trading unaffected'
         : (sh.fridayRule ? '◆ tenet · 4 rules on · cap ' + cap + (sh.capPending != null ? ' (→' + sh.capPending + ' tmrw)' : '') + ' · friday guard starts mon' : '◆ tenet · 4 rules on · cap ' + cap + (sh.capPending != null ? ' (→' + sh.capPending + ' tomorrow 9:30)' : '')),

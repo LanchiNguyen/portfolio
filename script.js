@@ -124,7 +124,7 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* demo stages: lazy click-to-load sandboxed iframes, scaled to fit */
-  document.querySelectorAll(".demo-stage").forEach(function (stage) {
+  document.querySelectorAll(".demo-stage").forEach(function (stage, stageIndex) {
     if (stage.classList.contains("demo-static")) return;
     var frame = stage.querySelector(".demo-frame");
     var openLink = stage.querySelector(".demo-open");
@@ -135,6 +135,13 @@
     var posterImg = poster ? poster.querySelector("img") : null;
     var current = null, iframe = null;
     var liveOnLoad = stage.hasAttribute('data-live-on-load');
+    if (tabs.length) {
+      frame.id = 'demo-panel-' + stageIndex;
+      tabs.forEach(function (tab, i) {
+        tab.id = 'demo-tab-' + stageIndex + '-' + i;
+        tab.setAttribute('aria-controls', frame.id);
+      });
+    }
 
     function cfg() {
       var t = stage.querySelector('.demo-tab[aria-selected="true"]');
@@ -163,6 +170,10 @@
         frame.removeAttribute('tabindex');
         frame.removeAttribute('role');
         frame.removeAttribute('aria-label');
+      }
+      if (tabs.length) {
+        frame.setAttribute('role', 'tabpanel');
+        frame.setAttribute('aria-labelledby', stage.querySelector('.demo-tab[aria-selected="true"]').id);
       }
       if (iframe) {
         iframe.style.width = c.w + "px";
@@ -212,7 +223,7 @@
         var stuck = false;
         try {
           var doc = mine.contentDocument;
-          stuck = !doc || doc.readyState === "loading" || !doc.body || doc.body.childElementCount === 0;
+          stuck = !doc || doc.readyState === "loading" || !doc.body || doc.body.childElementCount === 0 || (doc.querySelector('x-dc') && !doc.querySelector('#dc-root > *'));
         } catch (e) { /* cross-origin: assume it loaded */ }
         if (!stuck) return;
         var note = stage.querySelector(".demo-stall");
@@ -243,7 +254,7 @@
       tab.tabIndex = tab.getAttribute('aria-selected') === 'true' ? 0 : -1;
       tab.addEventListener("click", function () {
         tabs.forEach(function (t) { t.setAttribute("aria-selected", t === tab ? "true" : "false"); t.tabIndex = t === tab ? 0 : -1; });
-        if (stage.classList.contains("is-live")) { load(); } else { applyPoster(); }
+        if (stage.classList.contains("is-live")) { load(false); } else { applyPoster(); }
       });
       tab.addEventListener('keydown', function (e) {
         var keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
