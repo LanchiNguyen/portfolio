@@ -7,12 +7,12 @@ const { readFileSync } = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-function loadPrototype(name) {
+function loadPrototype(name, storage = new Map()) {
   const filename = path.join(__dirname, '..', 'tenet-proto', name + '.html');
   const html = readFileSync(filename, 'utf8');
   const script = html.match(/<script\b[^>]*\bdata-dc-script\b[^>]*>([\s\S]*?)<\/script>/);
   assert.ok(script, filename + ' must contain the actual Component script');
-  const storage = new Map();
+  const listeners = new Map();
   class DCLogic {
     props = {};
     setState(patch) { this.state = { ...this.state, ...patch }; }
@@ -27,11 +27,11 @@ function loadPrototype(name) {
     // timer through Component.tick() explicitly instead of waiting in tests.
     setTimeout: () => 0, clearTimeout() {},
     setInterval: () => 0, clearInterval() {},
-    window: { addEventListener() {}, removeEventListener() {} },
+    window: { addEventListener: (name, fn) => listeners.set(name, fn), removeEventListener: name => listeners.delete(name) },
     location: { search: '' },
   });
   const Component = new vm.Script(script[1] + '\nComponent;', { filename }).runInContext(context);
-  return { component: new Component(), html };
+  return { component: new Component(), html, fireStorage: () => listeners.get('storage')?.({ key: 'tenetSharedV3' }) };
 }
 
 function enterMonday(component, quantity) {
@@ -202,4 +202,113 @@ test('desktop decisions and final confirmation stay outside the scrolling detail
     assert.ok(actions.includes(binding), handler + ' must remain in the persistent action region');
     assert.ok(!details.includes(binding), handler + ' must not require scrolling the detail region');
   }
+});
+
+
+test('Companion cap edits propagate to Dart while looser changes remain pending', () => {
+  const storage = new Map();
+  const host = loadPrototype('host-new', storage);
+  const companion = loadPrototype('companion-new', storage).component;
+  host.component.componentDidMount();
+  companion.renderVals().capMinus();
+  host.fireStorage();
+  assert.equal(host.component.cap(), 4);
+  companion.renderVals().capPlus();
+  host.fireStorage();
+  assert.equal(host.component.cap(), 4, 'a pending increase cannot weaken the active cap');
+  assert.equal(host.component.sh().capPending, 5);
+  enterMonday(host.component);
+  host.component.renderVals().monReduce();
+  assert.equal(host.component.state.monQty, 4);
+  host.component.resetDemo();
+  assert.equal(host.component.cap(), 5);
+  assert.equal(companion.sh().capPending, null);
+});
+
+test('confirmed Dart fill announces its simulated result and uses the Record timestamp', () => {
+  const { component: c } = loadPrototype('host-new');
+  enterMonday(c);
+  c.renderVals().monReduce();
+  finishCooldown(c);
+  c.complete();
+  const event = c.sh().events[0];
+  assert.ok(c.state.sent.p.endsWith(event.time));
+  assert.match(c.state.liveMsg, /Bought 5.*Simulated fill/);
+  assert.doesNotMatch(c.state.liveMsg, /nothing was sent/i);
+});
+
+
+test('pacing respects the active cap during editing and after a mid-wait cap change', () => {
+  const { component: c } = loadPrototype('host-new');
+  c.resetScenario('thu');
+  c.complete();
+  c.renderVals().thuQtyChange({ target: { value: '86' } });
+  assert.equal(c.state.thuQty, 5);
+  for (let i = 0; i < 240; i++) c.tick();
+  assert.equal(c.state.thuPhase, 'review');
+  assert.equal(c.state.sent, null);
+  c.put({ cap: 2 });
+  assert.equal(c.renderVals().thuReviewRail, 'Swipe to send 2 at $1.19');
+  assert.match(c.renderVals().railAria, /Send 2 contracts/);
+  c.complete();
+  assert.equal(c.sh().events[0].size, '2× 602C');
+  assert.equal(c.state.sent.t, 'Bought 2× SPY 602C');
+});
+
+test('pacing starts with the current quantity after leaving the queue', () => {
+  const { component: c } = loadPrototype('host-new');
+  c.resetScenario('thu'); c.complete();
+  c.renderVals().thuQtyChange({ target: { value: '4' } });
+  c.renderVals().thuLeave();
+  assert.equal(c.renderVals().thuEffectiveQty, '4');
+  assert.match(c.renderVals().railAria, /buy 4 contracts/);
+  c.put({ cap: 2 });
+  assert.equal(c.renderVals().thuEffectiveQty, '2');
+  c.complete();
+  assert.equal(c.state.thuQty, 2);
+});
+
+test('repeated cap changes and pattern undo preserve earlier Record entries', () => {
+  const { component: c } = loadPrototype('companion-new');
+  const baseline = c.sh().events;
+  c.renderVals().capMinus();
+  const first = c.sh().events[0];
+  c.renderVals().capMinus();
+  c.renderVals().capPlus();
+  assert.equal(c.sh().events.length, baseline.length + 3);
+  assert.ok(c.sh().events.some(e => e.id === first.id && e.what === first.what));
+  c.saveRule();
+  const saved = c.sh().events[0];
+  c.renderVals().patUndo();
+  assert.ok(c.sh().events.some(e => e.id === saved.id));
+  assert.match(c.sh().events[0].what, /undone/);
+  assert.equal(c.sh().fridayRule, null);
+  assert.equal(new Set(c.sh().events.map(e => e.id)).size, c.sh().events.length);
+});
+
+test('simulated sync outage propagates across Dart and Companion and restoration settles pending events', () => {
+  const storage = new Map();
+  const host = loadPrototype('host-new', storage);
+  const companion = loadPrototype('companion-new', storage);
+  host.component.componentDidMount(); companion.component.componentDidMount();
+  host.component.renderVals().toggleTenet(); companion.fireStorage();
+  assert.equal(companion.component.state.broker, 'off');
+  companion.component.renderVals().capMinus();
+  host.fireStorage();
+  assert.equal(host.component.cap(), 4);
+  assert.equal(host.component.sh().events[0].sync, 'pending');
+  companion.component.renderVals().toggleBroker(); host.fireStorage();
+  assert.equal(host.component.state.tenetDown, false);
+  assert.equal(host.component.sh().events[0].sync, 'synced');
+  assert.equal(host.component.sh().events.find(e => e.id === 'e7').sync, 'failed', 'reconnect must not erase existing failed-event state');
+});
+
+test('Companion overview summaries count actual Record decisions instead of fixed fixtures', () => {
+  const c = loadPrototype('companion-new').component;
+  assert.equal(c.renderVals().overCount, '1');
+  assert.equal(c.renderVals().weekRows.find(r => r.label.startsWith('THU')).out, '3 waited / 0 overrode');
+  c.addEvent({day:'THU', time:'10:44', kind:'over', what:'test override', pending:true});
+  const values = c.renderVals();
+  assert.equal(values.overCount, '2');
+  assert.equal(values.weekRows.find(r => r.label.startsWith('THU')).out, '3 waited / 1 overrode');
 });

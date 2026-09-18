@@ -11,12 +11,12 @@
 <helmet>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#755419}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
 <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
 <div style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
-<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — RETAIL HOST v2 · SPY OPTIONS (0DTE)</div>
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#755419">◆ TENET — RETAIL HOST v2 · SPY OPTIONS (0DTE)</div>
 <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">“DART” IS AN INVENTED BROKER</div>
 </div>
 </sc-if>
@@ -32,11 +32,11 @@
 <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed #9AA0A4;border-radius:16px;padding:8px 10px 8px 16px;align-self:flex-start">
 <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#5E6B75">DEMO CONTROLS</span>
 <sc-if value="{{ isWed }}" hint-placeholder-val="{{ false }}">
-<button type="button" onClick="{{ advanceClock }}" aria-disabled="{{ wedAdvDisabled }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 18px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25;opacity:{{ wedAdvOpacity }}">{{ wedAdvLabel }}</button>
+<button type="button" onClick="{{ advanceClock }}" aria-disabled="{{ wedAdvDisabled }}" style="min-height:44px;border:1px solid #755419;border-radius:999px;padding:10px 18px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#755419;opacity:{{ wedAdvOpacity }}">{{ wedAdvLabel }}</button>
 </sc-if>
 <button type="button" onClick="{{ toggleTenet }}" aria-pressed="{{ tenetDownStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">{{ tenetToggleLabel }}</button>
 <sc-if value="{{ resetVisible }}" hint-placeholder-val="{{ true }}">
-<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — BOTH SURFACES</button>
+<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #755419;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#755419">RESET DEMO ↻ — ALL SURFACES</button>
 </sc-if>
 </div>
 </div>
@@ -202,7 +202,7 @@
 <sc-if value="{{ wedArmed }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid rgba(230,195,106,.3);background:rgba(230,195,106,.05);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ WIND-DOWN — YOUR 3:00 RULE STEPPED IN</div>
-<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">0DTE premium decays fastest into the close. In your last 45 days, 61% of give-back came after 3:00. Size steps down to expiry; typing above the allowance just trims it.</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">0DTE premium decays fastest into the close. Illustrative scenario: in the last 45 days, 61% of give-back came after 3:00. Size steps down to expiry; typing above the allowance just trims it.</div>
 <div role="img" aria-label="New-order allowance steps down from 5 contracts at 3:00 to zero at 3:55" style="display:flex;gap:4px;align-items:flex-end;height:26px">
 <div style="flex:1;height:26px;background:rgba(230,195,106,.5);border-radius:3px"></div>
 <div style="flex:1;height:19px;background:rgba(230,195,106,.38);border-radius:3px"></div>
@@ -252,17 +252,17 @@
 <sc-if value="{{ thuNoteOn }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #3A3F46;border-radius:10px;padding:9px 11px;font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#A8B0B8">{{ thuNote }}</div></sc-if>
 <div style="flex:1"></div>
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#98A1AB">ORDER</div>
-<div style="border:1px solid #23272D;border-radius:14px;padding:11px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 13px 'Plus Jakarta Sans'">BUY 3× SPY 602C</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#A8B0B8">0DTE · market · $345 at risk</span></div>
+<div style="border:1px solid #23272D;border-radius:14px;padding:11px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span style="font:700 13px 'Plus Jakarta Sans'">BUY {{ thuEffectiveQty }}× SPY 602C</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#A8B0B8">{{ thuReadyCost }}</span></div>
 <button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
 <span style="width:42px;height:42px;border-radius:50%;background:#07080A;display:flex;align-items:center;justify-content:center;font:700 14px 'IBM Plex Mono',monospace;color:#C8F65D;transform:translateX({{ dragX }}px);transition:{{ knobTransition }};position:relative;z-index:2">›</span>
-<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">Swipe to buy 3 contracts</span></button>
+<span style="position:absolute;left:0;right:0;text-align:center;font:700 13.5px 'Plus Jakarta Sans';color:#0A0B0C;pointer-events:none;opacity:{{ railLabelOpacity }}">Swipe to buy {{ thuEffectiveQty }} contracts</span></button>
 <div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">swipe, or press Enter on the rail</div>
 </sc-if>
 
 <sc-if value="{{ thuQueued }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ PACING RULE STEPPED IN — 2 MIN BETWEEN ENTRIES</div>
-<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Five 0DTE entries in six minutes. Your cluster days ended −$310 on average — the spread ate the rest.</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Five 0DTE entries in six minutes. Illustrative cluster days ended −$310 on average — the spread ate the rest.</div>
 <div style="display:flex;gap:5px;align-items:center;padding-top:1px">
 <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span>
 <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;border:1px solid #E6C36A;box-sizing:border-box"></span>
@@ -280,6 +280,7 @@
 </div>
 <div style="text-align:center;font:400 10px 'IBM Plex Mono',monospace;color:#98A1AB">{{ thuCost }}</div>
 </sc-if>
+<div style="font:400 10.5px/1.6 'IBM Plex Mono';color:#CBB78A">{{ thuCapNote }}</div>
 <div role="timer" aria-label="Queue time remaining" style="position:relative;height:50px;border-radius:999px;border:1px solid #E6C36A;background:linear-gradient(90deg,rgba(230,195,106,.26) 0 {{ thuFillPct }},rgba(230,195,106,.05) {{ thuFillPct }} 100%);display:flex;align-items:center;justify-content:center"><span style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A">READY TO REVIEW IN {{ thuClock }}</span></div>
 <div style="display:flex;gap:6px">
 <button type="button" onClick="{{ thuEditToggle }}" style="flex:1;min-height:44px;border:1px solid #3A3F46;border-radius:999px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#C6CDD4;display:flex;align-items:center;justify-content:center">{{ thuEditLabel }}</button>
@@ -294,6 +295,7 @@
 <div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#A8B0B8">602C quote refreshed 10:44 · <span style="color:#E9EDF2">$1.15 → $1.19</span></div>
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#E6C36A">⚠ PRICE MOVED +3.5% WHILE QUEUED</div>
 <div style="font:400 10.5px/1.6 'IBM Plex Mono',monospace;color:#CBB78A">{{ thuReviewCost }}</div>
+<div style="font:400 10.5px/1.6 'IBM Plex Mono';color:#CBB78A">{{ thuCapNote }}</div>
 </div>
 <div style="flex:1"></div>
 <button type="button" onPointerDown="{{ railDown }}" onKeyDown="{{ railKey }}" aria-label="{{ railAria }}" style="position:relative;height:54px;width:100%;border-radius:999px;background:linear-gradient(90deg,#C8F65D,#A6E236);display:flex;align-items:center;padding:0 6px;box-sizing:border-box;touch-action:none;cursor:grab;user-select:none">
@@ -348,9 +350,9 @@
 
 <sc-if value="{{ showHints }}" hint-placeholder-val="{{ true }}">
 <div style="display:flex;flex-direction:column;gap:14px;max-width:340px;padding-top:8px">
-<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#8C6A25">TRY THIS</div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#755419">TRY THIS</div>
 <sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
-<div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#8C6A25;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
+<div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#755419;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
 </sc-for>
 <div style="border-top:1px solid #C5CDD3;padding-top:11px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5E6B75;line-height:1.7">» KEYBOARD WORKS EVERYWHERE — TAB TO THE RAIL, PRESS ENTER. DEMO TIME RUNS FAST: COOLDOWN ~60×, QUEUE ~5×. EVERY EVENT LANDS IN THE COMPANION RECORD.</div>
 </div>
@@ -387,10 +389,10 @@ class Component extends DCLogic {
 
   componentDidMount() {
     const init = this.props.initialScenario;
-    this.setState({ sh: this.sh(), scenario: init || 'mon' });
+    this.setState({ sh: this.sh(), tenetDown: !!this.sh().syncOffline, scenario: init || 'mon' });
     this.iv = setInterval(() => this.tick(), 100);
     this._st = (e) => { if (e && e.key && e.key !== SKEY) return; const n = this.sh(); const old = this.state.sh || BASELINE;
-      if (n.resetSeq !== old.resetSeq) this.localReset(n); else this.setState({ sh: n }); };
+      if (n.resetSeq !== old.resetSeq) this.localReset(n); else this.setState({ sh: n, tenetDown: !!n.syncOffline }); };
     window.addEventListener('storage', this._st);
   }
   componentWillUnmount() { clearInterval(this.iv); clearTimeout(this.noteT); clearTimeout(this.wedNoteT); window.removeEventListener('storage', this._st); this.unbind(); }
@@ -482,7 +484,7 @@ class Component extends DCLogic {
     if (s.sheetFor === 'mon') this.setState({ sheetFor: null, monPhase: 'overridden', dragX: 0, liveMsg: 'Override recorded. You are back at order review — swipe or press Enter to send.' });
     else this.setState({ sheetFor: null, tuePhase: 'overridden', tueQty: s.tueOrig ?? s.tueQty, dragX: 0, liveMsg: 'Override recorded. You are back at order review — swipe or press Enter to send.' });
   }
-  showSent(sent) { this.setState({ sent, dragX: 0 }); setTimeout(() => { if (this._sentEl) this._sentEl.focus(); }, 80); }
+  showSent(sent) { this.setState({ sent, dragX: 0, liveMsg: sent.t + '. Simulated fill. ' + sent.p }); setTimeout(() => { if (this._sentEl) this._sentEl.focus(); }, 80); }
 
   complete() {
     const s = this.state, cap = this.cap(), R = ['This setup was planned before the losses', 'This rule needs review', 'Continue despite my rule'];
@@ -491,7 +493,7 @@ class Component extends DCLogic {
         this.setState({ monPhase: 'stepped', dragX: 0, monNote: null, liveMsg: (s.monQty > cap ? 'Two of your rules stepped in.' : 'Your cooldown stepped in.') + (s.monQty > cap ? ' Nothing was sent. Reduce to ' + cap + ' and wait nine minutes, override both rules, or cancel.' : ' Nothing was sent. Start the cooldown, override, or cancel.') }); }
       else if (s.monPhase === 'review') { const q = Math.min(s.monQty, cap);
         this.addEvent({ day: 'MON', time: '10:02', rule: 'LOSS COOLDOWN', what: 'loss cooldown · waited 9:00 · reviewed & sent' + (s.monQty > cap ? ' at your cap' : ''), size: (s.monQty > cap ? s.monQty + '→' : '') + q + '× 602P', result: 'sent @ $1.36', out: '✓ sent', kind: 'held' });
-        this.showSent({ t: 'Bought ' + q + '× SPY 602P', p: '@ $1.36 · $' + this.fmtN(q * 136) + ' premium · 10:03', g: '◇ waited 9:00 · reviewed the refreshed quote · you confirmed the send' }); }
+        this.showSent({ t: 'Bought ' + q + '× SPY 602P', p: '@ $1.36 · $' + this.fmtN(q * 136) + ' premium · 10:02', g: '◇ waited 9:00 · reviewed the refreshed quote · you confirmed the send' }); }
       else if (s.monPhase === 'overridden') { if (s.monQty === 0) { this.setState({ dragX: 0 }); return; }
         this.addEvent({ day: 'MON', time: '9:54', rule: s.monQty > cap ? 'LOSS COOLDOWN + SIZE CAP' : 'LOSS COOLDOWN', what: 'override · continued to order review · “' + ['planned before the losses', 'rule flagged for review', 'continued despite my rule'][s.reason] + '”', size: s.monQty + '× 602P', result: 'sent @ $1.42 · outcome pending', out: '◇ sent · override', kind: 'over', pending: true, tone: 'warn', reason: R[s.reason] });
         this.showSent({ t: 'Bought ' + s.monQty + '× SPY 602P', p: '@ $1.42 · $' + this.fmtN(s.monQty * 142) + ' premium · 9:54', g: '◇ override + reason recorded — it reads as context, not a confession' }); }
@@ -513,10 +515,10 @@ class Component extends DCLogic {
       this.showSent({ t: 'Bought ' + s.wedQty + '× SPY 604C', p: '@ $0.88 · $' + this.fmtN(s.wedQty * 88) + ' premium', g: s.wedStep === 0 ? '◇ before 3:00 — nothing guards this' : '◇ within your wind-down allowance · no new orders after 3:55' });
     }
     else if (s.scenario === 'thu') {
-      if (s.thuPhase === 'ready') this.setState({ thuPhase: 'queued', thuQueue: 120, thuNote: null, dragX: 0, liveMsg: 'Pacing rule stepped in. Order queued for two minutes — you can edit, leave the queue, or cancel. Nothing sends by itself.' });
-      else if (s.thuPhase === 'review') { if (s.thuQty === 0) { this.setState({ dragX: 0 }); return; }
-        this.addEvent({ day: 'THU', time: '10:44', rule: 'PACING', what: 'pacing · waited 2:00 · reviewed & sent at refreshed quote', size: s.thuQty + '× 602C', result: 'sent @ $1.19', out: '✓ sent', kind: 'held' });
-        this.showSent({ t: 'Bought ' + s.thuQty + '× SPY 602C', p: '@ $1.19 · $' + this.fmtN(s.thuQty * 119) + ' premium · 10:44', g: '◇ paced 2:00 · you re-confirmed at the refreshed quote' }); }
+      if (s.thuPhase === 'ready') this.setState({ thuPhase: 'queued', thuQty: Math.min(s.thuQty, cap), thuQueue: 120, thuNote: null, dragX: 0, liveMsg: 'Pacing rule stepped in. Order queued for two minutes — you can edit, leave the queue, or cancel. Nothing sends by itself.' });
+      else if (s.thuPhase === 'review') { const q = Math.min(s.thuQty, cap); if (q === 0) { this.setState({ dragX: 0 }); return; }
+        this.addEvent({ day: 'THU', time: '10:44', rule: 'PACING', what: 'pacing · waited 2:00 · reviewed & sent at refreshed quote', size: q + '× 602C', result: 'sent @ $1.19', out: '✓ sent', kind: 'held' });
+        this.showSent({ t: 'Bought ' + q + '× SPY 602C', p: '@ $1.19 · $' + this.fmtN(q * 119) + ' premium · 10:44', g: '◇ paced 2:00 · you re-confirmed at the refreshed quote' }); }
     }
   }
 
@@ -554,7 +556,7 @@ class Component extends DCLogic {
       if (sc === 'mon') return s.monPhase === 'review' ? 'Send ' + Math.min(s.monQty, cap) + ' contracts at the refreshed quote. Swipe right or press Enter.' : 'Send order: buy ' + s.monQty + ' contracts. Swipe right or press Enter. Your rules check it at send.';
       if (sc === 'tue') return s.tuePhase === 'changed' ? 'Send the revised size of ' + cap + ' contracts. Swipe right or press Enter.' : 'Send order: buy ' + s.tueQty + ' contracts. Swipe right or press Enter.';
       if (sc === 'wed') return 'Send order: buy ' + s.wedQty + ' contracts. Swipe right or press Enter.';
-      return s.thuPhase === 'review' ? 'Send ' + s.thuQty + ' contracts at the refreshed quote. Swipe right or press Enter.' : 'Send order: buy 3 contracts. Swipe right or press Enter.'; };
+      return s.thuPhase === 'review' ? 'Send ' + Math.min(s.thuQty, cap) + ' contracts at the refreshed quote. Swipe right or press Enter.' : 'Send order: buy ' + Math.min(s.thuQty, cap) + ' contracts. Swipe right or press Enter.'; };
     return {
       tabs, scenarioIntro: INTROS[sc], isMon: sc === 'mon', isTue: sc === 'tue', isWed: sc === 'wed', isThu: sc === 'thu',
       statusClock: sc === 'wed' ? wedClocks[s.wedStep] : { mon: '9:53', tue: '10:18', thu: '10:42' }[sc],
@@ -628,25 +630,27 @@ class Component extends DCLogic {
       wedAdvOpacity: s.wedStep === 4 ? '.45' : '1', wedAdvDisabled: String(s.wedStep === 4),
       thuReady: sc === 'thu' && s.thuPhase === 'ready', thuQueued: sc === 'thu' && s.thuPhase === 'queued',
       thuReview: sc === 'thu' && s.thuPhase === 'review', thuCancelled: sc === 'thu' && s.thuPhase === 'cancelled',
-      thuQtyStr: qtyStr(s.thuQty), thuCost: this.fmtC(s.thuQty, 115),
-      thuQtyChange: (e) => this.setState({ thuQty: Math.max(1, Math.min(this.parseQty(e.target.value), 86)) }),
-      thuMinus: () => this.setState({ thuQty: Math.max(1, s.thuQty - 1) }),
-      thuPlus: () => this.setState({ thuQty: Math.min(86, s.thuQty + 1) }),
+      thuQtyStr: qtyStr(Math.min(s.thuQty, cap)), thuCost: this.fmtC(Math.min(s.thuQty, cap), 115),
+      thuEffectiveQty: String(Math.min(s.thuQty, cap)), thuReadyCost: this.fmtC(Math.min(s.thuQty, cap), 115),
+      thuCapNote: 'Active size cap: ' + cap + ' contracts. This pacing flow keeps the order within that cap; review the quantity before sending.',
+      thuQtyChange: (e) => this.setState({ thuQty: Math.max(1, Math.min(this.parseQty(e.target.value), cap)) }),
+      thuMinus: () => this.setState({ thuQty: Math.max(1, Math.min(s.thuQty, cap) - 1) }),
+      thuPlus: () => this.setState({ thuQty: Math.min(cap, s.thuQty + 1) }),
       thuEditToggle: () => this.setState({ thuEditing: !s.thuEditing, liveMsg: s.thuEditing ? 'Done editing. The queue keeps its place.' : 'Editing the queued order. The queue keeps its place.' }),
       thuEditLabel: s.thuEditing ? 'DONE EDITING' : 'EDIT ORDER', thuEditingOn: s.thuEditing,
-      thuLeave: () => { this.addEvent({ day: 'THU', time: '10:43', rule: 'PACING', what: 'left the queue · order back in your hands', size: s.thuQty + '× 602C', result: 'nothing sent', out: '◇ left queue', kind: 'edit', tone: 'dim' });
+      thuLeave: () => { this.addEvent({ day: 'THU', time: '10:43', rule: 'PACING', what: 'left the queue · order back in your hands', size: Math.min(s.thuQty, cap) + '× 602C', result: 'nothing sent', out: '◇ left queue', kind: 'edit', tone: 'dim' });
         this.setState({ thuPhase: 'ready', thuQueue: 120, thuEditing: false, dragX: 0, thuNote: '◇ left the queue 10:43 · nothing sent · swiping again re-queues · on your record', liveMsg: 'Left the queue. Nothing was sent.' }); },
-      thuCancel: () => { this.addEvent({ day: 'THU', time: '10:43', rule: 'PACING', what: 'queued order cancelled', size: s.thuQty + '× 602C', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
+      thuCancel: () => { this.addEvent({ day: 'THU', time: '10:43', rule: 'PACING', what: 'queued order cancelled', size: Math.min(s.thuQty, cap) + '× 602C', result: 'nothing sent', out: '◇ cancelled', kind: 'edit', tone: 'dim' });
         this.setState({ thuPhase: 'cancelled', thuEditing: false, dragX: 0, liveMsg: 'Order cancelled. Queue cleared; nothing was sent.' }); },
       thuFillPct: Math.round(((120 - s.thuQueue) / 120) * 100) + '%', thuClock: this.fmt(s.thuQueue),
       thuNoteOn: !!s.thuNote, thuNote: s.thuNote,
-      thuReviewCost: this.fmtC(s.thuQty, 119), thuReviewRail: 'Swipe to send ' + s.thuQty + ' at $1.19',
+      thuReviewCost: this.fmtC(Math.min(s.thuQty, cap), 119), thuReviewRail: 'Swipe to send ' + Math.min(s.thuQty, cap) + ' at $1.19',
       sentOn: !!s.sent, sentT: s.sent ? s.sent.t : '', sentP: s.sent ? s.sent.p : '', sentG: s.sent ? s.sent.g : '',
       sentRef: (el) => { this._sentEl = el; },
       resetCurrent: () => this.resetScenario(this.state.scenario),
-      resetDemo: () => this.resetDemo(), resetVisible: !this.bare(),
-      toggleTenet: () => this.setState({ tenetDown: !s.tenetDown, liveMsg: s.tenetDown ? 'Tenet link restored. Pending events will sync.' : 'Simulating a Tenet outage. Rules still run on this device; new events sync later.' }),
-      tenetToggleLabel: s.tenetDown ? 'TENET OUTAGE: ON — TAP TO RESTORE' : 'SIMULATE TENET OUTAGE',
+      resetDemo: () => this.resetDemo(), resetVisible: true,
+      toggleTenet: () => { const offline = !s.tenetDown; const sh = this.sh(); this.put({ syncOffline: offline, events: offline ? sh.events : sh.events.map(e => e.sync === 'pending' ? { ...e, sync: 'synced' } : e) }); this.setState({ tenetDown: offline, liveMsg: offline ? 'Simulated sync outage. Rules still run locally; new events remain pending.' : 'Simulated link restored. Pending events marked synced in this browser.' }); },
+      tenetToggleLabel: s.tenetDown ? 'SYNC OUTAGE: ON — TAP TO RESTORE' : 'SIMULATE SYNC OUTAGE',
       tenetDownStr: String(s.tenetDown),
       tenetLine: s.tenetDown ? '◆ tenet unreachable — your rules still run on this device · events sync when it returns · trading unaffected'
         : (sh.fridayRule ? '◆ tenet · 4 rules on · cap ' + cap + (sh.capPending != null ? ' (→' + sh.capPending + ' tmrw)' : '') + ' · friday guard starts mon' : '◆ tenet · 4 rules on · cap ' + cap + (sh.capPending != null ? ' (→' + sh.capPending + ' tomorrow 9:30)' : '')),
