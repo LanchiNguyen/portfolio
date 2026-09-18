@@ -27,7 +27,7 @@
         if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
       });
     }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
-    items.forEach(function (el) { io.observe(el); });
+    items.forEach(function (el) { io.observe(el); el.setAttribute("data-reveal", ""); });
   }
 
   /* footer year */
@@ -244,6 +244,10 @@
     }
     function reset() {
       if (iframe) { iframe.remove(); iframe = null; }
+      /* a stage can name the browser-storage keys its prototype persists; clearing them makes reset mean reset */
+      (stage.getAttribute("data-reset-storage") || "").split(/\s+/).forEach(function (k) {
+        if (k) { try { localStorage.removeItem(k); } catch (e) {} }
+      });
       var note = stage.querySelector(".demo-stall");
       if (note) note.remove();
       if (liveOnLoad) { load(false); return; }
@@ -275,4 +279,85 @@
     if (liveOnLoad) load(false);
   });
 
+})();
+
+/* ---- image enlargement: one native <dialog>, Escape or the close button closes, focus returns ---- */
+(function () {
+  if (!("HTMLDialogElement" in window) || typeof HTMLDialogElement.prototype.showModal !== "function") return;
+  var SEL = ".screens-grid img, .figure img.shot-img, .art-grid .stamp img";
+  var imgs = Array.prototype.slice.call(document.querySelectorAll(SEL)).filter(function (img) {
+    return img.getAttribute("src") && !img.closest("a, button, .fig-live, .demo-stage, dialog");
+  });
+  if (!imgs.length) return;
+  var dlg = null, body = null, big = null, closeBtn = null, sizeBtn = null, opener = null;
+  function build() {
+    dlg = document.createElement("dialog");
+    dlg.className = "lightbox";
+    body = document.createElement("div");
+    body.className = "lightbox-body";
+    body.setAttribute("role", "region");
+    body.setAttribute("aria-label", "Image view; use arrow keys to scroll at full size");
+    body.tabIndex = -1;
+    big = document.createElement("img");
+    big.alt = "";
+    closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "lightbox-close";
+    closeBtn.textContent = "Close image";
+    sizeBtn = document.createElement("button");
+    sizeBtn.type = "button";
+    sizeBtn.className = "lightbox-close lightbox-size";
+    sizeBtn.textContent = "View full size";
+    sizeBtn.setAttribute("aria-pressed", "false");
+    body.appendChild(big);
+    body.appendChild(closeBtn);
+    body.appendChild(sizeBtn);
+    dlg.appendChild(body);
+    document.body.appendChild(dlg);
+    closeBtn.addEventListener("click", function () { dlg.close(); });
+    sizeBtn.addEventListener("click", function () {
+      var full = body.classList.toggle("is-full-size");
+      sizeBtn.textContent = full ? "Fit image" : "View full size";
+      sizeBtn.setAttribute("aria-pressed", String(full));
+      body.scrollTop = body.scrollLeft = 0;
+      body.tabIndex = full ? 0 : -1;
+      if (full) body.focus();
+    });
+    body.addEventListener("keydown", function (e) {
+      if (e.target !== body || !body.classList.contains("is-full-size")) return;
+      var pan = { ArrowLeft: [-64, 0], ArrowRight: [64, 0], ArrowUp: [0, -64], ArrowDown: [0, 64] }[e.key];
+      if (!pan) return;
+      e.preventDefault();
+      body.scrollLeft += pan[0]; body.scrollTop += pan[1];
+    });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target === body) dlg.close(); });
+    dlg.addEventListener("close", function () {
+      document.documentElement.classList.remove("lightbox-open");
+      big.removeAttribute("src");
+      var back = opener; opener = null;
+      if (back) back.focus();
+    });
+  }
+  function open(btn, img) {
+    if (!dlg) build();
+    opener = btn;
+    body.classList.remove("is-full-size");
+    body.tabIndex = -1;
+    sizeBtn.textContent = "View full size";
+    sizeBtn.setAttribute("aria-pressed", "false");
+    big.src = img.currentSrc || img.src;
+    dlg.setAttribute("aria-label", img.alt || "Enlarged image");
+    document.documentElement.classList.add("lightbox-open");
+    dlg.showModal();
+    closeBtn.focus();
+  }
+  imgs.forEach(function (img) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "zoom-btn";
+    btn.setAttribute("aria-label", "Enlarge image" + (img.alt ? ": " + img.alt : ""));
+    img.parentNode.insertBefore(btn, img);
+    btn.appendChild(img);
+    btn.addEventListener("click", function () { open(btn, img); });
+  });
 })();
