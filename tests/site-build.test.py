@@ -69,6 +69,50 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn('morsel-v31-', (site / 'figures-tenet.js').read_text())
         self.assertNotIn('tenet-mon-', (site / 'figures-morsel.js').read_text())
 
+    def test_site_metadata_helpers(self):
+        page = '<html><head><meta property="og:image" content="x"></head></html>'
+        once = prepare_site.add_site_metadata(page, 'https://example.test/about.html')
+        self.assertIn('<link rel="canonical" href="https://example.test/about.html" />', once)
+        self.assertIn('<meta property="og:url" content="https://example.test/about.html" />', once)
+        self.assertEqual(prepare_site.add_site_metadata(once, 'https://example.test/other.html'), once)
+        self.assertEqual(prepare_site.page_url('https://example.test', 'index.html'), 'https://example.test/')
+        self.assertEqual(prepare_site.page_url('https://example.test', 'morsel-docs/wireflow.html'), 'https://example.test/morsel-docs/wireflow.html')
+        self.assertIn('<loc>https://example.test/</loc>', prepare_site.sitemap_xml(['https://example.test/']))
+
+    def test_site_metadata_in_output_follows_site_url(self):
+        site = ROOT / '_site'
+        base = os.environ.get('SITE_URL', '').rstrip('/')
+        preview = bool(os.environ.get('PREVIEW'))
+        index = (site / 'index.html').read_text()
+        robots = (site / 'robots.txt').read_text()
+        if base and not preview:
+            self.assertIn(f'<link rel="canonical" href="{base}/" />', index)
+            self.assertIn(f'<meta property="og:url" content="{base}/" />', index)
+            sitemap = (site / 'sitemap.xml').read_text()
+            self.assertIn(f'<loc>{base}/</loc>', sitemap)
+            self.assertIn(f'<loc>{base}/mug.html</loc>', sitemap)
+            self.assertNotIn('404.html', sitemap)
+            self.assertNotIn('tenet-proto', sitemap)
+            self.assertNotIn('tenet-new.html', sitemap)
+            self.assertIn(f'Sitemap: {base}/sitemap.xml', robots)
+        else:
+            self.assertNotIn('rel="canonical"', index)
+            self.assertFalse((site / 'sitemap.xml').exists())
+            self.assertNotIn('Sitemap:', robots)
+
+    def test_not_found_page_and_unused_vendor_bundles(self):
+        site = ROOT / '_site'
+        self.assertTrue((ROOT / 'tenet-proto/vendor/babel.min.js').exists())   # capture tooling keeps its copy
+        self.assertFalse((site / 'tenet-proto/vendor/babel.min.js').exists())
+        for page in site.glob('tenet-proto/*.html'):
+            self.assertNotIn('babel', page.read_text().lower(), page.name)
+        if os.environ.get('PREVIEW'):
+            self.assertFalse((site / '404.html').exists())
+        else:
+            doc = Document((site / '404.html').read_text())
+            self.assertIn('noindex', ' '.join(doc.robots))
+            self.assertTrue(all(ref.startswith(('/', 'https://', 'mailto:', '#')) for ref in doc.refs), doc.refs)
+
     def test_published_images_have_consumers(self):
         site = ROOT / '_site'
         text = '\n'.join(p.read_text() for p in site.rglob('*')

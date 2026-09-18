@@ -244,6 +244,10 @@
     }
     function reset() {
       if (iframe) { iframe.remove(); iframe = null; }
+      /* a stage can name the browser-storage keys its prototype persists; clearing them makes reset mean reset */
+      (stage.getAttribute("data-reset-storage") || "").split(/\s+/).forEach(function (k) {
+        if (k) { try { localStorage.removeItem(k); } catch (e) {} }
+      });
       var note = stage.querySelector(".demo-stall");
       if (note) note.remove();
       if (liveOnLoad) { load(false); return; }
@@ -275,4 +279,57 @@
     if (liveOnLoad) load(false);
   });
 
+})();
+
+/* ---- image enlargement: one native <dialog>, Escape or the close button closes, focus returns ---- */
+(function () {
+  if (!("HTMLDialogElement" in window) || typeof HTMLDialogElement.prototype.showModal !== "function") return;
+  var SEL = ".screens-grid img, .figure img.shot-img, .art-grid .stamp img";
+  var imgs = Array.prototype.slice.call(document.querySelectorAll(SEL)).filter(function (img) {
+    return img.getAttribute("src") && !img.closest("a, button, .fig-live, .demo-stage, dialog");
+  });
+  if (!imgs.length) return;
+  var dlg = null, body = null, big = null, closeBtn = null, opener = null;
+  function build() {
+    dlg = document.createElement("dialog");
+    dlg.className = "lightbox";
+    body = document.createElement("div");
+    body.className = "lightbox-body";
+    big = document.createElement("img");
+    big.alt = "";
+    closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "lightbox-close";
+    closeBtn.textContent = "Close image";
+    body.appendChild(big);
+    body.appendChild(closeBtn);
+    dlg.appendChild(body);
+    document.body.appendChild(dlg);
+    closeBtn.addEventListener("click", function () { dlg.close(); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target === body) dlg.close(); });
+    dlg.addEventListener("close", function () {
+      document.documentElement.classList.remove("lightbox-open");
+      big.removeAttribute("src");
+      var back = opener; opener = null;
+      if (back) back.focus();
+    });
+  }
+  function open(btn, img) {
+    if (!dlg) build();
+    opener = btn;
+    big.src = img.currentSrc || img.src;
+    dlg.setAttribute("aria-label", img.alt || "Enlarged image");
+    document.documentElement.classList.add("lightbox-open");
+    dlg.showModal();
+    closeBtn.focus();
+  }
+  imgs.forEach(function (img) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "zoom-btn";
+    btn.setAttribute("aria-label", "Enlarge image" + (img.alt ? ": " + img.alt : ""));
+    img.parentNode.insertBefore(btn, img);
+    btn.appendChild(img);
+    btn.addEventListener("click", function () { open(btn, img); });
+  });
 })();

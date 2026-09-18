@@ -7,7 +7,8 @@
 # Usage:  bash build-site.sh
 # Env:    SITE_URL (optional) — e.g. https://lananguyen.xyz
 #           When set, og:image URLs are made absolute so link previews work in
-#           Slack/LinkedIn/iMessage. The deploy workflow passes the Pages URL.
+#           Slack/LinkedIn/iMessage, and prepare-site.py adds a canonical URL,
+#           og:url and sitemap.xml. The deploy workflow passes the Pages URL.
 #         PREVIEW (optional) — any non-empty value builds the staging variant
 #           that gets published under /preview/: a banner on every page,
 #           noindex, and no CNAME (the domain belongs to the root build).
@@ -20,6 +21,8 @@ mkdir -p _site
 cp *.html *.css script.js figures.js favicon.png _site/
 rm -f _site/capture-harness.html          # build tooling, not part of the site
 cp -r images morsel-docs morsel-proto tenet-proto _site/
+# tenet-proto vendors a Babel build for tooling; no published page loads it
+rm -f _site/tenet-proto/vendor/babel.min.js
 node build-morsel-production.cjs
 
 # absolute social-preview URLs when a domain is known
@@ -38,6 +41,8 @@ if [ -n "${PREVIEW:-}" ]; then
   # the page editor ships to staging only; it never exists on the live site
   cp editor.js _site/
   perl -pi -e 's|</body>|  <script src="editor.js" defer></script>\n</body>|' _site/*.html
+  # a 404 page is only served from the domain root; the preview lives under /preview/
+  rm -f _site/404.html
 else
   # the custom domain must travel with the published artifact, or Pages drops it
   if [ -f CNAME ]; then cp CNAME _site/; fi
