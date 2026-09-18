@@ -8,7 +8,7 @@ function PhotoStrip({ dish }) {
   const touch = React.useRef(null);
   if (!n) {
     return (
-      <div style={{ paddingTop: 108 }}>
+      <div className="m-hero-wrap" style={{ paddingTop: 108 }}>
         <div className="m-nophoto m-hero-nophoto" role="img" aria-label="No photo yet for this dish">
           <MIcon name="cameraoff" size={26} />
           <span className="m-body" style={{ fontWeight: 700 }}>No photo yet</span>
@@ -53,7 +53,7 @@ function DishScreen({ dishId, shortlist, onToggle, onBack, onCompare, onMenu, ba
       <div className="m-scroll">
         <div style={{ position: "relative" }}>
           <PhotoStrip dish={d} />
-          <button className="m-glass m-glass-icon" style={{ position: "absolute", left: 12, top: 56 }} aria-label={backLabel} onClick={onBack}><MIcon name="back" size={20} /></button>
+          <button className="m-glass m-glass-icon m-strip-back" style={{ position: "absolute", left: 12, top: 56 }} aria-label={backLabel} onClick={onBack}><MIcon name="back" size={20} /></button>
         </div>
         <div style={{ padding: "18px 16px 0" }}>
           <div className="m-micro" style={{ color: "var(--accent)" }}>{r.name}{section ? " · " + section.name : ""}</div>

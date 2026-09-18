@@ -50,7 +50,7 @@ function HomeScreen({ onPicker, onRestaurant, onOpen }) {
   return (
     <div className="m-screen m-fade">
       <div className="m-scroll" ref={scrollRef} onScroll={onScroll}>
-        <div style={{ padding: "58px 16px 0" }}>
+        <div className="m-home-head" style={{ padding: "58px 16px 0" }}>
           <div className="m-micro" style={{ color: "var(--accent)" }}>Morsel</div>
           <h1 className="m-title" style={{ marginTop: 6 }}>Near {area.hood}</h1>
           <button className="m-btn m-btn-primary" style={{ width: "100%", marginTop: 14, justifyContent: "space-between", padding: "0 18px 0 22px" }} onClick={onPicker}>
