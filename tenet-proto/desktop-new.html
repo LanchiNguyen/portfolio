@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<link rel="icon" href="../favicon.png">
 </head>
 <body>
 <x-dc>
@@ -95,9 +96,9 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 <div style="flex:1;display:flex;flex-direction:column;font:500 11px 'IBM Plex Mono',monospace;color:#535D65">
 <div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>602.20</span><span style="color:#C13A3F">2,210</span></div>
 <div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>{{ l2Ask }}</span><span style="color:#C13A3F">890</span></div>
-<div style="display:flex;justify-content:space-between;padding:4px;border-top:1px solid #E9EBEB;border-bottom:1px solid #E9EBEB;color:#212528"><span style="color:#2F8F5B">{{ l2BidSize }}</span><span>{{ l2Bid }}</span><span style="color:#C13A3F">—</span></div>
-<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">2,050</span><span>602.10</span><span></span></div>
-<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">880</span><span>602.08</span><span></span></div>
+<div style="display:flex;justify-content:space-between;padding:4px;border-top:1px solid #E9EBEB;border-bottom:1px solid #E9EBEB;color:#212528"><span style="color:#237044">{{ l2BidSize }}</span><span>{{ l2Bid }}</span><span style="color:#C13A3F">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#237044">2,050</span><span>602.10</span><span></span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#237044">880</span><span>602.08</span><span></span></div>
 </div>
 <div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#535D65;padding-top:8px">ladder live — the guard never touches it</div>
 </div>
@@ -107,7 +108,7 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 <div class="ticket-summary">
 <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#535D65">Side</span><span style="display:flex;gap:7px;align-items:center"><span style="font:600 13px 'Plus Jakarta Sans';color:{{ sideColor }}">{{ sideLabel }}</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#535D65;border:1px solid #E4E6E7;border-radius:4px;padding:2px 5px">SHORTABLE · ETB</span></span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#535D65">Qty</span><span style="font:600 15px 'IBM Plex Mono',monospace">{{ qtyDisp }}</span></div>
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#2F8F5B;white-space:nowrap">BID {{ bid }} × {{ bidSize }}</span><span style="color:#C13A3F;white-space:nowrap">ASK {{ ask }} × 890</span></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#237044;white-space:nowrap">BID {{ bid }} × {{ bidSize }}</span><span style="color:#C13A3F;white-space:nowrap">ASK {{ ask }} × 890</span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#535D65">Est. execution</span><span style="font:600 12.5px 'IBM Plex Mono',monospace">≈ {{ execPx }} <span style="font-weight:400;color:#535D65">({{ execAt }})</span></span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#535D65">Est. notional</span><span style="font-weight:600">{{ notional }}</span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;font-size:12.5px"><span style="color:#535D65">Buying power</span><span style="font-weight:600;color:#535D65">{{ buyingPower }}</span></div>
@@ -174,7 +175,7 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 <sc-if value="{{ isCancelled }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px dashed #C9CDD0;border-radius:10px;padding:11px 12px;display:flex;flex-direction:column;gap:6px;text-align:center">
 <div style="font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;color:#5C6367">◇ ORDER CANCELLED · NOTHING SENT · COOLDOWN RECORDED</div>
-<div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#8A9196">{{ cancelNote }} · trading unaffected · on your record</div>
+<div style="font:400 11px/1.6 'IBM Plex Mono',monospace;color:#596168">{{ cancelNote }} · trading unaffected · on your record</div>
 </div>
 </sc-if>
 
@@ -236,7 +237,7 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 </div>
 <div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
 <div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#535D65;padding-bottom:10px">POSITIONS</div>
-<div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9196">{{ positionsLine }}</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 11.5px 'IBM Plex Mono',monospace;color:#596168">{{ positionsLine }}</div>
 <div style="display:flex;justify-content:space-between;font:500 11px 'IBM Plex Mono',monospace;color:#535D65;border-top:1px solid #E9EBEB;padding-top:8px"><span>Day P&amp;L</span><span style="color:#C13A3F">−$360.00</span></div>
 </div>
 </div>
@@ -262,9 +263,9 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 <div style="flex:1;display:flex;flex-direction:column;font:500 11px 'IBM Plex Mono',monospace;color:#535D65">
 <div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>602.20</span><span style="color:#C13A3F">2,210</span></div>
 <div style="display:flex;justify-content:space-between;padding:4px"><span></span><span>602.15</span><span style="color:#C13A3F">890</span></div>
-<div style="display:flex;justify-content:space-between;padding:4px;border-top:1px solid #E9EBEB;border-bottom:1px solid #E9EBEB;color:#212528"><span style="color:#2F8F5B">1,480</span><span>602.12</span><span style="color:#C13A3F">—</span></div>
-<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">2,050</span><span>602.10</span><span></span></div>
-<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#2F8F5B">880</span><span>602.08</span><span></span></div>
+<div style="display:flex;justify-content:space-between;padding:4px;border-top:1px solid #E9EBEB;border-bottom:1px solid #E9EBEB;color:#212528"><span style="color:#237044">1,480</span><span>602.12</span><span style="color:#C13A3F">—</span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#237044">2,050</span><span>602.10</span><span></span></div>
+<div style="display:flex;justify-content:space-between;padding:4px"><span style="color:#237044">880</span><span>602.08</span><span></span></div>
 </div>
 <div style="font:400 10.5px 'IBM Plex Mono',monospace;color:#535D65;padding-top:8px">&nbsp;</div>
 </div>
@@ -272,7 +273,7 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font:600 12px 'Plus Jakarta Sans'">Order — SPY</span><span style="font:500 10.5px 'IBM Plex Mono',monospace;color:#535D65">MKT · DAY · SMART</span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#535D65">Side</span><span style="display:flex;gap:7px;align-items:center"><span style="font:600 13px 'Plus Jakarta Sans';color:#C13A3F">Sell Short</span><span style="font:500 10px 'IBM Plex Mono',monospace;color:#535D65;border:1px solid #E4E6E7;border-radius:4px;padding:2px 5px">SHORTABLE · ETB</span></span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:13px"><span style="color:#535D65">Qty</span><span style="font:600 15px 'IBM Plex Mono',monospace">1,000</span></div>
-<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#2F8F5B;white-space:nowrap">BID 602.12 × 1,480</span><span style="color:#C13A3F;white-space:nowrap">ASK 602.15 × 890</span></div>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:2px 10px;padding:7px 4px;border-bottom:1px solid #E9EBEB;font:500 11px 'IBM Plex Mono',monospace"><span style="color:#237044;white-space:nowrap">BID 602.12 × 1,480</span><span style="color:#C13A3F;white-space:nowrap">ASK 602.15 × 890</span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#535D65">Est. execution</span><span style="font:600 12.5px 'IBM Plex Mono',monospace">≈ 602.12 <span style="font-weight:400;color:#535D65">(at bid)</span></span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px solid #E9EBEB;font-size:12.5px"><span style="color:#535D65">Est. notional</span><span style="font-weight:600">$602,120</span></div>
 <div style="display:flex;justify-content:space-between;padding:7px 4px;font-size:12.5px"><span style="color:#535D65">Buying power</span><span style="font-weight:600;color:#535D65">$612,430</span></div>
@@ -291,7 +292,7 @@ button:focus-visible,input:focus-visible,.ticket-details:focus-visible{outline:2
 </div>
 <div style="background:#FBFBFA;padding:14px;display:flex;flex-direction:column">
 <div style="font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#535D65;padding-bottom:10px">POSITIONS</div>
-<div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 11.5px 'IBM Plex Mono',monospace;color:#8A9196">FLAT — no open positions</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;font:400 11.5px 'IBM Plex Mono',monospace;color:#596168">FLAT — no open positions</div>
 <div style="display:flex;justify-content:space-between;font:500 11px 'IBM Plex Mono',monospace;color:#535D65;border-top:1px solid #E9EBEB;padding-top:8px"><span>Day P&amp;L</span><span style="color:#C13A3F">−$360.00</span></div>
 </div>
 </div>

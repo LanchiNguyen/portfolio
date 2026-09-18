@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<link rel="icon" href="../favicon.png">
 </head>
 <body>
 <x-dc>
@@ -17,16 +18,16 @@
 <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
 <div style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
 <div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#755419">◆ TENET — COMPANION APP v2 · RULES / PATTERNS / RECORD</div>
-<div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">ONE RULE MODEL — DISTINCT MOBILE AND DESKTOP DEMOS</div>
+<div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#53616B">ONE RULE MODEL — DISTINCT MOBILE AND DESKTOP DEMOS</div>
 </div>
 </sc-if>
 
 <div role="group" aria-label="Prototype demo controls" style="width:100%;max-width:1100px;display:flex;flex-direction:column;gap:10px;margin-top:20px">
-<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.2em;color:#5E6B75">PROTOTYPE — AFTER-CLOSE COMPANION</div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.2em;color:#53616B">PROTOTYPE — AFTER-CLOSE COMPANION</div>
 <div style="max-width:720px;font:500 12.5px/1.6 'Plus Jakarta Sans';color:#4E5B65">Rules, patterns, and the Record live here. Tighten the options cap and Dart enforces it immediately; a looser cap stays pending. Meridian has its own equity cap. Completed interventions and rule changes appear in the local Record.</div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed #9AA0A4;border-radius:16px;padding:8px 10px 8px 16px;align-self:flex-start">
-<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#5E6B75">DEMO CONTROLS</span>
-<button type="button" onClick="{{ toggleFirstRun }}" aria-pressed="{{ firstRunStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">{{ firstRunLabel }}</button>
+<span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#53616B">DEMO CONTROLS</span>
+<button type="button" onClick="{{ toggleFirstRun }}" aria-pressed="{{ firstRunStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#53616B">{{ firstRunLabel }}</button>
 <sc-if value="{{ resetVisible }}" hint-placeholder-val="{{ true }}">
 <button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #755419;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#755419">RESET DEMO ↻ — ALL SURFACES</button>
 </sc-if>
@@ -37,7 +38,7 @@
 
 <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
 <div data-screen-label="Companion phone" style="width:322px;background:#101013;border:1px solid #2a2620;border-radius:34px;padding:14px 13px 12px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px;color:#e8e4da;min-height:680px;box-shadow:0 26px 50px -30px rgba(10,14,18,.55);position:relative;overflow:hidden">
-<div style="display:flex;justify-content:space-between;align-items:center;padding:0 6px"><span style="font:600 10px 'IBM Plex Mono',monospace">16:12</span><span aria-hidden="true" style="font:600 9.5px 'IBM Plex Mono',monospace;color:#5b6167;letter-spacing:.14em">▮▮▮ ▰</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:0 6px"><span style="font:600 10px 'IBM Plex Mono',monospace">16:12</span><span aria-hidden="true" style="font:600 9.5px 'IBM Plex Mono',monospace;color:#849099;letter-spacing:.14em">▮▮▮ ▰</span></div>
 <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span style="font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#e6c36a">◆ TENET</span>
 <button type="button" onClick="{{ toggleBroker }}" aria-pressed="{{ brokerOffStr }}" aria-label="{{ brokerAria }}" style="font:400 10px 'IBM Plex Mono',monospace;color:#8a9098;min-height:44px;padding:0 6px;display:flex;align-items:center;gap:5px">{{ brokerChip }}</button>
 </div>
@@ -376,7 +377,7 @@
 <sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
 <div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#755419;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
 </sc-for>
-<div style="border-top:1px solid #C5CDD3;padding-top:11px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5E6B75;line-height:1.7">» AFTER-CLOSE VIEW — AUTHORING AND EVIDENCE. INTERVENTION LIVES IN THE HOST TICKET. ONE SHARED RULE SET AND RECORD ACROSS BOTH PROTOTYPES.</div>
+<div style="border-top:1px solid #C5CDD3;padding-top:11px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#53616B;line-height:1.7">» AFTER-CLOSE VIEW — AUTHORING AND EVIDENCE. INTERVENTION LIVES IN THE HOST TICKET. ONE SHARED RULE SET AND RECORD ACROSS BOTH PROTOTYPES.</div>
 </div>
 </sc-if>
 </div>
