@@ -29,7 +29,7 @@
       <header class="bar">
         <a class="wordmark" href="index.html" aria-label="Lana Nguyen, home">Lana Nguyen<span class="dot">.</span></a>
         <nav class="bar-links" aria-label="Case study">
-          <a class="active" href="index.html#home-work">Work</a>
+          <a class="active" aria-current="true" href="index.html#home-work">Work</a>
           <a href="sketchbook.html">Sketchbook</a>
           <a href="about.html">About</a>
           <a href="index.html#home-contact">Contact</a>
@@ -99,7 +99,7 @@
         <div class="proj-row rv">
           <span class="side" role="heading" aria-level="2">A VOTE SHOULD NOT<br>FEEL LIKE A FORM</span>
           <div>
-            <p class="proj-p" data-ed="20">The wireframes use dropdowns to choose creators. In the final boards, tappable cards reveal faces and fan counts before voting. The comparison below makes that design change inspectable; it does not establish its effect on voting behavior.</p>
+            <p class="proj-p" data-ed="20">The wireframes use dropdowns to choose creators. I replaced them with tappable cards that show creator names, initials, and fan counts together. The boards make that change visible; they do not establish how it affected voting.</p>
             <figure class="figure" style="margin-top: 26px">
               <img class="shot-img" src="images/matrix/wire-events.webp" alt="Low-fidelity wireframes: event description, voting flow with champion dropdowns, creator selection, vote confirmation, and results, annotated with spec notes" width="1600" height="827" loading="lazy" data-ed="21" />
               <figcaption class="figcap" data-ed="22"><span class="fk">Lo-fi</span>Straight from the spec: dropdown champion pickers, plus annotations for a nav swap and EN/VN language toggle.</figcaption>
@@ -147,7 +147,7 @@
             <p class="proj-p" style="margin-bottom:18px" data-ed="35">These are the calls visible between the wireframes and final boards:</p>
             <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table" style="margin-bottom:22px"><table class="ev-table">
               <tr><th>Decision</th><th>Instead of</th><th>Why</th></tr>
-              <tr><td><b>Tappable creator cards for voting</b></td><td>The spec's two dropdown pickers</td><td>Cards make the vote a choice; fan counts give the tap a stake</td></tr>
+              <tr><td><b>Tappable creator cards for voting</b></td><td>The spec's two dropdown pickers</td><td>Cards expose the options together. Fan counts may also influence the vote, a tradeoff to examine.</td></tr>
               <tr><td><b>Sparklines + signed % per market row</b></td><td>Price-only list</td><td>The intended hierarchy is direction, then magnitude; this was a design choice, not a measured behavior</td></tr>
               <tr><td><b>Neon rationed to prices &amp; actions</b></td><td>Accent color everywhere the style guide allows</td><td>On near-black, everything-neon means nothing-neon; scannability needed a hierarchy the guide didn't specify</td></tr>
               <tr><td><b>Processor-agnostic checkout sheet</b></td><td>Designing to one payment provider</td><td>The illustrated layout explores both options; provider selection and integration are not established here</td></tr>
@@ -155,14 +155,14 @@
             <p class="proj-p" data-ed="36">The boards show the core flows, recurring components, and spacing within the supplied visual language. A complete implementation review would also need the following:</p>
             <ul class="feat-list">
               <li data-ed="37">Loading, empty, and error states are not shown here. The illustrated boards do not establish the contents of the complete handoff.</li>
-              <li data-ed="38">The gallery preserves the delivered screens, including their mixed device chrome. Original editable files are not included in this portfolio; these images document the handoff rather than a rebuilt interface.</li>
+              <li data-ed="38">The gallery shows the available project boards, including their mixed device chrome. Original editable files and the implemented product are not included here.</li>
               <li data-ed="39">The neon-on-dark palette came with its contrast choices; small grey metadata on near-black is what I'd challenge first in a week two.</li>
             </ul>
             <p class="proj-p" style="margin-top:18px" data-ed="40">A follow-up review would first confirm state coverage with engineering, then resolve the states not shown here:</p>
             <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
               <tr><th>Item</th><th>Plan</th><th>Goal (not a result)</th></tr>
-              <tr><td><b>State coverage</b></td><td>Loading / empty / error for the 5 stateful screens (market, orders, event, vote, checkout); empty inventory and failed payment first</td><td>0 screens where a dev has to invent a state</td></tr>
-              <tr><td><b>Handoff quality</b></td><td>Count dev clarification questions per screen in the first sprint</td><td>&le;1 per screen; each one becomes a spec fix</td></tr>
+              <tr><td><b>State coverage</b></td><td>Loading / empty / error for the 5 stateful screens (market, orders, event, vote, checkout); empty inventory and failed payment first</td><td>Agree on expected behavior and ownership for each missing state</td></tr>
+              <tr><td><b>Handoff quality</b></td><td>Review unclear behavior with engineering and record the decision in the spec</td><td>Resolve open questions about states, transitions, and recovery</td></tr>
               <tr><td><b>Build parity</b></td><td>Side-by-side review of built screens vs. Figma at sprint end</td><td>Deviations are deliberate calls</td></tr>
             </table></div>
           </div>
@@ -185,8 +185,8 @@
 
       <!-- next project -->
       </main>
-      <a class="next-proj" href="index.html#home-work">
-        <span><span class="k" data-ed="43">NEXT</span><span class="t" data-ed="44">Back to selected work</span></span>
+      <a class="next-proj" href="nhathuong.html">
+        <span><span class="k" data-ed="43">NEXT PROJECT</span><span class="t" data-ed="44">Nhat Huong &mdash; a packaging system across the range</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>

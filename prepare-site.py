@@ -48,12 +48,50 @@ def clean_html(source, preview=False):
         source=re.sub(r'<head\b[^>]*>', lambda m:m.group()+'\n<meta name="robots" content="noindex, nofollow">',source,count=1,flags=re.I)
     return source
 
+def add_site_metadata(source, page_url):
+    """Add a canonical link and og:url for one page. Idempotent; a page that already declares a canonical is left alone."""
+    if re.search(r'<link\s[^>]*rel=["\']canonical["\']', source, re.I): return source
+    tags=f'<link rel="canonical" href="{page_url}" />'
+    if not re.search(r'<meta\s[^>]*property=["\']og:url["\']', source, re.I): tags+=f'\n<meta property="og:url" content="{page_url}" />'
+    return re.sub(r'</head>', lambda m: tags+'\n'+m.group(), source, count=1, flags=re.I)
+
+def page_url(base, relative):
+    """'index.html' is the directory URL; everything else keeps its file name."""
+    parts=relative.split('/')
+    if parts[-1]=='index.html':
+        folder='/'.join(parts[:-1])
+        return base+'/'+(folder+'/' if folder else '')
+    return base+'/'+'/'.join(parts)
+
+def sitemap_pages():
+    """Published pages worth listing: the site pages and the Morsel notes, never the prototype apps, redirect stubs or the 404 page."""
+    out=[]
+    for page in sorted(SITE.rglob('*.html')):
+        rel=page.relative_to(SITE).as_posix()
+        if rel.startswith(('tenet-proto/','morsel-proto/')) or page.name=='404.html': continue
+        if re.search(r'http-equiv=["\']refresh["\']', page.read_text(), re.I): continue
+        out.append(rel)
+    return out
+
+def sitemap_xml(urls):
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            +''.join(f'  <url><loc>{u}</loc></url>\n' for u in urls)+'</urlset>\n')
+
 def prepare():
     preview=bool(os.environ.get('PREVIEW'))
     for page in SITE.rglob('*.html'):
         page.write_text(clean_html(page.read_text(),preview))
+    site_url=os.environ.get('SITE_URL','').rstrip('/')
+    robots='User-agent: *\nAllow: /\n'
+    if site_url and not preview:
+        pages=sitemap_pages()
+        for rel in pages:
+            page=SITE/rel
+            page.write_text(add_site_metadata(page.read_text(), page_url(site_url, rel)))
+        (SITE/'sitemap.xml').write_text(sitemap_xml([page_url(site_url, rel) for rel in pages]))
+        robots+=f'Sitemap: {site_url}/sitemap.xml\n'
     # Crawlers must be able to read noindex; this is staging exclusion, not access control.
-    (SITE/'robots.txt').write_text('User-agent: *\nAllow: /\n')
+    (SITE/'robots.txt').write_text(robots)
 
     source=(SITE/'figures.js').read_text()
     start=source.index('window.__FIGS = ')+len('window.__FIGS = ')

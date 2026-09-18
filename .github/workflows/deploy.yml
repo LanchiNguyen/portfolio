@@ -65,6 +65,8 @@ jobs:
 
       - name: Verify production links and deployment output
         run: python3 main/tests/site-build.test.py
+        env:
+          SITE_URL: ${{ vars.SITE_URL || 'https://lananguyen.xyz' }}
 
       - name: Build preview site into /preview/
         if: steps.preview-checkout.outcome == 'success'

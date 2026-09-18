@@ -1,0 +1,25 @@
+.hp-review { max-width: 370px; margin: 28px auto; border: 1px solid #d9ccd2; border-radius: 28px; padding: 26px 20px 18px; background: #fffafc; color: #1a1a1a; font: 400 14px/1.55 'Poppins', sans-serif; box-shadow: 0 14px 35px #442e3510; }
+.hp-review * { box-sizing: border-box; }
+.hp-review .hp-wordmark { font-size: 14px; font-weight: 600; letter-spacing: -.03em; }
+.hp-review .hp-title { margin: 18px 0 4px; font-size: 27px; line-height: 1.2; font-weight: 600; }
+.hp-review .hp-intro { margin: 0 0 20px; font-size: 13px; }
+.hp-review .hp-card { margin: 12px 0; padding: 17px; border-radius: 18px; }
+.hp-review .hp-card:nth-of-type(1) { background: #69e2b7; }
+.hp-review .hp-card:nth-of-type(2) { background: #fd8a93; }
+.hp-review .hp-card:nth-of-type(3) { background: #f7cc4e; }
+.hp-review .hp-label { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.hp-review .hp-card p { margin: 7px 0 0; font-size: 16px; line-height: 1.5; }
+.hp-review .hp-card .hp-source { margin-top: 10px; font-size: 12px; }
+.hp-review .hp-assistant { margin: 18px 0; padding: 10px 13px; border: 1px solid #a56d82; border-radius: 12px; font-size: 13px; font-weight: 600; }
+.hp-review .hp-tabs { display: flex; justify-content: space-between; gap: 8px; border-top: 1px solid #d9ccd2; padding-top: 15px; font-size: 11px; }
+.hp-review .hp-tabs strong { color: #8b2550; text-decoration: underline; text-underline-offset: 5px; }
+@media (max-width: 380px) { .hp-review { padding: 22px 15px 16px; } }
+
+.hp-review { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.hp-review .hp-assistant { display: flex; align-items: center; gap: 10px; border-radius: 18px; background: #f4e6ee; border-color: #d9ccd2; }
+.hp-review .hp-assistant svg { width: 24px; height: 24px; flex: 0 0 24px; }
+.hp-review .hp-assistant small { display: block; font-size: 10px; font-weight: 400; }
+.hp-review .hp-assistant strong { display: block; font-size: 12px; }
+.hp-review .hp-arrow { margin-left: auto; }
+.hp-review .hp-tabs > * { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.hp-review .hp-tabs svg { width: 19px; height: 19px; }

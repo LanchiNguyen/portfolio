@@ -30,10 +30,19 @@ window.__FIGS = {"morsel-v32-feed-cards":{"h":"<div style=\"width: 402px; height
     inner.setAttribute('aria-hidden', 'true');   /* the caption on .fig-live is the accessible name */
     inner.inert = true;   /* the fragments contain real <button>s; without inert they are dead tab stops */
     inner.innerHTML = f.h;
-    inner.querySelectorAll('[data-mp]').forEach(function (n) { n.src = photoSrc(n.getAttribute('data-mp')); });
     box.appendChild(inner);
     /* a figure captured mid-scroll carries the offset; restore it once laid out */
     inner.querySelectorAll('[data-scrolltop]').forEach(function (n) { n.scrollTop = +n.getAttribute('data-scrolltop'); });
+    /* the fragment is a static capture: a photo clipped by the frame (or the crop window) can never
+       show, so only photos that overlap the visible window are hydrated. Measured before the
+       scale transform is applied, so the numbers are fragment pixels. */
+    var win = c ? { x: c[0], y: c[1], w: c[2], h: c[3] } : { x: 0, y: 0, w: f.w, h: f.y };
+    var origin = inner.getBoundingClientRect();
+    inner.querySelectorAll('[data-mp]').forEach(function (n) {
+      var r = n.getBoundingClientRect(), top = r.top - origin.top, left = r.left - origin.left;
+      var shown = !r.width || !r.height || (top < win.y + win.h && top + r.height > win.y && left < win.x + win.w && left + r.width > win.x);
+      if (shown) n.src = photoSrc(n.getAttribute('data-mp'));
+    });
     box.setAttribute('data-ready', '1');
     fit(box);
   }

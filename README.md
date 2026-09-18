@@ -82,7 +82,7 @@ excluded from search indexing.
 
 `build-site.sh` assembles `_site/` using Node.js and Python 3. It precompiles
 Morsel JSX with the checked-in Babel version and serves production React,
-partitions figure data per case and externalizes duplicated fonts. No dependency
+partitions figure data per case and externalizes duplicated fonts. With `SITE_URL` set, the production build also adds canonical and Open Graph page URLs, a sitemap, and its robots reference. Preview builds remain noindex and exclude the sitemap. No dependency
 download is needed. Run `node build-figures.mjs` after editing `figures.json`.
 
 `tenet.html` is the canonical case study. `tenet-new.html` and the old prototype
@@ -186,3 +186,5 @@ Variables) so social link previews resolve absolutely.
 ## Contact
 
 lanchib.nguyen@gmail.com
+
+Gallery images open in a keyboard-accessible dialog. Use **View full size** to inspect fine detail and **Fit image** to return to the overview. Escape closes the dialog and restores focus. Morsel’s case-page reset clears only its prototype session; Tenet keeps its separate shared reset inside the app.

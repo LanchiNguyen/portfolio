@@ -29,7 +29,7 @@
       <header class="bar">
         <a class="wordmark" href="index.html" aria-label="Lana Nguyen, home">Lana Nguyen<span class="dot">.</span></a>
         <nav class="bar-links" aria-label="Case study">
-          <a class="active" href="index.html#home-work">Work</a>
+          <a class="active" aria-current="true" href="index.html#home-work">Work</a>
           <a href="sketchbook.html">Sketchbook</a>
           <a href="about.html">About</a>
           <a href="index.html#home-contact">Contact</a>
@@ -60,7 +60,7 @@
       <!-- TL;DR -->
       <div class="tldr rv">
         <div class="cell"><span class="k" data-ed="10">What it is</span><span class="v" data-ed="11">Short video rooms with friends: choose a topic and time limit, then save the call's metadata to a shared feed.</span></div>
-        <div class="cell"><span class="k" data-ed="12">What changed</span><span class="v" data-ed="13">A shared-journal direction became a short-call direction. The comparison below explains that shift as retrospective design reasoning, without claiming a validated research result.</span></div>
+        <div class="cell"><span class="k" data-ed="12">What changed</span><span class="v" data-ed="13">A shared-journal direction became a short-call direction. The comparison below revisits the tradeoff between composing an update and coordinating a call.</span></div>
         <div class="cell"><span class="k" data-ed="14">Status</span><span class="v" data-ed="15"><span class="status-flag">Unshipped concept</span> The original prototype lets callers choose a time limit. A fixed two-minute alternative appears only in the later reflection. Neither establishes a usability result.</span></div>
       </div>
 
@@ -100,14 +100,14 @@
         <div class="proj-row rv">
           <span class="side" role="heading" aria-level="2">WAS IT THE CALL,<br>OR THE SETUP?</span>
           <div style="display: flex; flex-direction: column; gap: 22px;">
-            <p class="proj-p" data-ed="20">The working map below organizes concerns around writing updates, finding time to call, and catching up with context. It is included as an early design artifact; it does not establish participant counts or a representative finding.</p>
+            <p class="proj-p" data-ed="20">The working map below organizes concerns around writing updates, finding time to call, and catching up with context. These early notes frame the two directions.</p>
             <div class="quotes">
               <div class="quote-card"><div class="q">Catching up is hard because context gets lost, so conversations stay superficial.</div><div class="a">WORKING HYPOTHESIS 01</div></div>
               <div class="quote-card"><div class="q">Calling bonds more and tires less than texting, but scheduling it is the chore.</div><div class="a">WORKING HYPOTHESIS 02</div></div>
             </div>
             <figure class="figure">
               <img class="shot-img" src="images/chatter/affinity.webp" alt="Affinity map of interview notes grouped into eight themes including frequency, random calls, call problems, text problems, and catching up" width="1400" height="1050" loading="lazy" data-ed="21" />
-              <figcaption class="figcap" data-ed="22"><span class="fk">Working synthesis map</span>Early notes grouped around calls, text, and catching up. Research provenance is not established by this board.</figcaption>
+              <figcaption class="figcap" data-ed="22"><span class="fk">Working synthesis map</span>Early notes grouped around calls, text, and catching up.</figcaption>
             </figure>
           </div>
         </div>
@@ -122,7 +122,7 @@
             <p class="proj-p" data-ed="23">Christy is a planning persona for a busy student keeping up with long-distance friends. I use this scenario to examine the effort each concept asks of the person; it is not a verified participant profile.</p>
             <figure class="figure" style="margin-top: 22px">
               <img class="shot-img" src="images/chatter/persona.webp" alt="Persona sheet for Christy, a 21-year-old college student: behaviors, scenario, goals and needs" width="1379" height="916" loading="lazy" data-ed="24" />
-              <figcaption class="figcap" data-ed="25"><span class="fk">Planning persona</span>A scenario used to explore the concept, not a research finding.</figcaption>
+              <figcaption class="figcap" data-ed="25"><span class="fk">Planning persona</span>A scenario for comparing the effort each concept requires.</figcaption>
             </figure>
           </div>
         </div>
@@ -180,7 +180,7 @@
               <li data-ed="35"><strong>Start a chatter</strong>: open a room with a topic and a caller-selected time limit</li>
               <li data-ed="36"><strong>Save a chatter</strong>: post the call's metadata (never a recording) to your feed</li>
               <li data-ed="37"><strong>Join a chatter</strong>: hop into a friend's live room from the feed</li>
-              <li data-ed="38"><strong>Receive a chatter</strong>: answer now, or pass without guilt</li>
+              <li data-ed="38"><strong>Receive a chatter</strong>: answer now, or decline</li>
             </ul>
             <figure class="figure" style="margin-top: 26px">
               <img class="shot-img" src="images/chatter/inspo-social.webp" alt="Inspiration study of social video apps including Glimpse's 2-minute random calls and Houseparty's drop-in rooms" width="1400" height="820" loading="lazy" data-ed="39" />
@@ -202,7 +202,7 @@
         <div class="proj-row rv">
           <span class="side" role="heading" aria-level="2">COULD A CAP MAKE A CALL<br>EASIER TO START?</span>
           <div style="display: flex; flex-direction: column; gap: 22px;">
-            <p class="proj-p" data-ed="45">The final screens let the caller choose a time cap. This adds flexibility, but leaves a question: can a recipient still judge the commitment at a glance? The case does not establish a participant finding for that choice.</p>
+            <p class="proj-p" data-ed="45">The final screens let the caller choose a time cap. This adds flexibility, but leaves a question: can a recipient still judge the commitment at a glance?</p>
             <div class="quotes">
               <div class="quote-card"><div class="q">Can a recipient tell how much time a call will take before answering?</div><div class="a">OPEN PRODUCT QUESTION</div></div>
               <div class="quote-card"><div class="q">What does a saved feed entry offer once its live room has ended?</div><div class="a">OPEN PRODUCT QUESTION</div></div>
@@ -218,7 +218,7 @@
         <div class="protos">
           <div class="proto rv">
             <div class="frame white">
-              <video src="images/chatter/proto-start.webm" autoplay muted loop playsinline controls preload="metadata" aria-label="Animated walkthrough: creating a chatter room with a topic and time limit"></video>
+              <video src="images/chatter/proto-start.webm" muted loop playsinline controls preload="metadata" aria-label="Animated walkthrough: creating a chatter room with a topic and time limit"></video>
             </div>
             <span class="no" data-ed="47">01</span>
             <div class="t">Start a quick chat</div>
@@ -226,7 +226,7 @@
           </div>
           <div class="proto rv" style="--d:100ms">
             <div class="frame white">
-              <video src="images/chatter/proto-feed.webm" autoplay muted loop playsinline controls preload="metadata" aria-label="Animated walkthrough: the feed of saved chatters with likes and comments"></video>
+              <video src="images/chatter/proto-feed.webm" muted loop playsinline controls preload="metadata" aria-label="Animated walkthrough: the feed of saved chatters with likes and comments"></video>
             </div>
             <span class="no" data-ed="48">02</span>
             <div class="t">Keep a log of memories</div>
@@ -234,7 +234,7 @@
           </div>
           <div class="proto rv" style="--d:200ms">
             <div class="frame white">
-              <video src="images/chatter/proto-room.webm" autoplay muted loop playsinline controls preload="metadata" aria-label="Animated walkthrough: a live Chatter room"></video>
+              <video src="images/chatter/proto-room.webm" muted loop playsinline controls preload="metadata" aria-label="Animated walkthrough: a live Chatter room"></video>
             </div>
             <span class="no" data-ed="49">03</span>
             <div class="t">Join the conversation</div>
@@ -251,7 +251,7 @@
           <div>
             <p class="proj-p" data-ed="50">The original screens include caller-selected time limits and persistent feed entries. Room lifetime remains unresolved: what can someone join after a room ends, and when should an ongoing badge disappear?</p>
             <p class="proj-p" style="margin-top:18px" data-ed="51">This later proposal explores a fixed two-minute room instead. It is a separate alternative, not the behavior implemented in the 2020 prototype:</p>
-            <ul class="feat-list"><li data-ed="52"><strong>Hard stop:</strong> end the live room at the chosen limit and remove its join action.</li><li data-ed="53"><strong>Extend by consent:</strong> offer a short extension only if everyone agrees; this makes the time commitment less certain.</li><li data-ed="54"><strong>Start again:</strong> let a saved entry invite its original participants into a new room, rather than imply the old room is still live.</li></ul><p class="proj-p" style="margin-top:16px" data-ed="55">I would test the hard stop and a separate invitation to start again. A saved entry would retain call metadata, never a recording. These are proposed mechanics, not changes made to the original prototype.</p>
+            <ul class="feat-list"><li data-ed="52"><strong>Hard stop:</strong> end the live room after two minutes and remove its join action.</li><li data-ed="53"><strong>Extend by consent:</strong> offer a short extension only if everyone agrees; this makes the time commitment less certain.</li><li data-ed="54"><strong>Start again:</strong> let a saved entry invite its original participants into a new room, rather than imply the old room is still live.</li></ul><div class="ev-wrap" tabindex="0" role="region" aria-label="Proposed call states"><table class="ev-table"><tr><th>Proposed state</th><th>Available action</th><th>What remains</th></tr><tr><td>Invitation</td><td>Accept or decline after seeing the duration and invited group</td><td>No call starts until accepted</td></tr><tr><td>Live room</td><td>Leave early; the room ends at two minutes</td><td>No join action once ended</td></tr><tr><td>Saved entry</td><td>Invite the same people to a new room</td><td>Call details only, never a playable recording</td></tr></table></div><p class="proj-p" style="margin-top:16px" data-ed="55">I would test the hard stop and a separate invitation to start again. A saved entry would retain call metadata, never a recording. These are proposed mechanics, not changes made to the original prototype.</p>
           </div>
         </div>
       </section>
@@ -285,8 +285,8 @@
 
       <!-- next project -->
       </main>
-      <a class="next-proj" href="tenet.html">
-        <span><span class="k" data-ed="61">BACK TO SELECTED WORK</span><span class="t" data-ed="62">Tenet &mdash; one deliberate moment</span></span>
+      <a class="next-proj" href="index.html#home-work">
+        <span><span class="k" data-ed="61">BACK TO SELECTED WORK</span><span class="t" data-ed="62">Explore the projects</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>
