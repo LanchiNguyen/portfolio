@@ -16,7 +16,9 @@ Plus `about.html` and `sketchbook.html` (illustration and painting).
 **The prototypes are real.** Tenet and Morsel ship as working builds in
 `tenet-proto/` and `morsel-proto/`. The "Try the prototype" section on each case
 study runs the actual application in the page — you can trigger a Dart
-intervention or walk Morsel's entry flow, feed, search, dish page, and next-step sheet.
+intervention or walk Morsel's visual menu: nearby dishes, the restaurant picker, a menu
+with photos and "No photo yet" rows, a dish page with labeled photo sources, and a
+compare shortlist.
 
 **Evidence has limits.** Concept data is simulated, new validation plans are
 proposed, and reasoning reconstructed later stays visibly retrospective.
@@ -32,7 +34,7 @@ index.html, *.html        the site
 styles.css, script.js     shared styles and behavior
 figures.js / .css         captured illustrative DOM states, not interactive demos
 tenet-proto/              the Tenet build (host, desktop, companion)
-morsel-proto/             the Morsel v3.2 build
+morsel-proto/             the Morsel visual-menu build (index.html + v4/app; the older v3/ tree is kept for reference and is not served)
 morsel-docs/             process documents: wireflow, explorations, DS addendum, testing plan
 images/                   photography and remaining rasters
 ```
@@ -55,12 +57,15 @@ node build-figures.mjs          # emit figures.js / figures.css
 node build-live-figures-into-pages.mjs   # replace lower illustrations with DOM snapshots
 ```
 
-The Morsel recipes drive the v3.2 prototype through `window.morselDebug`; `ONLY=morsel`
-re-captures Morsel and its process docs while keeping the previous Tenet captures, and
-`KEEP_MORSEL` in `capture-figures.cjs` lists the v3.1 states retained as "before"
-evidence in the case study. `tests/morsel.test.cjs` compiles the prototype with the
-vendored Babel and checks the dietary classifier, filter semantics, the destination
-model and the saved-state migration without a browser.
+The Morsel recipes drive the v4 visual-menu prototype through `window.morselDebug`;
+`ONLY=morsel` re-captures Morsel while keeping the previous Tenet captures, and
+`KEEP_MORSEL` in `capture-figures.cjs` lists the one earlier-exploration capture (the
+nearby-dish feed) carried over from a previous figures.json because the prototype no
+longer has that screen. The capture harness loads `morsel-bundle.js` from the repo
+root: the sentinel bundle `build-morsel-bundle.cjs` writes, in which photos travel as
+ids. `tests/morsel.test.cjs` boots `data.js` and `app.jsx` with the vendored Babel and
+checks the fixture contract, menu order, photo sources, ingredient lines, the
+three-dish shortlist and defensive state loading without a browser.
 
 `build-artifact.mjs` bundles the whole site into a single self-contained HTML
 file with every asset inlined and no external requests.

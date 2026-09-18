@@ -21,12 +21,12 @@
   --surface: #FFFCF5;
   --sunken: #EFE6D6;
   --ink: #26190E;
-  --ink-2: rgba(38, 25, 14, 0.62);
-  --ink-3: rgba(38, 25, 14, 0.40);
+  --ink-2: rgba(38, 25, 14, 0.72);
+  --ink-3: rgba(38, 25, 14, 0.62);
   --line: rgba(38, 25, 14, 0.10);
-  --accent: #C2492B;
+  --accent: #B2401F;
   --accent-ink: #FFF6EC;
-  --glass: rgba(28, 18, 10, 0.34);
+  --glass: rgba(28, 18, 10, 0.66);
   --glass-text: #FFF9F0;
   --r: 22px;
   --font-display: "Lora", Georgia, serif;
@@ -51,8 +51,8 @@
   --surface: #FFFFFF;
   --sunken: #F1ECDF;
   --ink: #1F1A12;
-  --ink-2: rgba(31, 26, 18, 0.60);
-  --ink-3: rgba(31, 26, 18, 0.38);
+  --ink-2: rgba(31, 26, 18, 0.72);
+  --ink-3: rgba(31, 26, 18, 0.62);
   --line: rgba(31, 26, 18, 0.10);
   --accent: #C97C1B;
   --accent-ink: #FFF9EE;
@@ -67,12 +67,12 @@
   --surface: #221B16;
   --sunken: #2B221C;
   --ink: #F4ECDF;
-  --ink-2: rgba(244, 236, 223, 0.62);
-  --ink-3: rgba(244, 236, 223, 0.40);
+  --ink-2: rgba(244, 236, 223, 0.76);
+  --ink-3: rgba(244, 236, 223, 0.62);
   --line: rgba(244, 236, 223, 0.12);
   --accent: #E2603A;
   --accent-ink: #FFF6EC;
-  --glass: rgba(10, 6, 3, 0.42);
+  --glass: rgba(10, 6, 3, 0.66);
   --shadow-card: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
   --shadow-float: 0 2px 6px rgba(0,0,0,.4), 0 14px 40px rgba(0,0,0,.55);
 }
@@ -257,7 +257,7 @@
 .m-rest-row .m-rest-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .m-tag { display: inline-flex; align-items: center; gap: 5px; border-radius: 999px; padding: 5px 10px; font-size: calc(11.5px * var(--ts)); font-weight: 800; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; background: var(--sunken); color: var(--ink-2); }
 .m-tag[data-tone="on"] { background: var(--ink); color: var(--paper); }
-.m-tag[data-tone="photo"] { background: var(--glass); color: var(--glass-text); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.m-tag[data-tone="photo"] { background: var(--glass); color: var(--glass-text); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); text-shadow: 0 1px 2px rgba(0,0,0,0.35); }
 
 .m-seg { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--sunken); }
 .m-seg button { border-radius: 999px; padding: 8px 16px; font-size: calc(14px * var(--ts)); font-weight: 700; color: var(--ink-2); min-height: 38px; }
@@ -336,8 +336,8 @@
 .morsel-app .m-tabbar { background: rgba(28, 18, 10, 0.86); border-color: rgba(255,255,255,0.12); padding: 5px; gap: 2px; }
 .morsel-app .m-tab { position: relative; width: auto; min-width: 84px; height: 50px; padding: 0 12px; flex-direction: column; gap: 3px; color: rgba(255, 249, 240, 0.92); }
 .morsel-app .m-tab[data-active="true"] { background: rgba(255, 249, 240, 0.96); color: #26190E; }
-.m-tab-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
-.m-tab-badge { position: absolute; top: 3px; right: 8px; min-width: 17px; height: 17px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 10.5px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
+.m-tab-label { font-size: 11px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
+.m-tab-badge { position: absolute; top: 3px; right: 8px; min-width: 17px; height: 17px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; padding: 0 5px; }
 /* the tab bar floats over reserved space, never over content */
 .morsel-app[data-tabs="true"] .m-screen { padding-bottom: 92px; }
 /* compare: three columns only while the text fits them; at large text, two then one */

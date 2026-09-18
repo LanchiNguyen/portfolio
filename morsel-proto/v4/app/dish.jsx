@@ -21,6 +21,7 @@ function PhotoStrip({ dish }) {
   const go = (d) => setI((x) => Math.min(n - 1, Math.max(0, x + d)));
   return (
     <div className="m-strip" role="group" aria-roledescription="photo carousel" aria-label={dish.name + " photos"}
+      onKeyDown={(e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(1); } else if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); } }}
       onTouchStart={(e) => { touch.current = e.touches[0].clientX; }}
       onTouchEnd={(e) => { if (touch.current === null) return; const dx = e.changedTouches[0].clientX - touch.current; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); touch.current = null; }}>
       <img key={p.img} src={u(p.img, 900)} alt={dish.name + ", " + sourceLabel(p.source).toLowerCase()} />
@@ -29,7 +30,7 @@ function PhotoStrip({ dish }) {
       {n > 1 && i < n - 1 && <button className="m-glass m-glass-icon m-strip-nav" style={{ right: 12 }} aria-label="Next photo" onClick={() => go(1)}><MIcon name="next" size={20} /></button>}
       <div className="m-strip-foot">
         <span className="m-glass" style={{ padding: "6px 12px" }}>{sourceLabel(p.source)}</span>
-        {n > 1 && <span className="m-glass" style={{ padding: "6px 12px", gap: 8 }}><span className="m-dots" aria-hidden="true">{dish.photos.map((_, k) => <span key={k} data-on={k === i} />)}</span><span>{i + 1} of {n}</span></span>}
+        {n > 1 && <span className="m-glass" style={{ padding: "6px 12px", gap: 8 }} aria-live="polite"><span className="m-dots" aria-hidden="true">{dish.photos.map((_, k) => <span key={k} data-on={k === i} />)}</span><span>{i + 1} of {n}</span></span>}
       </div>
     </div>
   );
