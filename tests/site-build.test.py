@@ -69,4 +69,14 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn('morsel-v31-', (site / 'figures-tenet.js').read_text())
         self.assertNotIn('tenet-mon-', (site / 'figures-morsel.js').read_text())
 
+    def test_published_images_have_consumers(self):
+        site = ROOT / '_site'
+        text = '\n'.join(p.read_text() for p in site.rglob('*')
+                         if p.suffix in {'.html', '.css', '.js'})
+        for image in (site / 'images').rglob('*'):
+            if not image.is_file(): continue
+            # Morsel constructs photo URLs from fixture IDs plus '.webp'.
+            reference = image.stem if image.parent.name == 'morsel-photos' else image.name
+            self.assertIn(reference, text, f'Unreferenced published asset: {image.relative_to(site)}')
+
 if __name__ == '__main__': unittest.main()
