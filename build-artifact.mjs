@@ -115,10 +115,10 @@ const tenetLauncher = `
 const morselLauncher = `
         <div class="pt-stage rv" data-proj="morsel">
           <div class="demo-head">
-            <span class="demo-kicker">MORSEL V3 &middot; FULL FLOW</span>
+            <span class="demo-kicker">MORSEL V3.2 &middot; FULL FLOW</span>
           </div>
           <div class="pt-frame is-phone">
-            <img class="pt-poster" src="../images/morsel/stage-morsel.webp" alt="The Morsel v3 prototype welcome screen — 'Eat with your eyes' over a dish photo grid" width="430" height="900" />
+            <img class="pt-poster" src="../images/morsel/stage-morsel.webp" alt="The Morsel v3.2 prototype welcome screen — 'Find a dish, then check it' over a dish photo grid" width="430" height="900" />
             <button class="pt-launch">&#9654;&ensp;LAUNCH THE REAL PROTOTYPE &mdash; RUNS IN THIS PAGE</button>
           </div>
           <p class="demo-note-txt" style="margin-top:9px">THE ACTUAL V3 BUILD, EXECUTED IN THIS DOCUMENT &middot; OPENS FULL-SCREEN, CLOSE RETURNS HERE &middot; ILLUSTRATIVE DATA &middot; ALLERGY-AWARE, NEVER &ldquo;ALLERGY-SAFE&rdquo;</p>
@@ -148,8 +148,8 @@ const theaterCss = `
 const theaterJs = `
 (function () {
   var P = window.__PROTO; if (!P) return;
-  var TITLES = { host: "TENET \\u2014 DART HOST \\u00b7 REAL PROTOTYPE", desktop: "TENET \\u2014 MERIDIAN DESKTOP \\u00b7 REAL PROTOTYPE", companion: "TENET \\u2014 COMPANION \\u00b7 REAL PROTOTYPE", morsel: "MORSEL V3 \\u00b7 REAL PROTOTYPE" };
-  var DISC = { host: "SIMULATED DATA \\u00b7 FICTIONAL BROKER \\u00b7 NOT SHIPPED", desktop: "SIMULATED DATA \\u00b7 FICTIONAL BROKER \\u00b7 NOT SHIPPED", companion: "SIMULATED DATA \\u00b7 NOT SHIPPED", morsel: "ILLUSTRATIVE DATA \\u00b7 ALLERGY-AWARE, NEVER \\u201cALLERGY-SAFE\\u201d \\u00b7 NOT SHIPPED" };
+  var TITLES = { host: "TENET \\u2014 DART HOST \\u00b7 REAL PROTOTYPE", desktop: "TENET \\u2014 MERIDIAN DESKTOP \\u00b7 REAL PROTOTYPE", companion: "TENET \\u2014 COMPANION \\u00b7 REAL PROTOTYPE", morsel: "MORSEL V3.2 \\u00b7 REAL PROTOTYPE" };
+  var DISC = { host: "SIMULATED DATA \\u00b7 FICTIONAL BROKER \\u00b7 NOT SHIPPED", desktop: "SIMULATED DATA \\u00b7 FICTIONAL BROKER \\u00b7 NOT SHIPPED", companion: "SIMULATED DATA \\u00b7 NOT SHIPPED", morsel: "ILLUSTRATIVE DATA \\u00b7 NO ORDER IS EVER PLACED \\u00b7 NOT SHIPPED" };
   var marks = null, hidden = [], restoreFocus = null, savedScroll = 0, overlay = null;
 
   function snapshot() { return { head: Array.prototype.slice.call(document.head.children), body: Array.prototype.slice.call(document.body.children) }; }

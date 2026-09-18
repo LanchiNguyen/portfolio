@@ -251,13 +251,7 @@
           <div>
             <p class="proj-p" data-ed="50">The original screens include caller-selected time limits and persistent feed entries. Room lifetime remains unresolved: what can someone join after a room ends, and when should an ongoing badge disappear?</p>
             <p class="proj-p" style="margin-top:18px" data-ed="51">This later proposal explores a fixed two-minute room instead. It is a separate alternative, not the behavior implemented in the 2020 prototype:</p>
-            <div class="ev-wrap"><table class="ev-table">
-              <tr><th>Option</th><th>How it works</th><th>Trade-off</th><th>Verdict</th></tr>
-              <tr><td><b>Hard stop</b></td><td>Room dies at 2:00, period; feed entries become memories and "join" disappears</td><td class="ok">Purest promise: a call that literally cannot run long</td><td>Right default, but makes the feed a graveyard</td></tr>
-              <tr><td><b>Extend by consent</b></td><td>At 1:45 everyone sees "+2 min?"; extends only if all tap yes</td><td>Cap becomes soft; "quick call" trust erodes with every extension</td><td>Allow once per room, max; unanimity keeps the pressure social, not personal</td></tr>
-              <tr><td><b>Knock to re-open</b></td><td>A saved chatter's participants can "knock": accept within the hour and a fresh 2-minute room spawns</td><td>Feed becomes a call-starter: you don't join the old room, you knock for a new one</td><td class="ok">The missing piece: what "join later" should have meant</td></tr>
-            </table></div>
-            <p class="proj-p" style="margin-top:12px" data-ed="52">So: rooms hard-stop, the feed keeps metadata forever, and every entry is a knock target that spawns a <em>new</em> room. "Ongoing" badges live for the room's 2 minutes only.</p>
+            <ul class="feat-list"><li data-ed="52"><strong>Hard stop:</strong> end the live room at the chosen limit and remove its join action.</li><li data-ed="53"><strong>Extend by consent:</strong> offer a short extension only if everyone agrees; this makes the time commitment less certain.</li><li data-ed="54"><strong>Start again:</strong> let a saved entry invite its original participants into a new room, rather than imply the old room is still live.</li></ul><p class="proj-p" style="margin-top:16px" data-ed="55">I would test the hard stop and a separate invitation to start again. A saved entry would retain call metadata, never a recording. These are proposed mechanics, not changes made to the original prototype.</p>
           </div>
         </div>
       </section>
@@ -268,9 +262,9 @@
         <div class="proj-row rv">
           <span class="side" role="heading" aria-level="2">WHAT IS STILL<br>UNPROVEN</span>
           <div>
-            <p class="proj-p" data-ed="53">The high-fidelity prototype was never tested. The main question is still open: does a short time limit make someone more likely to answer, or does it make the call feel disposable?</p>
-            <p class="proj-p" style="margin-top:18px" data-ed="54">The study this concept still needs:</p>
-            <p class="proj-p">Observe pairs of friends starting, receiving, and revisiting a call. Check whether they understand the time commitment and whether a saved entry is still joinable. A later diary study would be needed to understand real use over time.</p>
+            <p class="proj-p" data-ed="56">The high-fidelity prototype was never tested. The main question is still open: does a short time limit make someone more likely to answer, or does it make the call feel disposable?</p>
+            <p class="proj-p" style="margin-top:18px" data-ed="57">The study this concept still needs:</p>
+            <p class="proj-p" data-ed="58">Observe pairs of friends starting, receiving, and revisiting a call. Check whether they understand the time commitment and whether a saved entry is still joinable. A later diary study would be needed to understand real use over time.</p>
           </div>
         </div>
       </section>
@@ -278,9 +272,9 @@
       <!-- takeaways -->
       <section class="results rv">
         <div class="bloom"></div>
-        <span class="k" data-ed="55">WHERE IT LANDED</span>
+        <span class="k" data-ed="59">WHERE IT LANDED</span>
         <div class="results-grid">
-          <p class="big" data-ed="56">The two directions make the tradeoff visible: asynchronous updates require composition; live calls require shared attention. The next step would be testing which commitment friends are willing to make, not adding more screens.</p>
+          <p class="big" data-ed="60">The two directions make the tradeoff visible: asynchronous updates require composition; live calls require shared attention. The next step would be testing which commitment friends are willing to make, not adding more screens.</p>
           <div class="ledger">
             <div><span>Pivot</span><b>written updates &rarr; short calls</b></div>
             <div><span>Original time limit</span><b>caller-selected; unvalidated</b></div>
@@ -292,7 +286,7 @@
       <!-- next project -->
       </main>
       <a class="next-proj" href="tenet.html">
-        <span><span class="k" data-ed="57">BACK TO SELECTED WORK</span><span class="t" data-ed="58">Tenet &mdash; one deliberate moment</span></span>
+        <span><span class="k" data-ed="61">BACK TO SELECTED WORK</span><span class="t" data-ed="62">Tenet &mdash; one deliberate moment</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>

@@ -4,10 +4,10 @@ A product and UX design portfolio. Static HTML, CSS, and a little JavaScript: no
 framework, no build step required to view it. Open `index.html` in a browser, or
 serve the folder with `python3 -m http.server`.
 
-Selected work leads with **Morsel**, **Tenet**, then **Hey Period**. Matrix and
+Selected work leads with **Tenet**, **Morsel**, then **Hey Period**. Matrix and
 Nhat Huong are supporting cases; Mug and Chatter remain available as earlier
-concepts linked from About. The current IKEA title is owner-confirmed. Dates,
-full employment scope and a current résumé still need owner records.
+concepts linked from About. The IKEA title and April 2025 start are owner-confirmed. Full employment scope,
+a current résumé and a professional profile link remain owner-supplied updates.
 
 Plus `about.html` and `sketchbook.html` (illustration and painting).
 
@@ -16,7 +16,9 @@ Plus `about.html` and `sketchbook.html` (illustration and painting).
 **The prototypes are real.** Tenet and Morsel ship as working builds in
 `tenet-proto/` and `morsel-proto/`. The "Try the prototype" section on each case
 study runs the actual application in the page — you can trigger a Dart
-intervention or walk Morsel's onboarding, feed, and allergy gate.
+intervention or walk Morsel's visual menu: nearby dishes, the restaurant picker, a menu
+with photos and "No photo yet" rows, a dish page with labeled photo sources, and a
+compare shortlist.
 
 **Evidence has limits.** Concept data is simulated, new validation plans are
 proposed, and reasoning reconstructed later stays visibly retrospective.
@@ -32,7 +34,7 @@ index.html, *.html        the site
 styles.css, script.js     shared styles and behavior
 figures.js / .css         captured illustrative DOM states, not interactive demos
 tenet-proto/              the Tenet build (host, desktop, companion)
-morsel-proto/             the Morsel v3 build
+morsel-proto/             the Morsel visual-menu build (index.html + v4/app; the older v3/ tree is kept for reference and is not served)
 morsel-docs/             process documents: wireflow, explorations, DS addendum, testing plan
 images/                   photography and remaining rasters
 ```
@@ -55,6 +57,16 @@ node build-figures.mjs          # emit figures.js / figures.css
 node build-live-figures-into-pages.mjs   # replace lower illustrations with DOM snapshots
 ```
 
+The Morsel recipes drive the v4 visual-menu prototype through `window.morselDebug`;
+`ONLY=morsel` re-captures Morsel while keeping the previous Tenet captures, and
+`KEEP_MORSEL` in `capture-figures.cjs` lists the one earlier-exploration capture (the
+nearby-dish feed) carried over from a previous figures.json because the prototype no
+longer has that screen. The capture harness loads `morsel-bundle.js` from the repo
+root: the sentinel bundle `build-morsel-bundle.cjs` writes, in which photos travel as
+ids. `tests/morsel.test.cjs` boots `data.js` and `app.jsx` with the vendored Babel and
+checks the fixture contract, menu order, photo sources, ingredient lines, the
+three-dish shortlist and defensive state loading without a browser.
+
 `build-artifact.mjs` bundles the whole site into a single self-contained HTML
 file with every asset inlined and no external requests.
 
@@ -73,7 +85,7 @@ Verify before publishing:
 
 ```bash
 node stamp-editable.mjs --check
-node --test tests/tenet-new.test.cjs
+node --test tests/tenet-new.test.cjs tests/morsel.test.cjs
 bash build-site.sh
 python3 tests/site-build.test.py
 PREVIEW=1 bash build-site.sh

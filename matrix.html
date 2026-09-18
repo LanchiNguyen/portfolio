@@ -145,7 +145,7 @@
           <span class="side" role="heading" aria-level="2">WHAT I COULD RESOLVE<br>IN ONE WEEK</span>
           <div>
             <p class="proj-p" style="margin-bottom:18px" data-ed="35">These are the calls visible between the wireframes and final boards:</p>
-            <div class="ev-wrap" style="margin-bottom:22px"><table class="ev-table">
+            <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table" style="margin-bottom:22px"><table class="ev-table">
               <tr><th>Decision</th><th>Instead of</th><th>Why</th></tr>
               <tr><td><b>Tappable creator cards for voting</b></td><td>The spec's two dropdown pickers</td><td>Cards make the vote a choice; fan counts give the tap a stake</td></tr>
               <tr><td><b>Sparklines + signed % per market row</b></td><td>Price-only list</td><td>The intended hierarchy is direction, then magnitude; this was a design choice, not a measured behavior</td></tr>
@@ -159,7 +159,7 @@
               <li data-ed="39">The neon-on-dark palette came with its contrast choices; small grey metadata on near-black is what I'd challenge first in a week two.</li>
             </ul>
             <p class="proj-p" style="margin-top:18px" data-ed="40">A follow-up review would first confirm state coverage with engineering, then resolve the states not shown here:</p>
-            <div class="ev-wrap"><table class="ev-table">
+            <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
               <tr><th>Item</th><th>Plan</th><th>Goal (not a result)</th></tr>
               <tr><td><b>State coverage</b></td><td>Loading / empty / error for the 5 stateful screens (market, orders, event, vote, checkout); empty inventory and failed payment first</td><td>0 screens where a dev has to invent a state</td></tr>
               <tr><td><b>Handoff quality</b></td><td>Count dev clarification questions per screen in the first sprint</td><td>&le;1 per screen; each one becomes a spec fix</td></tr>

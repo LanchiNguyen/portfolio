@@ -59,6 +59,9 @@ class BuildTests(unittest.TestCase):
         self.assertNotRegex(entry, r'text/babel|development\.js|babel\.min')
         self.assertIn('app.bundle.js', entry)
         self.assertFalse((site / 'morsel-proto/vendor/babel.min.js').exists())
+        self.assertFalse((site / 'morsel-proto/v3').exists())
+        self.assertFalse(list((site / 'morsel-proto').rglob('*.jsx')))
+        self.assertTrue((site / 'morsel-proto/v4/app/styles.css').exists())
         self.assertFalse((site / 'figures.js').exists())
         self.assertNotIn('base64,', (site / 'figures-fonts.css').read_text())
         for page in ('morsel', 'tenet'):
