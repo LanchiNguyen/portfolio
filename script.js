@@ -211,6 +211,9 @@
       stage.classList.remove("is-slow");
       if (poster) poster.style.display = "none";
       fit();
+      // Start the wide workstation at its order ticket on narrow screens.
+      frame.scrollLeft = frame.classList.contains('is-pan') ? Math.max(0, frame.scrollWidth - frame.clientWidth - 48) : 0;
+      frame.scrollTop = 0;
       if (focusFrame !== false) iframe.focus();
       watchBoot(c);
     }

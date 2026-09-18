@@ -302,3 +302,13 @@ test('simulated sync outage propagates across Dart and Companion and restoration
   assert.equal(host.component.sh().events[0].sync, 'synced');
   assert.equal(host.component.sh().events.find(e => e.id === 'e7').sync, 'failed', 'reconnect must not erase existing failed-event state');
 });
+
+test('Companion overview summaries count actual Record decisions instead of fixed fixtures', () => {
+  const c = loadPrototype('companion-new').component;
+  assert.equal(c.renderVals().overCount, '1');
+  assert.equal(c.renderVals().weekRows.find(r => r.label.startsWith('THU')).out, '3 waited / 0 overrode');
+  c.addEvent({day:'THU', time:'10:44', kind:'over', what:'test override', pending:true});
+  const values = c.renderVals();
+  assert.equal(values.overCount, '2');
+  assert.equal(values.weekRows.find(r => r.label.startsWith('THU')).out, '3 waited / 1 overrode');
+});

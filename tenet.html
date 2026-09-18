@@ -8,7 +8,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Tenet — self-authored guardrails at the moment of send" />
   <meta property="og:description" content="Trader-authored pauses and a separate wind-down hard limit at order-send, inside two fictional brokers backed by one shared Record. Functional prototype, 2026." />
-  <meta property="og:image" content="images/tenet/card.webp" />
+  <meta property="og:image" content="images/tenet/decision-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="styles.css?v=tenet-audit-4" />
+  <link rel="stylesheet" href="styles.css?v=tenet-audit-6" />
   <link rel="stylesheet" href="figures-fonts.css" />
   <link rel="stylesheet" href="figures.css" />
   <link rel="stylesheet" href="tenet-case.css?v=2" />
@@ -62,7 +62,7 @@
       <div class="section-heading"><span class="case-index">01 / OVERVIEW</span><h2 id="overview-title" data-ed="3">Designing a clear<br>interruption.</h2></div>
       <div class="overview-grid">
         <div><p class="proj-p" data-ed="4">The concept starts with a specific situation: an active trader has taken several losses and prepares a larger order. A rule written during a quieter moment is easy to forget when the next trade is one gesture away.</p><p class="proj-p" data-ed="5">I focused on the moment the order is sent. The design has to explain the rule, handle overlapping limits, and make the next action unmistakable without taking over the trader&rsquo;s decision.</p></div>
-        <aside class="scope-card" aria-label="Scope and evidence"><h3 data-ed="6">What this project demonstrates</h3><ul><li data-ed="7">An end-to-end interaction model across mobile and desktop.</li><li data-ed="8">Explicit states for waiting, overriding, cancelling and reviewing.</li><li data-ed="9">Working rule changes and a shared decision record.</li></ul><p data-ed="10">Independent concept. Brokers, prices and fills are simulated. No participant study or live broker integration has been completed.</p></aside>
+        <aside class="scope-card" aria-label="Scope and evidence"><h3 data-ed="6">What this project demonstrates</h3><ul><li data-ed="7">An end-to-end interaction model across mobile and desktop.</li><li data-ed="8">Explicit states for waiting, overriding, cancelling and reviewing.</li><li data-ed="9">Working rule changes and a shared decision record.</li></ul><p data-ed="10">Independent concept. Brokers, prices and fills are simulated. No participant study or live broker integration has been completed. Tenet is not a broker, investment advice or a promise of profit.</p></aside>
       </div>
       <div class="case-evidence-pair">
 <figure class="figure"><div class="fig-live shot-img" data-fig="tenet-host-ticket" role="img" aria-label="Dart, the fictional gamified mobile broker, at 9:53 with a 4-day streak badge and SPY 0DTE puts: a contracts stepper set to 12 of MAX 86, '12 × $1.42 = $1,704 premium at risk', and a lime 'Swipe to buy 12 contracts' rail with 'tenet · 4 rules on · cap 5' beneath" style="--fw:322;--fh:660;max-width:236px; border-radius:18px"></div><figcaption data-ed="11"><strong>Before send.</strong> The fictional Dart broker makes placing an order fast.</figcaption></figure><figure class="figure"><div class="fig-live shot-img" data-fig="tenet-host2-intervention" role="img" aria-label="The same Dart screen after the swipe: '2 of your rules stepped in — nothing sent.' A labeled ledger: COOLDOWN, 3 losing round trips this morning, with a dot timeline 9:41, 9:46, 9:52; SIZE, 12 you asked beside 5 your cap today. 'Nothing was sent' with buttons Reduce to 5 + wait 9 min, Override with a reason, and Cancel order — nothing sends" style="--fw:322;--fh:660;max-width:236px; border-radius:18px"></div><figcaption data-ed="12"><strong>At send.</strong> Tenet explains both rules and offers one action that resolves them together.</figcaption></figure>
@@ -86,9 +86,9 @@
         <div class="demo-stage rv" data-live-on-load>
           <div class="demo-head">
             <div class="demo-tabs" role="tablist" aria-label="Prototype surface">
-              <button class="demo-tab" role="tab" aria-selected="true" data-src="tenet-proto/host-new.html?bare&amp;v=tenet-audit-4" data-w="380" data-h="1180" data-poster="images/tenet/stage-dart-new.webp" data-poster-alt="The Dart phone with a staged 12-contract order, above the scenario tabs and try-this steps" data-title="Dart mobile host prototype — trigger a rule at order-send">DART &middot; MOBILE</button>
-              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/desktop-new.html?bare&amp;v=tenet-audit-4" data-w="1440" data-h="1016" data-poster="images/tenet/stage-meridian-new.webp" data-poster-alt="The Meridian workstation: falling SPY chart, level 2 ladder, and a typed 1,000-share short in the order ticket" data-title="Meridian desktop host prototype — hold a short through the cooldown">MERIDIAN &middot; DESKTOP</button>
-              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/companion-new.html?bare&amp;v=tenet-audit-4" data-w="380" data-h="1350" data-poster="images/tenet/stage-companion-new.webp" data-poster-alt="The Companion home screen: what your rules did this week, with counts and estimates" data-title="Tenet Companion prototype — rules, patterns, and the Record">COMPANION</button>
+              <button class="demo-tab" role="tab" aria-selected="true" data-src="tenet-proto/host-new.html?bare&amp;v=tenet-audit-6" data-w="380" data-h="1180" data-poster="images/tenet/stage-dart-new.webp" data-poster-alt="The Dart phone with a staged 12-contract order, above the scenario tabs and try-this steps" data-title="Dart mobile host prototype — trigger a rule at order-send">DART &middot; MOBILE</button>
+              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/desktop-new.html?bare&amp;v=tenet-audit-6" data-w="1440" data-h="1016" data-poster="images/tenet/stage-meridian-new.webp" data-poster-alt="The Meridian workstation: falling SPY chart, level 2 ladder, and a typed 1,000-share short in the order ticket" data-title="Meridian desktop host prototype — hold a short through the cooldown">MERIDIAN &middot; DESKTOP</button>
+              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/companion-new.html?bare&amp;v=tenet-audit-6" data-w="380" data-h="1350" data-poster="images/tenet/stage-companion-new.webp" data-poster-alt="The Companion home screen: what your rules did this week, with counts and estimates" data-title="Tenet Companion prototype — rules, patterns, and the Record">COMPANION</button>
             </div>
             <a class="demo-open" href="tenet-proto/host-new.html">OPEN FULL PROTOTYPE &#8599;</a>
           </div>
@@ -100,8 +100,8 @@
             <span class="demo-note-txt">SIMULATED ORDERS &middot; SAVED IN THIS BROWSER</span>
             <button class="demo-reset">RELOAD THIS VIEW</button>
           </div>
-          <p class="demo-note" data-ed="39">Rules and completed decisions persist when you switch surfaces. Reload restarts the current view; use Reset demo inside Dart to restore the shared baseline.</p>
-          <p class="demo-mobile-note" data-ed="40">On a small screen, Meridian opens at a readable size in a scrollable view. Swipe across the workstation or open the full prototype.</p>
+          <p class="demo-note" data-ed="39">Rules and completed decisions persist when you switch surfaces. Reload restarts the current view; use Reset demo inside any surface to restore the shared baseline.</p>
+          <p class="demo-mobile-note" data-ed="40">On a small screen, Meridian opens with the order ticket in view. Swipe across the workstation or open the full prototype.</p>
         </div>
 
       <p class="prototype-link" data-ed="41"><a class="doc-link" href="tenet-proto/duo-new.html">Open Dart + Companion side by side &rarr;</a></p>
@@ -131,5 +131,5 @@
   </main>
   <a class="next-proj" href="morsel.html"><span><span class="k" data-ed="70">NEXT PROJECT</span><span class="t" data-ed="71">Morsel &mdash; trust in food discovery</span></span><span class="arw" aria-hidden="true">&rarr;</span></a>
   </div></div>
-  <script src="figures.js"></script><script src="script.js?v=tenet-audit-4"></script>
+  <script src="figures.js"></script><script src="script.js?v=tenet-audit-6"></script>
 </body></html>

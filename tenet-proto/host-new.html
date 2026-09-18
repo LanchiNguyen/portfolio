@@ -11,12 +11,12 @@
 <helmet>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
-<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#8C6A25}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
+<style>body{margin:0;background:#DEE6EB;color:#202B33;font-family:'Plus Jakarta Sans',sans-serif}a{color:#755419}a:hover{color:#6E521C}:root{--pad:28px}@media (max-width:520px){:root{--pad:10px}}button{font:inherit;color:inherit;background:none;border:none;padding:0;margin:0;text-align:inherit;cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #B98A2B;outline-offset:2px}@media (prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}}</style></helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:26px var(--pad) 60px;box-sizing:border-box">
 <sc-if value="{{ showChrome }}" hint-placeholder-val="{{ true }}">
 <div style="width:100%;max-width:1100px;display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap">
-<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#8C6A25">◆ TENET — RETAIL HOST v2 · SPY OPTIONS (0DTE)</div>
+<div style="font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.22em;color:#755419">◆ TENET — RETAIL HOST v2 · SPY OPTIONS (0DTE)</div>
 <div style="font:500 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">“DART” IS AN INVENTED BROKER</div>
 </div>
 </sc-if>
@@ -32,11 +32,11 @@
 <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px dashed #9AA0A4;border-radius:16px;padding:8px 10px 8px 16px;align-self:flex-start">
 <span style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#5E6B75">DEMO CONTROLS</span>
 <sc-if value="{{ isWed }}" hint-placeholder-val="{{ false }}">
-<button type="button" onClick="{{ advanceClock }}" aria-disabled="{{ wedAdvDisabled }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 18px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#8C6A25;opacity:{{ wedAdvOpacity }}">{{ wedAdvLabel }}</button>
+<button type="button" onClick="{{ advanceClock }}" aria-disabled="{{ wedAdvDisabled }}" style="min-height:44px;border:1px solid #755419;border-radius:999px;padding:10px 18px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#755419;opacity:{{ wedAdvOpacity }}">{{ wedAdvLabel }}</button>
 </sc-if>
 <button type="button" onClick="{{ toggleTenet }}" aria-pressed="{{ tenetDownStr }}" style="min-height:44px;border:1px solid #A9B4BC;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#5E6B75">{{ tenetToggleLabel }}</button>
 <sc-if value="{{ resetVisible }}" hint-placeholder-val="{{ true }}">
-<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #8C6A25;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#8C6A25">RESET DEMO ↻ — ALL SURFACES</button>
+<button type="button" onClick="{{ resetDemo }}" style="min-height:44px;border:1px solid #755419;border-radius:999px;padding:10px 16px;font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#755419">RESET DEMO ↻ — ALL SURFACES</button>
 </sc-if>
 </div>
 </div>
@@ -202,7 +202,7 @@
 <sc-if value="{{ wedArmed }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid rgba(230,195,106,.3);background:rgba(230,195,106,.05);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ WIND-DOWN — YOUR 3:00 RULE STEPPED IN</div>
-<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">0DTE premium decays fastest into the close. In your last 45 days, 61% of give-back came after 3:00. Size steps down to expiry; typing above the allowance just trims it.</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">0DTE premium decays fastest into the close. Illustrative scenario: in the last 45 days, 61% of give-back came after 3:00. Size steps down to expiry; typing above the allowance just trims it.</div>
 <div role="img" aria-label="New-order allowance steps down from 5 contracts at 3:00 to zero at 3:55" style="display:flex;gap:4px;align-items:flex-end;height:26px">
 <div style="flex:1;height:26px;background:rgba(230,195,106,.5);border-radius:3px"></div>
 <div style="flex:1;height:19px;background:rgba(230,195,106,.38);border-radius:3px"></div>
@@ -262,7 +262,7 @@
 <sc-if value="{{ thuQueued }}" hint-placeholder-val="{{ false }}">
 <div style="border:1px solid rgba(230,195,106,.36);background:rgba(230,195,106,.07);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px">
 <div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;color:#E6C36A">◆ PACING RULE STEPPED IN — 2 MIN BETWEEN ENTRIES</div>
-<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Five 0DTE entries in six minutes. Your cluster days ended −$310 on average — the spread ate the rest.</div>
+<div style="font:400 10.5px/1.7 'IBM Plex Mono',monospace;color:#CBB78A">Five 0DTE entries in six minutes. Illustrative cluster days ended −$310 on average — the spread ate the rest.</div>
 <div style="display:flex;gap:5px;align-items:center;padding-top:1px">
 <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span><span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;background:#E6C36A"></span>
 <span aria-hidden="true" style="width:7px;height:7px;border-radius:50%;border:1px solid #E6C36A;box-sizing:border-box"></span>
@@ -350,9 +350,9 @@
 
 <sc-if value="{{ showHints }}" hint-placeholder-val="{{ true }}">
 <div style="display:flex;flex-direction:column;gap:14px;max-width:340px;padding-top:8px">
-<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#8C6A25">TRY THIS</div>
+<div style="font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.18em;color:#755419">TRY THIS</div>
 <sc-for list="{{ hints }}" as="h" hint-placeholder-count="4">
-<div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#8C6A25;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
+<div style="display:flex;gap:10px"><span style="font:600 11px 'IBM Plex Mono',monospace;color:#755419;padding-top:2px">{{ h.n }}</span><div style="font:500 12.5px/1.65 'Plus Jakarta Sans';color:#4E5B65">{{ h.t }}</div></div>
 </sc-for>
 <div style="border-top:1px solid #C5CDD3;padding-top:11px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:#5E6B75;line-height:1.7">» KEYBOARD WORKS EVERYWHERE — TAB TO THE RAIL, PRESS ENTER. DEMO TIME RUNS FAST: COOLDOWN ~60×, QUEUE ~5×. EVERY EVENT LANDS IN THE COMPANION RECORD.</div>
 </div>
