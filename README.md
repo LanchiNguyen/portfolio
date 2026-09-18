@@ -34,7 +34,7 @@ index.html, *.html        the site
 styles.css, script.js     shared styles and behavior
 figures.js / .css         captured illustrative DOM states, not interactive demos
 tenet-proto/              the Tenet build (host, desktop, companion)
-morsel-proto/             the Morsel visual-menu build (index.html + v4/app; the older v3/ tree is kept for reference and is not served)
+morsel-proto/             the current Morsel visual-menu build (index.html + v4/app)
 morsel-docs/             process documents: wireflow, explorations, DS addendum, testing plan
 images/                   photography and remaining rasters
 ```
@@ -67,9 +67,16 @@ ids. `tests/morsel.test.cjs` boots `data.js` and `app.jsx` with the vendored Bab
 checks the fixture contract, menu order, photo sources, ingredient lines, the
 three-dish shortlist and defensive state loading without a browser.
 
-The supported review and publishing path is `build-site.sh`. The older
-`build-artifact.mjs` one-file exporter is retained as historical tooling; it
-requires an external font bundle and is not part of the current release checks.
+The supported review and publishing path is `build-site.sh`. The obsolete
+Morsel v3 source, superseded raster assets, and old one-file exporter have been
+removed from the current tree; Git history preserves them. Current capture
+recipes and their figure data remain because they document inspectable states,
+including the earlier-feed figure explicitly discussed in the Morsel case.
+
+Compatibility redirects remain intentionally: old Tenet links should open the
+current case or prototype rather than break. They contain no older application.
+The preview branch is also intentional: it supports the staging editor and is
+excluded from search indexing.
 
 ## Deploy
 
@@ -86,7 +93,7 @@ Verify before publishing:
 
 ```bash
 node stamp-editable.mjs --check
-node --test tests/*.test.cjs tests/morsel.test.cjs
+node --test tests/*.test.cjs
 bash build-site.sh
 python3 tests/site-build.test.py
 PREVIEW=1 bash build-site.sh
