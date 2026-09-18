@@ -161,7 +161,7 @@
       var pan = c.w > 700 && cw < 900;
       var scale = pan ? 1 : cw / c.w;
       frame.classList.toggle('is-pan', pan);
-      frame.style.height = (pan ? Math.min(c.h, Math.max(420, window.innerHeight * 0.7)) : Math.round(c.h * scale)) + "px";
+      frame.style.height = (pan ? c.h + 2 : Math.round(c.h * scale)) + "px";
       if (pan) {
         frame.setAttribute('tabindex', '0');
         frame.setAttribute('role', 'region');

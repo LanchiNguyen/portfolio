@@ -21,6 +21,9 @@ cp *.html *.css script.js figures.js favicon.png _site/
 rm -f _site/capture-harness.html          # build tooling, not part of the site
 cp -r images morsel-docs morsel-proto tenet-proto _site/
 node build-morsel-production.cjs
+# Retain earlier design artifacts in source history, not in the current site payload.
+rm -f _site/images/tenet/decision-preview.png _site/images/tenet/decision-preview.svg
+rm -f _site/images/morsel/v1-dietary-flat-2x.webp _site/images/morsel/v1-order-no-context-2x.webp _site/images/morsel/v1-search-empty-generic-2x.webp _site/images/morsel/v31-contact-sheet.webp _site/images/morsel/v31-search-no-context-2x.webp
 
 # absolute social-preview URLs when a domain is known
 if [ -n "${SITE_URL:-}" ]; then

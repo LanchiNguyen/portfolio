@@ -50,12 +50,21 @@ jobs:
           ref: preview
           path: preview
 
+      - name: Check source and prototype behavior
+        working-directory: main
+        run: |
+          node stamp-editable.mjs --check
+          node --test tests/*.test.cjs
+
       - name: Build production site
         run: bash main/build-site.sh
         env:
           # Set a repository variable SITE_URL (Settings -> Secrets and
           # variables -> Actions -> Variables) if the domain ever changes.
           SITE_URL: ${{ vars.SITE_URL || 'https://lananguyen.xyz' }}
+
+      - name: Verify production links and deployment output
+        run: python3 main/tests/site-build.test.py
 
       - name: Build preview site into /preview/
         if: steps.preview-checkout.outcome == 'success'

@@ -122,16 +122,24 @@ window.__FIGS = ${JSON.stringify(figs)};
     if (window.__MORSEL_PHOTOS && window.__MORSEL_PHOTOS[id]) return window.__MORSEL_PHOTOS[id];
     return (window.__FIG_PHOTO_BASE || 'images/morsel-photos/') + id + '.webp';
   }
+  /* data-crop="x,y,w,h" (fragment px) shows a close-up window of the figure */
+  function crop(box) {
+    var c = (box.getAttribute('data-crop') || '').split(',').map(Number);
+    return c.length === 4 && c.every(function (n) { return !isNaN(n); }) ? c : null;
+  }
   function fit(box) {
     var inner = box.firstElementChild; if (!inner) return;
     var w = box.clientWidth; if (!w) return;
-    inner.style.transform = 'scale(' + (w / +box.getAttribute('data-fw')) + ')';
+    var c = crop(box);
+    var s = w / (c ? c[2] : +box.getAttribute('data-fw'));
+    inner.style.transform = 'scale(' + s + ')' + (c ? ' translate(' + (-c[0]) + 'px,' + (-c[1]) + 'px)' : '');
   }
   function mount(box) {
     if (box.getAttribute('data-ready') === '1') return;
     var f = F[box.getAttribute('data-fig')]; if (!f) return;
+    var c = crop(box);
     box.setAttribute('data-fw', f.w);
-    box.style.setProperty('--fw', f.w); box.style.setProperty('--fh', f.y);
+    box.style.setProperty('--fw', c ? c[2] : f.w); box.style.setProperty('--fh', c ? c[3] : f.y);
     var inner = document.createElement('div');
     inner.className = 'fig-scale' + (f.c ? ' ' + f.c : '');
     inner.style.width = f.w + 'px'; inner.style.height = f.y + 'px';
@@ -140,6 +148,8 @@ window.__FIGS = ${JSON.stringify(figs)};
     inner.innerHTML = f.h;
     inner.querySelectorAll('[data-mp]').forEach(function (n) { n.src = photoSrc(n.getAttribute('data-mp')); });
     box.appendChild(inner);
+    /* a figure captured mid-scroll carries the offset; restore it once laid out */
+    inner.querySelectorAll('[data-scrolltop]').forEach(function (n) { n.scrollTop = +n.getAttribute('data-scrolltop'); });
     box.setAttribute('data-ready', '1');
     fit(box);
   }

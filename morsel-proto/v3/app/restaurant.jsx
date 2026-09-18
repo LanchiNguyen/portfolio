@@ -1,18 +1,19 @@
-// Morsel — restaurant: every dish we have from one spot, photo-first
-function RestaurantScreen({ restName, onBack, onOpen, conflictsOf }) {
-  const { u, dishes } = window.MorselData;
+// Morsel v3.2 — restaurant: every dish we have from one spot, with the same card
+// and the same dietary policy as everywhere else. A restaurant menu may show a
+// conflicting dish for context, flagged — it is never presented as a recommendation.
+// The restaurant-level next step opens the menu; it never silently picks a dish.
+function RestaurantScreen({ restName, onBack, onOpen, prefs, saved, onToggleSave }) {
+  const { u, dishes, dietState, nextStepLabel, destination, demoArea } = window.MorselData;
   const items = dishes.filter((d) => d.rest === restName);
-  const [ordering, setOrdering] = React.useState(false);
+  const [nextOpen, setNextOpen] = React.useState(false);
   const [toast, setToast] = React.useState(null);
   const ping = (msg) => { setToast(msg); window.clearTimeout(ping._t); ping._t = window.setTimeout(() => setToast(null), 1800); };
   if (!items.length) return null;
   const first = items[0];
-  const prices = items.map((d) => Number(d.price.replace("$", "")));
-  const priceRange = "$" + Math.min(...prices) + "–" + Math.max(...prices);
-  const avgPct = Math.round(items.reduce((a, d) => a + d.pct, 0) / items.length);
-  const reviewCount = items.reduce((a, d) => a + d.reviews.length, 0);
-  // demo edge state: brunch/bakery spots have closed by evening
-  const closedNow = ["Early Vote", "Buttercream Union"].includes(restName);
+  const priced = items.map((d) => d.price).filter((p) => p !== null && p !== undefined);
+  const priceRange = priced.length ? (Math.min(...priced) === Math.max(...priced) ? "$" + priced[0] : "$" + Math.min(...priced) + "–" + Math.max(...priced)) : "Not listed";
+  const flagged = items.filter((d) => { const s = dietState(d, prefs).state; return s === "conflict" || s === "unknown"; }).length;
+  const dest = destination(restName);
 
   return (
     <div className="m-screen m-fade" style={{ background: "var(--paper)" }}>
@@ -21,24 +22,21 @@ function RestaurantScreen({ restName, onBack, onOpen, conflictsOf }) {
       </div>
 
       <div className="m-scroll">
-        <div style={{ position: "relative", height: 300, background: "var(--sunken)" }}>
-          <img src={u(first.img, 900)} alt={restName} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <div style={{ position: "relative", height: 260, background: "var(--sunken)" }}>
+          <img src={u(first.img, 900)} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
           <div className="m-veil"></div>
           <div style={{ position: "absolute", left: 20, right: 20, bottom: 20, color: "#FFF7EB" }}>
-            <div className="m-micro" style={{ color: "rgba(255,247,235,.72)", marginBottom: 6 }}>{first.hood} · {first.walk}</div>
+            <div className="m-micro" style={{ color: "rgba(255,247,235,.72)", marginBottom: 6 }}>{first.hood}</div>
             <div className="m-title" style={{ fontSize: 30 }}>{restName}</div>
-            {closedNow && (
-              <div className="m-glass" style={{ marginTop: 10, background: "rgba(120,36,22,.55)" }}>Closed now · opens 8 AM</div>
-            )}
           </div>
         </div>
 
-        <div style={{ padding: "16px 22px 30px" }}>
+        <div style={{ padding: "16px 22px 0" }}>
           <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
             {[
-              { big: avgPct + "%", small: "ordered again within 90 days" },
-              { big: priceRange, small: "dishes on Morsel" },
-              { big: first.dist, small: "from you" }
+              { big: String(items.length), small: items.length === 1 ? "dish on Morsel" : "dishes on Morsel" },
+              { big: priceRange, small: priced.length < items.length ? "menu prices · some not listed" : "menu prices" },
+              { big: first.mi + " mi", small: "from " + demoArea.hood }
             ].map((s) => (
               <div key={s.small} style={{ flex: 1, background: "var(--surface)", border: "1px solid var(--line)", borderRadius: "var(--r)", padding: "12px 10px", textAlign: "center" }}>
                 <div className="m-heading" style={{ fontSize: 20 }}>{s.big}</div>
@@ -46,28 +44,29 @@ function RestaurantScreen({ restName, onBack, onOpen, conflictsOf }) {
               </div>
             ))}
           </div>
-          <div className="m-caption" style={{ color: "var(--ink-3)", marginTop: -8, marginBottom: 16 }}>Scores and diner counts are illustrative prototype data.</div>
 
-          <div style={{ display: "flex", gap: 8, marginBottom: 24 }}>
-            <button className="m-btn m-btn-quiet" style={{ flex: 1 }} onClick={() => ping("Demo directions — no map connection")}><MIcon name="nav" size={18} /> Directions</button>
-            {closedNow ? (
-              <button className="m-btn m-btn-primary" style={{ flex: 1 }} disabled>Opens 8 AM</button>
-            ) : (
-              <button className="m-btn m-btn-primary" style={{ flex: 1 }} onClick={() => setOrdering(true)}><MIcon name="bag" size={18} /> Order</button>
-            )}
-          </div>
+          <button className="m-btn m-btn-primary" style={{ width: "100%", marginBottom: 6 }} onClick={() => setNextOpen(true)}>
+            {nextStepLabel(restName)}
+          </button>
+          {dest.kind === "none" ? (
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 22, textAlign: "center" }}>No online menu to link to; call or visit.</div>
+          ) : <div style={{ marginBottom: 22 }}></div>}
 
-          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }}>
-            <div className="m-heading">Shot here</div>
-            <div className="m-caption" style={{ color: "var(--ink-3)", fontWeight: 600 }}>{items.length} dishes · {reviewCount} diners</div>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 4 }}>
+            <div className="m-heading">Dishes on Morsel</div>
           </div>
+          {flagged > 0 && (
+            <div className="m-caption" style={{ color: "var(--ink-2)", marginBottom: 10 }}>
+              {flagged} {flagged === 1 ? "dish is" : "dishes are"} flagged against your dietary settings. Shown for context, not recommended.
+            </div>
+          )}
         </div>
-        <div style={{ margin: "-18px 0 0", paddingBottom: 40 }}>
-          <FeedGrid dishes={items} cols={2} onOpen={onOpen} flag={conflictsOf} />
+        <div style={{ padding: "8px 0 40px" }}>
+          <FeedGrid dishes={items} cols={2} onOpen={onOpen} saved={saved} onToggleSave={onToggleSave} prefs={prefs} />
         </div>
       </div>
 
-      {ordering && <OrderSheet dish={first} conflict={conflictsOf ? conflictsOf(first) : []} onClose={() => setOrdering(false)} onPing={ping} />}
+      {nextOpen && <NextStepSheet rest={restName} onClose={() => setNextOpen(false)} onPing={ping} />}
       {toast && (
         <div className="m-rise" role="status" style={{ position: "absolute", bottom: 30, left: "50%", transform: "translateX(-50%)", zIndex: 50, background: "var(--ink)", color: "var(--paper)", borderRadius: 99, padding: "10px 20px", fontSize: 14, fontWeight: 600, whiteSpace: "nowrap", boxShadow: "var(--shadow-float)" }}>
           {toast}

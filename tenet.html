@@ -8,7 +8,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Tenet — self-authored guardrails at the moment of send" />
   <meta property="og:description" content="Trader-authored pauses and a separate wind-down hard limit at order-send, inside two fictional brokers backed by one shared Record. Functional prototype, 2026." />
-  <meta property="og:image" content="images/tenet/decision-preview.png" />
+  <meta property="og:image" content="images/tenet/card.webp" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Klee+One:wght@400;600&display=swap" rel="stylesheet" /></noscript>
-  <link rel="stylesheet" href="styles.css?v=tenet-audit-6" />
+  <link rel="stylesheet" href="styles.css?v=portfolio-release-1" />
   <link rel="stylesheet" href="figures-fonts.css" />
   <link rel="stylesheet" href="figures.css" />
   <link rel="stylesheet" href="tenet-case.css?v=2" />
@@ -52,7 +52,7 @@
           <div><dt>MY ROLE</dt><dd>Product design, interaction design, UX writing</dd></div>
           <div><dt>DELIVERABLE</dt><dd>Three connected prototype surfaces</dd></div>
           <div><dt>STATUS</dt><dd>Working concept &middot; not shipped</dd></div>
-          <div><dt>TOOLS</dt><dd>HTML/CSS/JavaScript, Claude Design, Fable</dd></div>
+          <div><dt>TOOLS</dt><dd>HTML/CSS/JavaScript; AI-assisted with Claude and Codex</dd></div>
         </dl>
       </div>
     </section>
@@ -86,9 +86,9 @@
         <div class="demo-stage rv" data-live-on-load>
           <div class="demo-head">
             <div class="demo-tabs" role="tablist" aria-label="Prototype surface">
-              <button class="demo-tab" role="tab" aria-selected="true" data-src="tenet-proto/host-new.html?bare&amp;v=tenet-audit-6" data-w="380" data-h="1180" data-poster="images/tenet/stage-dart-new.webp" data-poster-alt="The Dart phone with a staged 12-contract order, above the scenario tabs and try-this steps" data-title="Dart mobile host prototype — trigger a rule at order-send">DART &middot; MOBILE</button>
-              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/desktop-new.html?bare&amp;v=tenet-audit-6" data-w="1440" data-h="1016" data-poster="images/tenet/stage-meridian-new.webp" data-poster-alt="The Meridian workstation: falling SPY chart, level 2 ladder, and a typed 1,000-share short in the order ticket" data-title="Meridian desktop host prototype — hold a short through the cooldown">MERIDIAN &middot; DESKTOP</button>
-              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/companion-new.html?bare&amp;v=tenet-audit-6" data-w="380" data-h="1350" data-poster="images/tenet/stage-companion-new.webp" data-poster-alt="The Companion home screen: what your rules did this week, with counts and estimates" data-title="Tenet Companion prototype — rules, patterns, and the Record">COMPANION</button>
+              <button class="demo-tab" role="tab" aria-selected="true" data-src="tenet-proto/host-new.html?bare&amp;v=portfolio-release-1" data-w="380" data-h="1180" data-poster="images/tenet/stage-dart-new.webp" data-poster-alt="The Dart phone with a staged 12-contract order, above the scenario tabs and try-this steps" data-title="Dart mobile host prototype — trigger a rule at order-send">DART &middot; MOBILE</button>
+              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/desktop-new.html?bare&amp;v=portfolio-release-1" data-w="1440" data-h="1016" data-poster="images/tenet/stage-meridian-new.webp" data-poster-alt="The Meridian workstation: falling SPY chart, level 2 ladder, and a typed 1,000-share short in the order ticket" data-title="Meridian desktop host prototype — hold a short through the cooldown">MERIDIAN &middot; DESKTOP</button>
+              <button class="demo-tab" role="tab" aria-selected="false" data-src="tenet-proto/companion-new.html?bare&amp;v=portfolio-release-1" data-w="380" data-h="1350" data-poster="images/tenet/stage-companion-new.webp" data-poster-alt="The Companion home screen: what your rules did this week, with counts and estimates" data-title="Tenet Companion prototype — rules, patterns, and the Record">COMPANION</button>
             </div>
             <a class="demo-open" href="tenet-proto/host-new.html">OPEN FULL PROTOTYPE &#8599;</a>
           </div>
@@ -101,7 +101,7 @@
             <button class="demo-reset">RELOAD THIS VIEW</button>
           </div>
           <p class="demo-note" data-ed="39">Rules and completed decisions persist when you switch surfaces. Reload restarts the current view; use Reset demo inside any surface to restore the shared baseline.</p>
-          <p class="demo-mobile-note" data-ed="40">On a small screen, Meridian opens with the order ticket in view. Swipe across the workstation or open the full prototype.</p>
+          <p class="demo-mobile-note" data-ed="40">On a small screen, Meridian opens at the order ticket with its actions visible in the full-height frame. Swipe across the workstation or open the full prototype.</p>
         </div>
 
       <p class="prototype-link" data-ed="41"><a class="doc-link" href="tenet-proto/duo-new.html">Open Dart + Companion side by side &rarr;</a></p>
@@ -129,7 +129,7 @@
 
     <section class="results" id="reflection" aria-labelledby="reflection-title"><span class="k" data-ed="67">WHAT I TAKE FORWARD</span><h2 id="reflection-title" data-ed="68">Every interruption needs<br>a clear way forward.</h2><p data-ed="69">Tenet let me carry one interaction problem across rule authoring, two broker interfaces, failure states and a reviewable Record. The most consequential design choice was separating waiting from permission to send.</p><a class="case-secondary" href="mailto:lanchib.nguyen@gmail.com?subject=Let%27s%20talk%20about%20Tenet">Let&rsquo;s talk about the work &rarr;</a></section>
   </main>
-  <a class="next-proj" href="morsel.html"><span><span class="k" data-ed="70">NEXT PROJECT</span><span class="t" data-ed="71">Morsel &mdash; trust in food discovery</span></span><span class="arw" aria-hidden="true">&rarr;</span></a>
+  <a class="next-proj" href="morsel.html"><span><span class="k" data-ed="70">NEXT PROJECT</span><span class="t" data-ed="71">Morsel &mdash; see the dish before you order</span></span><span class="arw" aria-hidden="true">&rarr;</span></a>
   </div></div>
-  <script src="figures.js"></script><script src="script.js?v=tenet-audit-6"></script>
+  <script src="figures.js"></script><script src="script.js?v=portfolio-release-1"></script>
 </body></html>

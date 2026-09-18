@@ -37,11 +37,12 @@
         <a class="bar-loc" href="mailto:lanchib.nguyen@gmail.com">OPEN TO NEW ROLES &rarr;</a>
       </header>
       <div class="bar-hairline"></div>
+      <main>
 
       <!-- hero -->
       <section class="proj-hero" id="case">
         <div class="bloom"></div>
-        <a class="backlink" href="index.html#home-work">&larr; WORK / &#8470; 06 &middot; CLIENT</a>
+        <a class="backlink" href="index.html#home-work">&larr; WORK / CLIENT</a>
         <div class="proj-hero-grid">
           <div class="rv">
             <h1 data-ed="0">Matrix &mdash; making the next choice <em>visible</em></h1>
@@ -79,7 +80,7 @@
         <div class="chips" style="padding: 0 0 8px">
           <div class="chip rv"><div class="in"><div class="n">1 wk</div><div class="l">FROM SPECS TO DEV HANDOFF</div></div></div>
           <div class="chip rv" style="--d:80ms"><div class="in"><div class="n">2</div><div class="l">FEATURE AREAS</div></div></div>
-          <div class="chip rv" style="--d:160ms"><div class="in"><div class="n">11</div><div class="l">HI-FI SCREENS DELIVERED</div></div></div>
+          <div class="chip rv" style="--d:160ms"><div class="in"><div class="n">11</div><div class="l">5 EVENT + 6 MARKET SCREENS</div></div></div>
         </div>
       </section>
 
@@ -144,21 +145,21 @@
           <span class="side" role="heading" aria-level="2">WHAT I COULD RESOLVE<br>IN ONE WEEK</span>
           <div>
             <p class="proj-p" style="margin-bottom:18px" data-ed="35">These are the calls visible between the wireframes and final boards:</p>
-            <div class="ev-wrap" style="margin-bottom:22px"><table class="ev-table">
+            <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table" style="margin-bottom:22px"><table class="ev-table">
               <tr><th>Decision</th><th>Instead of</th><th>Why</th></tr>
               <tr><td><b>Tappable creator cards for voting</b></td><td>The spec's two dropdown pickers</td><td>Cards make the vote a choice; fan counts give the tap a stake</td></tr>
-              <tr><td><b>Sparklines + signed % per market row</b></td><td>Price-only list</td><td>Traders scan for direction first, magnitude second</td></tr>
+              <tr><td><b>Sparklines + signed % per market row</b></td><td>Price-only list</td><td>The intended hierarchy is direction, then magnitude; this was a design choice, not a measured behavior</td></tr>
               <tr><td><b>Neon rationed to prices &amp; actions</b></td><td>Accent color everywhere the style guide allows</td><td>On near-black, everything-neon means nothing-neon; scannability needed a hierarchy the guide didn't specify</td></tr>
-              <tr><td><b>Processor-agnostic checkout sheet</b></td><td>Designing to one payment provider</td><td>The team hadn't picked one; the layout survives either choice</td></tr>
+              <tr><td><b>Processor-agnostic checkout sheet</b></td><td>Designing to one payment provider</td><td>The illustrated layout explores both options; provider selection and integration are not established here</td></tr>
             </table></div>
             <p class="proj-p" data-ed="36">The boards show the core flows, recurring components, and spacing within the supplied visual language. A complete implementation review would also need the following:</p>
             <ul class="feat-list">
               <li data-ed="37">Loading, empty, and error states are not shown here. The illustrated boards do not establish the contents of the complete handoff.</li>
-              <li data-ed="38">Device chrome is inconsistent across two boards (iOS status bars on some screens, not others); I'd re-export before showing these again.</li>
+              <li data-ed="38">The gallery preserves the delivered screens, including their mixed device chrome. Original editable files are not included in this portfolio; these images document the handoff rather than a rebuilt interface.</li>
               <li data-ed="39">The neon-on-dark palette came with its contrast choices; small grey metadata on near-black is what I'd challenge first in a week two.</li>
             </ul>
             <p class="proj-p" style="margin-top:18px" data-ed="40">A follow-up review would first confirm state coverage with engineering, then resolve the states not shown here:</p>
-            <div class="ev-wrap"><table class="ev-table">
+            <div class="ev-wrap" tabindex="0" role="region" aria-label="Scrollable comparison table"><table class="ev-table">
               <tr><th>Item</th><th>Plan</th><th>Goal (not a result)</th></tr>
               <tr><td><b>State coverage</b></td><td>Loading / empty / error for the 5 stateful screens (market, orders, event, vote, checkout); empty inventory and failed payment first</td><td>0 screens where a dev has to invent a state</td></tr>
               <tr><td><b>Handoff quality</b></td><td>Count dev clarification questions per screen in the first sprint</td><td>&le;1 per screen; each one becomes a spec fix</td></tr>
@@ -183,8 +184,9 @@
       </section>
 
       <!-- next project -->
+      </main>
       <a class="next-proj" href="index.html#home-work">
-        <span><span class="k" data-ed="43">NEXT PROJECT &mdash; &#8470; 07</span><span class="t" data-ed="44">Back to selected work</span></span>
+        <span><span class="k" data-ed="43">NEXT</span><span class="t" data-ed="44">Back to selected work</span></span>
         <span class="arw">&rarr;</span>
       </a>
     </div>

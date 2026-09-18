@@ -1,4 +1,6 @@
-// Morsel — location sheet: type any place, then refine to a nearby neighborhood.
+// Morsel — area sheet: type any place, then refine to a nearby neighborhood.
+// The default is the demo area. Nothing is requested from the device: this
+// prototype never has a real location, and it never says otherwise.
 // Mock geo index — enough breadth to prove the pattern isn't DC-exclusive.
 const MORSEL_PLACES = [
   { city: "Washington, DC", hoods: ["Shaw", "Dupont Circle", "Capitol Hill", "Adams Morgan", "Georgetown", "Navy Yard"] },
@@ -12,6 +14,7 @@ const MORSEL_PLACES = [
 ];
 
 function LocationSheet({ loc, onChange, onClose }) {
+  const { demoArea, covered } = window.MorselData;
   const [q, setQ] = React.useState("");
   const [cityPick, setCityPick] = React.useState(null); // stage 2: refine to a hood
   const query = q.trim().toLowerCase();
@@ -27,23 +30,26 @@ function LocationSheet({ loc, onChange, onClose }) {
     });
   }
 
-  const commit = (city, hood) => { onChange({ city, hood: hood || null }); onClose(); };
+  // null means "the demo area"; a city object is a deliberate manual choice
+  const commit = (city, hood) => { onChange(city ? { city, hood: hood || null } : null); onClose(); };
   const stage2 = cityPick ? MORSEL_PLACES.find((p) => p.city === cityPick) : null;
+  const onDemo = !loc || !loc.city;
 
   return (
     <div style={{ position: "absolute", inset: 0, zIndex: 60, display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
       <button aria-label="Close" onClick={onClose} style={{ position: "absolute", inset: 0, background: "rgba(15,9,4,.45)", cursor: "pointer" }}></button>
-      <div className="m-rise" style={{ position: "relative", background: "var(--surface)", borderRadius: "calc(var(--r) + 4px) calc(var(--r) + 4px) 0 0", padding: "10px 20px 28px", boxShadow: "var(--shadow-float)", maxHeight: "78%", display: "flex", flexDirection: "column" }}>
+      <div className="m-rise" role="dialog" aria-label="Choose an area" style={{ position: "relative", background: "var(--surface)", borderRadius: "calc(var(--r) + 4px) calc(var(--r) + 4px) 0 0", padding: "10px 20px 28px", boxShadow: "var(--shadow-float)", maxHeight: "78%", display: "flex", flexDirection: "column" }}>
         <div style={{ width: 36, height: 4, borderRadius: 99, background: "var(--line)", margin: "0 auto 14px", flex: "none" }}></div>
 
         {!stage2 ? (
           <React.Fragment>
-            <div className="m-heading" style={{ marginBottom: 12, flex: "none" }}>Where are you eating?</div>
+            <div className="m-heading" style={{ marginBottom: 4, flex: "none" }}>Where are you eating?</div>
+            <div className="m-caption" style={{ color: "var(--ink-3)", marginBottom: 12, flex: "none" }}>Morsel currently covers Washington, DC only.</div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, background: "var(--sunken)", borderRadius: 99, padding: "0 16px", minHeight: 48, flex: "none", marginBottom: 6 }}>
               <div style={{ color: "var(--ink-3)", flex: "none" }}><MIcon name="search" size={16} /></div>
-              <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="City, neighborhood, or zip"
+              <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder="City or neighborhood" aria-label="City or neighborhood"
                 style={{ flex: 1, minWidth: 0, border: "none", outline: "none", background: "none", font: "inherit", fontSize: 16, color: "var(--ink)" }} />
-              {q && <button className="m-caption" style={{ color: "var(--ink-2)", fontWeight: 700, flex: "none" }} onClick={() => setQ("")}>Clear</button>}
+              {q && <button className="m-caption" style={{ color: "var(--ink-2)", fontWeight: 700, flex: "none", minHeight: 32 }} onClick={() => setQ("")}>Clear</button>}
             </div>
 
             <div className="m-scroll" style={{ margin: "0 -6px" }}>
@@ -51,13 +57,13 @@ function LocationSheet({ loc, onChange, onClose }) {
                 <button onClick={() => commit(null)}
                   style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", padding: "12px 6px", borderRadius: 14, minHeight: 52 }}>
                   <div style={{ width: 38, height: 38, borderRadius: 99, flex: "none", display: "flex", alignItems: "center", justifyContent: "center", background: "var(--accent)", color: "var(--accent-ink)" }}>
-                    <MIcon name="nav" size={17} />
+                    <MIcon name="pin" size={17} />
                   </div>
                   <div style={{ flex: 1, textAlign: "left" }}>
-                    <div className="m-second" style={{ fontWeight: 700 }}>Use my location</div>
-                    <div className="m-caption" style={{ color: "var(--ink-3)" }}>Currently Shaw, Washington DC</div>
+                    <div className="m-second" style={{ fontWeight: 700 }}>{demoArea.hood}, Washington DC</div>
+                    <div className="m-caption" style={{ color: "var(--ink-3)" }}>Distances are measured from here.</div>
                   </div>
-                  {!loc && <div style={{ color: "var(--accent)", flex: "none" }}><MIcon name="check" size={18} /></div>}
+                  {onDemo && <div style={{ color: "var(--accent)", flex: "none" }}><MIcon name="check" size={18} /></div>}
                 </button>
               )}
               {query && matches.length === 0 && (
@@ -72,7 +78,7 @@ function LocationSheet({ loc, onChange, onClose }) {
                   <div style={{ flex: 1, textAlign: "left" }}>
                     <div className="m-second" style={{ fontWeight: 700 }}>{m.hood || m.city}</div>
                     <div className="m-caption" style={{ color: "var(--ink-3)" }}>
-                      {m.hood ? m.city : "city"}{window.MorselData.covered.includes(m.city) ? "" : " · no coverage yet"}
+                      {m.hood ? m.city : "city"}{covered.includes(m.city) ? "" : " · not covered yet"}
                     </div>
                   </div>
                 </button>
@@ -87,7 +93,7 @@ function LocationSheet({ loc, onChange, onClose }) {
               </button>
               <div>
                 <div className="m-heading" style={{ fontSize: 20 }}>{stage2.city}</div>
-                <div className="m-caption" style={{ color: "var(--ink-3)" }}>Pick a neighborhood, or take the whole city</div>
+                <div className="m-caption" style={{ color: "var(--ink-3)" }}>Choose a neighborhood or the whole city</div>
               </div>
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 14 }}>
