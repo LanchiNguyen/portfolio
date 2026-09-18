@@ -4,9 +4,9 @@ A product and UX design portfolio. Static HTML, CSS, and a little JavaScript: no
 framework, no build step required to view it. Open `index.html` in a browser, or
 serve the folder with `python3 -m http.server`.
 
-Selected work leads with **Tenet**, **Morsel**, then **Hey Period**. Matrix and
-Nhat Huong are supporting cases; Mug and Chatter remain available as earlier
-concepts linked from About. The IKEA title and April 2025 start are owner-confirmed. Full employment scope,
+Selected work leads with **Tenet**, **Morsel**, **Hey Period**, then **Mug**.
+Matrix and Nhat Huong are supporting cases. Mug retains its original team-concept
+scope; Chatter remains available as an earlier concept linked from About. The IKEA title and April 2025 start are owner-confirmed. Full employment scope,
 a current résumé and a professional profile link remain owner-supplied updates.
 
 Plus `about.html` and `sketchbook.html` (illustration and painting).
